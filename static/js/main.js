@@ -34,7 +34,10 @@ function init() {
       filterFunction: function(rec) {
         return rec["usnews_2019_rank"];
       },
-      colorScale: "ordinal"
+      colorScale: "ordinal",
+      
+      rank:       {field: "demographics median_hh_income", label: "Median household income"},
+      carnegieug: {field: "median_debt_suppressed overall", label: "Median student debt"}
     });
 
     showScatterplot({
@@ -59,8 +62,6 @@ function init() {
           }
         }
       },
-      other: {field: "usnews_2019_rank", label: "US News Rank"},
-      other1: {field: "carnegie_undergrad", label: "Carnegie Categories (undergrad)"},
       color: {field: "6_yrs_after_entry median", label: "Earnings 2 yrs after grad"},
       filterFunction: function(rec) {
         return rec["6_yrs_after_entry median"] 
@@ -68,8 +69,15 @@ function init() {
           && rec["demographics median_hh_income"] 
           && rec["carnegie_undergrad"] 
           && +rec["carnegie_undergrad"] > 5
+          && rec["enrollment_all"] 
+          && +rec["enrollment_all"] > 1000
       },
-      colorScale: "quantize"
+      colorScale: "quantize",
+
+      rank:       {field: "usnews_2019_rank", label: "US News Rank"},
+      carnegieug: {field: "carnegie_undergrad", label: "Carnegie Categories (undergrad)"},
+      enrollment: {field: "enrollment_all", label: "Enrollment"}
+
     });
 }
 
@@ -478,11 +486,11 @@ function showScatterplot(info) {
     
     scatterplotChart.tooltipContent(function(d) {
       let buf =  d.name + 
-           "<br>" + labels.x     + ": " + d[info.x.label] + 
-           "<br>" + labels.y     + ": " + d[info.y.label] +
-           "<br>" + labels.color + ": " + d[info.color.label];
+           "<br>" + labels.x     + ": " + d[info.x.field] + 
+           "<br>" + labels.y     + ": " + d[info.y.field] +
+           "<br>" + labels.color + ": " + d[info.color.field];
       if (info.size) {
-        buf += "<br>" + labels.size  + ": " + d[info.size.label];
+        buf += "<br>" + labels.size  + ": " + d[info.size.field];
       }
       return buf;     
     })
