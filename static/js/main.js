@@ -23,8 +23,8 @@ function init() {
  
   showScatterplot({
       selector: "#scatterplot1",
-      width: 900,
-      height: 500,
+      width: 500,
+      height: 400,
       margin: {top: 20, bottom: 50, left: 70, right: 10},
       x:     {field: "usnews_2019_rank", label: "US News Rank"}, 
       y:     {field: "cost attendance academic_year", label: "Cost Attendance"}, 
@@ -35,15 +35,15 @@ function init() {
         return rec["usnews_2019_rank"];
       },
       colorScale: "ordinal",
-      
+
       rank:       {field: "demographics median_hh_income", label: "Median household income"},
       carnegieug: {field: "median_debt_suppressed overall", label: "Median student debt"}
     });
 
     showScatterplot({
       selector: "#scatterplot2",
-      width: 1000,
-      height: 800,
+      width: 800,
+      height: 600,
       margin: {top: 20, bottom: 50, left: 70, right: 10},
       x:      {field: "demographics median_hh_income", label: "Median household income"}, 
       y:      {field: "median_debt_suppressed overall", label: "Median debt"}, 
