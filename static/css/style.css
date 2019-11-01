@@ -1,0 +1,153 @@
+body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
+
+.hide {
+  display: none;
+}
+
+* {
+  font-family: 'Raleway';
+  color:  #454545 ;
+}
+
+body #body-contents {
+  display: flex;
+  flex-flow: column;
+  padding: 10px;
+  overflow-y: scroll;
+  height: -webkit-fill-available;
+}
+
+body .selections {
+  display: flex;
+  flex-flow: row;
+  margin-bottom: 20px;
+}
+
+#scorecard-select-container,
+#scorecard-college-select-container {
+  margin-top: 10px;
+  margin-right: 50px;
+}
+
+.multiselect-container {
+  width: 500px;
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+.charts {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+}
+
+.charts .hist {
+  margin-left: 0px;
+}
+
+.charts .chart-title {
+  font-size: 13px;
+  display: block;
+  text-align: center;
+  font-weight: 500;
+  height: 44px;
+  line-height: 12px;
+  white-space: normal;
+  word-break: break-word;
+  width: 160px;
+}
+.charts .chart-label {
+  font-size: 11px;
+  display: block;
+  text-align: center;
+}
+.charts .chart-label.danger {
+  background: #fff7d9;
+  width: 70px;
+  text-align: center;
+  color: black;
+  margin: auto;
+  height: 13px;
+  line-height: 13px;
+  margin-top: 2px;
+}
+
+.charts .hist svg .x.axis .tick text {
+  transform: rotate(90deg) translate(6px,-12px);
+  text-anchor: start;
+}
+
+.charts .hist svg rect {
+  fill: #b7b7b9;
+  stroke: #6c6c6c;
+  stroke-width: .5px;
+}
+
+.charts .hist svg rect.highlight {
+  stroke: #2d96cb;
+  stroke-width: 2px;
+}
+
+.charts .hist svg text.marker-label {
+  font-size: 10px;
+  font-weight: 500;
+}
+.charts .hist svg .marker {
+  fill: #1d68de
+}
+.charts .hist svg .marker line {
+  stroke: #1d68de;
+  stroke-width: 5px;
+  stroke-opacity: .5;
+}
+
+.btn-group-sm>.btn, .btn-sm {
+    height: 30px;
+    margin-top: 12px;
+}
+
+
+.legend-size circle.swatch,
+.legend-symbol path.swatch {
+  fill: #a2a1a1;
+  stroke-width: 1px;
+  stroke: #4c4c4c;
+}
+
+.legendCells .cell text {
+  font-size: 12px;
+}
+
+.scatterplot .bubble {
+  opacity: .7;
+  stroke: black;
+  stroke-width: 1px;
+  stroke-opacity: .8;
+  cursor: pointer;
+  pointer-events: all;
+}
+.scatterplot .y.axis text.label {
+  fill: black;
+  font-size: 14px;
+}
+.scatterplot .x.axis text.label {
+  fill: black;
+  font-size: 14px;
+}
+
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    min-width: 200px;
+    max-width: 300px;
+    min-height: 60px;
+    max-height: 300px;
+    padding: 10px;
+    font-size: 14px;
+    color: white;
+    background: #303030;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+    text-align: left;
+}
