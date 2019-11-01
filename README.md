@@ -22,7 +22,7 @@ Then open your browser on http://localhost:5000
 
 ## Backend commands:
 
-**http://localhost:5000/getFields**
+http://localhost:5000/getFields
 
 This will return all of the field names in the dataset.  Right now, this is a subset of all of the fields.  It has also merged in data from other rankings.
 
