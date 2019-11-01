@@ -123,7 +123,7 @@ function scatterplot() {
         .append("text")
         .attr("class", "label")
         .attr("transform", "rotate(-90)")
-        .attr("x", (innerWidth/2) * -1)
+        .attr("x", (innerHeight/2) * -1)
         .attr("y", (margin.left * -1))
         .attr("dy", "0.71em")
         .attr("text-anchor", "middle")
