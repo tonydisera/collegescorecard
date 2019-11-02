@@ -28,6 +28,11 @@ function init() {
  
 }
 
+function rankColleges() {
+  search.close();
+}
+
+
 
 function promiseShowHistograms(rowNumber=1, collegeName) {
 

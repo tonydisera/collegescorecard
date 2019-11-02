@@ -4,6 +4,7 @@ class Search {
 		this.regionSelector   = '#search-dialog #select-region';
     this.programSelector  = '#search-dialog #select-program';
     this.controlSelector  = '#search-dialog #select-control';
+    this.filteredCollegesSelector = "#search-dialog #filtered-colleges"
     this.selectedColleges = []
     this.selectedRegions = []
     this.selectedPrograms = []
@@ -11,6 +12,7 @@ class Search {
 
     this.allColleges = []
     this.filteredColleges = []
+    this.checkedColleges = []
 
     this.fieldNames = ["usnews_2019_rank", "control", "region"]
 
@@ -224,5 +226,64 @@ class Search {
       }
 
     })
+    self.showFilteredColleges()
+  }
+
+  showFilteredColleges() {
+    let self = this;
+    d3.select(self.filteredCollegesSelector).select(".list-group").remove();
+    let listGroup = d3.select(self.filteredCollegesSelector)
+      .append("ul")
+      .attr("class", "list-group")
+      .data([self.filteredColleges])
+
+    var items = listGroup.selectAll(".list-group-item").data(function(d) {
+        return d;
+    });
+
+    items.enter()
+      .append("li")
+      .attr("class", "list-group-item");
+
+    let itemForms = listGroup.selectAll(".list-group-item")
+       .append("div")
+       .attr("class", "form-check");
+
+    itemForms
+      .append("input")
+      .attr("type", "checkbox")
+      .attr("id", function(d,i) {
+        return "college-cb-" + i;
+      })
+      .attr("class", "form-checked-input")
+      .on("change", function(d,i) {
+        let checked = d3.select(this).property("checked");
+        self.checkCollege(d.name, checked)
+      })
+
+    itemForms
+      .append("label")
+      .attr("class", "form-check-label")
+      .attr("for", function(d,i) {
+        return "college-cb-" + i;
+      })
+      .text(function(d,i) {
+        return (i+1) + ".  " +  d.name
+      })
+
+  }
+  checkCollege(collegeName, checked) {
+    let self = this;
+    if (checked) {
+      if (self.checkedColleges.indexOf(collegeName) < 0) {
+        self.checkedColleges.push(collegeName);
+      }
+    } else {
+      let idx = self.checkedColleges.indexOf(collegeName);
+      self.checkedColleges.splice(idx,1)
+    }
+  }
+  close() {
+    $('#search-dialog ').modal('hide')
   }
 }

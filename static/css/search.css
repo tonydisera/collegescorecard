@@ -9,3 +9,7 @@
   max-height: 400px;
   overflow-y: scroll;
 }
+
+#search-dialog .form-check-label {
+	margin-left: 10px;
+}

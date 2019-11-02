@@ -59,7 +59,93 @@
     <div>
       <h2>Score</h2>
     
-      <div class="selections">
+      
+      <div>
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Select Colleges</button>
+
+        <div id="search-dialog" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content" style="width:1000px;padding:20px">
+
+              <div style="display:flex;flex-flow:row;">
+
+                <div class="card" style="flex-grow:1;max-width:340px;min-width:250px;">
+                  <div class="card-header">Filter</div>
+
+                  <div class="card-body" style="display:flex;justify-content: space-between;flex-direction: column;">
+                    <div>
+
+                      <div class="select-container" >
+                        <select id="select-college" multiple="multiple">
+                        </select>
+                      </div>
+
+
+                      <div class="select-container" >
+                        <select id="select-region" multiple="multiple">
+                          <option value="0">U.S. Service Schools</option>
+                          <option value="1">New England (CT, ME, MA, NH, RI, VT)</option>
+                          <option value="2">Mid East (DE, DC, MD, NJ, NY, PA)</option>
+                          <option value="3">Great Lakes (IL, IN, MI, OH, WI)</option>
+                          <option value="4">Plains (IA, KS, MN, MO, NE, ND, SD)</option>
+                          <option value="5">Southeast (AL, AR, FL, GA, KY, LA, MS, NC, SC, TN, VA, WV)</option>
+                          <option value="6">Southwest (AZ, NM, OK, TX)</option>
+                          <option value="7">Rocky Mountains (CO, ID, MT, UT, WY)</option>
+                          <option value="8">Far West (AK, CA, HI, NV, OR, WA)</option>
+                          <option value="9">Outlying Areas (AS, FM, GU, MH, MP, PR, PW, VI)</option>
+                        </select>
+                      </div>
+
+
+                      <div class="select-container" >
+                        <select id="select-program" multiple="multiple">
+                        </select>
+                      </div>
+
+                      <div class="select-container" >
+                        <select id="select-control" multiple="multiple">
+                          <option value="1">Public</option>
+                          <option value="2">Private</option>
+                          <option value="3">Private for profit</option>
+                        </select>
+                      </div>
+
+                    </div>
+
+                      
+                    <div style="justify-content: flex-end;display: flex;">
+                       <button type="button" onclick="search.filterColleges()" class="btn btn-primary">Filter</button>
+                    </div>                  
+
+                  </div>
+
+                </div>
+
+                <div class="card" style="flex-grow:1;margin-left:10px">
+                  <div class="card-header">Select</div>
+                  <div class="card-body" style="display:flex;justify-content: space-between;flex-direction: column;">
+                    <div id="filtered-colleges" style="min-height:400px;max-height:400px;overflow-y:scroll">
+                    </div>
+                    <div style="justify-content: flex-end;display: flex;">
+                       <button type="button" onclick="rankColleges()" class="btn btn-primary">Rank</button>
+                    </div>      
+                  </div>
+
+                </div>
+
+              </div>
+             
+
+            </div>
+
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="selections" style="display:none">
         <div id="scorecard-select-container">
           <select id="scorecard-select" multiple="multiple">
           </select>
@@ -69,61 +155,7 @@
           </select>
         </div>
       </div>
-      <div>
 
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Select Colleges</button>
-
-        <div id="search-dialog" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content" style="padding:20px">
-
-              <div class="select-container" >
-                <select id="select-college" multiple="multiple">
-                </select>
-              </div>
-
-
-              <div class="select-container" >
-                <select id="select-region" multiple="multiple">
-                  <option value="0">U.S. Service Schools</option>
-                  <option value="1">New England (CT, ME, MA, NH, RI, VT)</option>
-                  <option value="2">Mid East (DE, DC, MD, NJ, NY, PA)</option>
-                  <option value="3">Great Lakes (IL, IN, MI, OH, WI)</option>
-                  <option value="4">Plains (IA, KS, MN, MO, NE, ND, SD)</option>
-                  <option value="5">Southeast (AL, AR, FL, GA, KY, LA, MS, NC, SC, TN, VA, WV)</option>
-                  <option value="6">Southwest (AZ, NM, OK, TX)</option>
-                  <option value="7">Rocky Mountains (CO, ID, MT, UT, WY)</option>
-                  <option value="8">Far West (AK, CA, HI, NV, OR, WA)</option>
-                  <option value="9">Outlying Areas (AS, FM, GU, MH, MP, PR, PW, VI)</option>
-                </select>
-              </div>
-
-
-              <div class="select-container" >
-                <select id="select-program" multiple="multiple">
-                </select>
-              </div>
-
-              <div class="select-container" >
-                <select id="select-control" multiple="multiple">
-                  <option value="1">Public</option>
-                  <option value="2">Private</option>
-                  <option value="3">Private for profit</option>
-                </select>
-              </div>
-
-              
-            <div style="text-align:right">
-               <button type="button" onclick="search.filterColleges()" class="btn btn-primary">Get colleges</button>
-            </div>
-
-            </div>
-
-
-          </div>
-        </div>
-
-      </div>
       <div class="chart-container">
       </div>
     </div>
