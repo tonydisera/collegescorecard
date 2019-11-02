@@ -5,7 +5,8 @@ class Search {
 		this.regionSelector   = '#search-dialog #select-region';
     this.programSelector  = '#search-dialog #select-program';
     this.controlSelector  = '#search-dialog #select-control';
-    this.filteredCollegesSelector = "#search-dialog #filtered-colleges"
+    this.filteredCollegesSelector = "#search-dialog #filtered-colleges";
+    this.usnewsSelector = "#search-dialog #usnews-cb";
 
     this.selectedColleges = []
     
@@ -13,6 +14,7 @@ class Search {
     this.selectedRegions = []
     this.selectedPrograms = []
     this.selectedControl = []
+    this.usnewsChecked = false;
 
     this.allColleges = []
     this.filteredColleges = []
@@ -25,6 +27,12 @@ class Search {
 
 	init() {
     let self = this;
+
+    $(self.usnewsSelector).on("change", 
+    function(d,i) {
+        let checked = d3.select(this).property("checked");
+        self.usnewsChecked = checked;
+    })
 
     $(self.degreeLevelSelector).multiselect(
     { 
@@ -231,7 +239,8 @@ class Search {
         self.selectedPrograms.length == 0 &&
         self.selectedRegions.length == 0 &&
         self.selectedControl.length == 0 &&
-        self.selectedDegreeLevel.length == 0 ) {
+        self.selectedDegreeLevel.length == 0 &&
+        !self.usnewsChecked) {
       self.filteredColleges = [];
     } else {
       self.filteredColleges = self.allColleges.filter(function(college) {
@@ -242,6 +251,11 @@ class Search {
             matchesCollege = true;
           }
         } 
+
+        let matchesUsnews = false;
+        if (self.usnewsChecked && college["usnews_2019_rank"]) {
+          matchesUsnews = true;
+        }
 
         let matchesRegion = self.selectedRegions.length == 0;
         if (self.selectedRegions.length > 0) {
@@ -283,8 +297,9 @@ class Search {
           if (self.selectedDegreeLevel.length > 0 ||
               self.selectedPrograms.length > 0 ||
               self.selectedRegions.length > 0 ||
-              self.selectedControl.length > 0) {
-            return (matchesDegreeLevel && matchesRegion && matchesProgram && matchesControl);
+              self.selectedControl.length > 0 ||
+              self.usnewsChecked) {
+            return (matchesUsnews && matchesDegreeLevel && matchesRegion && matchesProgram && matchesControl);
           } else {
             return false;
           }

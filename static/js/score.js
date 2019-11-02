@@ -120,10 +120,12 @@ function addChartRows() {
     Promise.all(promises)
     .then(function() {
       rowNumber = 1;
-      collegeNames.forEach(function(collegeName) {
-        highlightHistograms(rowNumber, collegeName);
-        rowNumber++;
-      })
+      setTimeout(function() {
+        collegeNames.forEach(function(collegeName) {
+          highlightHistograms(rowNumber, collegeName);
+          rowNumber++;
+        })        
+      },1000)
     })
   } else {
     addRow(1, "");
