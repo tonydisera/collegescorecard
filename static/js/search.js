@@ -1,11 +1,15 @@
 class Search {
 	constructor() {
     this.collegeSelector   = '#search-dialog #select-college';
+    this.degreeLevelSelector   = '#search-dialog #select-degree-level';
 		this.regionSelector   = '#search-dialog #select-region';
     this.programSelector  = '#search-dialog #select-program';
     this.controlSelector  = '#search-dialog #select-control';
     this.filteredCollegesSelector = "#search-dialog #filtered-colleges"
+
     this.selectedColleges = []
+    
+    this.selectedDegreeLevel = []
     this.selectedRegions = []
     this.selectedPrograms = []
     this.selectedControl = []
@@ -14,18 +18,40 @@ class Search {
     this.filteredColleges = []
     this.checkedColleges = []
 
-    this.fieldNames = ["usnews_2019_rank", "control", "region"]
+    this.fieldNames = ["usnews_2019_rank", "control", "region", 
+                       "degrees_awarded predominant_recoded", "city", "state"]
 
 	}
 
 	init() {
     let self = this;
 
+    $(self.degreeLevelSelector).multiselect(
+    { 
+      buttonWidth: '400px',
+      nonSelectedText: "Predominant Degree Awarded",
+      onChange: function(options, checked) {
+        if (Array.isArray(options)) {
+          options.forEach(function(option) {
+            let key = option[0].value
+            self.selectDegreeLevel(key, checked);
+          })
+        } else {
+          let key = options[0].value
+          self.selectDegreeLevel(key, checked);
+        }
+
+      },
+      onDropdownHide: function(event) {
+        
+      }    
+    })
 
     $(self.collegeSelector).multiselect(
     { enableCaseInsensitiveFiltering: true,
       enableFiltering: true,
-      nonSelectedText: "Select colleges",
+      buttonWidth: '400px',
+      nonSelectedText: "Search specific colleges",
       onChange: function(options, checked) {
         if (Array.isArray(options)) {
           options.forEach(function(option) {
@@ -45,6 +71,7 @@ class Search {
 
     $(self.regionSelector).multiselect(
     { enableCaseInsensitiveFiltering: true,
+      buttonWidth: '400px',
       nonSelectedText: "Select regions",
       onChange: function(options, checked) {
         if (Array.isArray(options)) {
@@ -65,7 +92,8 @@ class Search {
 
     $(self.programSelector).multiselect(
     { enableCaseInsensitiveFiltering: true,
-      nonSelectedText: "Select degrees offered",
+      buttonWidth: '400px',
+      nonSelectedText: "Select 4 yr degrees offered",
       onChange: function(options, checked) {
         if (Array.isArray(options)) {
           options.forEach(function(option) {
@@ -105,7 +133,9 @@ class Search {
 
       promiseGetData(self.fieldNames)
       .then(function(colleges) {
-        self.allColleges = colleges;
+        self.allColleges = colleges.sort(function(a,b) {
+         a.name.localeCompare(b.name);
+        })
         let options = []
         colleges.forEach(function(college) {
           options.push({ label: college.name, title: college.name, value: college.name } );
@@ -118,6 +148,7 @@ class Search {
     $(self.controlSelector).multiselect(
     { enableCaseInsensitiveFiltering: true,
       nonSelectedText: "Control",
+      buttonWidth: '400px',
       onChange: function(options, checked) {
         if (Array.isArray(options)) {
           options.forEach(function(option) {
@@ -182,14 +213,25 @@ class Search {
       self.selectedControl.splice(idx,1)
     }
   }
-
+  selectDegreeLevel(degreeLevelKey, checked) {
+    let self = this;
+    if (checked) {
+      if (self.selectedDegreeLevel.indexOf(degreeLevelKey) < 0) {
+        self.selectedDegreeLevel.push(degreeLevelKey);
+      }
+    } else {
+      let idx = self.selectedDegreeLevel.indexOf(degreeLevelKey);
+      self.selectedDegreeLevel.splice(idx,1)
+    }
+  }
   filterColleges() {
     let self = this;
 
     if (self.selectedColleges.length == 0 &&
         self.selectedPrograms.length == 0 &&
         self.selectedRegions.length == 0 &&
-        self.selectedControl.length == 0 ) {
+        self.selectedControl.length == 0 &&
+        self.selectedDegreeLevel.length == 0 ) {
       self.filteredColleges = [];
     } else {
       self.filteredColleges = self.allColleges.filter(function(college) {
@@ -227,9 +269,26 @@ class Search {
           }
         } 
 
-        return matchesCollege 
-               || (matchesRegion && matchesProgram && matchesControl);
 
+        let matchesDegreeLevel = self.selectedDegreeLevel.length == 0;
+        if (self.selectedDegreeLevel.length > 0 && college["degrees_awarded predominant_recoded"]) {
+          if (self.selectedDegreeLevel.indexOf(college["degrees_awarded predominant_recoded"].toString()) >= 0) {
+            matchesDegreeLevel = true;
+          }
+        } 
+
+        if (matchesCollege) {
+          return matchesCollege
+        } else {
+          if (self.selectedDegreeLevel.length > 0 ||
+              self.selectedPrograms.length > 0 ||
+              self.selectedRegions.length > 0 ||
+              self.selectedControl.length > 0) {
+            return (matchesDegreeLevel && matchesRegion && matchesProgram && matchesControl);
+          } else {
+            return false;
+          }
+        }
       })      
     }
     self.showFilteredColleges()
@@ -237,6 +296,8 @@ class Search {
 
   showFilteredColleges() {
     let self = this;
+    d3.select("#filtered-college-count").text(self.filteredColleges.length)
+
     d3.select(self.filteredCollegesSelector).select(".list-group").remove();
     let listGroup = d3.select(self.filteredCollegesSelector)
       .append("ul")
@@ -291,5 +352,65 @@ class Search {
   }
   close() {
     $('#search-dialog ').modal('hide')
+  }
+
+  getCollegesDeprecated() {
+    promiseGetData(["usnews_2019_rank", "control"])
+    .then(function(data) {
+      let colleges = data;
+
+
+      let optGroups = [];
+
+      let options = colleges.filter(function(college) {
+        return college["usnews_2019_rank"] != null
+      })
+      .sort(function(a,b) {
+        return a["usnews_2019_rank"] - b["usnews_2019_rank"];
+      })
+      .map(function(college) {
+        return { label: college.name, title: college.name, value: college.name };
+      })
+      optGroups.push( {label: 'US News top 200', children: options })
+
+      let publicColleges = colleges.filter(function(college) {
+        return college["control"] == 1
+      })
+      .sort(function(a,b) {
+        return  a.name.localeCompare(b.name);
+      })
+      .map(function(college) {
+        return { label: college.name, title: college.name, value: college.name };
+      })
+      optGroups.push( {label: 'Public colleges', children: publicColleges })
+
+
+      optGroups.push( {label: 'Private colleges', children:
+        colleges.filter(function(college) {
+          return college["control"] == 2
+        })
+        .sort(function(a,b) {
+          return  a.name.localeCompare(b.name);
+        })
+        .map(function(college) {
+          return { label: college.name, title: college.name, value: college.name };
+        })
+      })
+
+      optGroups.push( {label: 'Private for-profit', children:
+        colleges.filter(function(college) {
+          return college["control"] == 3
+        })
+        .sort(function(a,b) {
+          return  a.name.localeCompare(b.name);
+        })
+        .map(function(college) {
+          return { label: college.name, title: college.name, value: college.name };
+        })
+      })
+
+      let collegeSelector = "#scorecard-college-select";
+      $(collegeSelector).multiselect('dataprovider', optGroups);
+    })
   }
 }

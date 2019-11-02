@@ -1,13 +1,6 @@
 let fields = []
 let selectedFieldMap = {}
-
-
-let colleges = []
-let selectedCollegeMap = {}
-let selectedColleges = []
-
 let histChartMap = {1: {}}
-
 let search = null;
 
 
@@ -21,11 +14,8 @@ function init() {
   search = new Search();
   search.init();
 
-  initDropdowns();
-  getNumericFields();
-  getColleges();
-
- 
+  initFieldDropdown();
+  
 }
 
 function rankColleges() {
@@ -155,102 +145,56 @@ function getSelectedFieldNames() {
 }
 
 function getSelectedCollegeNames() {
-  return selectedColleges;
+  return search.checkedColleges;
 }
 
 function selectField(fieldName, checked) {
   selectedFieldMap[fieldName] = checked;
 }
 
-function selectCollege(collegeName, checked) {
-  selectedCollegeMap[collegeName] = checked;
-  if (checked) {
-    if (selectedColleges.indexOf(collegeName) < 0) {
-      selectedColleges.push(collegeName);
-    }
-  } else {
-    let idx = selectedColleges.indexOf(collegeName);
-    selectedColleges.splice(idx,1)
-  }
-}
 
-function initDropdowns() {
+
+function initFieldDropdown() {
+
   let fieldSelector = '#scorecard-select';
   $(fieldSelector).multiselect(
-    { enableFiltering: true,
-      includeSelectAllOption: true,
-      enableCaseInsensitiveFiltering: true,
-      nonSelectedText: "Select fields",
-      onChange: function(options, checked) {
+  { enableFiltering: true,
+    includeSelectAllOption: true,
+    enableCaseInsensitiveFiltering: true,
+    nonSelectedText: "Select fields",
+    onChange: function(options, checked) {
 
-        if (options && options.length > 0) {
-          if (Array.isArray(options)) {
-            options.forEach(function(option) {
-              let field = option[0].label
-              selectField(field, checked);
-            })
-          } else {
-            let field = options[0].label
-            selectField(field, checked);
-          }
-        }
-      },
-      onDropdownHide: function(event) {
-        addChartRows()
-      },
-      onSelectAll: function(event) {
-        fields.forEach(function(field) {
-          selectField(field, true);
-        })
-
-      },
-      onDeselectAll: function(event) {
-        fields.forEach(function(field) {
-          selectField(field, false);
-        })
-
-      }
-
-    });
-  
-
-    let collegeSelector = '#scorecard-college-select';
-    $(collegeSelector).multiselect(
-    { enableFiltering: true,
-      includeSelectAllOption: true,
-      nonSelectedText: "Select college to highlight",
-      enableCaseInsensitiveFiltering: true,
-      enableClickableOptGroups: true,
-      onChange: function(options, checked) {
+      if (options && options.length > 0) {
         if (Array.isArray(options)) {
           options.forEach(function(option) {
-            let college = option[0].label
-            selectCollege(college, checked);
+            let field = option[0].label
+            selectField(field, checked);
           })
         } else {
-          let college = options[0].label
-          selectCollege(college, checked);
+          let field = options[0].label
+          selectField(field, checked);
         }
-
-      },
-      onDropdownHide: function(event) {
-        addChartRows();
-      },
-      onSelectAll: function(event) {
-        colleges.forEach(function(college) {
-          selectCollege(college, true);
-        })
-
-      },
-      onDeselectAll: function(event) {
-        colleges.forEach(function(college) {
-          selectCollege(college, false);
-        })
-
       }
+    },
+    onDropdownHide: function(event) {
+      addChartRows()
+    },
+    onSelectAll: function(event) {
+      fields.forEach(function(field) {
+        selectField(field, true);
+      })
 
-    });
-    
+    },
+    onDeselectAll: function(event) {
+      fields.forEach(function(field) {
+        selectField(field, false);
+      })
+
+    }
+
+  });
+  getNumericFields();
+  
 }
 
 
@@ -261,65 +205,7 @@ function highlightHistograms(rowNumber=1, collegeName) {
   }
 }
 
-function getColleges(rowNumber=1) {
-  promiseGetData(["usnews_2019_rank", "control"])
-  .then(function(data) {
-    colleges = data;
 
-
-    let optGroups = [];
-
-    let options = colleges.filter(function(college) {
-      return college["usnews_2019_rank"] != null
-    })
-    .sort(function(a,b) {
-      return a["usnews_2019_rank"] - b["usnews_2019_rank"];
-    })
-    .map(function(college) {
-      return { label: college.name, title: college.name, value: college.name };
-    })
-    optGroups.push( {label: 'US News top 200', children: options })
-
-    let publicColleges = colleges.filter(function(college) {
-      return college["control"] == 1
-    })
-    .sort(function(a,b) {
-      return  a.name.localeCompare(b.name);
-    })
-    .map(function(college) {
-      return { label: college.name, title: college.name, value: college.name };
-    })
-    optGroups.push( {label: 'Public colleges', children: publicColleges })
-
-
-    optGroups.push( {label: 'Private colleges', children:
-      colleges.filter(function(college) {
-        return college["control"] == 2
-      })
-      .sort(function(a,b) {
-        return  a.name.localeCompare(b.name);
-      })
-      .map(function(college) {
-        return { label: college.name, title: college.name, value: college.name };
-      })
-    })
-
-    optGroups.push( {label: 'Private for-profit', children:
-      colleges.filter(function(college) {
-        return college["control"] == 3
-      })
-      .sort(function(a,b) {
-        return  a.name.localeCompare(b.name);
-      })
-      .map(function(college) {
-        return { label: college.name, title: college.name, value: college.name };
-      })
-    })
-
-    let collegeSelector = "#scorecard-college-select";
-    $(collegeSelector).multiselect('dataprovider', optGroups);
-  })
-}
 
 function getNumericFields() {
   d3.json("getFields",

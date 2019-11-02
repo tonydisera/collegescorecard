@@ -5,7 +5,7 @@
 }
 
 #search-dialog .multiselect-container {
-  width: 520px;
+  width: 400px;
   max-height: 400px;
   overflow-y: scroll;
 }
@@ -13,3 +13,8 @@
 #search-dialog .form-check-label {
 	margin-left: 10px;
 }
+
+#search-dialog .card-body {
+	padding: 10px;
+}
+

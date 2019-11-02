@@ -21,16 +21,17 @@ body .selections {
   display: flex;
   flex-flow: row;
   margin-bottom: 20px;
+  margin-top: 20px;
 }
 
-#scorecard-select-container,
-#scorecard-college-select-container {
+#scorecard-select-container {
   margin-top: 10px;
   margin-right: 50px;
+  margin-left: 50px;
 }
 
 .multiselect-container {
-  width: 530px;
+  width: 500px;
   max-height: 400px;
   overflow-y: scroll;
 }
@@ -104,6 +105,10 @@ body .selections {
 .btn-group-sm>.btn, .btn-sm {
     height: 30px;
     margin-top: 12px;
+}
+
+button.multiselect {
+  text-align: left;
 }
 
 
