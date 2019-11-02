@@ -185,47 +185,53 @@ class Search {
 
   filterColleges() {
     let self = this;
-    self.filteredColleges = self.allColleges.filter(function(college) {
-      let matchesCollege = false;
-      if (self.selectedColleges.length > 0) {
-        if (self.selectedColleges.indexOf(college.name) >= 0) {
-          matchesCollege = true;
-        }
-      } 
 
-      let matchesRegion = self.selectedRegions.length == 0;
-      if (self.selectedRegions.length > 0) {
-        if (college.region) {
-          if (self.selectedRegions.indexOf(college.region.toString()) >= 0) {
-            matchesRegion = true;
+    if (self.selectedColleges.length == 0 &&
+        self.selectedPrograms.length == 0 &&
+        self.selectedRegions.length == 0 &&
+        self.selectedControl.length == 0 ) {
+      self.filteredColleges = [];
+    } else {
+      self.filteredColleges = self.allColleges.filter(function(college) {
+
+        let matchesCollege = false;
+        if (self.selectedColleges.length > 0) {
+          if (self.selectedColleges.indexOf(college.name) >= 0) {
+            matchesCollege = true;
           }
+        } 
 
-        }
-      } 
+        let matchesRegion = self.selectedRegions.length == 0;
+        if (self.selectedRegions.length > 0) {
+          if (college.region) {
+            if (self.selectedRegions.indexOf(college.region.toString()) >= 0) {
+              matchesRegion = true;
+            }
 
-      let matchesProgram = self.selectedPrograms.length == 0;
-      if (self.selectedPrograms.length > 0) {
-        self.selectedPrograms.forEach(function(programKey) {
-          if (!matchesProgram && college[programKey] == 1) {
-            matchesProgram = true;
           }
-        })
-      } 
+        } 
 
-      let matchesControl = self.selectedControl.length == 0;
-      if (self.selectedControl.length > 0) {
-        if (self.selectedControl.indexOf(college.control.toString()) >= 0) {
-          matchesControl = true;
-        }
-      } 
+        let matchesProgram = self.selectedPrograms.length == 0;
+        if (self.selectedPrograms.length > 0) {
+          self.selectedPrograms.forEach(function(programKey) {
+            if (!matchesProgram && college[programKey] == 1) {
+              matchesProgram = true;
+            }
+          })
+        } 
 
-      if (matchesCollege) {
-        return true;
-      } else {
-        return matchesRegion && matchesProgram && matchesControl;
-      }
+        let matchesControl = self.selectedControl.length == 0;
+        if (self.selectedControl.length > 0) {
+          if (self.selectedControl.indexOf(college.control.toString()) >= 0) {
+            matchesControl = true;
+          }
+        } 
 
-    })
+        return matchesCollege 
+               || (matchesRegion && matchesProgram && matchesControl);
+
+      })      
+    }
     self.showFilteredColleges()
   }
 
