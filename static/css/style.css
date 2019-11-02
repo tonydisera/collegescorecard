@@ -30,7 +30,7 @@ body .selections {
 }
 
 .multiselect-container {
-  width: 500px;
+  width: 530px;
   max-height: 400px;
   overflow-y: scroll;
 }

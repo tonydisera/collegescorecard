@@ -9,8 +9,23 @@ APP_FOLDER = os.path.dirname(os.path.realpath(__file__))
 
 
 @app.route("/")
-def hello():
+def root():
     return render_template("index.html")
+
+
+@app.route("/summary")
+def summary():
+    return render_template("summary.html")
+
+
+@app.route("/segment")
+def segment():
+    return render_template("segment.html")
+
+
+@app.route("/score")
+def score():
+    return render_template("score.html")        
 
 @app.route("/getFields")
 def getFields():

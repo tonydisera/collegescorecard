@@ -33,6 +33,8 @@ function scatterplot() {
          "<br>" + labels.color + ": " + colorValue(d)
   }
 
+  var showQuadrants = false;
+
   let colorScale = d3.scaleOrdinal(d3.schemeCategory20);
 
   var outerWidth = null;
@@ -134,7 +136,6 @@ function scatterplot() {
       });
 
 
-
       bubbles.enter()
         .append('path')
         .attr('class', 'bubble')
@@ -195,6 +196,9 @@ function scatterplot() {
 
 
   var drawColorLegend = function() {
+    if (!container) {
+      return
+    }
     let svg = container.select("svg.scatterplot");
     svg.select(".legend-color").remove();
 
@@ -226,6 +230,9 @@ function scatterplot() {
 
 
   var drawSizeLegend = function() {
+    if (!container) {
+      return
+    }
 
     let svg = container.select("svg.scatterplot");
     svg.select(".legend-size").remove();
@@ -249,6 +256,10 @@ function scatterplot() {
   }
 
   drawSymbolLegend = function() {
+    if (!container) {
+      return
+    }
+    
     var triangle = d3.symbol().type(d3.symbolTriangle)(),
       circle = d3.symbol().type(d3.symbolCircle)(),
       cross = d3.symbol().type(d3.symbolCross)(),
@@ -351,6 +362,11 @@ function scatterplot() {
   chart.labels = function(_) {
     if (!arguments.length) return labels;
     labels = _;
+    return chart;
+  };  
+  chart.showQuadrants = function(_) {
+    if (!arguments.length) return showQuadrants;
+    showQuadrants = _;
     return chart;
   };  
   chart.colorLabels = function(_) {
