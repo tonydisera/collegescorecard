@@ -118,3 +118,22 @@ function showScatterplot(info) {
     }
   });
 }
+
+
+function promiseGetDegreesOffered() {
+  return new Promise(function(resolve, reject) {
+
+    d3.json("getDegreesOffered",
+    function (err, data) {
+      if (err) {
+        console.log(err)
+        reject(err)
+      }
+      let records = data.map(function(rec) {
+        return rec[0];
+      })
+      resolve(records)
+    })
+  })
+
+}

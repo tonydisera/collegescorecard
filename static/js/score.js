@@ -165,7 +165,7 @@ function selectCollege(collegeName, checked) {
     }
   } else {
     let idx = selectedColleges.indexOf(collegeName);
-    selectedColleges = selectedColleges.slice(idx,1)
+    selectedColleges.splice(idx,1)
   }
 }
 

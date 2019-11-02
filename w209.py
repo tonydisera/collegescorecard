@@ -27,6 +27,7 @@ def segment():
 def score():
     return render_template("score.html")        
 
+
 @app.route("/getFields")
 def getFields():
     # Load the CSV file from the static folder, inside the current path
@@ -57,5 +58,13 @@ def getData():
   scorecard_data.drop_duplicates(subset = "name", keep = False, inplace = True)
 
   return scorecard_data[fields].to_json(orient='records')
+
+
+@app.route("/getDegreesOffered")
+def getDegreesOffered():
+    fileName = "static/data/degrees_offered_bachelors.csv"
+    degrees_offered = pd.read_csv(os.path.join(APP_FOLDER,fileName)) 
+    return degrees_offered.to_json(orient="values")
+
 
 
