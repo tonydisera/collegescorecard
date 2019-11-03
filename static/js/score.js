@@ -20,6 +20,7 @@ function init() {
 
 function rankColleges() {
   search.close();
+  addChartRows();
 }
 
 
@@ -105,7 +106,7 @@ function addRow(rowNumber, collegeName) {
 }
 
 function addChartRows() {
-
+  d3.select(".chart-container").selectAll(".chart-row").remove();
 
   var collegeNames = getSelectedCollegeNames();
   let rowNumber = 1
@@ -193,8 +194,10 @@ function initFieldDropdown() {
       })
 
     }
-
+    
   });
+  
+
   getNumericFields();
   
 }
@@ -226,6 +229,19 @@ function getNumericFields() {
 
     let fieldSelector = "#scorecard-select";
     $(fieldSelector).multiselect('dataprovider', options);
+
+    $(fieldSelector).multiselect('select', 
+      ['cost attendance academic_year', 
+       'instructional_expenditure_per_fte', 
+       'faculty_salary',
+       'ft_faculty_rate',
+       'completion_rate_4yr_150nt',
+       'demographics avg_family_income',
+       '6_yrs_after_entry median',
+       'median_debt_suppressed overall',
+       'demographics race_ethnicity black',
+       'demographics race_ethnicity hispanic'
+       ], true)
   })
 }
 

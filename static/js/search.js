@@ -32,6 +32,7 @@ class Search {
     function(d,i) {
         let checked = d3.select(this).property("checked");
         self.usnewsChecked = checked;
+        self.filterColleges();
     })
 
     $(self.degreeLevelSelector).multiselect(
@@ -51,7 +52,7 @@ class Search {
 
       },
       onDropdownHide: function(event) {
-        
+        self.filterColleges();
       }    
     })
 
@@ -73,7 +74,7 @@ class Search {
 
       },
       onDropdownHide: function(event) {
-        
+        self.filterColleges();
       }    
     })
 
@@ -94,7 +95,7 @@ class Search {
 
       },
       onDropdownHide: function(event) {
-        
+        self.filterColleges();
       }    
     })
 
@@ -115,7 +116,7 @@ class Search {
 
       },
       onDropdownHide: function(event) {
-        
+        self.filterColleges();
       }    
     })
 
@@ -142,7 +143,7 @@ class Search {
       promiseGetData(self.fieldNames)
       .then(function(colleges) {
         self.allColleges = colleges.sort(function(a,b) {
-         a.name.localeCompare(b.name);
+          return a.name.localeCompare(b.name);
         })
         let options = []
         colleges.forEach(function(college) {
@@ -170,7 +171,7 @@ class Search {
 
       },
       onDropdownHide: function(event) {
-        
+        self.filterColleges();
       }    
     })
 
@@ -252,7 +253,7 @@ class Search {
           }
         } 
 
-        let matchesUsnews = false;
+        let matchesUsnews = !self.usnewsChecked;
         if (self.usnewsChecked && college["usnews_2019_rank"]) {
           matchesUsnews = true;
         }
@@ -306,11 +307,19 @@ class Search {
         }
       })      
     }
+    self.filteredColleges.sort(function(a,b) {
+      if (self.usnewsChecked && a["usnews_2019_rank"] && b["usnews_2019_rank"]) {
+        return a["usnews_2019_rank"] - b["usnews_2019_rank"];
+      } else {
+        return a.name.localeCompare(b.name);
+      }
+    })
     self.showFilteredColleges()
   }
 
   showFilteredColleges() {
     let self = this;
+    self.checkedColleges = [];
     d3.select("#filtered-college-count").text(self.filteredColleges.length)
 
     d3.select(self.filteredCollegesSelector).select(".list-group").remove();

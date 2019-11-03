@@ -69,51 +69,55 @@ function histogram() {
         return matchingElements.length > 0;
       })
 
+      let yPos = height - margin.top - margin.bottom;
+      let xPos = 0;
       if (matchedBins.length > 0) {
         let theBin = matchedBins[0];
-        let xPos = x(theBin.x0) - ((x(theBin.x1) - x(theBin.x0))/2);
-        let yPos = height - margin.top - margin.bottom;
-
-        let marker = container.select("svg .markers").selectAll(".marker")
-         .data([0])
-         .enter()
-         .append("g")
-         .attr("class", "marker");
-
-        marker.append("line")
-         .attr("x1", 0)
-         .attr("x2", 0)
-         .attr("y1", 0)
-         .attr("y2", yPos)
-         .style("opacity", 1)
-
-        marker.append("circle")
-         .attr("cx", 0)
-         .attr("cy", yPos)
-         .attr("r", "3")
-         .style("opacity", 1)
-
-        marker.append("text")
-         .attr("class", "marker-label")
-         .attr("x", 0)
-         .attr("y", -2)
-         .style("text-anchor", "middle")
-         .text(xValue(selectedData[0]))
-
-         marker.selectAll("line")
-               .transition()
-               .duration(1000)
-               .attr("x1", xPos)
-               .attr("x2", xPos)
-        marker.selectAll("circle")
-               .transition()
-               .duration(1000)
-               .attr("x", xPos)
-        marker.selectAll("text")
-               .transition()
-               .duration(1000)
-               .attr("x", xPos)
+        xPos = x(theBin.x0) - ((x(theBin.x1) - x(theBin.x0))/2);
+      } else {
+        xPos = x(xValue(selectedData[0]));
       }
+
+      let marker = container.select("svg .markers").selectAll(".marker")
+       .data([0])
+       .enter()
+       .append("g")
+       .attr("class", "marker");
+
+      marker.append("line")
+       .attr("x1", 0)
+       .attr("x2", 0)
+       .attr("y1", 0)
+       .attr("y2", yPos)
+       .style("opacity", 1)
+
+      marker.append("circle")
+       .attr("cx", 0)
+       .attr("cy", yPos)
+       .attr("r", "3")
+       .style("opacity", 1)
+
+      marker.append("text")
+       .attr("class", "marker-label")
+       .attr("x", 0)
+       .attr("y", -2)
+       .style("text-anchor", "middle")
+       .text(xValue(selectedData[0]))
+
+      marker.selectAll("line")
+             .transition()
+             .duration(1000)
+             .attr("x1", xPos)
+             .attr("x2", xPos)
+      marker.selectAll("circle")
+             .transition()
+             .duration(1000)
+             .attr("cx", xPos)
+      marker.selectAll("text")
+             .transition()
+             .duration(1000)
+             .attr("x", xPos)
+    
     })
 
   }

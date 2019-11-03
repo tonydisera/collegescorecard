@@ -58,9 +58,12 @@ def getData():
   scorecard_data.drop_duplicates(subset = "name", keep = False, inplace = True)
 
   if "instructional_expenditure_per_fte" in fields:
-    print ("*** SETTING MAX ****")
     #scorecard_data = scorecard_data[scorecard_data["instructional_expenditure_per_fte"].isnull() | scorecard_data["instructional_expenditure_per_fte"] < 30000 ]
-    scorecard_data['instructional_expenditure_per_fte'][scorecard_data['instructional_expenditure_per_fte'] >= 30000] = 30000
+    scorecard_data['instructional_expenditure_per_fte'][scorecard_data['instructional_expenditure_per_fte'] >= 200000] = 200000
+
+  if "tuition_revenue_per_fte" in fields:
+    scorecard_data['tuition_revenue_per_fte'][scorecard_data['tuition_revenue_per_fte'] >= 100000] = 100000
+
 
   return scorecard_data[fields].to_json(orient='records')
 
