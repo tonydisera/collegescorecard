@@ -148,6 +148,9 @@ button.multiselect {
 .rankchart .row text {
   font-size: 14px;
 }
+.rankchart .col-header text {
+  font-size: 14px;
+}
 
 div.tooltip {
     position: absolute;

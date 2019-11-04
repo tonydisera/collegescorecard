@@ -8,6 +8,9 @@ class Search {
     this.filteredCollegesSelector = "#search-dialog #filtered-colleges";
     this.usnewsSelector = "#search-dialog #usnews-cb";
 
+    this.selectAllSelector = "#search-dialog #select-all-cb";
+    this.selectAll = false;
+
     this.selectedColleges = []
     
     this.selectedDegreeLevel = []
@@ -20,6 +23,7 @@ class Search {
     this.filteredColleges = []
     this.checkedColleges = []
 
+
     this.fieldNames = ["usnews_2019_rank", "control", "region", 
                        "degrees_awarded predominant_recoded", "city", "state"]
 
@@ -27,6 +31,13 @@ class Search {
 
 	init() {
     let self = this;
+
+    $(self.selectAllSelector).on("change", 
+    function(d,i) {
+        let checked = d3.select(this).property("checked");
+        self.selectAll = checked;
+        self.selectAllColleges();
+    })
 
     $(self.usnewsSelector).on("change", 
     function(d,i) {
@@ -177,6 +188,14 @@ class Search {
 
 
 	}
+
+  selectAllColleges() {
+    let self = this;
+    for (var i=0; i < self.filteredColleges.length; i++) {
+      $("#college-cb-" + i).prop("checked", self.selectAll);
+      self.checkCollege(self.filteredColleges[i].name, self.selectAll)
+    }
+  }
 
   selectCollege(collegeName, checked) {
     let self = this;

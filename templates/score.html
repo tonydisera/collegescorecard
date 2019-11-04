@@ -152,15 +152,23 @@
           </div>
 
           <div class="card" style="flex-grow:1;margin-left:10px">
-            <div class="card-header">Select</div>
-            <div class="card-body" style="display:flex;justify-content: space-between;flex-direction: column;">
-              <div>
+            <div class="card-header" >Select
+              <div style="float:right;display:inline-block;">
                 <label style="padding-right:4px">
                   Colleges found
                 </label>
                 <span id="filtered-college-count" class="badge badge-primary"></span>
               </div>
 
+            </div>
+            <div class="card-body" style="display:flex;justify-content: space-between;flex-direction: column;">
+                <div class="form-check" style="margin-left:20px">
+                  <input type="checkbox" id="select-all-cb" class="form-checked-input">
+                  <label class="form-check-label" for="select-all-cb">
+                    Select all
+                  </label>
+                </div>
+             
               <div id="filtered-colleges" style="min-height:400px;max-height:400px;overflow-y:scroll">
               </div>
               <div style="justify-content: flex-end;display: flex;">

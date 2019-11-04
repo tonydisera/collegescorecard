@@ -19,8 +19,16 @@ function init() {
   initFieldDropdown();
 
   rankChart = rankchart();
-  rankChart.width(1000)
-           .height(500);
+  rankChart.invertedScalesFor([
+    "tuition in_state",
+    "tuition out_of_state",
+    "tuition academic_year",
+    "cost attendance academic_year",
+    "demographics avg_family_income",    
+    "demographics median_family_income",
+    "demographics median_hh_income",
+    "median_debt_suppressed overall"
+  ])
   
 }
 
