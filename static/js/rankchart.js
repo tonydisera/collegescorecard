@@ -28,7 +28,8 @@ function rankchart() {
   var data = null;
   var stackedData = null;
 
-  var rowHeight  = 50;
+  var headerHeight = 55;
+  var rowHeight  = 40;
   var barHeight  = 20;
   var colWidth   = 100;
   var colPadding = 10;
@@ -297,7 +298,7 @@ function rankchart() {
            .duration(1200)
            .ease(d3.easeSin)
            .attr('transform',function(d,i){ 
-             return "translate(0 ," + (rowHeight * (i+1)) + ")";
+             return "translate(0 ," + ((rowHeight * i) + headerHeight) + ")";
            })
 
             

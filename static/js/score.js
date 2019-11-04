@@ -19,6 +19,7 @@ function init() {
   initFieldDropdown();
 
   rankChart = rankchart();
+  rankChart.margin( { top: 10, right: 5, bottom: 90, left: 0 } )
   rankChart.invertedScalesFor([
     "tuition in_state",
     "tuition out_of_state",
