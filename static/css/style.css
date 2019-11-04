@@ -140,6 +140,15 @@ button.multiselect {
   font-size: 14px;
 }
 
+.rankchart rect.bar {
+  stroke: black;
+  stroke-width: 1px;
+}
+
+.rankchart .row text {
+  font-size: 14px;
+}
+
 div.tooltip {
     position: absolute;
     text-align: center;

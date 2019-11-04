@@ -2,6 +2,8 @@ let fields = []
 let selectedFieldMap = {}
 let histChartMap = {1: {}}
 let search = null;
+let rankChart = null;
+
 
 
 $(document).ready(function() {
@@ -15,12 +17,56 @@ function init() {
   search.init();
 
   initFieldDropdown();
+
+  rankChart = rankchart();
+  rankChart.width(1000)
+           .height(500);
   
 }
 
 function rankColleges() {
   search.close();
-  addChartRows();
+  promiseShowRankings(getSelectedCollegeNames());
+}
+
+function promiseShowRankings(selectedCollegeNames) {
+
+
+  promiseGetCollegeData(selectedCollegeNames, getSelectedFieldNames())
+  .then(function(selectedCollegeData) {
+
+    let selection = d3.select("#rank-chart");
+    selection.datum(selectedCollegeData);
+    rankChart(selection);
+
+
+  })
+
+
+}
+
+function promiseGetCollegeData(selectedCollegeNames, fieldNames) {
+  return new Promise(function(resolve, reject) {
+    promiseGetData(fieldNames)
+    .then(function(data) {
+
+      let selectedColleges = [];
+      selectedCollegeNames.forEach(function(collegeName) {
+          var found = false;
+          items = data.filter(function(item) {
+              if(!found && item.name == collegeName) {
+                  selectedColleges.push(item);
+                  found = true;
+                  return false;
+              } else 
+                  return true;
+          })
+      })
+
+      resolve(selectedColleges)
+    })    
+  })
+
 }
 
 
@@ -33,8 +79,8 @@ function promiseShowHistograms(rowNumber=1, collegeName) {
     promiseGetData(fieldNames)
     .then(function(data) {
 
-      let chartContainerSelector  = "#chart-row-" + rowNumber + " .charts"
-      let chartSelector           = "#chart-row-" + rowNumber + " .charts .hist"
+      let chartContainerSelector  = "#histograms #chart-row-" + rowNumber + " .charts"
+      let chartSelector           = "#histograms #chart-row-" + rowNumber + " .charts .hist"
       d3.selectAll(chartSelector).remove()
       histChartMap[rowNumber] = {}
 
@@ -88,9 +134,9 @@ function promiseShowHistograms(rowNumber=1, collegeName) {
 function addRow(rowNumber, collegeName) {
 
 
-  d3.select(".chart-container").select("#chart-row-" + rowNumber).remove();
+  d3.select("#histograms.chart-container").select("#chart-row-" + rowNumber).remove();
 
-  var chartRow = d3.select(".chart-container")
+  var chartRow = d3.select("#histograms.chart-container")
     .append("div")
     .attr("id", "chart-row-" + rowNumber)
     .attr("class", "chart-row")
@@ -106,7 +152,7 @@ function addRow(rowNumber, collegeName) {
 }
 
 function addChartRows() {
-  d3.select(".chart-container").selectAll(".chart-row").remove();
+  d3.select("#histograms.chart-container").selectAll(".chart-row").remove();
 
   var collegeNames = getSelectedCollegeNames();
   let rowNumber = 1
@@ -180,7 +226,7 @@ function initFieldDropdown() {
       }
     },
     onDropdownHide: function(event) {
-      addChartRows()
+      promiseShowRankings(getSelectedCollegeNames())
     },
     onSelectAll: function(event) {
       fields.forEach(function(field) {
