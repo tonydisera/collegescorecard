@@ -20,7 +20,7 @@ function rankchart() {
   var fields = []
 
 
-  let colorScale = d3.scaleOrdinal(d3.schemeCategory20);
+  let colorScale = d3.scaleOrdinal(d3.schemeTableau10);
 
   var outerWidth = null;
 
