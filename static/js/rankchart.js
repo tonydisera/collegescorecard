@@ -33,7 +33,7 @@ function rankchart() {
   var barHeight  = 20;
   var colWidth   = 100;
   var colPadding = 10;
-  var nameWidth  = 220;
+  var nameWidth  = 250;
 
 
   function chart(selection) {
@@ -73,7 +73,10 @@ function rankchart() {
       data.forEach(function(d) {
         let total = 0;
         fields.forEach(function(field, fieldIdx) {
-          total += scales[fieldIdx](d[field]);
+          if (invertedScalesFor.length > 0 && invertedScalesFor.indexOf(field) >= 0 && d[field] == null) {
+          } else {
+            total += scales[fieldIdx](d[field]);
+          }
         })
         d._total = total;
       })
@@ -212,10 +215,16 @@ function rankchart() {
       var cols = rowsEnter
         .selectAll(".col").data(function(d,i) {
           return stackedData.map(function(layer, layerIdx) {
+            let isInverseScale = false;
+            let field = fields[layerIdx];
+            if (invertedScalesFor.length > 0 && invertedScalesFor.indexOf(field) >= 0) {
+              isInverseScale = true;
+            }
             return {layerIdx: layerIdx, 
-                    field: fields[layerIdx], 
+                    field: field, 
                     scale: scales[layerIdx], 
                     scaleTotal: scalesTotal[layerIdx], 
+                    isInverseScale: isInverseScale,
                     layer: layer[i]};
           })
         }, function(d,i) {
@@ -244,7 +253,11 @@ function rankchart() {
         .attr("y", -10)
         .attr("height", barHeight)
         .attr("width", function(d,i) {
-          return d.scale(d.layer[1] - d.layer[0]);
+          if (d.isInverseScale && (d.layer[1] - d.layer[0] == 0)) {
+            return 0;
+          } else {
+            return d.scale(d.layer[1] - d.layer[0]);
+          }
         })
         .attr("fill", function(d,i) {
           if (d.layerIdx == fields.length-1) {
@@ -266,7 +279,14 @@ function rankchart() {
 
             let scaledRec = {};
             theFields.forEach(function(field, i) {
-              scaledRec[field] = scalesTotal[i](record[field])
+              if (invertedScalesFor.length > 0 && invertedScalesFor.indexOf(field) >= 0 &&
+                  record[field] == null) {
+                scaledRec[field] = 0;
+
+              } else {
+                scaledRec[field] = scalesTotal[i](record[field])
+
+              }
             })
 
             let stacked = d3.stack().keys(theFields)([scaledRec]);
