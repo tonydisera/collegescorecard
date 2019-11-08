@@ -15,6 +15,8 @@ function histogram() {
   var data = null;
   var container = null;
 
+  var showAxis = true;
+
   var outline = function(names) {
 
     let selectedData = data.filter(function(d) {
@@ -177,22 +179,25 @@ function histogram() {
         .select("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-      svg
-        .merge(svgEnter)
-        .select(".x.axis")
-        .attr("transform", "translate(0," + innerHeight + ")")
-        .call(d3.axisBottom(x));
+      if (showAxis) {
+        svg
+          .merge(svgEnter)
+          .select(".x.axis")
+          .attr("transform", "translate(0," + innerHeight + ")")
+          .call(d3.axisBottom(x));
 
-      svg
-        .merge(svgEnter)
-        .select(".y.axis")
-        .call(d3.axisLeft(y))
-        .append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 6)
-        .attr("dy", "0.71em")
-        .attr("text-anchor", "end")
-        .text("Frequency");
+        svg
+          .merge(svgEnter)
+          .select(".y.axis")
+          .call(d3.axisLeft(y))
+          .append("text")
+          .attr("transform", "rotate(-90)")
+          .attr("y", 6)
+          .attr("dy", "0.71em")
+          .attr("text-anchor", "end")
+          .text("Frequency");
+        
+      }
 
       var bars = g.selectAll(".bar").data(function(d) {
         return d;
@@ -244,6 +249,12 @@ function histogram() {
   chart.highlight = function(_) {
     if (!arguments.length) return highlight;
     highlight = _;
+    return chart;
+  };
+
+  chart.showAxis = function(_) {
+    if (!arguments.length) return showAxis;
+    showAxis = _;
     return chart;
   };
 

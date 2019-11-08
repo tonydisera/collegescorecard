@@ -36,71 +36,68 @@ body .selections {
   overflow-y: scroll;
 }
 
-.charts {
+#hist-chart {
   display: flex;
   flex-flow: row;
-  flex-wrap: wrap;
 }
 
-.charts .hist {
-  margin-left: 0px;
-}
 
-.charts .chart-title {
-  font-size: 13px;
-  display: block;
-  text-align: center;
-  font-weight: 500;
-  height: 44px;
-  line-height: 12px;
-  white-space: normal;
-  word-break: break-word;
-  width: 160px;
-}
-.charts .chart-label {
-  font-size: 11px;
-  display: block;
-  text-align: center;
-}
-.charts .chart-label.danger {
-  background: #fff7d9;
-  width: 70px;
-  text-align: center;
-  color: black;
-  margin: auto;
-  height: 13px;
-  line-height: 13px;
-  margin-top: 2px;
-}
-
-.charts .hist svg .x.axis .tick text {
+#hist-chart .hist svg .x.axis .tick text {
   transform: rotate(90deg) translate(6px,-12px);
   text-anchor: start;
 }
 
-.charts .hist svg rect {
+#hist-chart .hist svg rect {
   fill: #b7b7b9;
   stroke: #6c6c6c;
   stroke-width: .5px;
 }
 
-.charts .hist svg rect.highlight {
+#hist-chart .hist svg rect.highlight {
   stroke: #2d96cb;
   stroke-width: 2px;
 }
 
-.charts .hist svg text.marker-label {
+#hist-chart .hist svg text.marker-label {
   font-size: 10px;
   font-weight: 500;
 }
-.charts .hist svg .marker {
+#hist-chart .hist svg .marker {
   fill: #1d68de
 }
-.charts .hist svg .marker line {
+#hist-chart .hist svg .marker line {
   stroke: #1d68de;
   stroke-width: 5px;
   stroke-opacity: .5;
 }
+
+#hist-chart .hist.selectivity svg rect {
+  fill: #59a14f;
+  stroke: #519248;
+}
+
+#hist-chart .hist.instruction svg rect {
+  fill: #f28e2c;
+  stroke: #c47527;
+}
+
+ #hist-chart .hist.diversity svg rect {
+  fill: #4e79a7;
+  stroke: #426992;
+  stroke-width: .5px;
+}
+
+#hist-chart .hist.cost  svg rect {
+  fill: #e25659;
+  stroke: #c64a4d;
+}
+
+#hist-chart .hist.outcome  svg rect {
+  fill: #75b7b2;
+  stroke: #5a8c88;
+}
+
+
 
 .btn-group-sm>.btn, .btn-sm {
     height: 30px;
@@ -146,10 +143,10 @@ button.multiselect {
 }
 
 .rankchart .row text {
-  font-size: 14px;
+  font-size: 12px;
 }
 .rankchart .col-header text {
-  font-size: 14px;
+  font-size: 12px;
 }
 
 div.tooltip {

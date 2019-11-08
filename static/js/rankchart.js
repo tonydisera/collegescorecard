@@ -9,18 +9,14 @@ function rankchart() {
   var color = null;
   var tooltip = null;
   var tooltipContent = function(d) {
-    let buf = "";
-    fields.forEach(function(field) {
-      buf += "<br>" + field + " " + d[field];
-    })
-    return buf;
+    return d.name + "<br>" + d.field + ": " + d.value
   }
   var invertedScalesFor = [];
 
   var fields = []
+  var fieldDescriptors = [];
 
 
-  let colorScale = d3.scaleOrdinal(d3.schemeTableau10);
 
   var outerWidth = null;
 
@@ -28,12 +24,50 @@ function rankchart() {
   var data = null;
   var stackedData = null;
 
-  var headerHeight = 55;
-  var rowHeight  = 40;
-  var barHeight  = 20;
-  var colWidth   = 100;
-  var colPadding = 10;
-  var nameWidth  = 250;
+  var headerHeight  = 70;
+  var rowHeight     = 40;
+  var barHeight     = 20;
+  var colWidth      = 80;
+  var colWidthTotal = 300;
+  var colPadding    = 10;
+  var nameWidth     = 250;
+
+  var inverseBarMin = 2;
+
+  let darkColors = ['#1b9e77','#d95f02','#7570b3','#e7298a','#66a61e','#e6ab02','#a6761d','#666666',
+               '#22c796','#f79245', '#a7a3d1'];
+
+  let tc = d3.scaleOrdinal(d3.schemeTableau10, 10);
+  let tc0 = tc(4);
+  let tc1 = tc(0);
+  let tc2 = tc(5);
+  let tc3 = tc(6);
+  let tc4 = tc(1);
+
+  var categoryColorMap1 = {
+    'selectivity': ['#f7fbff','#deebf7','#c6dbef','#9ecae1','#6baed6','#4292c6','#2171b5','#084594'].reverse(),
+    'outcome':     ['#ffffff','#f0f0f0','#d9d9d9','#bdbdbd','#969696','#737373','#525252','#252525'].reverse(),
+    'cost':        ['#f7fcf5','#e5f5e0','#c7e9c0','#a1d99b','#74c476','#41ab5d','#238b45','#005a32'].reverse(),
+    'instruction': ['#fcfbfd','#efedf5','#dadaeb','#bcbddc','#9e9ac8','#807dba','#6a51a3','#4a1486'].reverse(),
+    'diversity':   ['#fff5eb','#fee6ce','#fdd0a2','#fdae6b','#fd8d3c','#f16913','#d94801','#8c2d04'].reverse(),
+    'total':       ['#ffffff','#ffffff','#ffffff','#ffffff','#ffffff','#ffffff','#ffffff','#ffffff']
+  }
+
+
+
+  var categoryColorMap = {
+    'selectivity': tc4,
+    'outcome':     tc3,
+    'cost':        tc2,
+    'instruction': tc1,
+    'diversity':   tc0,
+    'total':       '#ffffff'
+  }
+
+
+  var formatColumnHeader = function(d,i) {
+    return d;
+  }
 
 
   function chart(selection) {
@@ -41,31 +75,38 @@ function rankchart() {
 
       container = selection;
 
-      fields = Object.keys(theData[0]).filter(function(field) {
-        return field != "name";
-      })
+      if (fieldDescriptors == null) {
+        fields = Object.keys(theData[0]).filter(function(field) {
+          return field != "name";
+        })        
+      } else {
+        fields = fieldDescriptors.map(function(field) {
+          return field.name;
+        })
+
+      }
 
       data = theData;
 
       scales = fields.map(function(field,i) {
         let scale = d3.scaleLinear()
-            .range([0, colWidth])
+            .domain([d3.min(data, d => d[field]), d3.max(data, d => d[field])])
             .clamp(true)
         if (invertedScalesFor.length > 0 && invertedScalesFor.indexOf(field) >= 0) {
-          scale.domain([d3.max(data, d => d[field]), 0])
+          scale.range([colWidth, 2])
         } else {
-          scale.domain([0, d3.max(data, d => d[field])])
+          scale.range([2, colWidth])
         }
         return scale;
       })
       scalesTotal = fields.map(function(field,i) {
         let scale = d3.scaleLinear()
-            .range([0, (colWidth/fields.length)])
+            .domain([d3. min(data, d => d[field]), d3.max(data, d => d[field])])
             .clamp(true)
         if (invertedScalesFor.length > 0 && invertedScalesFor.indexOf(field) >= 0) {
-          scale.domain([d3.max(data, d => d[field]), 0])
+          scale.range([colWidthTotal/fields.length, 2])
         } else {
-          scale.domain([0, d3.max(data, d => d[field])])
+          scale.range([2, colWidthTotal/fields.length])
         }
         return scale;
       })
@@ -81,6 +122,7 @@ function rankchart() {
         d._total = total;
       })
       fields.push("_total")
+      fieldDescriptors.push({name: '_total', category: 'total', categoryIdx: 0})
       scales.push( 
         d3.scaleLinear()
             .domain([0, d3.max(data, d => d._total)])
@@ -101,13 +143,12 @@ function rankchart() {
         (data)
 
       height = (rowHeight * data.length) + margin.top + margin.bottom;
-      width  = ((colWidth+colPadding) * fields.length) + nameWidth + colPadding + margin.left + margin.right;
+      width  = ((colWidth+colPadding) * fields.length-1) + nameWidth + colPadding + colWidthTotal + margin.left + margin.right;
 
       innerHeight = height - margin.top - margin.bottom;
       innerWidth =  width - margin.left - margin.right;
 
 
-      color = colorScale;  
 
       // Select the svg element, if it exists.
       let svg = d3
@@ -138,7 +179,11 @@ function rankchart() {
         .append("g")
         .attr("class", "col-header-row")
 
-      var colHeaders = headerRowEnter.selectAll(".col-header").data(fields);
+      var colHeaders = headerRow
+        .merge(headerRowEnter)
+        .selectAll(".col-header").data(fields,function(d,i) {
+          return d + "-" + i;
+        });
 
       colHeaders.exit().remove();
       var colHeadersEnter = colHeaders
@@ -152,17 +197,13 @@ function rankchart() {
         .attr("dx", 0)
         .attr("dy", 0)
         .text(function(d,i) {
-          if (d== "_total") {
-            return "Overall score"
-          } else {
-            return d.split("_").join(" ");
-          }
+          return formatColumnHeader(d,i);
         })
         .call(wrap, colWidth+3)
 
       var rows = g.selectAll(".row").data(data,
-      function(d) {
-        return d.name
+      function(d,i) {
+        return d.name + "-" + i;
       });
 
       rows.exit().remove();
@@ -172,25 +213,6 @@ function rankchart() {
         .attr('class', 'row')
         .attr('transform',function(d,i){ 
           return "translate(0,0)";
-        })
-        .on("mouseover", function(d) {
-          tooltip.transition()
-              .duration(200)
-              .style("opacity", .9);
-
-          tooltip.html(tooltipContent(d));
-
-          h = tooltip.node().offsetHeight
-          w = tooltip.node().offsetWidth
-
-          tooltip
-              .style("left", (d3.event.pageX + 2) + "px")
-              .style("top", ((d3.event.pageY - h) - 3) + "px");
-        })
-        .on("mouseout", function(d) {
-          tooltip.transition()
-                 .duration(200)
-                 .style("opacity", 0)
         })
 
       rowsEnter
@@ -212,23 +234,31 @@ function rankchart() {
         })
         .call(wrap, nameWidth - 33)
 
-      var cols = rowsEnter
+      var cols = rows
+        .merge(rowsEnter)
         .selectAll(".col").data(function(d,i) {
           return stackedData.map(function(layer, layerIdx) {
             let isInverseScale = false;
             let field = fields[layerIdx];
+            let fieldDescriptor = fieldDescriptors[layerIdx];
+
             if (invertedScalesFor.length > 0 && invertedScalesFor.indexOf(field) >= 0) {
               isInverseScale = true;
             }
-            return {layerIdx: layerIdx, 
+            return {row: i,
+                    name: data[i].name,
+                    layerIdx: layerIdx, 
                     field: field, 
+                    category: fieldDescriptor.category,
+                    categoryIdx: fieldDescriptor.categoryIdx,
+                    value: data[i][field],
                     scale: scales[layerIdx], 
                     scaleTotal: scalesTotal[layerIdx], 
                     isInverseScale: isInverseScale,
                     layer: layer[i]};
           })
         }, function(d,i) {
-          return d.name + i
+          return d.name + "-" + d.field + "-" + i;
         });
 
       cols.exit().remove();
@@ -255,6 +285,8 @@ function rankchart() {
         .attr("width", function(d,i) {
           if (d.isInverseScale && (d.layer[1] - d.layer[0] == 0)) {
             return 0;
+          } else if (d.isInverseScale && (d.scale(d.layer[1] - d.layer[0]) == 0)) {
+            return inverseBarMin;
           } else {
             return d.scale(d.layer[1] - d.layer[0]);
           }
@@ -263,14 +295,34 @@ function rankchart() {
           if (d.layerIdx == fields.length-1) {
             return "white";
           } else {
-            return color(d.layerIdx);
+
+            return getColor(d.category, d.categoryIdx);
           }
+        })
+        .on("mouseover", function(d) {
+          tooltip.transition()
+              .duration(200)
+              .style("opacity", .9);
+
+          tooltip.html(tooltipContent(d));
+
+          h = tooltip.node().offsetHeight
+          w = tooltip.node().offsetWidth
+
+          tooltip
+              .style("left", (d3.event.pageX + 2) + "px")
+              .style("top", ((d3.event.pageY - h) - 3) + "px");
+        })
+        .on("mouseout", function(d) {
+          tooltip.transition()
+                 .duration(200)
+                 .style("opacity", 0)
         })
 
       container.selectAll(".col.total")
          .each(function(d,i) {
             colTot = d3.select(this)
-            colTot.select("rect").remove(); 
+            colTot.selectAll("rect").remove(); 
 
             let record = data[i];
             let theFields = fields.filter(function(field) {
@@ -293,6 +345,7 @@ function rankchart() {
 
             stacked
             .forEach(function(fieldInfo, fieldIdx) {
+              let fieldDescriptor = fieldDescriptors[fieldIdx];
               colTot.append("rect")
                 .attr("class", "bar")
                 .attr("x", function(d,i) {
@@ -304,7 +357,7 @@ function rankchart() {
                   return fieldInfo[0][1] - fieldInfo[0][0];
                 })
                 .attr("fill", function(d,i) {
-                  return color(fieldIdx);
+                  return getColor(fieldDescriptor.category, fieldDescriptor.categoryIdx);
                 })
               })
          })
@@ -358,6 +411,47 @@ function rankchart() {
     })
   }
 
+  var getColor = function(category, categoryIdx) {
+    let baseColor = categoryColorMap[category];
+    if (categoryIdx == 0) {
+      return baseColor;
+    } else {
+      return adjustColor(baseColor, categoryIdx)
+    }
+  }
+
+  var adjustColor = function(color, k) {
+    if (k % 4 == 0) {
+      return darken(color,k)
+    } else if (k % 3 == 0) {
+      return saturate(color,k)
+    } if (k % 2 == 0) {
+      return desaturate(color,k)
+    } else {
+      return lighten(color,k)
+    }
+  }
+
+  var darken = function(color, k = 1) {
+    const {l, c, h} = d3.lch(color);
+    return d3.lch(l - 10 * k, c, h);
+  }
+
+  var lighten = function(color, k = 1) {
+    const {l, c, h} = d3.lch(color);
+    return d3.lch(l + 18 * k, c, h);
+  }
+
+  var saturate = function(color, k = 1) {
+    const {l, c, h} = d3.lch(color);
+    return d3.lch(l, c + 6 * k, h);
+  }
+
+  var desaturate = function(color, k = 1) {
+    const {l, c, h} = d3.lch(color);
+    return d3.lch(l, c - 6 * k, h);
+  }
+
   chart.margin = function(_) {
     if (!arguments.length) return margin;
     margin = _;
@@ -393,6 +487,46 @@ function rankchart() {
     return chart;
   };  
   
+  chart.formatColumnHeader = function(_) {
+    if (!arguments.length) return formatColumnHeader;
+    formatColumnHeader = _;
+    return chart;
+  }
+  chart.fieldDescriptors = function(_) {
+    if (!arguments.length) return fieldDescriptors;
+    fieldDescriptors = _;
+    return chart;
+  }
+  chart.colWidth = function(_) {
+    if (!arguments.length) return colWidth;
+    colWidth = _;
+    return chart;
+  }
+  chart.colPadding = function(_) {
+    if (!arguments.length) return colPadding;
+    colWidth = _;
+    return chart;
+  }
+  chart.colWidthTotal = function(_) {
+    if (!arguments.length) return colWidthTotal;
+    colWidthTotal = _;
+    return chart;
+  }
+  chart.rowHeight = function(_) {
+    if (!arguments.length) return rowHeight;
+    colWidth = _;
+    return chart;
+  }
+  chart.headerHeight = function(_) {
+    if (!arguments.length) return headerHeight;
+    headerHeight = _;
+    return chart;
+  }
+  chart.nameWidth = function(_) {
+    if (!arguments.length) return nameWidth;
+    nameWidth = _;
+    return chart;
+  }
   chart 
   return chart;
 }

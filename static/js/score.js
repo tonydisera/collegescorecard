@@ -1,10 +1,15 @@
 let fields = []
 let selectedFieldMap = {}
-let histChartMap = {1: {}}
+let histChartMap = {};
 let search = null;
 let rankChart = null;
+let metricCategories = ['selectivity', 'instruction', 'diversity', 'cost', 'outcome', 'rank']
 
-
+let rankHeaderHeight =  70;
+let rankColPadding = 10;
+let rankColWidth = 70;
+let rankColWidthTotal = 250;
+let rankNameWidth = 200;
 
 $(document).ready(function() {
 
@@ -20,21 +25,33 @@ function init() {
 
   rankChart = rankchart();
   rankChart.margin( { top: 10, right: 5, bottom: 90, left: 0 } )
-  rankChart.invertedScalesFor([
-    "tuition in_state",
-    "tuition out_of_state",
-    "tuition academic_year",
-    "cost attendance academic_year",
-    "demographics avg_family_income",    
-    "demographics median_family_income",
-    "demographics median_hh_income",
-    "median_debt_suppressed overall"
-  ])
+  rankChart.headerHeight(rankHeaderHeight);
+  rankChart.colWidth(rankColWidth);
+  rankChart.colWidthTotal(rankColWidthTotal);
+  rankChart.nameWidth(rankNameWidth);
+  rankChart.formatColumnHeader(function(d,i) {
+    return formatRankColumnHeader(d)
+  })
   
+}
+
+function formatRankColumnHeader(d) {
+  if ( d == "_total") {
+      return "Overall score"
+  } else {
+    let hdr = d.split("_").join(" ");
+    let tokens = hdr.split("demographics ");
+    if (tokens.length > 1) {
+      return tokens[1];
+    } else {
+      return hdr;
+    }
+  }
 }
 
 function rankColleges() {
   search.close();
+  promiseShowHistograms();
   promiseShowRankings(getSelectedCollegeNames());
 }
 
@@ -45,6 +62,7 @@ function promiseShowRankings(selectedCollegeNames) {
   .then(function(selectedCollegeData) {
 
     let selection = d3.select("#rank-chart");
+    rankChart.fieldDescriptors(getSelectedMetricFields())
     selection.datum(selectedCollegeData);
     rankChart(selection);
 
@@ -80,7 +98,7 @@ function promiseGetCollegeData(selectedCollegeNames, fieldNames) {
 
 
 
-function promiseShowHistograms(rowNumber=1, collegeName) {
+function promiseShowHistograms() {
 
   return new Promise(function(resolve, reject) {
 
@@ -88,51 +106,39 @@ function promiseShowHistograms(rowNumber=1, collegeName) {
     promiseGetData(fieldNames)
     .then(function(data) {
 
-      let chartContainerSelector  = "#histograms #chart-row-" + rowNumber + " .charts"
-      let chartSelector           = "#histograms #chart-row-" + rowNumber + " .charts .hist"
+      let chartContainerSelector  = "#hist-chart"
+      d3.select(chartContainerSelector).style("margin-left", (rankNameWidth+rankColPadding) + "px");
+
+      let chartSelector           = "#hist-chart .hist"
       d3.selectAll(chartSelector).remove()
-      histChartMap[rowNumber] = {}
+      histChartMap = {};
 
-      getSelectedFieldNames().forEach(function(selectedField) {
-        let selectedFieldName = selectedField.split(" ").join("_");
+      getSelectedMetricFields().forEach(function(selectedField) {
+        let selectedFieldName = selectedField.name.split(" ").join("_");
 
-        let selection = d3.select(chartContainerSelector).append("div").attr("class", "hist " + selectedFieldName);
+        let clazzes = "hist " + selectedFieldName + " " + selectedField.category;
+        let selection = d3.select(chartContainerSelector).append("div").attr("class", clazzes);
 
-        if (rowNumber == 1) {
-          selection.append("span").attr("class", "chart-title").text(selectedField)
-
-          let nonNullValues = data.filter(function(d) {
-            return d[selectedField];
-          })
-          let nullRatio = ((data.length - nonNullValues.length) / data.length);
-          let nullPct = nullRatio * 100;
-          let nullPctLabel  = +(Math.round(nullPct + "e+" + 0)  + "e-" + 0);
-          selection.append("span")
-                   .attr("class", function() {
-                      if (nullRatio > .25) {
-                        return "chart-label danger"
-                      } else {
-                        return "chart-label"
-                      }
-                   })
-                   .text(nullPctLabel + "% blank")
-
-        }
-
+        let nonNullValues = data.filter(function(d) {
+          return d[selectedField.name];
+        })
+        
 
         let histChart = histogram();
-        histChart.width(160)
-                 .height(160)
-                 .margin({top: 20, bottom: 62, left: 35, right: 8})
+        histChart.width(rankColWidth+rankColPadding)
+                 .height(70)
+                 .margin({top: 0, bottom: 10, left: 0, right: rankColPadding})
+                
         histChart.xValue(function(d) {
-          return d[selectedField];
+          return d[selectedField.name];
         })
+        histChart.showAxis(false)
         selection.datum(data)
         histChart(selection);
 
-        histChartMap[rowNumber][selectedFieldName] = histChart;
+        histChartMap[selectedFieldName] = histChart;
       })
-      resolve({rowNumber: rowNumber, collegeName: collegeName});
+      resolve();
 
 
     })
@@ -140,57 +146,6 @@ function promiseShowHistograms(rowNumber=1, collegeName) {
 
 }
 
-function addRow(rowNumber, collegeName) {
-
-
-  d3.select("#histograms.chart-container").select("#chart-row-" + rowNumber).remove();
-
-  var chartRow = d3.select("#histograms.chart-container")
-    .append("div")
-    .attr("id", "chart-row-" + rowNumber)
-    .attr("class", "chart-row")
-
-  chartRow.append("div")
-          .attr("class", "college-title")
-          .text(collegeName);
-
-  chartRow.append("div")
-    .attr("class", "charts")
-
-
-}
-
-function addChartRows() {
-  d3.select("#histograms.chart-container").selectAll(".chart-row").remove();
-
-  var collegeNames = getSelectedCollegeNames();
-  let rowNumber = 1
-  let promises = []
-  if (collegeNames.length > 0) {
-    collegeNames.forEach(function(collegeName) {
-      addRow(rowNumber, collegeName)
-      let p = promiseShowHistograms(rowNumber, collegeName)
-      promises.push(p)
-      rowNumber++;
-    })
-    Promise.all(promises)
-    .then(function() {
-      rowNumber = 1;
-      setTimeout(function() {
-        collegeNames.forEach(function(collegeName) {
-          highlightHistograms(rowNumber, collegeName);
-          rowNumber++;
-        })        
-      },1000)
-    })
-  } else {
-    addRow(1, "");
-    promiseShowHistograms(1, "");
-  }
-
-
-
-}
 
 function getSelectedFieldNames() {
   return fields.filter(function(field) {
@@ -199,7 +154,32 @@ function getSelectedFieldNames() {
   map(function(field) {
     return field.name;
   })
+}
 
+
+function getSelectedMetricFields() {
+  let selectedFields = []
+  metricCategories.forEach(function(category) {
+    let fieldsForCategory = fields.filter(function(field) {
+      return selectedFieldMap[field.name] && field.name != 'name' && field.category == category;
+    })
+    fieldsForCategory.forEach(function(field,i) {
+      field.categoryIdx = i;
+      selectedFields.push(field)
+    })
+  })
+  return selectedFields;
+}
+
+function getFieldCategory(fieldName) {
+  let matched = fields.filter(function(field) {
+    return field.name == fieldName;
+  })
+  if (matched && matched.length > 0) {
+    return matched[0].category;
+  } else {
+    return "";
+  }
 }
 
 function getSelectedCollegeNames() {
@@ -225,27 +205,27 @@ function initFieldDropdown() {
       if (options && options.length > 0) {
         if (Array.isArray(options)) {
           options.forEach(function(option) {
-            let field = option[0].label
+            let field = option[0].value
             selectField(field, checked);
           })
         } else {
-          let field = options[0].label
+          let field = options[0].value
           selectField(field, checked);
         }
       }
     },
     onDropdownHide: function(event) {
-      promiseShowRankings(getSelectedCollegeNames())
+      rankColleges();
     },
     onSelectAll: function(event) {
       fields.forEach(function(field) {
-        selectField(field, true);
+        selectField(field.name, true);
       })
 
     },
     onDeselectAll: function(event) {
       fields.forEach(function(field) {
-        selectField(field, false);
+        selectField(field.name, false);
       })
 
     }
@@ -253,7 +233,7 @@ function initFieldDropdown() {
   });
   
 
-  getNumericFields();
+  getMetricFields();
   
 }
 
@@ -265,40 +245,57 @@ function highlightHistograms(rowNumber=1, collegeName) {
   }
 }
 
-
-
-function getNumericFields() {
-  d3.json("getFields",
-  function (err, data) {
+function getMetricFields() {
+  d3.json("getDataDictionary",
+  function(err, data) {
     if (err) {
       console.log(err)
+      return;
     }
+
     fields = data.filter(function(field) {
-      return field.type == 'numeric'
+      return field.forRanking
     });
 
-    let options = []
-    fields.forEach(function(field) {
-      options.push({ label: field.name, title: field.name, value: field.name } );
+    
+
+    optGroups = metricCategories.map(function(category) {
+      let optGroup = {label: category, children: null};
+      optGroup.children = fields.filter(function(field) {
+        return field.category == category;
+      })
+      .map(function(field) {
+        return { label: formatRankColumnHeader(field.name), 
+                 title: field.name, 
+                 value: field.name }
+      })
+      return optGroup;
     })
 
     let fieldSelector = "#scorecard-select";
-    $(fieldSelector).multiselect('dataprovider', options);
+    $(fieldSelector).multiselect('dataprovider', optGroups);
 
-    $(fieldSelector).multiselect('select', 
-      ['cost attendance academic_year', 
-       'instructional_expenditure_per_fte', 
-       'faculty_salary',
-       'ft_faculty_rate',
-       'completion_rate_4yr_150nt',
-       'demographics avg_family_income',
-       '6_yrs_after_entry median',
-       'median_debt_suppressed overall',
-       'demographics race_ethnicity black',
-       'demographics race_ethnicity hispanic'
-       ], true)
+    let defaultFields = fields.filter(function(field) {
+        return field.rankDefaultSelect;
+    })
+    .map(function(field) {
+      return field.name;
+    })
+    $(fieldSelector).multiselect('select', defaultFields, true)
+
+    let invertedScaleFields = fields.filter(function(field) {
+      return field.rankDescending;
+    })
+    .map(function(field) {
+      return field.name;
+    })
+    rankChart.invertedScalesFor(invertedScaleFields);
+
   })
 }
+
+
+
 
 
 

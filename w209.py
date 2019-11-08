@@ -74,5 +74,11 @@ def getDegreesOffered():
     degrees_offered = pd.read_csv(os.path.join(APP_FOLDER,fileName)) 
     return degrees_offered.to_json(orient="values")
 
+@app.route("/getDataDictionary")
+def getDataDictionary():
+    fileName = "static/data/data_dictionary.csv"
+    data_dictionary = pd.read_csv(os.path.join(APP_FOLDER,fileName)) 
+    return data_dictionary.to_json(orient="records")
+
 
 
