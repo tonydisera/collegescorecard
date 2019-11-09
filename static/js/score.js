@@ -10,6 +10,7 @@ let rankColPadding = 10;
 let rankColWidth = 70;
 let rankColWidthTotal = 250;
 let rankNameWidth = 200;
+let rankCategoryPadding = 40;
 
 $(document).ready(function() {
 
@@ -29,6 +30,7 @@ function init() {
   rankChart.colWidth(rankColWidth);
   rankChart.colWidthTotal(rankColWidthTotal);
   rankChart.nameWidth(rankNameWidth);
+  rankChart.categoryPadding(rankCategoryPadding)
   rankChart.formatColumnHeader(function(d,i) {
     return formatRankColumnHeader(d)
   })
@@ -37,7 +39,7 @@ function init() {
 
 function formatRankColumnHeader(d) {
   if ( d == "_total") {
-      return "Overall score"
+      return "combined score"
   } else {
     let hdr = d.split("_").join(" ");
     let tokens = hdr.split("demographics ");
@@ -103,26 +105,77 @@ function promiseShowHistograms() {
   return new Promise(function(resolve, reject) {
 
     let fieldNames = getSelectedFieldNames();
+
+    let fieldDescriptors = getSelectedMetricFields();
+    let categories = []
+    let category = null;
+    fieldDescriptors.forEach(function(field,i) {
+      if (i == 0 || field.category != fieldDescriptors[i-1].category) {
+        category = {category: field.category, count: 1}
+        categories.push(category)
+      } else {
+        category.count++;
+      }
+    })
+    categories.push({category: 'Overall', width: rankColWidthTotal })
+
+    let headerContainerSelector  = "#hist-chart-categories"
+    let headerSelector  = "#hist-chart-categories .category-header"
+    d3.select(headerContainerSelector).style("margin-left", (rankNameWidth+rankColPadding) + "px");
+    d3.selectAll(headerSelector).remove();
+
+
+    categories.forEach(function(cat,i) {
+      d3.select(headerContainerSelector)
+        .append("span")
+        .attr("class", "category-header")
+        .style("width", function() {
+          if (cat.width) {
+            return cat.width + "px";
+          } else {
+            return (cat.count * rankColWidth) + ((cat.count-1) * rankColPadding) + "px";
+          }
+        })
+        .style("margin-left", function() {
+          if (i > 0 && cat.width == null) {
+            return (rankColPadding + rankCategoryPadding) + "px";
+          } else {
+            return "0px"
+          }
+        })
+        .text(function(d,i) {
+          return cat.category
+        })
+    })
+
     promiseGetData(fieldNames)
     .then(function(data) {
+
+
 
       let chartContainerSelector  = "#hist-chart"
       d3.select(chartContainerSelector).style("margin-left", (rankNameWidth+rankColPadding) + "px");
 
+
       let chartSelector           = "#hist-chart .hist"
       d3.selectAll(chartSelector).remove()
       histChartMap = {};
+
+      let prevCategory = null;
 
       getSelectedMetricFields().forEach(function(selectedField) {
         let selectedFieldName = selectedField.name.split(" ").join("_");
 
         let clazzes = "hist " + selectedFieldName + " " + selectedField.category;
         let selection = d3.select(chartContainerSelector).append("div").attr("class", clazzes);
+        if (prevCategory != null && prevCategory != selectedField.category) {
+          selection.style("margin-left", rankCategoryPadding + "px");
+        }
 
         let nonNullValues = data.filter(function(d) {
           return d[selectedField.name];
         })
-        
+
 
         let histChart = histogram();
         histChart.width(rankColWidth+rankColPadding)
@@ -136,7 +189,10 @@ function promiseShowHistograms() {
         selection.datum(data)
         histChart(selection);
 
-        histChartMap[selectedFieldName] = histChart;
+        histChartMap[selectedField.name] = histChart;
+
+        prevCategory = selectedField.category;
+
       })
       resolve();
 

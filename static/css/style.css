@@ -36,6 +36,15 @@ body .selections {
   overflow-y: scroll;
 }
 
+#hist-chart-categories {
+  display: flex;
+}
+
+#hist-chart-categories .category-header {
+  text-align: center;
+  display: inline-block;
+}
+
 #hist-chart {
   display: flex;
   flex-flow: row;
