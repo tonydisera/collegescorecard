@@ -124,6 +124,10 @@ function histogram() {
 
   }
 
+  function removeHighlight() {
+    container.selectAll("svg .markers .marker").remove();
+  }
+
 
 
   function chart(selection) {
@@ -196,7 +200,7 @@ function histogram() {
           .attr("dy", "0.71em")
           .attr("text-anchor", "end")
           .text("Frequency");
-        
+
       }
 
       var bars = g.selectAll(".bar").data(function(d) {
@@ -249,6 +253,12 @@ function histogram() {
   chart.highlight = function(_) {
     if (!arguments.length) return highlight;
     highlight = _;
+    return chart;
+  };
+
+  chart.removeHighlight = function(_) {
+    if (!arguments.length) return removeHighlight;
+    removeHighlight = _;
     return chart;
   };
 

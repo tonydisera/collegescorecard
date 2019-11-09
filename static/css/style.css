@@ -182,6 +182,10 @@ button.multiselect {
   fill: blue;
 }
 
+.rankchart .row text {
+  cursor: pointer;
+}
+
 div.tooltip {
     position: absolute;
     text-align: center;

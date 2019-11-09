@@ -39,7 +39,18 @@ function init() {
     promiseShowHistograms();
     promiseShowRankings(getSelectedCollegeNames());
   })
-  
+  rankChart.onHover(function(record) {
+    highlightHistogram(record.name, record.field)
+  })
+  rankChart.onHoverEnd(function(record) {
+    unhighlightHistograms(record.name);
+  })
+  rankChart.onHoverRow(function(record) {
+    highlightHistograms(record.name)
+  })
+  rankChart.onHoverRowEnd(function(record) {
+    unhighlightHistograms(record.name);
+  })  
 }
 
 function formatRankColumnHeader(d) {
@@ -300,11 +311,23 @@ function initFieldDropdown() {
 }
 
 
-function highlightHistograms(rowNumber=1, collegeName) {
-  for (var key in histChartMap[rowNumber]) {
-    let histChart = histChartMap[rowNumber][key];
+function highlightHistograms(collegeName) {
+  for (var key in histChartMap) {
+    let histChart = histChartMap[key];
     histChart.highlight()([collegeName]);
   }
+}
+
+function unhighlightHistograms(collegeName) {
+  for (var key in histChartMap) {
+    let histChart = histChartMap[key];
+    histChart.removeHighlight()([collegeName]);
+  }
+}
+
+function highlightHistogram(collegeName, field) {
+  let histChart = histChartMap[field.name];
+  histChart.highlight()([collegeName]);
 }
 
 function getMetricFields() {

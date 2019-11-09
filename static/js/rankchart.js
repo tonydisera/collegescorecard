@@ -8,7 +8,7 @@ function rankchart() {
   var color = null;
   var tooltip = null;
   var tooltipContent = function(d) {
-    return d.name + "<br>" + d.field + ": " + d.value
+    return d.name + "<br>" + d.field.name + ": " + d.value
   }
 
   var fieldDescriptors = [];
@@ -32,6 +32,22 @@ function rankchart() {
   var inverseBarMin = 2;
 
   let onRescale = function() {
+
+  }
+
+  let onHover = function() {
+
+  }
+
+  let onHoverEnd = function() {
+
+  }
+
+  let onHoverRow = function() {
+
+  }
+
+  let onHoverRowEnd = function() {
 
   }
 
@@ -238,6 +254,12 @@ function rankchart() {
         .text(function (d,i) {
           return i+1 
         })
+        .on("mouseover", function(d) {
+          onHoverRow(d)
+        })
+        .on("mouseout", function(d) {
+          onHoverRowEnd(d)
+        })
 
       rowsEnter
         .append("g")
@@ -247,6 +269,12 @@ function rankchart() {
         .attr("dy", 0)
         .text(function (d,i) {
           return d.name
+        })
+        .on("mouseover", function(d) {
+          onHoverRow(d)
+        })
+        .on("mouseout", function(d) {
+          onHoverRowEnd(d)
         })
         .call(wrap, nameWidth - 33)
 
@@ -326,11 +354,13 @@ function rankchart() {
           tooltip
               .style("left", (d3.event.pageX + 2) + "px")
               .style("top", ((d3.event.pageY - h) - 3) + "px");
+          onHover(d)
         })
         .on("mouseout", function(d) {
           tooltip.transition()
                  .duration(200)
                  .style("opacity", 0)
+          onHoverEnd(d)
         })
 
       // Add the stacked bar showing the overall score for each row
@@ -677,11 +707,32 @@ function rankchart() {
     onRescale = _;
     return chart;
   }
+  chart.onHover = function(_) {
+    if (!arguments.length) return onHover;
+    onHover = _;
+    return chart;
+  }
+  chart.onHoverEnd = function(_) {
+    if (!arguments.length) return onHoverEnd;
+    onHoverEnd = _;
+    return chart;
+  }  
+  chart.onHoverRow = function(_) {
+    if (!arguments.length) return onHoverRow;
+    onHoverRow = _;
+    return chart;
+  }
+  chart.onHoverRowEnd = function(_) {
+    if (!arguments.length) return onHoverRowEnd;
+    onHoverRowEnd = _;
+    return chart;
+  }    
   chart.initFieldDescriptors = function(_) {
     if (!arguments.length) return initFieldDescriptors;
     initFieldDescriptors = _;
     return chart;
   }
+
   chart 
   return chart;
 }
