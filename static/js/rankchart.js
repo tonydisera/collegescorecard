@@ -5,7 +5,6 @@ function rankchart() {
     innerWidth = width - margin.left - margin.right,
     innerHeight = height - margin.top - margin.bottom;
    
-  var scales = null;
   var color = null;
   var tooltip = null;
   var tooltipContent = function(d) {
@@ -13,11 +12,9 @@ function rankchart() {
   }
 
   var fieldDescriptors = [];
-
-
-
-  var outerWidth = null;
-
+  var totalField = null;
+  var totalCategoryPadding = 0;
+  var totalColWidth = 0;
   var container = null;
   var data = null;
   var stackedData = null;
@@ -30,12 +27,14 @@ function rankchart() {
   var colPadding    = 10;
   var nameWidth     = 250;
   var categoryPadding = 30;
-  var weightHeight    = 20;
+  var weightHeight    = 14;
 
   var inverseBarMin = 2;
 
-  let darkColors = ['#1b9e77','#d95f02','#7570b3','#e7298a','#66a61e','#e6ab02','#a6761d','#666666',
-               '#22c796','#f79245', '#a7a3d1'];
+  let onRescale = function() {
+
+  }
+
 
   let tc = d3.scaleOrdinal(d3.schemeTableau10, 10);
   let tc0 = tc(4);
@@ -43,18 +42,6 @@ function rankchart() {
   let tc2 = tc(5);
   let tc3 = tc(6);
   let tc4 = tc(1);
-
-  var categoryColorMap1 = {
-    'selectivity': ['#f7fbff','#deebf7','#c6dbef','#9ecae1','#6baed6','#4292c6','#2171b5','#084594'].reverse(),
-    'outcome':     ['#ffffff','#f0f0f0','#d9d9d9','#bdbdbd','#969696','#737373','#525252','#252525'].reverse(),
-    'cost':        ['#f7fcf5','#e5f5e0','#c7e9c0','#a1d99b','#74c476','#41ab5d','#238b45','#005a32'].reverse(),
-    'instruction': ['#fcfbfd','#efedf5','#dadaeb','#bcbddc','#9e9ac8','#807dba','#6a51a3','#4a1486'].reverse(),
-    'diversity':   ['#fff5eb','#fee6ce','#fdd0a2','#fdae6b','#fd8d3c','#f16913','#d94801','#8c2d04'].reverse(),
-    'total':       ['#ffffff','#ffffff','#ffffff','#ffffff','#ffffff','#ffffff','#ffffff','#ffffff']
-  }
-
-
-
   var categoryColorMap = {
     'selectivity': tc4,
     'outcome':     tc3,
@@ -80,91 +67,31 @@ function rankchart() {
         return; 
       }   
 
-      let totalCategoryPadding = 0;
-      fieldDescriptors.forEach(function(field,i) {
-        if (i > 0 && field.category != fieldDescriptors[i-1].category) {
-          field.padding = categoryPadding;
-          totalCategoryPadding += categoryPadding;
-        } else {
-          field.padding = 0;     
-        }
-        field.paddingCumulative = totalCategoryPadding;
-        field.weights = [0,1,2,3].map(function(weight) {
-          return {field: field, weight: weight};
-        })
-        field.currentWeight = 1;
-      })
-      // Add padding for total
-      totalCategoryPadding += categoryPadding;
-
 
       data = theData;
 
-      scales = fieldDescriptors.map(function(field,i) {
-        let scale = d3.scaleLinear()
-            .domain([d3.min(data, d => d[field.name]), d3.max(data, d => d[field.name])])
-            .clamp(true)
-        if (field.rankDescending) {
-          scale.range([colWidth, 2])
-        } else {
-          scale.range([2, colWidth])
-        }
-        return scale;
-      })
-      scalesTotal = fieldDescriptors.map(function(field,i) {
-        let scale = d3.scaleLinear()
-            .domain([d3. min(data, d => d[field.name]), d3.max(data, d => d[field.name])])
-            .clamp(true)
-        if (field.rankDescending) {
-          scale.range([colWidthTotal/fieldDescriptors.length, 2])
-        } else {
-          scale.range([2, colWidthTotal/fieldDescriptors.length])
-        }
-        return scale;
-      })
+      // Scale the data
+      scaleData(data)
 
-      data.forEach(function(d) {
-        let total = 0;
-        fieldDescriptors.forEach(function(field, fieldIdx) {
-          if (field.rankDescending && d[field.name] == null) {
-          } else {
-            total += scales[fieldIdx](d[field.name]);
-          }
-        })
-        d._total = total;
-      })
-      totalField = {name: '_total', category: 'total', categoryIdx: 0, padding: 0, paddingCumulative: totalCategoryPadding};
-      totalField.weights = [];
-      totalField.weight = 0;
+
+      // Add a column representing the overall score 
       fieldDescriptors.push(totalField)
-      scales.push( 
-        d3.scaleLinear()
-            .domain([0, d3.max(data, d => d._total)])
-            .range([0, colWidth])
-      )
-      scalesTotal.push( 
-        d3.scaleLinear()
-            .domain([0, d3.max(data, d => d._total)])
-            .range([0, 0])
-      )
 
-      data.sort(function(a,b) {
-        return d3.descending(a._total, b._total);
-      })
 
+      // Calculate the height and width
+      height = headerHeight + (rowHeight * data.length) + margin.top + margin.bottom;
+      width  = (totalColWidth + (colPadding) * fieldDescriptors.length-1) + nameWidth + colPadding + colWidthTotal + totalCategoryPadding + margin.left + margin.right;
+      innerHeight = height - margin.top - margin.bottom;
+      innerWidth =  width - margin.left - margin.right;
+
+
+      // Stack the data by the different columns
       let fieldNames = fieldDescriptors.map(function(field) {
         return field.name
       })
       stackedData = d3.stack()
         .keys(fieldNames)
         (data)
-
-      height = headerHeight + (rowHeight * data.length) + margin.top + margin.bottom;
-      width  = ((colWidth+colPadding) * fields.length-1) + nameWidth + colPadding + colWidthTotal + totalCategoryPadding + margin.left + margin.right;
-
-      innerHeight = height - margin.top - margin.bottom;
-      innerWidth =  width - margin.left - margin.right;
-
 
 
       // Select the svg element, if it exists.
@@ -190,16 +117,26 @@ function rankchart() {
         .select("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+      // Add the column headers
+      g.selectAll(".col-header-row").remove();
       var headerRow = g.selectAll(".col-header-row").data([fieldDescriptors]);
       headerRow.exit().remove();
       let headerRowEnter = headerRow.enter()
         .append("g")
         .attr("class", "col-header-row")
 
+      headerRowEnter
+        .append("text")
+        .attr("class", "weight-header")
+        .attr("x", "0")
+        .attr("y", headerHeight-weightHeight-30+12)
+        .text("Click to adjust weights >")
+
+
       var colHeaders = headerRow
         .merge(headerRowEnter)
-        .selectAll(".col-header").data(fieldDescriptors,function(d,i) {
-          return d.name + "-" + i;
+        .selectAll(".col-header").data(fieldDescriptors,function(field,i) {
+          return field.name + "-" + i + "-" + field.colX;
         });
 
       colHeaders.exit().remove();
@@ -207,8 +144,8 @@ function rankchart() {
         .enter()
         .append("g")
         .attr("class", "col-header")
-        .attr("transform", function(d,i) {
-          return "translate(" + ((nameWidth + colPadding + d.paddingCumulative) + ((colWidth+colPadding)*i)) + ",0)";
+        .attr("transform", function(field,i) {
+          return "translate(" + field.colX + ",0)";
         })
       colHeadersEnter
         .append("text")
@@ -219,6 +156,7 @@ function rankchart() {
         })
         .call(wrap, colWidth +3)
 
+      // Add the weight boxes to the column header
       let weightGroup = colHeadersEnter.selectAll("g.weights")
         .data(function(fieldDescriptor) {
           return [fieldDescriptor.weights];
@@ -229,7 +167,7 @@ function rankchart() {
       let weightGroupEnter = weightGroup
         .enter()
         .append("g")
-        .attr("transform", "translate(0," + (headerHeight-(colWidth/4)-40) + ")")
+        .attr("transform", "translate(0," + (headerHeight-(weightHeight)-30) + ")")
         .attr("class", "weights")
 
       let weightRectEnter = weightGroupEnter.selectAll("rect.weight")
@@ -243,24 +181,24 @@ function rankchart() {
       weightRectEnter
         .append("rect")
         .attr("class", function(weightObject) {
-          if (weightObject.weight == weightObject.field.currentWeight-1) {
+          if (weightObject.weight <= weightObject.field.currentWeight-1) {
             return "weight selected";
           } else {
             return "weight"
           }
         })
         .attr("x", function(weightObject) {
-          return weightObject.weight*(colWidth/4)
+          return weightObject.weight*weightHeight;
         })
         .attr("y", "0")
         .attr("width", function(weightObject) {
           if (weightObject.field.name != "_total") {
-            return colWidth/4;
+            return weightHeight;
           } else {
             return "0";
           }
         })
-        .attr("height", colWidth/4)
+        .attr("height", weightHeight)
         .on("click", function(weightObject) {
           weightObject.field.currentWeight = weightObject.weight+1;
 
@@ -272,11 +210,15 @@ function rankchart() {
 
           })
 
+          onRescale()
+
         })
 
 
+      // Add the rows
       var rows = g.selectAll(".row").data(data,
       function(d,i) {
+        //return d.name + "-" + i + "-" + totalColWidth + "-" + totalCategoryPadding;
         return d.name + "-" + i;
       });
 
@@ -285,9 +227,9 @@ function rankchart() {
       let rowsEnter  = rows.enter()
         .append('g')
         .attr('class', 'row')
-        .attr('transform',function(d,i){ 
-          return "translate(0,0)";
-        })
+        .attr('transform',function(record,i){ 
+           return "translate(0 ," + ((rowHeight * record.position) + headerHeight) + ")";
+         })
 
       rowsEnter
         .append("text")
@@ -308,6 +250,8 @@ function rankchart() {
         })
         .call(wrap, nameWidth - 33)
 
+
+      // Add the column bars
       var cols = rows
         .merge(rowsEnter)
         .selectAll(".col").data(function(d,i) {
@@ -316,21 +260,16 @@ function rankchart() {
             let fieldDescriptor = fieldDescriptors[layerIdx];
 
 
-            return {row: i,
-                    name:              data[i].name,
-                    layerIdx:          layerIdx, 
-                    paddingCumulative: fieldDescriptor.paddingCumulative,
-                    field:             fieldDescriptor.name, 
-                    category:          fieldDescriptor.category,
-                    categoryIdx:       fieldDescriptor.categoryIdx,
-                    value:             data[i][fieldDescriptor.name],
-                    scale:             scales[layerIdx], 
-                    scaleTotal:        scalesTotal[layerIdx], 
-                    isInverseScale:    fieldDescriptor.rankDescending,
-                    layer:             layer[i]};
+            return { row: i,
+                     layerIdx:          layerIdx, 
+                     layer:             layer[i],
+                     name:              data[i].name,
+                     field:             fieldDescriptor,
+                     value:             data[i][fieldDescriptor.name]
+                    };
           })
         }, function(d,i) {
-          return d.name + "-" + d.field + "-" + i;
+          return d.name + "-" + d.field.name + "-" + d.field.width + " " + d.field.colX + "-" + i;
         });
 
       cols.exit().remove();
@@ -343,33 +282,36 @@ function rankchart() {
           } else{
             return "col";
           }
-        })
+        });
+
+      cols.merge(colsEnter)
         .attr("transform", function(d,i) {
-          return "translate(" + (nameWidth+colPadding+d.paddingCumulative + (i*(colWidth+colPadding))) + ",0)";
+          return "translate(" + d.field.colX + ",0)";
         })
 
-      colsEnter
+      let bars = cols.merge(colsEnter).selectAll(".bar");
+
+      let barsEnter = colsEnter
         .append("rect")
-        .attr("class", "bar")
+        .attr("class", "bar");
+
+      cols.merge(colsEnter).selectAll(".bar")
         .attr("x", 0)
         .attr("y", -10)
         .attr("height", barHeight)
         .attr("width", function(d,i) {
-          if (d.isInverseScale && (d.layer[1] - d.layer[0] == 0)) {
+          if (d.field.name == "_total") {
             return 0;
-          } else if (d.isInverseScale && (d.scale(d.layer[1] - d.layer[0]) == 0)) {
+          } if (d.field.rankDescending && (d.layer[1] - d.layer[0] == 0)) {
+            return 0;
+          } else if (d.field.rankDescending && (d.field.scale(d.layer[1] - d.layer[0]) == 0)) {
             return inverseBarMin;
           } else {
-            return d.scale(d.layer[1] - d.layer[0]);
-          }
+            return d.field.scale(d.layer[1] - d.layer[0]);
+          }        
         })
         .attr("fill", function(d,i) {
-          if (d.layerIdx == fields.length-1) {
-            return "white";
-          } else {
-
-            return getColor(d.category, d.categoryIdx);
-          }
+          return getColor(d.field.category, d.field.categoryIdx);
         })
         .on("mouseover", function(d) {
           tooltip.transition()
@@ -391,73 +333,197 @@ function rankchart() {
                  .style("opacity", 0)
         })
 
-      container.selectAll(".col.total")
-      .each(function(d,i) {
-        colTot = d3.select(this)
-        colTot.selectAll("rect").remove(); 
+      // Add the stacked bar showing the overall score for each row
+      addTotalBars()
 
-        let record = data[i];
-        let theFieldDescriptors = fieldDescriptors.filter(function(field) {
-          return field.name != "_total"
-        })
-
-        let scaledRec = {};
-        theFieldDescriptors.forEach(function(field, i) {
-          if (field.rankDescending && record[field.name] == null) {
-            scaledRec[field.name] = 0;
-
-          } else {
-            scaledRec[field.name] = scalesTotal[i](record[field.name])
-
-          }
-        })
-
-        let theFieldNames = theFieldDescriptors.map(function(field) {
-          return field.name;
-        })
-        let stacked = d3.stack().keys(theFieldNames)([scaledRec]);
-
-        stacked
-        .forEach(function(fieldInfo, fieldIdx) {
-          let fieldDescriptor = fieldDescriptors[fieldIdx];
-          colTot.append("rect")
-            .attr("class", "bar")
-            .attr("x", function(d,i) {
-              return fieldInfo[0][0]
-            })
-            .attr("y", -10)
-            .attr("height", barHeight)
-            .attr("width", function(d,i) {
-              return fieldInfo[0][1] - fieldInfo[0][0];
-            })
-            .attr("fill", function(d,i) {
-              return getColor(fieldDescriptor.category, fieldDescriptor.categoryIdx);
-            })
-        })
-      })
-         
-        
-
-
-
-      g.selectAll(".row")
-          .transition()
-           .duration(1200)
-           .ease(d3.easeSin)
-           .attr('transform',function(d,i){ 
-             return "translate(0 ," + ((rowHeight * i) + headerHeight) + ")";
-           })
-
+      // Show the transitions, reordering the rows and shrinking/expanding
+      // the column bars
+      showTransitions(g);        
             
-             
+      // Add the tooltip             
       container.select(".tooltip").remove();
       tooltip = container.append("div")
         .attr("class", "tooltip")
         .style("opacity", 0);
 
-
-    
     });
+  }
+
+  var initFieldDescriptors = function() {
+    totalCategoryPadding = 0;
+    totalColWidth = 0;
+    fieldDescriptors.forEach(function(field,i) {
+      if (i > 0 && field.category != fieldDescriptors[i-1].category) {
+        totalCategoryPadding += categoryPadding;
+      } 
+      field.paddingCumulative = totalCategoryPadding;
+      field.weights = [0,1,2,3].map(function(weight) {
+        return {field: field, weight: weight};
+      })
+      field.currentWeight = field.currentWeight ? field.currentWeight : 1;
+      field.width = colWidth*field.currentWeight;
+
+      field.colX = nameWidth + colPadding + field.paddingCumulative + totalColWidth;
+
+      totalColWidth += field.width;
+      totalColWidth += colPadding;
+    })
+    // Add padding for total
+    totalCategoryPadding += categoryPadding;
+
+    // totalField holds the scales for the overall score 
+    totalField = {name: '_total', category: 'total', categoryIdx: 0, padding: 0, paddingCumulative: totalCategoryPadding};
+    totalField.weights = [];
+    totalField.weight = 0;
+    totalField.colX = nameWidth + colPadding + totalCategoryPadding + totalColWidth;
+    totalField.scale = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d._total)])
+      .range([0, colWidth])
+
+    totalField.scaleTotal = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d._total)])
+      .range([0, 0])   
+
+  }
+
+  var scaleData = function(data) {
+
+    // Initialize field descriptors with the x postion, padding, width
+    initFieldDescriptors();
+
+
+    // Set up column scales
+    fieldDescriptors.forEach(function(field,i) {
+      field.scale = d3.scaleLinear()
+          .domain([d3.min(data, d => d[field.name]), d3.max(data, d => d[field.name])])
+          .clamp(true)
+      if (field.rankDescending) {
+        field.scale.range([colWidth * field.currentWeight, 2])
+      } else {
+        field.scale.range([2, colWidth * field.currentWeight])
+      }
+
+      field.scaleTotal = d3.scaleLinear()
+          .domain([d3. min(data, d => d[field.name]), d3.max(data, d => d[field.name])])
+          .clamp(true)
+      if (field.rankDescending) {
+        field.scaleTotal.range([(colWidthTotal/fieldDescriptors.length) * field.currentWeight, 2])
+      } else {
+        field.scaleTotal.range([2, (colWidthTotal/fieldDescriptors.length) * field.currentWeight])
+      }
+
+    })
+
+    // Calculate overall score 
+    data.forEach(function(d) {
+      let total = 0;
+      fieldDescriptors.forEach(function(field, fieldIdx) {
+        if (field.rankDescending && d[field.name] == null) {
+        } else {
+          total += field.scale(d[field.name]);
+        }
+      })
+      d._total = total;
+    })
+    
+
+    // Sort the rows according to the overall score
+    data.forEach(function(record, i) {
+      record.position = i;
+    })
+    data.sort(function(a,b) {
+      return d3.descending(a._total, b._total);
+    })
+
+
+  }
+
+
+  var addTotalBars = function() {
+    // Add the overall bar (a stacked bar)
+    container.selectAll(".col.total")
+    .each(function(d,i) {
+      colTot = d3.select(this)
+      colTot.selectAll("rect").remove(); 
+
+      let record = data[i];
+      let theFieldDescriptors = fieldDescriptors.filter(function(field) {
+        return field.name != "_total"
+      })
+
+      let scaledRec = {};
+      theFieldDescriptors.forEach(function(field, i) {
+        if (field.rankDescending && record[field.name] == null) {
+          scaledRec[field.name] = 0;
+
+        } else {
+          scaledRec[field.name] = field.scaleTotal(record[field.name])
+
+        }
+      })
+
+      let theFieldNames = theFieldDescriptors.map(function(field) {
+        return field.name;
+      })
+      let stacked = d3.stack().keys(theFieldNames)([scaledRec]);
+
+      stacked
+      .forEach(function(fieldInfo, fieldIdx) {
+        let fieldDescriptor = fieldDescriptors[fieldIdx];
+        colTot.append("rect")
+          .attr("class", "bar-total")
+          .attr("x", function(d,i) {
+            return fieldInfo[0][0]
+          })
+          .attr("y", -10)
+          .attr("height", barHeight)
+          .attr("width", function(d,i) {
+            return fieldInfo[0][1] - fieldInfo[0][0];
+          })
+          .attr("fill", function(d,i) {
+            return getColor(fieldDescriptor.category, fieldDescriptor.categoryIdx);
+          })
+      })
+    })
+
+  }
+
+  var showTransitions = function(g) {
+    // Transition the rows as the order changes
+    g.selectAll(".row")
+        .transition()
+         .duration(1200)
+         .ease(d3.easeSin)
+         .attr('transform',function(d,i){ 
+           return "translate(0 ," + ((rowHeight * i) + headerHeight) + ")";
+         })
+
+    /*
+    g.selectAll(".row .col")
+       .transition()
+       .duration(1200)
+       .ease(d3.easeSin)
+       .attr("transform", function(d,i) {
+          return "translate(" + d.field.colX + ",0)";
+       })
+    */
+
+    /*
+    g.selectAll(".row .col rect.bar")
+     .transition()
+     .duration(1200)
+     .ease(d3.easeSin)
+     .attr("width", function(d,i) {
+        if (d.field.rankDescending && (d.layer[1] - d.layer[0] == 0)) {
+          return 0;
+        } else if (d.field.rankDescending && (d.field.scale(d.layer[1] - d.layer[0]) == 0)) {
+          return inverseBarMin;
+        } else {
+          return d.field.scale(d.layer[1] - d.layer[0]);
+        }        
+     })
+     */
+
   }
 
 
@@ -604,6 +670,16 @@ function rankchart() {
   chart.categoryPadding = function(_) {
     if (!arguments.length) return categoryPadding;
     categoryPadding = _;
+    return chart;
+  }
+  chart.onRescale = function(_) {
+    if (!arguments.length) return onRescale;
+    onRescale = _;
+    return chart;
+  }
+  chart.initFieldDescriptors = function(_) {
+    if (!arguments.length) return initFieldDescriptors;
+    initFieldDescriptors = _;
     return chart;
   }
   chart 

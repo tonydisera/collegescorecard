@@ -162,11 +162,24 @@ button.multiselect {
   stroke-width: 1px;
 }
 
+.rankchart rect.bar-total {
+  stroke: black;
+  stroke-width: 1px;
+}
+
 .rankchart .row text {
   font-size: 12px;
 }
 .rankchart .col-header text {
   font-size: 12px;
+}
+
+.rankchart text.weight-header {
+  font-size: 13px;
+  font-weight: 600;
+  font-style: italic;
+  text-anchor: start;
+  fill: blue;
 }
 
 div.tooltip {

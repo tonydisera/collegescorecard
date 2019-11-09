@@ -34,6 +34,11 @@ function init() {
   rankChart.formatColumnHeader(function(d,i) {
     return formatRankColumnHeader(d)
   })
+  rankChart.onRescale(function() {
+    rankChart.initFieldDescriptors()()
+    promiseShowHistograms();
+    promiseShowRankings(getSelectedCollegeNames());
+  })
   
 }
 
@@ -111,11 +116,16 @@ function promiseShowHistograms() {
     let category = null;
     fieldDescriptors.forEach(function(field,i) {
       if (i == 0 || field.category != fieldDescriptors[i-1].category) {
-        category = {category: field.category, count: 1}
+        if (category) {
+          category.width -= rankColPadding;
+        }
+        category = {category: field.category, count: 1, width: 0}
         categories.push(category)
       } else {
         category.count++;
       }
+      let theWidth = field.width ? (field.width+rankColPadding) : (rankColWidth+rankColPadding);
+      category.width += theWidth;
     })
     categories.push({category: 'Overall', width: rankColWidthTotal })
 
@@ -129,16 +139,12 @@ function promiseShowHistograms() {
       d3.select(headerContainerSelector)
         .append("span")
         .attr("class", "category-header")
-        .style("width", function() {
-          if (cat.width) {
-            return cat.width + "px";
-          } else {
-            return (cat.count * rankColWidth) + ((cat.count-1) * rankColPadding) + "px";
-          }
+        .style("min-width", function() {
+          return cat.width + "px";
         })
         .style("margin-left", function() {
-          if (i > 0 && cat.width == null) {
-            return (rankColPadding + rankCategoryPadding) + "px";
+          if (i > 0 && i < categories.length - 1) {
+            return rankCategoryPadding+rankColPadding + "px";            
           } else {
             return "0px"
           }
@@ -178,7 +184,7 @@ function promiseShowHistograms() {
 
 
         let histChart = histogram();
-        histChart.width(rankColWidth+rankColPadding)
+        histChart.width(selectedField.width ? (selectedField.width+rankColPadding) : (rankColWidth+rankColPadding))
                  .height(70)
                  .margin({top: 0, bottom: 10, left: 0, right: rankColPadding})
                 
