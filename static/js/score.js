@@ -5,7 +5,7 @@ let search = null;
 let rankChart = null;
 let metricCategories = ['selectivity', 'instruction', 'diversity', 'cost', 'outcome', 'rank']
 
-let rankHeaderHeight =  70;
+let rankHeaderHeight =  90;
 let rankColPadding = 10;
 let rankColWidth = 70;
 let rankColWidthTotal = 250;

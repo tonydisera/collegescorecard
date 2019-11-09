@@ -146,6 +146,17 @@ button.multiselect {
   font-size: 14px;
 }
 
+.rankchart rect.weight {
+  stroke: #727070;
+  stroke-width: 1px;
+  fill: #edebeb;
+}
+
+.rankchart rect.weight.selected {
+  stroke-width: 1px;
+  fill: #a5a2a2;
+}
+
 .rankchart rect.bar {
   stroke: black;
   stroke-width: 1px;

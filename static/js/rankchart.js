@@ -31,6 +31,7 @@ function rankchart() {
   var colPadding    = 10;
   var nameWidth     = 250;
   var categoryPadding = 30;
+  var weightHeight    = 20;
 
   var inverseBarMin = 2;
 
@@ -89,6 +90,10 @@ function rankchart() {
           field.padding = 0;     
         }
         field.paddingCumulative = totalCategoryPadding;
+        field.weights = [0,1,2,3].map(function(weight) {
+          return {field: field, weight: weight};
+        })
+        field.currentWeight = 1;
       })
       // Add padding for total
       totalCategoryPadding += categoryPadding;
@@ -129,7 +134,10 @@ function rankchart() {
         })
         d._total = total;
       })
-      fieldDescriptors.push({name: '_total', category: 'total', categoryIdx: 0, padding: 0, paddingCumulative: totalCategoryPadding})
+      totalField = {name: '_total', category: 'total', categoryIdx: 0, padding: 0, paddingCumulative: totalCategoryPadding};
+      totalField.weights = [];
+      totalField.weight = 0;
+      fieldDescriptors.push(totalField)
       scales.push( 
         d3.scaleLinear()
             .domain([0, d3.max(data, d => d._total)])
@@ -152,7 +160,7 @@ function rankchart() {
         .keys(fieldNames)
         (data)
 
-      height = (rowHeight * data.length) + margin.top + margin.bottom;
+      height = headerHeight + (rowHeight * data.length) + margin.top + margin.bottom;
       width  = ((colWidth+colPadding) * fields.length-1) + nameWidth + colPadding + colWidthTotal + totalCategoryPadding + margin.left + margin.right;
 
       innerHeight = height - margin.top - margin.bottom;
@@ -203,13 +211,70 @@ function rankchart() {
         .attr("transform", function(d,i) {
           return "translate(" + ((nameWidth + colPadding + d.paddingCumulative) + ((colWidth+colPadding)*i)) + ",0)";
         })
+      colHeadersEnter
         .append("text")
         .attr("dx", 0)
         .attr("dy", 0)
         .text(function(d,i) {
           return formatColumnHeader(d.name,i);
         })
-        .call(wrap, colWidth+3)
+        .call(wrap, colWidth +3)
+
+      let weightGroup = colHeadersEnter.selectAll("g.weights")
+        .data(function(fieldDescriptor) {
+          return [fieldDescriptor.weights];
+        })
+
+      weightGroup.exit().remove();
+
+      let weightGroupEnter = weightGroup
+        .enter()
+        .append("g")
+        .attr("transform", "translate(0," + (headerHeight-(colWidth/4)-40) + ")")
+        .attr("class", "weights")
+
+      let weightRectEnter = weightGroupEnter.selectAll("rect.weight")
+        .data(function(weightObject) {
+          return weightObject;
+        }, function(weightObject) {
+          return weightObject.weight;
+        })
+        .enter()
+
+      weightRectEnter
+        .append("rect")
+        .attr("class", function(weightObject) {
+          if (weightObject.weight == weightObject.field.currentWeight-1) {
+            return "weight selected";
+          } else {
+            return "weight"
+          }
+        })
+        .attr("x", function(weightObject) {
+          return weightObject.weight*(colWidth/4)
+        })
+        .attr("y", "0")
+        .attr("width", function(weightObject) {
+          if (weightObject.field.name != "_total") {
+            return colWidth/4;
+          } else {
+            return "0";
+          }
+        })
+        .attr("height", colWidth/4)
+        .on("click", function(weightObject) {
+          weightObject.field.currentWeight = weightObject.weight+1;
+
+          d3.select(d3.select(this).node().parentNode)
+            .selectAll("rect")
+            .each(function(childWeightObject) {
+
+            d3.select(this).classed("selected", childWeightObject.weight <= weightObject.weight)
+
+          })
+
+        })
+
 
       var rows = g.selectAll(".row").data(data,
       function(d,i) {
@@ -401,6 +466,7 @@ function rankchart() {
 
 
   var wrap = function(text, width) {
+
     text.each(function() {
       var text = d3.select(this),
           words = text.text().split(/\s+/).reverse(),
@@ -411,6 +477,9 @@ function rankchart() {
           y = text.attr("y"),
           dy = parseFloat(text.attr("dy")),
           tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em")
+      if (words.join(" ") == "score combined") {
+        width = colWidthTotal;
+      } 
       while (word = words.pop()) {
         line.push(word)
         tspan.text(line.join(" "))
