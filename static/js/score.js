@@ -345,7 +345,6 @@ function getMetricFields() {
     .map(function(field) {
       return field.name;
     })
-    rankChart.invertedScalesFor(invertedScaleFields);
 
   })
 }

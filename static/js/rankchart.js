@@ -11,7 +11,6 @@ function rankchart() {
   var tooltipContent = function(d) {
     return d.name + "<br>" + d.field + ": " + d.value
   }
-  var invertedScalesFor = [];
 
   var fieldDescriptors = [];
 
@@ -105,7 +104,7 @@ function rankchart() {
         let scale = d3.scaleLinear()
             .domain([d3.min(data, d => d[field.name]), d3.max(data, d => d[field.name])])
             .clamp(true)
-        if (invertedScalesFor.length > 0 && invertedScalesFor.indexOf(field.name) >= 0) {
+        if (field.rankDescending) {
           scale.range([colWidth, 2])
         } else {
           scale.range([2, colWidth])
@@ -116,7 +115,7 @@ function rankchart() {
         let scale = d3.scaleLinear()
             .domain([d3. min(data, d => d[field.name]), d3.max(data, d => d[field.name])])
             .clamp(true)
-        if (invertedScalesFor.length > 0 && invertedScalesFor.indexOf(field.name) >= 0) {
+        if (field.rankDescending) {
           scale.range([colWidthTotal/fieldDescriptors.length, 2])
         } else {
           scale.range([2, colWidthTotal/fieldDescriptors.length])
@@ -127,7 +126,7 @@ function rankchart() {
       data.forEach(function(d) {
         let total = 0;
         fieldDescriptors.forEach(function(field, fieldIdx) {
-          if (invertedScalesFor.length > 0 && invertedScalesFor.indexOf(field.name) >= 0 && d[field.name] == null) {
+          if (field.rankDescending && d[field.name] == null) {
           } else {
             total += scales[fieldIdx](d[field.name]);
           }
@@ -316,9 +315,7 @@ function rankchart() {
             let isInverseScale = false;
             let fieldDescriptor = fieldDescriptors[layerIdx];
 
-            if (invertedScalesFor.length > 0 && invertedScalesFor.indexOf(fieldDescriptor.name) >= 0) {
-              isInverseScale = true;
-            }
+
             return {row: i,
                     name:              data[i].name,
                     layerIdx:          layerIdx, 
@@ -329,7 +326,7 @@ function rankchart() {
                     value:             data[i][fieldDescriptor.name],
                     scale:             scales[layerIdx], 
                     scaleTotal:        scalesTotal[layerIdx], 
-                    isInverseScale:    isInverseScale,
+                    isInverseScale:    fieldDescriptor.rankDescending,
                     layer:             layer[i]};
           })
         }, function(d,i) {
@@ -406,8 +403,7 @@ function rankchart() {
 
         let scaledRec = {};
         theFieldDescriptors.forEach(function(field, i) {
-          if (invertedScalesFor.length > 0 && invertedScalesFor.indexOf(field.name) >= 0 &&
-              record[field.name] == null) {
+          if (field.rankDescending && record[field.name] == null) {
             scaledRec[field.name] = 0;
 
           } else {
@@ -558,11 +554,7 @@ function rankchart() {
     colorScale = _;
     return chart;
   }; 
-  chart.invertedScalesFor = function(_) {
-    if (!arguments.length) return invertedScalesFor;
-    invertedScalesFor = _;
-    return chart;
-  };   
+ 
   chart.tooltipContent = function(_) {
     if (!arguments.length) return tooltipContent;
     tooltipContent = _;
