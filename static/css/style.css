@@ -1,5 +1,19 @@
 body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
 
+.navbar.bg-info {
+  background-color: rgb(89, 120, 157) !important
+}
+
+.btn-primary {
+    background-color: rgb(89, 120, 157) !important;
+    border-color: rgb(89, 120, 157) !important;
+}
+
+.btn-info {
+    background-color: rgb(89, 120, 157) !important;
+    border-color: rgb(89, 120, 157) !important;
+}
+
 .hide {
   display: none;
 }
@@ -20,14 +34,19 @@ body #body-contents {
 body .selections {
   display: flex;
   flex-flow: row;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   margin-top: 20px;
 }
 
 #scorecard-select-container {
-  margin-top: 10px;
+  margin-top: 0px;
   margin-right: 50px;
   margin-left: 50px;
+}
+
+#search-colleges-button {
+  margin-top: 0px;
+  margin-left: 70px;
 }
 
 .multiselect-container {

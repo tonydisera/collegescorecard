@@ -53,17 +53,23 @@ function rankchart() {
 
 
   let tc = d3.scaleOrdinal(d3.schemeTableau10, 10);
-  let tc0 = tc(4);
-  let tc1 = tc(0);
-  let tc2 = tc(5);
-  let tc3 = tc(6);
-  let tc4 = tc(1);
+  let tc0 = tc(0);
+  let tc1 = tc(1);
+  let tc2 = tc(2);
+  let tc3 = tc(3);
+  let tc4 = tc(4);
+  let tc5 = tc(5);
+  let tc6 = tc(6);
+  let tc7 = tc(7);
+  let tc8 = tc(8);
+  let tc9 = tc(9);
   var categoryColorMap = {
     'selectivity': tc4,
     'outcome':     tc3,
     'cost':        tc2,
     'instruction': tc1,
     'diversity':   tc0,
+    'rank':        tc7,
     'total':       '#ffffff'
   }
 
@@ -287,7 +293,6 @@ function rankchart() {
             let isInverseScale = false;
             let fieldDescriptor = fieldDescriptors[layerIdx];
 
-
             return { row: i,
                      layerIdx:          layerIdx, 
                      layer:             layer[i],
@@ -330,7 +335,9 @@ function rankchart() {
         .attr("width", function(d,i) {
           if (d.field.name == "_total") {
             return 0;
-          } if (d.field.rankDescending && (d.layer[1] - d.layer[0] == 0)) {
+          } else if (d.value == null) {
+            return 0;
+          } else if (d.field.rankDescending && (d.layer[1] - d.layer[0] == 0)) {
             return 0;
           } else if (d.field.rankDescending && (d.field.scale(d.layer[1] - d.layer[0]) == 0)) {
             return inverseBarMin;
@@ -483,7 +490,7 @@ function rankchart() {
 
       let scaledRec = {};
       theFieldDescriptors.forEach(function(field, i) {
-        if (field.rankDescending && record[field.name] == null) {
+        if (record[field.name] == null) {
           scaledRec[field.name] = 0;
 
         } else {
@@ -595,14 +602,18 @@ function rankchart() {
   }
 
   var adjustColor = function(color, k) {
+    let multiplier = Math.ceil(k / 4);
+    if (multiplier < 1) {
+      multiplier = 1;
+    }
     if (k % 4 == 0) {
-      return darken(color,k)
+      return darken(color,multiplier)
     } else if (k % 3 == 0) {
-      return saturate(color,k)
+      return saturate(color,multiplier)
     } if (k % 2 == 0) {
-      return desaturate(color,k)
+      return desaturate(color,multiplier)
     } else {
-      return lighten(color,k)
+      return lighten(color,multiplier)
     }
   }
 
@@ -613,7 +624,7 @@ function rankchart() {
 
   var lighten = function(color, k = 1) {
     const {l, c, h} = d3.lch(color);
-    return d3.lch(l + 18 * k, c, h);
+    return d3.lch(l + 10 * k, c, h);
   }
 
   var saturate = function(color, k = 1) {

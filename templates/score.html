@@ -32,7 +32,7 @@
 
 <body>
 
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<nav class="navbar navbar-expand-lg navbar navbar-dark bg-info">
 	  <a class="navbar-brand" href="/">US College Scorecard</a>
 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 	    <span class="navbar-toggler-icon"></span>
@@ -59,13 +59,12 @@
 
 
     <div>
-      <h2>Score</h2>
-    
-
       <div class="selections" >
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#search-dialog">Select Colleges</button>
+        <h2>Score and Rank US Colleges</h2>
+        <button id="search-colleges-button" type="button" class="btn btn-info " data-toggle="modal" data-target="#search-dialog">Select Colleges</button>
 
         <div id="scorecard-select-container">
+          <span style="padding-right:4px">Select Metrics</span>
           <select id="scorecard-select" multiple="multiple">
           </select>
         </div>

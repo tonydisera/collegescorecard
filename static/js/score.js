@@ -138,7 +138,7 @@ function promiseShowHistograms() {
       let theWidth = field.width ? (field.width+rankColPadding) : (rankColWidth+rankColPadding);
       category.width += theWidth;
     })
-    categories.push({category: 'Overall', width: rankColWidthTotal })
+    categories.push({category: 'overall', width: rankColWidthTotal })
 
     let headerContainerSelector  = "#hist-chart-categories"
     let headerSelector  = "#hist-chart-categories .category-header"
@@ -272,6 +272,7 @@ function initFieldDropdown() {
   { enableFiltering: true,
     includeSelectAllOption: true,
     enableCaseInsensitiveFiltering: true,
+    inheritClass: true,
     nonSelectedText: "Select fields",
     onChange: function(options, checked) {
 
