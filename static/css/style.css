@@ -1,23 +1,23 @@
 body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
 
 .navbar.bg-info {
-  background-color: #59789d !important
+  background-color: #4a7fbc !important
 }
 
 .btn-primary {
-    background-color: #364b63 !important;
-    border-color: #364b63 !important;
+    background-color: #4a7fbc!important;
+    border-color: #4a7fbc !important;
 }
 
 .btn-info {
-    background-color: #364b63 !important;
-    border-color: #364b63 !important;
+    background-color: #4a7fbc !important;
+    border-color: #4a7fbc!important;
 }
 
 .selections button.multiselect {
   color: #fff;
-  background-color: #364b63;
-  border-color: #364b63;
+  background-color: #4a7fbc;
+  border-color: #4a7fbc;
   max-height: 40px;
 }
 

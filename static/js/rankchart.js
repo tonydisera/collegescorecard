@@ -69,9 +69,9 @@ function rankchart() {
   let tc_brown  = tc(8); // brown
   let tc_tan    = tc(9); // tran
   var categoryColorMap = {
-    'selectivity': desaturate(tc_yellow, 1),
+    'selectivity': desaturate(tc_green, 1),
     'instruction': tc_blue,
-    'diversity':   desaturate(tc_orange, 1),
+    'diversity':   desaturate(tc_yellow, 1),
     'cost':        tc_cyan,
     'outcome':     desaturate(tc_red,1),
     'rank':        tc_brown,
