@@ -34,9 +34,10 @@ online_only,college,,,
 size,college,,,
 enrollment_all,college,,,
 demographics race_ethnicity white,diversity,Y,Y,
-demographics race_ethnicity black,diversity,Y,,Y
-demographics race_ethnicity hispanic,diversity,Y,,Y
-demographics race_ethnicity asian,diversity,Y,,Y
+demographics race_ethnicity non-white,diversity,Y,,Y
+demographics race_ethnicity black,diversity,Y,,
+demographics race_ethnicity hispanic,diversity,Y,,
+demographics race_ethnicity asian,diversity,Y,,
 demographics race_ethnicity aian,diversity,Y,,
 demographics race_ethnicity nhpi,diversity,Y,,
 demographics race_ethnicity two_or_more,diversity,,,

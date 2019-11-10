@@ -8,6 +8,7 @@
   width: 400px;
   max-height: 400px;
   overflow-y: scroll;
+  margin-bottom: 20px;
 }
 
 #search-dialog .form-check-label {
@@ -26,10 +27,24 @@
     line-height: 1.5;
     border-radius: .25rem;
 	margin-top: 0px;
-	min-height: 50px;
 }
 
 
 .selections button.multiselect .multiselect-selected-text {
 	color: white;
+}
+#search-dialog #rank-button {
+	margin-right: 10px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	min-width: 120px;
+}
+
+#search-dialog #filtered-college-count {
+	max-height: 20px;
+	min-height: 20px;
+	font-size: 14px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	background-color: #46b4d4;
 }

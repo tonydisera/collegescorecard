@@ -21,7 +21,7 @@ function rankchart() {
 
   var headerHeight  = 70;
   var rowHeight     = 40;
-  var barHeight     = 20;
+  var barHeight     = 15;
   var colWidth      = 80;
   var colWidthTotal = 300;
   var colPadding    = 10;
@@ -51,25 +51,30 @@ function rankchart() {
 
   }
 
+  var desaturate = function(color, k = 1) {
+    const {l, c, h} = d3.lch(color);
+    return d3.lch(l, c - 10 * k, h);
+  }
 
-  let tc = d3.scaleOrdinal(d3.schemeTableau10, 10);
-  let tc0 = tc(0);
-  let tc1 = tc(1);
-  let tc2 = tc(2);
-  let tc3 = tc(3);
-  let tc4 = tc(4);
-  let tc5 = tc(5);
-  let tc6 = tc(6);
-  let tc7 = tc(7);
-  let tc8 = tc(8);
-  let tc9 = tc(9);
+
+  let tc = d3.scaleOrdinal(d3.schemeTableau10);
+  let tc_blue   = tc(0); //blue
+  let tc_orange = tc(1); // orange
+  let tc_red    = tc(2); // red
+  let tc_cyan   = tc(3); // cyan
+  let tc_green  = tc(4); // green
+  let tc_yellow = tc(5); // yellow
+  let tc_purple = tc(6); // purple
+  let tc_pink   = tc(7); // pink
+  let tc_brown  = tc(8); // brown
+  let tc_tan    = tc(9); // tran
   var categoryColorMap = {
-    'selectivity': tc4,
-    'outcome':     tc3,
-    'cost':        tc2,
-    'instruction': tc1,
-    'diversity':   tc0,
-    'rank':        tc7,
+    'selectivity': desaturate(tc_yellow, 1),
+    'instruction': tc_blue,
+    'diversity':   desaturate(tc_orange, 1),
+    'cost':        tc_cyan,
+    'outcome':     desaturate(tc_red,1),
+    'rank':        tc_brown,
     'total':       '#ffffff'
   }
 
@@ -282,7 +287,6 @@ function rankchart() {
         .on("mouseout", function(d) {
           onHoverRowEnd(d)
         })
-        .call(wrap, nameWidth - 33)
 
 
       // Add the column bars
@@ -602,16 +606,12 @@ function rankchart() {
   }
 
   var adjustColor = function(color, k) {
-    let multiplier = Math.ceil(k / 4);
+    let multiplier = Math.ceil(k / 2);
     if (multiplier < 1) {
       multiplier = 1;
     }
-    if (k % 4 == 0) {
+    if (k % 2 == 0) {
       return darken(color,multiplier)
-    } else if (k % 3 == 0) {
-      return saturate(color,multiplier)
-    } if (k % 2 == 0) {
-      return desaturate(color,multiplier)
     } else {
       return lighten(color,multiplier)
     }
@@ -619,12 +619,12 @@ function rankchart() {
 
   var darken = function(color, k = 1) {
     const {l, c, h} = d3.lch(color);
-    return d3.lch(l - 10 * k, c, h);
+    return d3.lch(l - 12 * k, c, h);
   }
 
   var lighten = function(color, k = 1) {
     const {l, c, h} = d3.lch(color);
-    return d3.lch(l + 10 * k, c, h);
+    return d3.lch(l + 10 * k, c - 15, h);
   }
 
   var saturate = function(color, k = 1) {
@@ -632,10 +632,7 @@ function rankchart() {
     return d3.lch(l, c + 6 * k, h);
   }
 
-  var desaturate = function(color, k = 1) {
-    const {l, c, h} = d3.lch(color);
-    return d3.lch(l, c - 6 * k, h);
-  }
+
 
   chart.margin = function(_) {
     if (!arguments.length) return margin;
@@ -695,7 +692,12 @@ function rankchart() {
   }
   chart.rowHeight = function(_) {
     if (!arguments.length) return rowHeight;
-    colWidth = _;
+    rowHeight = _;
+    return chart;
+  }
+  chart.barHeight = function(_) {
+    if (!arguments.length) return barHeight;
+    barHeight = _;
     return chart;
   }
   chart.headerHeight = function(_) {

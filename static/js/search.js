@@ -207,6 +207,7 @@ class Search {
       let idx = self.selectedColleges.indexOf(collegeName);
       self.selectedColleges.splice(idx,1)
     }
+
   }
   selectRegion(regionKey, checked) {
     let self = this;
@@ -391,6 +392,13 @@ class Search {
     } else {
       let idx = self.checkedColleges.indexOf(collegeName);
       self.checkedColleges.splice(idx,1)
+    }
+    
+    if (self.checkedColleges.length > 0) {
+      $("#search-dialog  #rank-button").attr("disabled", false);
+    } else {
+      $("#search-dialog  #rank-button").attr("disabled", true);
+
     }
   }
   close() {

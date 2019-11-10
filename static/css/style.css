@@ -18,6 +18,7 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
   color: #fff;
   background-color: #364b63;
   border-color: #364b63;
+  max-height: 40px;
 }
 
 
@@ -54,6 +55,7 @@ body .selections {
 #search-colleges-button {
   margin-top: 0px;
   margin-left: 70px;
+  max-height: 40px;
 }
 
 .multiselect-container {
@@ -106,31 +108,6 @@ body .selections {
   stroke-opacity: .5;
 }
 
-#hist-chart .hist.selectivity svg rect {
-  fill: #59a14f;
-  stroke: #519248;
-}
-
-#hist-chart .hist.instruction svg rect {
-  fill: #f28e2c;
-  stroke: #c47527;
-}
-
- #hist-chart .hist.diversity svg rect {
-  fill: #4e79a7;
-  stroke: #426992;
-  stroke-width: .5px;
-}
-
-#hist-chart .hist.cost  svg rect {
-  fill: #e25659;
-  stroke: #c64a4d;
-}
-
-#hist-chart .hist.outcome  svg rect {
-  fill: #75b7b2;
-  stroke: #5a8c88;
-}
 
 
 

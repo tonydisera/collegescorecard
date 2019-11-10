@@ -6,13 +6,17 @@ let rankChart = null;
 let metricCategories = ['selectivity', 'instruction', 'diversity', 'cost', 'outcome', 'rank']
 
 let rankHeaderHeight =  90;
+let rankRowHeight = 20;
+let rankBarHeight = 13;
+
 let rankColPadding = 10;
 let rankColWidth = 70;
 let rankColWidthTotal = 250;
-let rankNameWidth = 200;
+let rankNameWidth = 300;
 let rankCategoryPadding = 40;
 
 $(document).ready(function() {
+
 
   init();
 
@@ -26,7 +30,10 @@ function init() {
 
   rankChart = rankchart();
   rankChart.margin( { top: 10, right: 5, bottom: 90, left: 0 } )
+
   rankChart.headerHeight(rankHeaderHeight);
+  rankChart.rowHeight(rankRowHeight);
+  rankChart.barHeight(rankBarHeight);
   rankChart.colWidth(rankColWidth);
   rankChart.colWidthTotal(rankColWidthTotal);
   rankChart.nameWidth(rankNameWidth);
