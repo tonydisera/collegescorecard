@@ -6,8 +6,8 @@ let rankChart = null;
 let metricCategories = ['selectivity', 'instruction', 'diversity', 'cost', 'outcome', 'rank']
 
 let rankHeaderHeight =  90;
-let rankRowHeight = 20;
-let rankBarHeight = 13;
+let rankRowHeight = 24;
+let rankBarHeight = 15;
 
 let rankColPadding = 10;
 let rankColWidth = 70;
@@ -204,7 +204,7 @@ function promiseShowHistograms() {
         let histChart = histogram();
         histChart.width(selectedField.width ? (selectedField.width+rankColPadding) : (rankColWidth+rankColPadding))
                  .height(70)
-                 .margin({top: 0, bottom: 10, left: 0, right: rankColPadding})
+                 .margin({top: 10, bottom: 10, left: 3, right: rankColPadding})
                 
         histChart.xValue(function(d) {
           return d[selectedField.name];

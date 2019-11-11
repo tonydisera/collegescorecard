@@ -28,6 +28,7 @@ function rankchart() {
   var nameWidth     = 250;
   var categoryPadding = 30;
   var weightHeight    = 14;
+  var rowTextHeight   = 10;
 
   var inverseBarMin = 2;
 
@@ -56,6 +57,28 @@ function rankchart() {
     return d3.lch(l, c - 10 * k, h);
   }
 
+  var setCurrentRow = function(rowElem, field) {
+    let y = +rowElem.attr("transform").split(",")[1].split(")")[0]
+    let x = 0
+    container.select(".current-row")
+     .attr("x", x)
+     .attr("y", y-(rowHeight/2))
+     .attr("width", innerWidth)
+     .attr("height", rowHeight)
+
+    container.select(".current-row")
+       .transition()
+       .duration(500)
+       .attr("opacity", 1) 
+
+
+  }
+  var unsetCurrentRow = function(rowElem, field) {
+    container.select(".current-row")
+       .transition()
+       .duration(500)
+       .attr("opacity", 0)
+  }
 
   let tc = d3.scaleOrdinal(d3.schemeTableau10);
   let tc_blue   = tc(0); //blue
@@ -85,6 +108,8 @@ function rankchart() {
   }
 
 
+
+
   function chart(selection) {
     selection.each(function(theData) {
 
@@ -108,7 +133,7 @@ function rankchart() {
 
       // Calculate the height and width
       height = headerHeight + (rowHeight * data.length) + margin.top + margin.bottom;
-      width  = (totalColWidth + (colPadding) * fieldDescriptors.length-1) + nameWidth + colPadding + colWidthTotal + totalCategoryPadding + margin.left + margin.right;
+      width  = totalColWidth + nameWidth + colPadding + colWidthTotal + totalCategoryPadding + margin.left + margin.right;
       innerHeight = height - margin.top - margin.bottom;
       innerWidth =  width - margin.left - margin.right;
 
@@ -144,6 +169,7 @@ function rankchart() {
         .merge(svgEnter)
         .select("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
 
       // Add the column headers
       g.selectAll(".col-header-row").remove();
@@ -242,6 +268,8 @@ function rankchart() {
 
         })
 
+      g.append("rect")
+        .attr("class", "current-row")
 
       // Add the rows
       var rows = g.selectAll(".row").data(data,
@@ -256,38 +284,40 @@ function rankchart() {
         .append('g')
         .attr('class', 'row')
         .attr('transform',function(record,i){ 
-           return "translate(0 ," + ((rowHeight * record.position) + headerHeight) + ")";
+           return "translate(0," + ((rowHeight * record.position) + headerHeight) + ")";
          })
+        .on("mouseover", function(d) {
+          setCurrentRow(d3.select(this), d)
+          onHoverRow(d)
+          
+        })
+        .on("mouseout", function(d) {
+          unsetCurrentRow();
+          onHoverRowEnd(d)
+
+        })
 
       rowsEnter
         .append("text")
+        .attr("y", (rowTextHeight/2))
         .attr("dx", 0)
         .attr("dy", 0)
         .text(function (d,i) {
           return i+1 
         })
-        .on("mouseover", function(d) {
-          onHoverRow(d)
-        })
-        .on("mouseout", function(d) {
-          onHoverRowEnd(d)
-        })
+       
 
       rowsEnter
         .append("g")
         .attr("transform", "translate(33,0)")
         .append("text")
+        .attr("y", (rowTextHeight/2))
         .attr("dx", 0)
         .attr("dy", 0)
         .text(function (d,i) {
           return d.name
         })
-        .on("mouseover", function(d) {
-          onHoverRow(d)
-        })
-        .on("mouseout", function(d) {
-          onHoverRowEnd(d)
-        })
+       
 
 
       // Add the column bars
@@ -335,7 +365,7 @@ function rankchart() {
 
       cols.merge(colsEnter).selectAll(".bar")
         .attr("x", 0)
-        .attr("y", -10)
+        .attr("y", (barHeight/2)*-1)
         .attr("height", barHeight)
         .attr("width", function(d,i) {
           if (d.field.name == "_total") {
@@ -353,6 +383,7 @@ function rankchart() {
         .attr("fill", function(d,i) {
           return getColor(d.field.category, d.field.categoryIdx);
         })
+        /*
         .on("mouseover", function(d) {
           tooltip.transition()
               .duration(200)
@@ -366,14 +397,15 @@ function rankchart() {
           tooltip
               .style("left", (d3.event.pageX + 2) + "px")
               .style("top", ((d3.event.pageY - h) - 3) + "px");
-          onHover(d)
+          
         })
         .on("mouseout", function(d) {
           tooltip.transition()
                  .duration(200)
                  .style("opacity", 0)
-          onHoverEnd(d)
+          
         })
+        */
 
       // Add the stacked bar showing the overall score for each row
       addTotalBars()
@@ -387,6 +419,9 @@ function rankchart() {
       tooltip = container.append("div")
         .attr("class", "tooltip")
         .style("opacity", 0);
+
+
+
 
     });
   }
@@ -477,7 +512,6 @@ function rankchart() {
       return d3.descending(a._total, b._total);
     })
 
-
   }
 
 
@@ -517,7 +551,7 @@ function rankchart() {
           .attr("x", function(d,i) {
             return fieldInfo[0][0]
           })
-          .attr("y", -10)
+          .attr("y", (barHeight/2)*-1)
           .attr("height", barHeight)
           .attr("width", function(d,i) {
             return fieldInfo[0][1] - fieldInfo[0][0];
@@ -537,7 +571,7 @@ function rankchart() {
          .duration(1200)
          .ease(d3.easeSin)
          .attr('transform',function(d,i){ 
-           return "translate(0 ," + ((rowHeight * i) + headerHeight) + ")";
+           return "translate(0," + ((rowHeight * i) + headerHeight) + ")";
          })
 
     /*

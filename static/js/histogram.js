@@ -51,8 +51,6 @@ function histogram() {
 
   function highlight(names) {
 
-    container.selectAll("svg .markers .marker").remove();
-
     names.forEach(function(name) {
       let selectedData = data.filter(function(d) {
         return name == d.name;
@@ -80,52 +78,45 @@ function histogram() {
         xPos = x(xValue(selectedData[0]));
       }
 
-      let marker = container.select("svg .markers").selectAll(".marker")
-       .data([0])
-       .enter()
-       .append("g")
-       .attr("class", "marker");
 
-      marker.append("line")
-       .attr("x1", 0)
-       .attr("x2", 0)
-       .attr("y1", 0)
+
+      let markers = container.select("svg .markers")
+
+
+      markers.select("line")
        .attr("y2", yPos)
-       .style("opacity", 1)
+       .attr("opacity", 1)
 
-      marker.append("circle")
-       .attr("cx", 0)
+      markers.select("circle")
        .attr("cy", yPos)
-       .attr("r", "3")
-       .style("opacity", 1)
+       .attr("opacity", 1)
 
-      marker.append("text")
-       .attr("class", "marker-label")
-       .attr("x", 0)
+      markers.select("text")
        .attr("y", -2)
-       .style("text-anchor", "middle")
        .text(xValue(selectedData[0]))
+       .attr("opacity", 1)
 
-      marker.selectAll("line")
+      markers.selectAll("line")
              .transition()
              .duration(1000)
              .attr("x1", xPos)
              .attr("x2", xPos)
-      marker.selectAll("circle")
+      markers.selectAll("circle")
              .transition()
              .duration(1000)
              .attr("cx", xPos)
-      marker.selectAll("text")
+      markers.selectAll("text")
              .transition()
              .duration(1000)
-             .attr("x", xPos)
+             .attr("x", xPos < 11 ? 11 : xPos)
     
     })
 
   }
 
   function removeHighlight() {
-    container.selectAll("svg .markers .marker").remove();
+    container.selectAll("svg .markers .marker").attr("opacity", 0);
+    container.selectAll("svg .markers .marker-label").attr("opacity", 0);
   }
 
 
@@ -222,6 +213,32 @@ function histogram() {
                .append("g")
                .attr("class", "markers")
                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      let markers = container.select("svg .markers");
+      
+      markers.append("line")
+       .attr("class", "marker")
+       .attr("x1", 0)
+       .attr("x2", 0)
+       .attr("y1", 0)
+       .attr("y2", 0)
+       .attr("opacity", 0)
+
+      markers.append("circle")
+       .attr("class", "marker")
+       .attr("cx", 0)
+       .attr("cy", 0)
+       .attr("r", "3")
+       .attr("opacity", 0)
+
+      markers.append("text")
+       .attr("class", "marker-label")
+       .attr("x", 0)
+       .attr("y", -2)
+       .style("text-anchor", "middle")
+       .attr("opacity", 0)
+
+
+
     });
   }
 

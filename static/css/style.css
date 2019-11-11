@@ -102,9 +102,9 @@ body .selections {
 #hist-chart .hist svg .marker {
   fill: #1d68de
 }
-#hist-chart .hist svg .marker line {
+#hist-chart .hist svg line.marker  {
   stroke: #1d68de;
-  stroke-width: 5px;
+  stroke-width: 2px;
   stroke-opacity: .5;
 }
 
@@ -187,6 +187,12 @@ button.multiselect {
 
 .rankchart .row text {
   cursor: pointer;
+}
+
+.rankchart .current-row {
+  fill: #e9e8e8;
+  stroke: #999999;
+  stroke-width: .5;
 }
 
 div.tooltip {
