@@ -42,4 +42,5 @@ ul.sidebar-menu li a {
     max-width: initial;
     overflow: scroll;
     width: 100%;
+    height: 100vh;
 }

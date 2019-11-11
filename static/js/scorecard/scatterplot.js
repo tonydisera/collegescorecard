@@ -199,6 +199,9 @@ function scatterplot() {
     if (!container) {
       return
     }
+    if (color.domain().length == 0) {
+      return;
+    }
     let svg = container.select("svg.scatterplot");
     svg.select(".legend-color").remove();
 

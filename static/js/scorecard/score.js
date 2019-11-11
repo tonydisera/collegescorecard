@@ -11,9 +11,9 @@ let rankBarHeight = 15;
 
 let rankColPadding = 10;
 let rankColWidth = 70;
-let rankColWidthTotal = 250;
+let rankColWidthTotal = 220;
 let rankNameWidth = 300;
-let rankCategoryPadding = 40;
+let rankCategoryPadding = 30;
 
 $(document).ready(function() {
 
