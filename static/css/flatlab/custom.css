@@ -1,0 +1,43 @@
+ul.sidebar-menu li a {
+	font-size: 16px
+}
+
+.p-task.tasks-bar .task-info .value {
+    display: inline-block;
+    float: right;
+    font-size: 14px;
+    margin-top: -20px;
+}
+
+.p-task {
+	padding-bottom: 0px;
+	margin-bottom: 10px;
+}
+
+.p-task li {
+	padding-bottom: 5px;
+}
+
+.sb-slidebar .side-title {
+	padding-bottom: 0px;
+}
+
+.state-overview.custom .symbol {
+    width: 30%;
+}
+
+.state-overview.custom .value {
+    width: 70%;
+ }
+
+ .state-overview.custom .symbol i {
+    font-size: 30px;
+}
+
+.wrapper {
+    margin-left: 10px;
+    margin-right: 10px;
+    max-width: initial;
+    overflow: scroll;
+    width: 100%;
+}

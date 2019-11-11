@@ -1,0 +1,246 @@
+body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
+
+.navbar.bg-info {
+  background-color: #6ccac9 !important
+}
+
+.btn-primary {
+    background-color: #6ccac9 !important;
+    border-color: #6ccac9 !important;
+}
+
+.btn-info {
+    background-color: #6ccac9 !important;
+    border-color: #6ccac9!important;
+}
+
+.selections button.multiselect {
+    max-height: 40px;
+    border: 1px solid #e7e7e7;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    margin-top: 0px;
+}
+
+
+
+.hide {
+  display: none;
+}
+
+* {
+  font-family: 'Raleway';
+  color:  #454545 ;
+}
+
+body #body-contents {
+  display: flex;
+  flex-flow: column;
+  padding: 10px;
+  overflow-y: scroll;
+  height: -webkit-fill-available;
+}
+
+body .selections {
+  display: flex;
+  flex-flow: row;
+  margin-bottom: 30px;
+  margin-top: 20px;
+}
+
+#scorecard-select-container {
+  margin-top: 0px;
+  margin-right: 50px;
+  margin-left: 50px;
+}
+
+#search-colleges-button {
+  margin-top: 0px;
+  margin-left: 0px;
+  max-height: 40px;
+}
+
+.multiselect-container {
+  width: 500px;
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+.multiselect-container>li>a>label {
+    font-weight: 400;
+    padding: 3px 10px 3px 20px;
+    font-size: 14px;
+}
+
+#hist-chart-categories {
+  display: flex;
+}
+
+#hist-chart-categories .category-header {
+  text-align: center;
+  display: inline-block;
+  font-size: 14px;
+}
+
+#hist-chart {
+  display: flex;
+  flex-flow: row;
+}
+
+
+#hist-chart .hist svg .x.axis .tick text {
+  transform: rotate(90deg) translate(6px,-12px);
+  text-anchor: start;
+}
+
+#hist-chart .hist svg rect {
+  fill: #b7b7b9;
+  stroke: #6c6c6c;
+  stroke-width: .5px;
+}
+
+#hist-chart .hist svg rect.highlight {
+  stroke: #2d96cb;
+  stroke-width: 2px;
+}
+
+#hist-chart .hist svg text.marker-label {
+  font-size: 10px;
+  font-weight: 500;
+}
+#hist-chart .hist svg .marker {
+  fill: #1d68de
+}
+#hist-chart .hist svg line.marker  {
+  stroke: #1d68de;
+  stroke-width: 2px;
+  stroke-opacity: .5;
+}
+
+
+
+
+.btn-group-sm>.btn, .btn-sm {
+    height: 30px;
+    margin-top: 12px;
+}
+
+button.multiselect {
+  text-align: left;
+  background-color: transparent;
+  border-color: #eeeeee;
+}
+button.multiselect.btn-default:hover, 
+button.multiselect.btn-default:focus, 
+button.multiselect.btn-default:active, 
+button.multiselect.btn-default.active, 
+.open button.multiselect.dropdown-toggle.btn-default {
+  background-color: transparent;
+  border-color: #eeeeee;
+}
+
+
+.multiselect-container.dropdown-menu > li > a:hover label, 
+.multiselect-container.dropdown-menu > li > a:focus label{
+  color: white;
+}
+
+
+.legend-size circle.swatch,
+.legend-symbol path.swatch {
+  fill: #a2a1a1;
+  stroke-width: 1px;
+  stroke: #4c4c4c;
+}
+
+.legendCells .cell text {
+  font-size: 12px;
+}
+
+.scatterplot .bubble {
+  opacity: .7;
+  stroke: black;
+  stroke-width: 1px;
+  stroke-opacity: .8;
+  cursor: pointer;
+  pointer-events: all;
+}
+.scatterplot .y.axis text.label {
+  fill: black;
+  font-size: 14px;
+}
+.scatterplot .x.axis text.label {
+  fill: black;
+  font-size: 14px;
+}
+
+#rank-chart.chart-container {
+  overflow-x: scroll;
+  overflow-y: scroll;
+  height: 100vh;
+}
+
+.rankchart rect.weight {
+  stroke: #727070;
+  stroke-width: 1px;
+  fill: #edebeb;
+}
+
+.rankchart rect.weight.selected {
+  stroke-width: 1px;
+  fill: #a5a2a2;
+}
+
+.rankchart rect.bar {
+  stroke: black;
+  stroke-width: 1px;
+}
+
+.rankchart rect.bar-total {
+  stroke: black;
+  stroke-width: 1px;
+}
+
+.rankchart .row text {
+  font-size: 12px;
+}
+.rankchart .col-header text {
+  font-size: 12px;
+}
+
+.rankchart text.weight-header {
+  font-size: 13px;
+  font-weight: 600;
+  font-style: italic;
+  text-anchor: start;
+  fill: blue;
+}
+
+.rankchart .row text {
+  cursor: pointer;
+}
+
+.rankchart .current-row {
+  fill: #e9e8e8;
+  stroke: #999999;
+  stroke-width: .5;
+}
+
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    min-width: 200px;
+    max-width: 300px;
+    min-height: 60px;
+    max-height: 300px;
+    padding: 10px;
+    font-size: 14px;
+    color: white;
+    background: #303030;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+    text-align: left;
+}
