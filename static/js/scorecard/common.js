@@ -1,3 +1,24 @@
+let defaultFieldNames = [
+  "name",
+  "admission_rate overall",
+  "act_scores midpoint cumulative",
+  "act_scores 75th_percentile cumulative",
+  "faculty_salary",
+  "ft_faculty_rate",
+  "instructional_expenditure_per_fte",
+  "demographics race_ethnicity black",
+  "demographics race_ethnicity hispanic",
+  "demographics race_ethnicity asian",
+  "demographics median_family_income",
+  "tuition in_state",
+  "tuition out_of_state",
+  "cost attendance academic_year",
+  "median_debt_suppressed overall",
+  "completion_rate_4yr_150nt",
+  "retention_rate four_year full_time",
+  "6_yrs_after_entry median",
+  "10_yrs_after_entry working_not_enrolled mean_earnings"
+]
 
 function promiseGetData(fieldNames) {
   return new Promise(function(resolve, reject) {
@@ -5,7 +26,12 @@ function promiseGetData(fieldNames) {
     if (fieldNames.length == 0) {
       resolve([])
     } else {
-      fieldNames.push("name");
+      defaultFieldNames.forEach(function(defaultFieldName) {
+        if (fieldNames.indexOf(defaultFieldName) < 0) {
+          fieldNames.push(defaultFieldName);
+        }
+
+      })
 
       d3.json("getData?fields=" + fieldNames.join(","),
       function (err, data) {
@@ -135,5 +161,38 @@ function promiseGetDegreesOffered() {
       resolve(records)
     })
   })
+
+}
+
+function showCollegeDetail(college) {
+  $('#college-detail #name').text(college.name)
+  $('#college-detail #admission-rate').text(college["admission_rate overall"])
+  $('#college-detail #act-midpoint').text(college["act_scores midpoint cumulative"])
+  $('#college-detail #act-75pctl').text(college["act_scores 75th_percentile cumulative"])
+  $('#college-detail #faculty-salary').text(college["faculty_salary"])
+  $('#college-detail #full-time-faculty-ratio').text(college["ft_faculty_rate"])
+  $('#college-detail #instructional-cost-per-fte').text(college["instructional_expenditure_per_fte"])
+  $('#college-detail #diversity-pct-black').text(college["demographics race_ethnicity black"])
+  $('#college-detail #diversity-pct-hispanic').text(college["demographics race_ethnicity hispanic"])
+  $('#college-detail #diversity-pct-asian').text(college["demographics race_ethnicity asian"])
+  $('#college-detail #median-hh-income').text(college["demographics median_family_income"])
+  $('#college-detail #tuition-in-state').text(college["tuition in_state"])
+  $('#college-detail #tuition-out-of-state').text(college["tuition out_of_state"])
+  $('#college-detail #cost').text(college["cost attendance academic_year"])
+  $('#college-detail #median-debt').text(college["median_debt_suppressed overall"])
+  $('#college-detail #completion-rate').text(college["completion_rate_4yr_150nt"])
+  $('#college-detail #retention-rate').text(college["retention_rate four_year full_time"])
+  $('#college-detail #median-salary-6-yrs').text(college["6_yrs_after_entry median"])
+  $('#college-detail #median-salary-10-yrs').text(college["10_yrs_after_entry working_not_enrolled mean_earnings"])
+
+  setTimeout(function(){
+    
+    if ($("#college-detail.sb-active").length == 0) {
+      $("#slide-right-button").click();                
+    }
+
+  },1);
+
+
 
 }

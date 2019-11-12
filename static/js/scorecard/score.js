@@ -15,6 +15,8 @@ let rankColWidthTotal = 220;
 let rankNameWidth = 300;
 let rankCategoryPadding = 30;
 
+let slidebarClicks = 0;
+
 
 $(document).ready(function() {
 
@@ -59,6 +61,9 @@ function init() {
   rankChart.onHoverRowEnd(function(record) {
     unhighlightHistograms(record.name);
   })  
+  rankChart.onRowClicked(function(college) {
+    showCollegeDetail(college)
+  })
 }
 
 function formatRankColumnHeader(d) {

@@ -7,6 +7,10 @@ ul.sidebar-menu li ul.sub li a {
     color: #4b4c4e;
 }
 
+.sb-slidebar.sb-right  {
+    color: white !important;
+}
+
 .p-task.tasks-bar .task-info .value {
     display: inline-block;
     float: right;
@@ -25,6 +29,7 @@ ul.sidebar-menu li ul.sub li a {
 
 .sb-slidebar .side-title {
 	padding-bottom: 0px;
+    margin-bottom: 0px;
 }
 
 .state-overview.custom .symbol {

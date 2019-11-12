@@ -35,7 +35,7 @@
 
 
 
-    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,500i,600,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="static/css/scorecard/custom-flatlab.css" rel="stylesheet">
     <link rel="stylesheet" href="static/css/scorecard/style.css">
     <link rel="stylesheet" href="static/css/scorecard/search.css">
@@ -122,6 +122,8 @@
                         <h3 class="">Compare and Rank</h3>
                         <p></p>
                     </div>
+
+                    <button style="display: none" id="slide-right-button" class="btn btn-info sb-toggle-right">Slide</button>
                 </section>
               </div>
                         
@@ -176,26 +178,23 @@
       <!--main content end-->
 
        <!-- Right Slidebar start -->
-      <div class="sb-slidebar sb-right sb-style-overlay">
-          <h4 style="padding-left:10px">US College Detail</h4>
-          <h5 class="side-title">Overview</h5>
+      <div id="college-detail" class="sb-slidebar sb-right sb-style-overlay">
+          <h5 id="name" style="padding-left:10px"></h5>
 
           <h5 class="side-title">Selectivity</h5>
           <ul class="p-task tasks-bar">
             <li>
               <div class="task-info">
                   <div class="desc">Admission Rate</div>
-                  <div class="value">10%</div>
+                  <div id="admission-rate" class="value"></div>
               </div>
-            </li>
-            <li>
               <div class="task-info">
                   <div class="desc">ACT Cumulative - Midpoint</div>
-                  <div class="value">32</div>
+                  <div id="act-midpoint" class="value"></div>
               </div>
               <div class="task-info">
                   <div class="desc">ACT Cumulative - 75 percentile</div>
-                  <div class="value">33</div>
+                  <div id="act-75pctl" class="value"></div>
               </div>
             </li>
           </ul>
@@ -204,17 +203,17 @@
             <li>
               <div class="task-info">
                   <div class="desc">Faculty Salary</div>
-                  <div class="value">$50,000</div>
+                  <div id="faculty-salary" class="value"></div>
               </div>
               <div class="task-info">
                   <div class="desc">Full-time Faculty Ratio</div>
-                  <div class="value">79%</div>
+                  <div id="full-time-faculty-ratio" class="value"></div>
               </div>
             </li>
             <li>
               <div class="task-info">
                   <div class="desc">Instructional Cost per full-time student</div>
-                  <div class="value">$12,000</div>
+                  <div id="instructional-cost-per-fte" class="value"></div>
               </div>
             </li>
           </ul>
@@ -223,21 +222,19 @@
             <li>
               <div class="task-info">
                   <div class="desc">Percent Black</div>
-                  <div class="value">.5%</div>
+                  <div id="diversity-pct-black" class="value"></div>
               </div>
               <div class="task-info">
                   <div class="desc">Percent Hispanic</div>
-                  <div class="value">10%</div>
+                  <div id="diversity-pct-hispanic" class="value"></div>
               </div>
               <div class="task-info">
                   <div class="desc">Percent Asian</div>
-                  <div class="value">12%</div>
+                  <div id="diversity-pct-asian" class="value"></div>
               </div>
-            </li>
-            <li>
               <div class="task-info">
                   <div class="desc">Median Household Income</div>
-                  <div class="value">$57,000</div>
+                  <div id="median-hh-income" class="value"></div>
               </div>
             </li>
           </ul>          
@@ -246,21 +243,19 @@
             <li>
               <div class="task-info">
                   <div class="desc">Tuition In-state</div>
-                  <div class="value">$7000</div>
+                  <div id="tuition-in-state" class="value"></div>
               </div>
               <div class="task-info">
                   <div class="desc">Tuition Out-of-state</div>
-                  <div class="value">$30,000</div>
+                  <div id="tuition-out-of-state"  class="value"></div>
               </div>
               <div class="task-info">
                   <div class="desc">Cost of attendance</div>
-                  <div class="value">$17,000</div>
+                  <div id="cost" class="value"></div>
               </div>
-            </li>
-            <li>
               <div class="task-info">
                   <div class="desc">Median Debt</div>
-                  <div class="value">$22,000</div>
+                  <div id="median-debt" class="value"></div>
               </div>
             </li>
           </ul>          
@@ -270,21 +265,19 @@
             <li>
               <div class="task-info">
                   <div class="desc">Retention Rate</div>
-                  <div class="value">78%</div>
+                  <div id="retention-rate" class="value"></div>
               </div>
               <div class="task-info">
                   <div class="desc">Completion Rate</div>
-                  <div class="value">78%</div>
+                  <div id="completion-rate" class="value"></div>
               </div>
-            </li>
-            <li>
               <div class="task-info">
                   <div class="desc">Median Salary - 2 years post graduation</div>
-                  <div class="value">$60,200</div>
+                  <div id="median-salary-6-yrs" class="value"></div>
               </div>
               <div class="task-info">
                   <div class="desc">Median Salary - 6 years post graduation</div>
-                  <div class="value">$78,300</div>
+                  <div id="median-salary-10-yrs" class="value"></div>
               </div>
             </li>
           </ul>

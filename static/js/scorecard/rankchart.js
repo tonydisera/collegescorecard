@@ -52,6 +52,11 @@ function rankchart() {
 
   }
 
+  let onRowClicked = function() {
+    
+  }
+
+
   var desaturate = function(color, k = 1) {
     const {l, c, h} = d3.lch(color);
     return d3.lch(l, c - 10 * k, h);
@@ -310,13 +315,17 @@ function rankchart() {
         })
 
       rowsEnter
-       .on("mouseover", function(d) {
+        .on("mouseover", function(d) {
           setCurrentRow(d3.select(this), d)
           
         })
         .on("mouseout", function(d) {
           unsetCurrentRow();
 
+        })
+        .on("click", function(d) {
+          onRowClicked(d)
+          
         })
        
 
@@ -785,6 +794,11 @@ function rankchart() {
   chart.onHoverRowEnd = function(_) {
     if (!arguments.length) return onHoverRowEnd;
     onHoverRowEnd = _;
+    return chart;
+  } 
+  chart.onRowClicked = function(_) {
+    if (!arguments.length) return onRowClicked;
+    onRowClicked = _;
     return chart;
   }    
   chart.initFieldDescriptors = function(_) {
