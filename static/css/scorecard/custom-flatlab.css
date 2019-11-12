@@ -2,6 +2,11 @@ ul.sidebar-menu li a {
 	font-size: 16px
 }
 
+ul.sidebar-menu li ul.sub li a {
+    font-size: 14px;
+    color: #4b4c4e;
+}
+
 .p-task.tasks-bar .task-info .value {
     display: inline-block;
     float: right;
@@ -23,16 +28,25 @@ ul.sidebar-menu li a {
 }
 
 .state-overview.custom .symbol {
-    width: 30%;
+    width: 20%;
+    padding: 10px;
+}
+
+.state-overview.custom .symbol.navy {
+    background-color: #486db1;
 }
 
 .state-overview.custom .value {
-    width: 70%;
+    width:80%;       
+    margin-top: 0px;
+    padding-top: 10px;
  }
 
- .state-overview.custom .symbol i {
+.state-overview.custom .symbol i {
     font-size: 30px;
 }
+
+
 
 .wrapper {
     margin-left: 0px;

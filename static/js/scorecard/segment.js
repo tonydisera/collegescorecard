@@ -1,12 +1,12 @@
-
 $(document).ready(function() {
   
+  
   init();
-
+  
 });
 
 function init() {
-
+  
   showScatterplot({
       selector: "#scatterplot1",
       width: 500,

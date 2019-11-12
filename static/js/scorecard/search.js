@@ -27,6 +27,8 @@ class Search {
     this.fieldNames = ["usnews_2019_rank", "control", "region", 
                        "degrees_awarded predominant_recoded", "city", "state"]
 
+
+
 	}
 
 	init() {

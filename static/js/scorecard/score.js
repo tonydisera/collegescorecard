@@ -15,10 +15,11 @@ let rankColWidthTotal = 220;
 let rankNameWidth = 300;
 let rankCategoryPadding = 30;
 
+
 $(document).ready(function() {
 
-
-  init();
+  init();  
+  
 
 });
 

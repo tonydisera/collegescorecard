@@ -1,17 +1,19 @@
 body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
 
 .navbar.bg-info {
-  background-color: #6ccac9 !important
+  background-color: #486db1 !important
 }
 
 .btn-primary {
-    background-color: #6ccac9 !important;
-    border-color: #6ccac9 !important;
+    background-color: #486db1 !important;
+    border-color: #486db1 !important;
+    font-weight: 500;
 }
 
 .btn-info {
-    background-color: #6ccac9 !important;
-    border-color: #6ccac9!important;
+    background-color: #486db1 !important;
+    border-color: #486db1!important;
+    font-weight: 500;
 }
 
 .selections button.multiselect {

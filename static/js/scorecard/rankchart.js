@@ -286,16 +286,7 @@ function rankchart() {
         .attr('transform',function(record,i){ 
            return "translate(0," + ((rowHeight * record.position) + headerHeight) + ")";
          })
-        .on("mouseover", function(d) {
-          setCurrentRow(d3.select(this), d)
-          onHoverRow(d)
-          
-        })
-        .on("mouseout", function(d) {
-          unsetCurrentRow();
-          onHoverRowEnd(d)
-
-        })
+       
 
       rowsEnter
         .append("text")
@@ -316,6 +307,16 @@ function rankchart() {
         .attr("dy", 0)
         .text(function (d,i) {
           return d.name
+        })
+
+      rowsEnter
+       .on("mouseover", function(d) {
+          setCurrentRow(d3.select(this), d)
+          
+        })
+        .on("mouseout", function(d) {
+          unsetCurrentRow();
+
         })
        
 
@@ -561,6 +562,17 @@ function rankchart() {
           })
       })
     })
+    container.selectAll(".col.total")
+      .on("mouseover", function(d) {
+         
+          onHoverRow(d)
+          
+      })
+      .on("mouseout", function(d) {
+ 
+        onHoverRowEnd(d)
+
+      })
 
   }
 
