@@ -11,7 +11,7 @@ function countUp(count)
             $display.text(speed * run_count);
             run_count++;
         } else if(parseInt($display.text()) < count) {
-            var curr_count = parseInt($display.text()) + 1;
+            var curr_count = parseInt($display.text()) + 100;
             $display.text(curr_count);
         } else {
             clearInterval(int);
@@ -19,7 +19,7 @@ function countUp(count)
     }, int_speed);
 }
 
-countUp(495);
+countUp(7127);
 
 function countUp2(count)
 {
@@ -34,7 +34,7 @@ function countUp2(count)
             $display.text(speed * run_count);
             run_count++;
         } else if(parseInt($display.text()) < count) {
-            var curr_count = parseInt($display.text()) + 1;
+            var curr_count = parseInt($display.text()) + 10000;
             $display.text(curr_count);
         } else {
             clearInterval(int);
@@ -42,7 +42,7 @@ function countUp2(count)
     }, int_speed);
 }
 
-countUp2(947);
+countUp2(13001074);
 
 function countUp3(count)
 {
@@ -57,7 +57,7 @@ function countUp3(count)
             $display.text(speed * run_count);
             run_count++;
         } else if(parseInt($display.text()) < count) {
-            var curr_count = parseInt($display.text()) + 1;
+            var curr_count = parseInt($display.text()) + 1000;
             $display.text(curr_count);
         } else {
             clearInterval(int);
@@ -65,7 +65,7 @@ function countUp3(count)
     }, int_speed);
 }
 
-countUp3(328);
+countUp3(16000);
 
 function countUp4(count)
 {
@@ -80,7 +80,7 @@ function countUp4(count)
             $display.text(speed * run_count);
             run_count++;
         } else if(parseInt($display.text()) < count) {
-            var curr_count = parseInt($display.text()) + 1;
+            var curr_count = parseInt($display.text()) + 100;
             $display.text(curr_count);
         } else {
             clearInterval(int);
@@ -88,4 +88,4 @@ function countUp4(count)
     }, int_speed);
 }
 
-countUp4(10328);
+countUp4(55000);
