@@ -103,7 +103,7 @@ function rankchart() {
     'diversity':   desaturate(tc_yellow, 1),
     'cost':        tc_cyan,
     'outcome':     desaturate(tc_red,1),
-    'rank':        tc_brown,
+    'rank':        tc_purple,
     'total':       '#ffffff'
   }
 
