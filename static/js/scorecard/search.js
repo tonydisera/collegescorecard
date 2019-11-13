@@ -18,6 +18,8 @@ class Search {
     this.selectedPrograms = []
     this.selectedControl = []
     this.usnewsChecked = false;
+    this.minACT = null;
+    this.maxACT = null;
 
     this.allColleges = []
     this.filteredColleges = []
@@ -188,6 +190,21 @@ class Search {
       }    
     })
 
+    $('#minACT').on("focusout", function(event) {
+      self.minACT = $('#minACT').val();
+      if (self.minACT == "") {
+        self.minACT = null;
+      }
+      self.filterColleges();
+    })
+    $('#maxACT').on("focusout", function(event) {
+      self.maxACT = $('#maxACT').val();
+      if (self.maxACT == "") {
+        self.maxACT = null;
+      }
+      self.filterColleges();
+    })
+
 
 	}
 
@@ -263,7 +280,9 @@ class Search {
         self.selectedRegions.length == 0 &&
         self.selectedControl.length == 0 &&
         self.selectedDegreeLevel.length == 0 &&
-        !self.usnewsChecked) {
+        !self.usnewsChecked &&
+        self.minACT == null &&
+        self.maxACT == null) {
       self.filteredColleges = [];
     } else {
       self.filteredColleges = self.allColleges.filter(function(college) {
@@ -314,6 +333,19 @@ class Search {
           }
         } 
 
+        let matchesACTMin = self.minACT == null;
+        if (self.minACT != null) {
+          if (college["act_scores midpoint cumulative"] >= self.minACT) {
+            matchesACTMin = true;
+          }
+        }
+        let matchesACTMax = self.maxACT == null;
+        if (self.maxACT != null) {
+          if (college["act_scores midpoint cumulative"] <= self.maxACT) {
+            matchesACTMax = true;
+          }
+        }
+
         if (matchesCollege) {
           return matchesCollege
         } else {
@@ -321,8 +353,10 @@ class Search {
               self.selectedPrograms.length > 0 ||
               self.selectedRegions.length > 0 ||
               self.selectedControl.length > 0 ||
-              self.usnewsChecked) {
-            return (matchesUsnews && matchesDegreeLevel && matchesRegion && matchesProgram && matchesControl);
+              self.usnewsChecked ||
+              self.minACT ||
+              self.maxACT) {
+            return (matchesUsnews && matchesDegreeLevel && matchesRegion && matchesProgram && matchesControl && matchesACTMin && matchesACTMax);
           } else {
             return false;
           }

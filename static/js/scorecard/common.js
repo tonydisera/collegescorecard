@@ -17,7 +17,8 @@ let defaultFieldNames = [
   "completion_rate_4yr_150nt",
   "retention_rate four_year full_time",
   "6_yrs_after_entry median",
-  "10_yrs_after_entry working_not_enrolled mean_earnings"
+  "10_yrs_after_entry working_not_enrolled mean_earnings",
+  "act_scores midpoint cumulative"
 ]
 
 function promiseGetData(fieldNames) {
