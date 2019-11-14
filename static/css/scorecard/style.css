@@ -69,13 +69,14 @@ body .selections {
 #scorecard-select-container {
   margin-top: 0px;
   margin-right: 50px;
-  margin-left: 50px;
+  margin-left: 0px;
 }
 
 #search-colleges-button {
   margin-top: 0px;
-  margin-left: 0px;
+  margin-right: 30px;
   max-height: 40px;
+  min-width: 150px;
 }
 
 .multiselect-container {
@@ -88,6 +89,13 @@ body .selections {
     font-weight: 400;
     padding: 3px 10px 3px 20px;
     font-size: 14px;
+}
+
+#filter-badges .badge {
+  font-size: 12px;
+  margin-right: 5px;
+  margin-top: 5px;
+  height: 20px;
 }
 
 #hist-chart-categories {

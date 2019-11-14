@@ -26,8 +26,6 @@ $(document).ready(function() {
 });
 
 function init() {
-  search = new Search();
-  search.init();
 
   initFieldDropdown();
 
@@ -64,6 +62,14 @@ function init() {
   rankChart.onRowClicked(function(college) {
     showCollegeDetail(college)
   })
+
+  search = new Search();
+  search.promiseInit()
+  .then(function() {
+    rankColleges();  
+  })
+
+
 }
 
 function formatRankColumnHeader(d) {
@@ -82,6 +88,10 @@ function formatRankColumnHeader(d) {
 
 function rankColleges() {
   search.close();
+  
+  d3.selectAll("#filter-badges badge").remove();
+  d3.select("#filter-badges").html(search.getBadges())
+
   promiseShowHistograms();
   promiseShowRankings(getSelectedCollegeNames());
 }
