@@ -63,7 +63,7 @@ body .selections {
   display: flex;
   flex-flow: row;
   margin-bottom: 30px;
-  margin-top: 20px;
+  margin-top: 0px;
 }
 
 #scorecard-select-container {
@@ -204,7 +204,7 @@ button.multiselect.btn-default.active,
 }
 
 #rank-chart.chart-container {
-  overflow-x: scroll;
+  overflow-x: unset;
   overflow-y: scroll;
   height: 100vh;
 }
@@ -257,6 +257,11 @@ button.multiselect.btn-default.active,
   fill: #e9e8e8;
   stroke: #999999;
   stroke-width: .5;
+}
+
+#rank-chart-heading {
+  margin-bottom: 10px;
+  display: flex;
 }
 
 div.tooltip {

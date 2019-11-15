@@ -128,6 +128,7 @@ function rankchart() {
       }   
 
 
+
       data = theData;
 
       // Scale the data
@@ -152,6 +153,9 @@ function rankchart() {
       stackedData = d3.stack()
         .keys(fieldNames)
         (data)
+
+      container.style("min-width", width + "px")
+      headingContainer.style("min-width", width + "px")
 
 
       addHeadingSVG()
@@ -375,7 +379,7 @@ function rankchart() {
         .attr("class", "hint-header")
         .attr("x", innerWidth - colWidthTotal )
         .attr("y", "0")
-        .attr("width", colWidthTotal - 15)
+        .attr("width", colWidthTotal - 10)
         .attr("height", 40)
         .attr("y", headerHeight-weightHeight-30+12-20)
       let hintGroup = headerRowEnter
@@ -388,8 +392,8 @@ function rankchart() {
         .attr("dy", 0)
         .attr("x", 0)
         .attr("y", -2)
-        .text("Hover over to bars below see metrics across all colleges")  
-        .call(wrap, colWidthTotal - 15)     
+        .text("Hover over bars below for placement across all colleges")  
+        .call(wrap, colWidthTotal - 10)     
 
 
 
