@@ -382,6 +382,11 @@ class Search {
   filterColleges() {
     let self = this;
 
+    $(self.selectAllSelector).prop( "checked", false );
+    self.checkedColleges = []
+    $("#search-dialog  #rank-button").attr("disabled", true);
+  
+
     if (self.selectedColleges.length == 0 &&
         self.selectedPrograms.length == 0 &&
         self.selectedRegions.length == 0 &&

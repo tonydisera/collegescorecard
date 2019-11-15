@@ -404,6 +404,13 @@ function rankchart() {
       headerRowEnter
         .append("text")
         .attr("class", "col-header")
+        .attr("x", 0)
+        .attr("y", 0)
+        .text("rank")
+
+      headerRowEnter
+        .append("text")
+        .attr("class", "col-header")
         .attr("x", 33)
         .attr("y", 0)
         .text("name")
