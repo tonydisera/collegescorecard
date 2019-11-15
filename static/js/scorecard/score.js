@@ -147,6 +147,7 @@ function promiseShowHistograms() {
 
     let fieldDescriptors = getSelectedMetricFields();
     let categories = []
+    categories.push({category: 'overall', width: rankColWidthTotal })
     let category = null;
     fieldDescriptors.forEach(function(field,i) {
       if (i == 0 || field.category != fieldDescriptors[i-1].category) {
@@ -161,7 +162,6 @@ function promiseShowHistograms() {
       let theWidth = field.width ? (field.width+rankColPadding) : (rankColWidth+rankColPadding);
       category.width += theWidth;
     })
-    categories.push({category: 'overall', width: rankColWidthTotal })
 
     let headerContainerSelector  = "#hist-chart-categories"
     let headerSelector  = "#hist-chart-categories .category-header"
@@ -194,7 +194,7 @@ function promiseShowHistograms() {
 
 
       let chartContainerSelector  = "#hist-chart"
-      d3.select(chartContainerSelector).style("margin-left", (rankNameWidth+rankColPadding) + "px");
+      d3.select(chartContainerSelector).style("margin-left", (rankNameWidth+rankColPadding+rankColWidthTotal+rankColPadding) + "px");
 
 
       let chartSelector           = "#hist-chart .hist"

@@ -135,9 +135,6 @@ function rankchart() {
       scaleData(data)
 
 
-      // Add a column representing the overall score 
-      fieldDescriptors.push(totalField)
-
 
       // Calculate the height and width
       height = headerHeight + (rowHeight * data.length) + margin.top + margin.bottom;
@@ -267,7 +264,7 @@ function rankchart() {
       let colsEnter = cols.enter()
         .append('g')
         .attr('class', function(d,i) {
-          if (d.layerIdx == fieldDescriptors.length-1) {
+          if (d.field.name == "_total") {
             return "col total";
           } else{
             return "col";
@@ -358,43 +355,24 @@ function rankchart() {
         .append("g")
         .attr("class", "col-header-row")
 
-      headerRowEnter
-        .append("rect")
-        .attr("class", "hint-header")
-        .attr("x", "0")
-        .attr("y", "0")
-        .attr("width", nameWidth - 30)
-        .attr("height", 40)
-        .attr("y", headerHeight-weightHeight-30+12-20)
-      headerRowEnter
-        .append("text")
-        .attr("class", "hint-header")
-        .attr("x", "10")
-        .attr("y", headerHeight-weightHeight-30+12)
-        .text("Click to adjust weights >")
 
-
-      headerRowEnter
-        .append("rect")
-        .attr("class", "hint-header")
-        .attr("x", innerWidth - colWidthTotal )
-        .attr("y", "0")
-        .attr("width", colWidthTotal - 10)
-        .attr("height", 40)
-        .attr("y", headerHeight-weightHeight-30+12-20)
       let hintGroup = headerRowEnter
         .append("g")
-        .attr("transform", "translate(" + (innerWidth - colWidthTotal + 10) + "," + (headerHeight-weightHeight-30+12) + ")")
+        .attr("transform", "translate(" + (nameWidth + colPadding) + ",0)");
+
+      hintGroup
+        .append("rect")
+        .attr("class", "hint-header")
+        .attr("x", 50)
+        .attr("y", 53)
+        .attr("width", 160)
+        .attr("height", 20)
       hintGroup
         .append("text")
         .attr("class", "hint-header")
-        .attr("dx", 0)
-        .attr("dy", 0)
-        .attr("x", 0)
-        .attr("y", -2)
-        .text("Hover over bars below for placement across all colleges")  
-        .call(wrap, colWidthTotal - 10)     
-
+        .attr("x", 53)
+        .attr("y", 66)
+        .text("Click to adjust weights >")
 
 
       var colHeaders = headerRow
@@ -483,6 +461,23 @@ function rankchart() {
   var initFieldDescriptors = function() {
     totalCategoryPadding = 0;
     totalColWidth = 0;
+
+    // totalField holds the scales for the overall score 
+    totalField = {name: '_total', category: 'total', categoryIdx: 0, padding: 0, paddingCumulative: 0};
+    totalField.weights = [];
+    totalField.weight = 0;
+    totalField.scale = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d._total)])
+      .range([0, colWidth])
+
+    totalField.scaleTotal = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d._total)])
+      .range([0, 0])   
+
+    
+    fieldDescriptors.splice(0, 0, totalField)      
+
+
     fieldDescriptors.forEach(function(field,i) {
       if (i > 0 && field.category != fieldDescriptors[i-1].category) {
         totalCategoryPadding += categoryPadding;
@@ -492,7 +487,7 @@ function rankchart() {
         return {field: field, weight: weight};
       })
       field.currentWeight = field.currentWeight ? field.currentWeight : 1;
-      field.width = colWidth*field.currentWeight;
+      field.width = field.name == "_total" ? colWidthTotal : colWidth*field.currentWeight;
 
       field.colX = nameWidth + colPadding + field.paddingCumulative + totalColWidth;
 
@@ -502,18 +497,6 @@ function rankchart() {
     // Add padding for total
     totalCategoryPadding += categoryPadding;
 
-    // totalField holds the scales for the overall score 
-    totalField = {name: '_total', category: 'total', categoryIdx: 0, padding: 0, paddingCumulative: totalCategoryPadding};
-    totalField.weights = [];
-    totalField.weight = 0;
-    totalField.colX = nameWidth + colPadding + totalCategoryPadding + totalColWidth;
-    totalField.scale = d3.scaleLinear()
-      .domain([0, d3.max(data, d => d._total)])
-      .range([0, colWidth])
-
-    totalField.scaleTotal = d3.scaleLinear()
-      .domain([0, d3.max(data, d => d._total)])
-      .range([0, 0])   
 
   }
 
@@ -522,6 +505,13 @@ function rankchart() {
     // Initialize field descriptors with the x postion, padding, width
     initFieldDescriptors();
 
+
+    let units = 0;
+    fieldDescriptors.forEach(function(field) {
+      if (field.name != "_total") {
+        units += field.currentWeight;
+      }
+    })
 
     // Set up column scales
     fieldDescriptors.forEach(function(field,i) {
@@ -538,9 +528,9 @@ function rankchart() {
           .domain([d3. min(data, d => d[field.name]), d3.max(data, d => d[field.name])])
           .clamp(true)
       if (field.rankDescending) {
-        field.scaleTotal.range([(colWidthTotal/fieldDescriptors.length) * field.currentWeight, 2])
+        field.scaleTotal.range([(colWidthTotal/units) * field.currentWeight, 2])
       } else {
-        field.scaleTotal.range([2, (colWidthTotal/fieldDescriptors.length) * field.currentWeight])
+        field.scaleTotal.range([2, (colWidthTotal/units) * field.currentWeight])
       }
 
     })
@@ -549,9 +539,12 @@ function rankchart() {
     data.forEach(function(d) {
       let total = 0;
       fieldDescriptors.forEach(function(field, fieldIdx) {
-        if (field.rankDescending && d[field.name] == null) {
-        } else {
-          total += field.scale(d[field.name]);
+        if (field.name != "_total") {
+          if (field.rankDescending && d[field.name] == null) {
+          } else {
+            total += field.scale(d[field.name]);
+          }
+
         }
       })
       d._total = total;
@@ -599,9 +592,9 @@ function rankchart() {
 
       stacked
       .forEach(function(fieldInfo, fieldIdx) {
-        let fieldDescriptor = fieldDescriptors[fieldIdx];
+        let fieldDescriptor = theFieldDescriptors[fieldIdx];
         colTot.append("rect")
-          .attr("class", "bar-total")
+          .attr("class", "bar-total " + fieldDescriptor.category)
           .attr("x", function(d,i) {
             return fieldInfo[0][0]
           })
@@ -615,16 +608,19 @@ function rankchart() {
           })
       })
     })
-    container.selectAll(".col.total")
+    container.selectAll(".col")
       .on("mouseover", function(d) {
-         
           onHoverRow(d)
-          
       })
       .on("mouseout", function(d) {
- 
         onHoverRowEnd(d)
-
+      })
+    container.selectAll(".row text")
+      .on("mouseover", function(d) {
+          onHoverRow(d)
+      })
+      .on("mouseout", function(d) {
+        onHoverRowEnd(d)
       })
 
   }
