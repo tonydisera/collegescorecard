@@ -96,6 +96,9 @@ body .selections {
   margin-right: 5px;
   margin-top: 5px;
   height: 20px;
+  color: #717171;
+  background-color: #eae8e8;
+  border: thin solid #6180ba;
 }
 
 #hist-chart-categories {
@@ -234,12 +237,16 @@ button.multiselect.btn-default.active,
   font-size: 12px;
 }
 
-.rankchart text.weight-header {
+.rankchart text.hint-header {
   font-size: 13px;
   font-weight: 600;
-  font-style: italic;
   text-anchor: start;
-  fill: blue;
+  fill: #717171;
+}
+
+.rankchart rect.hint-header {
+  fill:   #fffbce;
+  stroke: #eab729;  
 }
 
 .rankchart .row text {

@@ -16,6 +16,7 @@ function rankchart() {
   var totalCategoryPadding = 0;
   var totalColWidth = 0;
   var container = null;
+  var headingContainer = null;
   var data = null;
   var stackedData = null;
 
@@ -115,10 +116,11 @@ function rankchart() {
 
 
 
-  function chart(selection) {
+  function chart(selection, containerForHeading) {
     selection.each(function(theData) {
 
       container = selection;
+      headingContainer = containerForHeading ? containerForHeading : selection;
 
       if (fieldDescriptors == null) {
         console.log("rankchart cannot draw chart without fieldDescriptors") 
@@ -152,6 +154,9 @@ function rankchart() {
         (data)
 
 
+      addHeadingSVG()
+
+
       // Select the svg element, if it exists.
       let svg = d3
         .select(this)
@@ -176,103 +181,6 @@ function rankchart() {
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
-      // Add the column headers
-      g.selectAll(".col-header-row").remove();
-      var headerRow = g.selectAll(".col-header-row").data([fieldDescriptors]);
-      headerRow.exit().remove();
-      let headerRowEnter = headerRow.enter()
-        .append("g")
-        .attr("class", "col-header-row")
-
-      headerRowEnter
-        .append("text")
-        .attr("class", "weight-header")
-        .attr("x", "0")
-        .attr("y", headerHeight-weightHeight-30+12)
-        .text("Click to adjust weights >")
-
-
-      var colHeaders = headerRow
-        .merge(headerRowEnter)
-        .selectAll(".col-header").data(fieldDescriptors,function(field,i) {
-          return field.name + "-" + i + "-" + field.colX;
-        });
-
-      colHeaders.exit().remove();
-      var colHeadersEnter = colHeaders
-        .enter()
-        .append("g")
-        .attr("class", "col-header")
-        .attr("transform", function(field,i) {
-          return "translate(" + field.colX + ",0)";
-        })
-      colHeadersEnter
-        .append("text")
-        .attr("dx", 0)
-        .attr("dy", 0)
-        .text(function(d,i) {
-          return formatColumnHeader(d.name,i);
-        })
-        .call(wrap, colWidth +3)
-
-      // Add the weight boxes to the column header
-      let weightGroup = colHeadersEnter.selectAll("g.weights")
-        .data(function(fieldDescriptor) {
-          return [fieldDescriptor.weights];
-        })
-
-      weightGroup.exit().remove();
-
-      let weightGroupEnter = weightGroup
-        .enter()
-        .append("g")
-        .attr("transform", "translate(0," + (headerHeight-(weightHeight)-30) + ")")
-        .attr("class", "weights")
-
-      let weightRectEnter = weightGroupEnter.selectAll("rect.weight")
-        .data(function(weightObject) {
-          return weightObject;
-        }, function(weightObject) {
-          return weightObject.weight;
-        })
-        .enter()
-
-      weightRectEnter
-        .append("rect")
-        .attr("class", function(weightObject) {
-          if (weightObject.weight <= weightObject.field.currentWeight-1) {
-            return "weight selected";
-          } else {
-            return "weight"
-          }
-        })
-        .attr("x", function(weightObject) {
-          return weightObject.weight*weightHeight;
-        })
-        .attr("y", "0")
-        .attr("width", function(weightObject) {
-          if (weightObject.field.name != "_total") {
-            return weightHeight;
-          } else {
-            return "0";
-          }
-        })
-        .attr("height", weightHeight)
-        .on("click", function(weightObject) {
-          weightObject.field.currentWeight = weightObject.weight+1;
-
-          d3.select(d3.select(this).node().parentNode)
-            .selectAll("rect")
-            .each(function(childWeightObject) {
-
-            d3.select(this).classed("selected", childWeightObject.weight <= weightObject.weight)
-
-          })
-
-          onRescale()
-
-        })
-
       g.append("rect")
         .attr("class", "current-row")
 
@@ -289,7 +197,7 @@ function rankchart() {
         .append('g')
         .attr('class', 'row')
         .attr('transform',function(record,i){ 
-           return "translate(0," + ((rowHeight * record.position) + headerHeight) + ")";
+           return "translate(0," + ((rowHeight * record.position) ) + ")";
          })
        
 
@@ -393,29 +301,7 @@ function rankchart() {
         .attr("fill", function(d,i) {
           return getColor(d.field.category, d.field.categoryIdx);
         })
-        /*
-        .on("mouseover", function(d) {
-          tooltip.transition()
-              .duration(200)
-              .style("opacity", .9);
-
-          tooltip.html(tooltipContent(d));
-
-          h = tooltip.node().offsetHeight
-          w = tooltip.node().offsetWidth
-
-          tooltip
-              .style("left", (d3.event.pageX + 2) + "px")
-              .style("top", ((d3.event.pageY - h) - 3) + "px");
-          
-        })
-        .on("mouseout", function(d) {
-          tooltip.transition()
-                 .duration(200)
-                 .style("opacity", 0)
-          
-        })
-        */
+       
 
       // Add the stacked bar showing the overall score for each row
       addTotalBars()
@@ -434,6 +320,160 @@ function rankchart() {
 
 
     });
+  }
+
+  var addHeadingSVG = function() {
+      // Select the svg element, if it exists.
+      let svg = headingContainer
+        .selectAll("svg")
+        .data([stackedData]);
+
+      // Otherwise, create the skeletal chart.
+      var svgEnter = svg.enter().append("svg");
+      var gEnter = svgEnter.append("g");
+
+
+      // Update the outer dimensions.
+      svg
+        .merge(svgEnter)
+        .attr("class", "rankchart")
+        .attr("width", width)
+        .attr("height", headerHeight );
+
+      var g = svg
+        .merge(svgEnter)
+        .select("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+      // Add the column headers
+      g.selectAll(".col-header-row").remove();
+      var headerRow = g.selectAll(".col-header-row").data([fieldDescriptors]);
+      headerRow.exit().remove();
+      let headerRowEnter = headerRow.enter()
+        .append("g")
+        .attr("class", "col-header-row")
+
+      headerRowEnter
+        .append("rect")
+        .attr("class", "hint-header")
+        .attr("x", "0")
+        .attr("y", "0")
+        .attr("width", nameWidth - 30)
+        .attr("height", 40)
+        .attr("y", headerHeight-weightHeight-30+12-20)
+      headerRowEnter
+        .append("text")
+        .attr("class", "hint-header")
+        .attr("x", "10")
+        .attr("y", headerHeight-weightHeight-30+12)
+        .text("Click to adjust weights >")
+
+
+      headerRowEnter
+        .append("rect")
+        .attr("class", "hint-header")
+        .attr("x", innerWidth - colWidthTotal )
+        .attr("y", "0")
+        .attr("width", colWidthTotal - 15)
+        .attr("height", 40)
+        .attr("y", headerHeight-weightHeight-30+12-20)
+      let hintGroup = headerRowEnter
+        .append("g")
+        .attr("transform", "translate(" + (innerWidth - colWidthTotal + 10) + "," + (headerHeight-weightHeight-30+12) + ")")
+      hintGroup
+        .append("text")
+        .attr("class", "hint-header")
+        .attr("dx", 0)
+        .attr("dy", 0)
+        .attr("x", 0)
+        .attr("y", -2)
+        .text("Hover over to bars below see metrics across all colleges")  
+        .call(wrap, colWidthTotal - 15)     
+
+
+
+      var colHeaders = headerRow
+        .merge(headerRowEnter)
+        .selectAll(".col-header").data(fieldDescriptors,function(field,i) {
+          return field.name + "-" + i + "-" + field.colX;
+        });
+
+      colHeaders.exit().remove();
+      var colHeadersEnter = colHeaders
+        .enter()
+        .append("g")
+        .attr("class", "col-header")
+        .attr("transform", function(field,i) {
+          return "translate(" + field.colX + ",0)";
+        })
+      colHeadersEnter
+        .append("text")
+        .attr("dx", 0)
+        .attr("dy", 0)
+        .text(function(d,i) {
+          return formatColumnHeader(d.name,i);
+        })
+        .call(wrap, colWidth +3)
+
+      // Add the weight boxes to the column header
+      let weightGroup = colHeadersEnter.selectAll("g.weights")
+        .data(function(fieldDescriptor) {
+          return [fieldDescriptor.weights];
+        })
+
+      weightGroup.exit().remove();
+
+      let weightGroupEnter = weightGroup
+        .enter()
+        .append("g")
+        .attr("transform", "translate(0," + (headerHeight-(weightHeight)-30) + ")")
+        .attr("class", "weights")
+
+      let weightRectEnter = weightGroupEnter.selectAll("rect.weight")
+        .data(function(weightObject) {
+          return weightObject;
+        }, function(weightObject) {
+          return weightObject.weight;
+        })
+        .enter()
+
+      weightRectEnter
+        .append("rect")
+        .attr("class", function(weightObject) {
+          if (weightObject.weight <= weightObject.field.currentWeight-1) {
+            return "weight selected";
+          } else {
+            return "weight"
+          }
+        })
+        .attr("x", function(weightObject) {
+          return weightObject.weight*weightHeight;
+        })
+        .attr("y", "0")
+        .attr("width", function(weightObject) {
+          if (weightObject.field.name != "_total") {
+            return weightHeight;
+          } else {
+            return "0";
+          }
+        })
+        .attr("height", weightHeight)
+        .on("click", function(weightObject) {
+          weightObject.field.currentWeight = weightObject.weight+1;
+
+          d3.select(d3.select(this).node().parentNode)
+            .selectAll("rect")
+            .each(function(childWeightObject) {
+
+            d3.select(this).classed("selected", childWeightObject.weight <= weightObject.weight)
+
+          })
+
+          onRescale()
+
+        })
+
   }
 
   var initFieldDescriptors = function() {
@@ -592,7 +632,7 @@ function rankchart() {
          .duration(1200)
          .ease(d3.easeSin)
          .attr('transform',function(d,i){ 
-           return "translate(0," + ((rowHeight * i) + headerHeight) + ")";
+           return "translate(0," + ((rowHeight * i) ) + ")";
          })
 
     /*

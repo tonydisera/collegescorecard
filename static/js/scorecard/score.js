@@ -13,7 +13,7 @@ let rankColPadding = 10;
 let rankColWidth = 70;
 let rankColWidthTotal = 220;
 let rankNameWidth = 300;
-let rankCategoryPadding = 30;
+let rankCategoryPadding = 10;
 
 let slidebarClicks = 0;
 
@@ -30,7 +30,7 @@ function init() {
   initFieldDropdown();
 
   rankChart = rankchart();
-  rankChart.margin( { top: 10, right: 5, bottom: 90, left: 0 } )
+  rankChart.margin( { top: 10, right: 5, bottom: 0, left: 0 } )
 
   rankChart.headerHeight(rankHeaderHeight);
   rankChart.rowHeight(rankRowHeight);
@@ -74,7 +74,7 @@ function init() {
 
 function formatRankColumnHeader(d) {
   if ( d == "_total") {
-      return "combined score"
+      return ""
   } else {
     let hdr = d.split("_").join(" ");
     let tokens = hdr.split("demographics ");
@@ -105,7 +105,7 @@ function promiseShowRankings(selectedCollegeNames) {
     let selection = d3.select("#rank-chart");
     rankChart.fieldDescriptors(getSelectedMetricFields())
     selection.datum(selectedCollegeData);
-    rankChart(selection);
+    rankChart(selection, d3.select("#rank-chart-heading"));
 
 
   })
