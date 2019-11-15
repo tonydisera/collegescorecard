@@ -25,7 +25,7 @@ class Search {
     this.selectedControlLabels = ["Public"]
 
     this.usnewsChecked = false;
-    this.minACT = 30;
+    this.minACT = 28;
     this.maxACT = null;
 
     this.allColleges = []
