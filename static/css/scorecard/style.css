@@ -224,11 +224,13 @@ button.multiselect.btn-default.active,
 .rankchart rect.bar {
   stroke: black;
   stroke-width: 1px;
+  cursor: pointer;
 }
 
 .rankchart rect.bar-total {
   stroke: black;
   stroke-width: 1px;
+  cursor: pointer;
 }
 
 .rankchart .row text {

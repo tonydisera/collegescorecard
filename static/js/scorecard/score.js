@@ -11,7 +11,8 @@ let rankBarHeight = 15;
 
 let rankColPadding = 10;
 let rankColWidth = 70;
-let rankColWidthTotal = 210;
+let rankColWidthTotal = 100;
+let rankColWidthScore = 50;
 let rankNameWidth = 290;
 let rankCategoryPadding = 10;
 
@@ -39,6 +40,7 @@ function init() {
   rankChart.colWidthTotal(rankColWidthTotal);
   rankChart.nameWidth(rankNameWidth);
   rankChart.categoryPadding(rankCategoryPadding)
+  rankChart.colWidthScore(rankColWidthScore)
   rankChart.formatColumnHeader(function(d,i) {
     return formatRankColumnHeader(d)
   })
@@ -194,7 +196,7 @@ function promiseShowHistograms() {
 
 
       let chartContainerSelector  = "#hist-chart"
-      d3.select(chartContainerSelector).style("margin-left", (rankNameWidth+rankColPadding+rankColWidthTotal+rankColPadding) + "px");
+      d3.select(chartContainerSelector).style("margin-left", (rankNameWidth+rankColPadding+rankColWidthScore+rankColPadding+rankColWidthTotal+rankColPadding) + "px");
 
 
       let chartSelector           = "#hist-chart .hist"
