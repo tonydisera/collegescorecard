@@ -26,7 +26,7 @@ act_scores 25th_percentile math,selectivity,Y,,
 act_scores 75th_percentile math,selectivity,Y,,
 act_scores 25th_percentile writing,selectivity,Y,,
 act_scores 75th_percentile writing,selectivity,Y,,
-act_scores midpoint cumulative,selectivity,Y,,
+act_scores midpoint cumulative,selectivity,Y,,Y
 act_scores midpoint english,selectivity,Y,,
 act_scores midpoint math,selectivity,Y,,
 act_scores midpoint writing,selectivity,Y,,

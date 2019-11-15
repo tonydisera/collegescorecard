@@ -192,7 +192,7 @@ function rankchart() {
       var rows = g.selectAll(".row").data(data,
       function(d,i) {
         //return d.name + "-" + i + "-" + totalColWidth + "-" + totalCategoryPadding;
-        return d.name + "-" + i;
+        return d.name + "-" + i + "-" + scaleForScore(d._total);
       });
 
       rows.exit().remove();
@@ -910,7 +910,11 @@ function rankchart() {
     if (!arguments.length) return colWidthScore;
     colWidthScore = _;
     return chart;
-
+  }
+  chart.maxNameLength = function(_) {
+    if (!arguments.length) return maxNameLength;
+    maxNameLength = _;
+    return chart;
   }
 
   chart 

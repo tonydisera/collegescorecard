@@ -13,19 +13,19 @@ class Search {
 
     this.selectedColleges = []
     
-    this.selectedDegreeLevel = []
-    this.selectedDegreeLevelLabels = []
+    this.selectedDegreeLevel = ["3"]
+    this.selectedDegreeLevelLabels = ["Bachelors"]
 
     this.selectedRegions = []
     this.selectedRegionLabels = []
 
     this.selectedPrograms = []
 
-    this.selectedControl = []
-    this.selectedControlLabels = []
+    this.selectedControl = ["1"]
+    this.selectedControlLabels = ["Public"]
 
-    this.usnewsChecked = true;
-    this.minACT = null;
+    this.usnewsChecked = false;
+    this.minACT = 30;
     this.maxACT = null;
 
     this.allColleges = []
@@ -82,6 +82,7 @@ class Search {
           self.filterColleges();
         }    
       })
+       $(self.degreeLevelSelector).multiselect('select', ['3'], true)
 
       $(self.collegeSelector).multiselect(
       { enableCaseInsensitiveFiltering: true,
@@ -171,6 +172,8 @@ class Search {
           self.filterColleges();
         }    
       })
+      $(self.controlSelector).multiselect('select', ['1'], true)
+
 
       $('#minACT').on("focusout", function(event) {
         self.minACT = $('#minACT').val();

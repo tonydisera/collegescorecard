@@ -13,8 +13,9 @@ let rankColPadding = 10;
 let rankColWidth = 70;
 let rankColWidthTotal = 100;
 let rankColWidthScore = 50;
-let rankNameWidth = 290;
-let rankCategoryPadding = 10;
+let rankNameWidth = 260;
+let rankMaxNameLength = 50;
+let rankCategoryPadding = 0;
 
 let slidebarClicks = 0;
 
@@ -39,6 +40,7 @@ function init() {
   rankChart.colWidth(rankColWidth);
   rankChart.colWidthTotal(rankColWidthTotal);
   rankChart.nameWidth(rankNameWidth);
+  rankChart.maxNameLength(rankMaxNameLength);
   rankChart.categoryPadding(rankCategoryPadding)
   rankChart.colWidthScore(rankColWidthScore)
   rankChart.formatColumnHeader(function(d,i) {
