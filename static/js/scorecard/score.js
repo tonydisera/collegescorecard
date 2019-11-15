@@ -167,7 +167,7 @@ function promiseShowHistograms() {
 
     let headerContainerSelector  = "#hist-chart-categories"
     let headerSelector  = "#hist-chart-categories .category-header"
-    d3.select(headerContainerSelector).style("margin-left", (rankNameWidth+rankColPadding) + "px");
+    d3.select(headerContainerSelector).style("margin-left", (rankNameWidth+rankColPadding+rankColWidthScore) + "px");
     d3.selectAll(headerSelector).remove();
 
 

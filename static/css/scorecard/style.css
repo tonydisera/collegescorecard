@@ -110,6 +110,7 @@ body .selections {
   text-align: center;
   display: inline-block;
   font-size: 14px;
+  color: #464646;
 }
 
 #hist-chart {
