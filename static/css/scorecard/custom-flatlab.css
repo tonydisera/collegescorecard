@@ -56,6 +56,10 @@ ul.sidebar-menu li ul.sub li a {
     font-size: 20px;
 }
 
+.state-overview.custom .card {
+    margin-bottom: 10px;
+}
+
 
 
 .wrapper {
