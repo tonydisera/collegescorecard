@@ -207,8 +207,8 @@ button.multiselect.btn-default.active,
 
 #hist-chart span.hint {
   display: inline-block;
-  margin-left: -190px;
-  width: 190px;
+  margin-left: -140px;
+  min-width: 140px;
   line-height: 13px;
   height: 20px;
   background-color: #fffef0;
@@ -216,7 +216,6 @@ button.multiselect.btn-default.active,
   padding: 2px;
   margin-top: 30px;
   font-size: 12px;  
-  margin-right: 10px;
 }
 
 #rank-chart.chart-container {

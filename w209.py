@@ -7,6 +7,9 @@ from flask import request
 
 APP_FOLDER = os.path.dirname(os.path.realpath(__file__))
 
+metric_all    = "static/data/college_scorecard_merged.csv"
+cleaned_all   = "static/data/Most-Recent-Cohorts-All-Data-Elements-ExTitleIV-Cleaned.csv"
+
 
 @app.route("/")
 def root():
@@ -27,11 +30,45 @@ def segment():
 def score():
     return render_template("score.html")        
 
-
 @app.route("/getFields")
 def getFields():
+  # Load the CSV file from the static folder, inside the current path
+  scorecard_data = pd.read_csv(os.path.join(APP_FOLDER,cleaned_all))
+  cols = scorecard_data.columns.tolist()
+
+  col_types = []
+  for i, type in enumerate(scorecard_data.dtypes):
+    data_type = "string"
+    if type == np.float64 or type == np.int64:
+      data_type = "numeric"
+    col_types.append(data_type)
+
+  dict = {'name': cols, 'type': col_types}
+  columns = pd.DataFrame(dict)
+
+  # show the post with the given id, the id is an integer
+  return columns.to_json(orient='records')
+
+@app.route("/getData")
+def getData():
+  fieldsArg = request.args.get('fields', '');
+  fields = fieldsArg.split(",")
+
+  scorecard_data = pd.read_csv(os.path.join(APP_FOLDER,cleaned_all))
+
+  # dropping ALL duplicate values
+  scorecard_data.drop_duplicates(subset = "name", keep = False, inplace = True)
+
+
+  return scorecard_data[fields].to_json(orient='records')
+
+
+
+
+@app.route("/getMetricFields")
+def getMetricFields():
     # Load the CSV file from the static folder, inside the current path
-    scorecard_data = pd.read_csv(os.path.join(APP_FOLDER,"static/data/college_scorecard_merged.csv"))
+    scorecard_data = pd.read_csv(os.path.join(APP_FOLDER,metric_all))
     cols = scorecard_data.columns.tolist()
 
     col_types = []
@@ -47,12 +84,12 @@ def getFields():
     # show the post with the given id, the id is an integer
     return columns.to_json(orient='records')
 
-@app.route("/getData")
-def getData():
+@app.route("/getMetricData")
+def getMetricData():
   fieldsArg = request.args.get('fields', '');
   fields = fieldsArg.split(",")
 
-  scorecard_data = pd.read_csv(os.path.join(APP_FOLDER,"static/data/college_scorecard_merged.csv"))
+  scorecard_data = pd.read_csv(os.path.join(APP_FOLDER,metric_all))
 
   # dropping ALL duplicate values
   scorecard_data.drop_duplicates(subset = "name", keep = False, inplace = True)
@@ -74,8 +111,8 @@ def getDegreesOffered():
     degrees_offered = pd.read_csv(os.path.join(APP_FOLDER,fileName)) 
     return degrees_offered.to_json(orient="values")
 
-@app.route("/getDataDictionary")
-def getDataDictionary():
+@app.route("/getMetricDataDictionary")
+def getMetricDataDictionary():
     fileName = "static/data/data_dictionary.csv"
     data_dictionary = pd.read_csv(os.path.join(APP_FOLDER,fileName)) 
     return data_dictionary.to_json(orient="records")

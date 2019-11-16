@@ -209,7 +209,7 @@ class Search {
         })
         $(self.programSelector).multiselect('dataprovider', options);
 
-        promiseGetData(self.fieldNames)
+        promiseMetricGetData(self.fieldNames)
         .then(function(colleges) {
           self.allColleges = colleges.sort(function(a,b) {
             return a.name.localeCompare(b.name);

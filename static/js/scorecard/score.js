@@ -126,7 +126,7 @@ function promiseShowRankings(selectedCollegeNames) {
 
 function promiseGetCollegeData(selectedCollegeNames, fieldNames) {
   return new Promise(function(resolve, reject) {
-    promiseGetData(fieldNames)
+    promiseMetricGetData(fieldNames)
     .then(function(data) {
 
       let selectedColleges = [];
@@ -199,7 +199,7 @@ function promiseShowHistograms() {
         })
     })
 
-    promiseGetData(fieldNames)
+    promiseMetricGetData(fieldNames)
     .then(function(data) {
 
 
@@ -368,7 +368,7 @@ function highlightHistogram(collegeName, field) {
 }
 
 function getMetricFields() {
-  d3.json("getDataDictionary",
+  d3.json("getMetricDataDictionary",
   function(err, data) {
     if (err) {
       console.log(err)

@@ -1,4 +1,4 @@
-let defaultFieldNames = [
+let defaultMetricFieldNames = [
   "name",
   "admission_rate overall",
   "act_scores midpoint cumulative",
@@ -28,14 +28,35 @@ function promiseGetData(fieldNames) {
     if (fieldNames.length == 0) {
       resolve([])
     } else {
-      defaultFieldNames.forEach(function(defaultFieldName) {
+
+
+      d3.json("getData?fields=" + fieldNames.join(","),
+      function (err, data) {
+        if (err) {
+          console.log(err)
+          reject(err)
+        }
+        resolve(data)
+      })
+    }
+  })
+
+}
+
+function promiseMetricGetData(fieldNames) {
+  return new Promise(function(resolve, reject) {
+
+    if (fieldNames.length == 0) {
+      resolve([])
+    } else {
+      defaultMetricFieldNames.forEach(function(defaultFieldName) {
         if (fieldNames.indexOf(defaultFieldName) < 0) {
           fieldNames.push(defaultFieldName);
         }
 
       })
 
-      d3.json("getData?fields=" + fieldNames.join(","),
+      d3.json("getMetricData?fields=" + fieldNames.join(","),
       function (err, data) {
         if (err) {
           console.log(err)
@@ -60,7 +81,7 @@ function getInfoFields(info) {
 
 
 function showScatterplot(info) {
-  promiseGetData(getInfoFields(info))
+  promiseMetricGetData(getInfoFields(info))
   .then(function(data) {
 
     let filteredColleges = info.filterFunction ? data.filter(info.filterFunction) : data;
