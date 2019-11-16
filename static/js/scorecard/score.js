@@ -14,7 +14,7 @@ let rankColWidth = 70;
 let rankColWidthTotal = 100;
 let rankColWidthScore = 50;
 let rankNameWidth = 260;
-let rankMaxNameLength = 50;
+let rankMaxNameLength = 40;
 let rankCategoryPadding = 0;
 
 let slidebarClicks = 0;
@@ -68,6 +68,8 @@ function init() {
     showCollegeDetail(college)
   })
 
+  d3.select('#loading').style("display", "initial")
+
   search = new Search();
   search.promiseInit()
   .then(function() {
@@ -92,19 +94,23 @@ function formatRankColumnHeader(d) {
 }
 
 function rankColleges() {
+  d3.select('#loading').style("display", "initial")
   search.close();
   
   d3.selectAll("#filter-badges badge").remove();
   d3.select("#filter-badges").html(search.getBadges())
 
   promiseShowHistograms();
-  promiseShowRankings(getSelectedCollegeNames());
+  promiseShowRankings(getSelectedCollegeNames())
+  .then(function() {
+      d3.select('#loading').style("display", "none")
+  })
 }
 
 function promiseShowRankings(selectedCollegeNames) {
 
 
-  promiseGetCollegeData(selectedCollegeNames, getSelectedFieldNames())
+  return promiseGetCollegeData(selectedCollegeNames, getSelectedFieldNames())
   .then(function(selectedCollegeData) {
 
     let selection = d3.select("#rank-chart");
