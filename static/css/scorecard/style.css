@@ -205,6 +205,20 @@ button.multiselect.btn-default.active,
   font-size: 14px;
 }
 
+#hist-chart span.hint {
+  display: inline-block;
+  margin-left: -190px;
+  width: 190px;
+  line-height: 13px;
+  height: 20px;
+  background-color: #fbf9df;
+  border: solid thin #efce73;
+  padding: 2px;
+  margin-top: 30px;
+  font-size: 12px;  
+  margin-right: 10px;
+}
+
 #rank-chart.chart-container {
   overflow-x: unset;
   overflow-y: scroll;
@@ -242,15 +256,14 @@ button.multiselect.btn-default.active,
 }
 
 .rankchart text.hint-header {
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 12px;
   text-anchor: start;
   fill: #717171;
 }
 
 .rankchart rect.hint-header {
-  fill:   #fffbce;
-  stroke: #eab729;  
+  fill: #fbf9df;
+  stroke: #efce73;
 }
 
 .rankchart .row text {

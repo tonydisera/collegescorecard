@@ -20,6 +20,7 @@ let defaultFieldNames = [
   "10_yrs_after_entry working_not_enrolled mean_earnings",
   "act_scores midpoint cumulative"
 ]
+let currentCollege = null;
 
 function promiseGetData(fieldNames) {
   return new Promise(function(resolve, reject) {
@@ -166,34 +167,46 @@ function promiseGetDegreesOffered() {
 }
 
 function showCollegeDetail(college) {
-  $('#college-detail #name').text(college.name)
-  $('#college-detail #admission-rate').text(college["admission_rate overall"])
-  $('#college-detail #act-midpoint').text(college["act_scores midpoint cumulative"])
-  $('#college-detail #act-75pctl').text(college["act_scores 75th_percentile cumulative"])
-  $('#college-detail #faculty-salary').text(college["faculty_salary"])
-  $('#college-detail #full-time-faculty-ratio').text(college["ft_faculty_rate"])
-  $('#college-detail #instructional-cost-per-fte').text(college["instructional_expenditure_per_fte"])
-  $('#college-detail #diversity-pct-black').text(college["demographics race_ethnicity black"])
-  $('#college-detail #diversity-pct-hispanic').text(college["demographics race_ethnicity hispanic"])
-  $('#college-detail #diversity-pct-asian').text(college["demographics race_ethnicity asian"])
-  $('#college-detail #median-hh-income').text(college["demographics median_family_income"])
-  $('#college-detail #tuition-in-state').text(college["tuition in_state"])
-  $('#college-detail #tuition-out-of-state').text(college["tuition out_of_state"])
-  $('#college-detail #cost').text(college["cost attendance academic_year"])
-  $('#college-detail #median-debt').text(college["median_debt_suppressed overall"])
-  $('#college-detail #completion-rate').text(college["completion_rate_4yr_150nt"])
-  $('#college-detail #retention-rate').text(college["retention_rate four_year full_time"])
-  $('#college-detail #median-salary-6-yrs').text(college["6_yrs_after_entry median"])
-  $('#college-detail #median-salary-10-yrs').text(college["10_yrs_after_entry working_not_enrolled mean_earnings"])
+  if (college == currentCollege && ($("#college-detail.sb-active").length == 1)) {
+    currentCollege = null;
+    setTimeout(function() {
+      $("#slide-right-button").click();      
 
-  setTimeout(function(){
-    
-    if ($("#college-detail.sb-active").length == 0) {
-      $("#slide-right-button").click();                
-    }
+    })
 
-  },1);
+  } else {
+    currentCollege = college;
 
+    $('#college-detail #name').text(college.name)
+    $('#college-detail #admission-rate').text(college["admission_rate overall"])
+    $('#college-detail #act-midpoint').text(college["act_scores midpoint cumulative"])
+    $('#college-detail #act-75pctl').text(college["act_scores 75th_percentile cumulative"])
+    $('#college-detail #faculty-salary').text(college["faculty_salary"])
+    $('#college-detail #full-time-faculty-ratio').text(college["ft_faculty_rate"])
+    $('#college-detail #instructional-cost-per-fte').text(college["instructional_expenditure_per_fte"])
+    $('#college-detail #diversity-pct-black').text(college["demographics race_ethnicity black"])
+    $('#college-detail #diversity-pct-hispanic').text(college["demographics race_ethnicity hispanic"])
+    $('#college-detail #diversity-pct-asian').text(college["demographics race_ethnicity asian"])
+    $('#college-detail #median-hh-income').text(college["demographics median_family_income"])
+    $('#college-detail #tuition-in-state').text(college["tuition in_state"])
+    $('#college-detail #tuition-out-of-state').text(college["tuition out_of_state"])
+    $('#college-detail #cost').text(college["cost attendance academic_year"])
+    $('#college-detail #median-debt').text(college["median_debt_suppressed overall"])
+    $('#college-detail #completion-rate').text(college["completion_rate_4yr_150nt"])
+    $('#college-detail #retention-rate').text(college["retention_rate four_year full_time"])
+    $('#college-detail #median-salary-6-yrs').text(college["6_yrs_after_entry median"])
+    $('#college-detail #median-salary-10-yrs').text(college["10_yrs_after_entry working_not_enrolled mean_earnings"])
+
+    setTimeout(function(){
+      
+      if ($("#college-detail.sb-active").length == 0) {
+        $("#slide-right-button").click();                
+      }
+
+    },1);
+
+  }
+  
 
 
 }

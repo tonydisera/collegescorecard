@@ -370,18 +370,37 @@ function rankchart() {
         .attr("class", "col-header-row")
 
 
-      let hintGroup = headerRowEnter
+      let hintGroup1 = headerRowEnter
+        .append("g")
+        .attr("transform", "translate(0," + (headerHeight-weightHeight-20) + ")");
+
+      hintGroup1
+        .append("rect")
+        .attr("class", "hint-header")
+        .attr("x", 0)
+        .attr("y", -13)
+        .attr("width", colWidth + 33 + colPadding + colWidthScore)
+        .attr("height", 20)
+      hintGroup1
+        .append("text")
+        .attr("class", "hint-header")
+        .attr("x", 3)
+        .attr("y", 0)
+        .text("Hover or click on college")
+
+
+      let hintGroup2 = headerRowEnter
         .append("g")
         .attr("transform", "translate(" + (nameWidth + colPadding + colWidthTotal + colPadding + colWidthScore + colPadding - 160 - colPadding) + "," + (headerHeight-weightHeight-20) + ")");
 
-      hintGroup
+      hintGroup2
         .append("rect")
         .attr("class", "hint-header")
         .attr("x", 0)
         .attr("y", -13)
         .attr("width", 160)
         .attr("height", 20)
-      hintGroup
+      hintGroup2
         .append("text")
         .attr("class", "hint-header")
         .attr("x", 3)

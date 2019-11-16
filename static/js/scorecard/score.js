@@ -20,6 +20,7 @@ let rankCategoryPadding = 0;
 let slidebarClicks = 0;
 
 
+
 $(document).ready(function() {
 
   init();  
@@ -238,6 +239,8 @@ function promiseShowHistograms() {
         prevCategory = selectedField.category;
 
       })
+      d3.select(chartContainerSelector).select(".hint").style("display", "initial");
+
       resolve();
 
 
