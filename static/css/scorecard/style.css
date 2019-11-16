@@ -211,8 +211,8 @@ button.multiselect.btn-default.active,
   width: 190px;
   line-height: 13px;
   height: 20px;
-  background-color: #fbf9df;
-  border: solid thin #efce73;
+  background-color: #fffef0;
+  border: solid thin #f0d897;
   padding: 2px;
   margin-top: 30px;
   font-size: 12px;  
@@ -240,12 +240,14 @@ button.multiselect.btn-default.active,
   stroke: black;
   stroke-width: 1px;
   cursor: pointer;
+  opacity: .8;
 }
 
 .rankchart rect.bar-total {
   stroke: black;
   stroke-width: 1px;
   cursor: pointer;
+  opacity: .8;
 }
 
 .rankchart .row text {
@@ -262,8 +264,8 @@ button.multiselect.btn-default.active,
 }
 
 .rankchart rect.hint-header {
-  fill: #fbf9df;
-  stroke: #efce73;
+  fill: #fffef0;
+  stroke: #f0d897;
 }
 
 .rankchart .row text {
