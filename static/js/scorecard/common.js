@@ -81,7 +81,7 @@ function getInfoFields(info) {
 
 
 function showScatterplot(info) {
-  promiseMetricGetData(getInfoFields(info))
+  promiseGetData(getInfoFields(info))
   .then(function(data) {
 
     let filteredColleges = info.filterFunction ? data.filter(info.filterFunction) : data;
@@ -95,7 +95,11 @@ function showScatterplot(info) {
         return d[info.x.field];
       })
       .yValue(function(d) {
-        return d[info.y.field];
+        if (d[info.y.field] == 'PrivacySuppressed') {
+          return null;
+        } else {
+          return d[info.y.field];        
+        }
       })
       .colorValue(function(d) {
         return d[info.color.field];
