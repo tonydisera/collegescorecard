@@ -99,6 +99,7 @@ function rankColleges() {
   
   d3.selectAll("#filter-badges badge").remove();
   d3.select("#filter-badges").html(search.getBadges())
+  d3.select(".selections #college-count").text(getSelectedCollegeNames().length + " colleges")
 
   promiseShowHistograms();
   promiseShowRankings(getSelectedCollegeNames())

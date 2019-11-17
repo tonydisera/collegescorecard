@@ -370,46 +370,6 @@ function rankchart() {
         .attr("class", "col-header-row")
 
 
-      let hintGroup1 = headerRowEnter
-        .append("g")
-        .attr("transform", "translate(0," + (headerHeight-weightHeight-20) + ")");
-
-      hintGroup1
-        .append("rect")
-        .attr("class", "hint-header")
-        .attr("x", 0)
-        .attr("y", -13)
-        .attr("width", colWidth + 33 + colPadding + colWidthScore)
-        .attr("height", 20)
-      hintGroup1
-        .append("text")
-        .attr("class", "hint-header")
-        .attr("x", 3)
-        .attr("y", 0)
-        .text("Hover or click on college")
-
-
-      let hintGroup2 = headerRowEnter
-        .append("g")
-        .attr("transform", "translate(" + (nameWidth + colPadding + colWidthTotal + colPadding + colWidthScore + colPadding - 160 - colPadding) + "," + (headerHeight-weightHeight-20) + ")");
-
-      hintGroup2
-        .append("rect")
-        .attr("class", "hint-header")
-        .attr("x", 0)
-        .attr("y", -13)
-        .attr("width", 160)
-        .attr("height", 20)
-      hintGroup2
-        .append("text")
-        .attr("class", "hint-header")
-        .attr("x", 3)
-        .attr("y", 0)
-        .text("Click to adjust weights >")
-
-
-  
-
 
       var colHeaders = headerRow
         .merge(headerRowEnter)
@@ -424,21 +384,21 @@ function rankchart() {
         .append("text")
         .attr("class", "col-header")
         .attr("x", 0)
-        .attr("y", 0)
+        .attr("y", weightHeight+30)
         .text("rank")
 
       headerRowEnter
         .append("text")
         .attr("class", "col-header")
         .attr("x", 33)
-        .attr("y", 0)
+        .attr("y", weightHeight+30)
         .text("name")
 
       headerRowEnter
         .append("text")
         .attr("class", "col-header")
         .attr("x", 33+nameWidth)
-        .attr("y", 0)
+        .attr("y", weightHeight+30)
         .text("score")      
 
 
@@ -450,7 +410,10 @@ function rankchart() {
           return "translate(" + field.colX + ",0)";
         })
 
-      colHeadersEnter
+      let colHeadersText = colHeadersEnter
+        .append("g")
+        .attr("transform", "translate(0," +  (weightHeight+30) + ")")
+      colHeadersText  
         .append("text")
         .attr("dx", 0)
         .attr("dy", 0)
@@ -470,7 +433,7 @@ function rankchart() {
       let weightGroupEnter = weightGroup
         .enter()
         .append("g")
-        .attr("transform", "translate(0," + (headerHeight-(weightHeight)-30) + ")")
+        .attr("transform", "translate(0," + ((weightHeight/2)*-1) + ")")
         .attr("class", "weights")
 
       let weightRectEnter = weightGroupEnter.selectAll("rect.weight")
@@ -516,6 +479,43 @@ function rankchart() {
           onRescale()
 
         })
+
+      let hintGroup1 = headerRowEnter
+        .append("g")
+        .attr("transform", "translate(0," + (headerHeight-20) + ")");
+
+      hintGroup1
+        .append("rect")
+        .attr("class", "hint-header")
+        .attr("x", 0)
+        .attr("y", -13)
+        .attr("width", colWidth + 33 + colPadding + colWidthScore)
+        .attr("height", 20)
+      hintGroup1
+        .append("text")
+        .attr("class", "hint-header")
+        .attr("x", 3)
+        .attr("y", 0)
+        .text("Hover or click on college")
+
+
+      let hintGroup2 = headerRowEnter
+        .append("g")
+        .attr("transform", "translate(" + (nameWidth + colPadding + colWidthTotal + colPadding + colWidthScore + colPadding - 160 - colPadding) + "," + (((weightHeight/2)*-1)+12) + ")");
+
+      hintGroup2
+        .append("rect")
+        .attr("class", "hint-header")
+        .attr("x", 0)
+        .attr("y", -13)
+        .attr("width", 160)
+        .attr("height", 20)
+      hintGroup2
+        .append("text")
+        .attr("class", "hint-header")
+        .attr("x", 3)
+        .attr("y", 0)
+        .text("Click to adjust weights >")
 
   }
 
