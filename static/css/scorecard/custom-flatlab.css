@@ -27,6 +27,10 @@ ul.sidebar-menu li ul.sub li a {
 	padding-bottom: 5px;
 }
 
+.p-task li:last-child {
+    padding: 5px 15px 5px 15px;
+}
+
 .sb-slidebar .side-title {
 	padding-bottom: 0px;
     margin-bottom: 0px;
