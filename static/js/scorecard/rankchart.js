@@ -33,6 +33,7 @@ function rankchart() {
   var rowTextHeight   = 10;
   var colWidthScore = 50;
   var maxNameLength = 50;
+  var rankColWidth = 40;
 
   var inverseBarMin = 2;
 
@@ -217,7 +218,7 @@ function rankchart() {
 
       rowsEnter
         .append("g")
-        .attr("transform", "translate(33,0)")
+        .attr("transform", "translate(" + rankColWidth + ",0)")
         .append("text")
         .attr("y", (rowTextHeight/2))
         .attr("dx", 0)
@@ -241,7 +242,7 @@ function rankchart() {
         })
 
       rowsEnter.append("g")
-        .attr("transform", "translate(" + (nameWidth+33) + ",0)")
+        .attr("transform", "translate(" + (nameWidth+rankColWidth) + ",0)")
         .append("text")
         .attr("x", 0)
         .attr("y", 5)
@@ -385,21 +386,21 @@ function rankchart() {
         .attr("class", "col-header")
         .attr("x", 0)
         .attr("y", weightHeight+30)
-        .text("rank")
+        .text("Rank")
 
       headerRowEnter
         .append("text")
         .attr("class", "col-header")
-        .attr("x", 33)
+        .attr("x", rankColWidth)
         .attr("y", weightHeight+30)
-        .text("name")
+        .text("College")
 
       headerRowEnter
         .append("text")
         .attr("class", "col-header")
-        .attr("x", 33+nameWidth)
+        .attr("x", rankColWidth+nameWidth)
         .attr("y", weightHeight+30)
-        .text("score")      
+        .text("Score")      
 
 
       var colHeadersEnter = colHeaders
@@ -480,37 +481,20 @@ function rankchart() {
 
         })
 
-      let hintGroup1 = headerRowEnter
-        .append("g")
-        .attr("transform", "translate(0," + (headerHeight-20) + ")");
-
-      hintGroup1
-        .append("rect")
-        .attr("class", "hint-header")
-        .attr("x", 0)
-        .attr("y", -13)
-        .attr("width", colWidth + 33 + colPadding + colWidthScore)
-        .attr("height", 20)
-      hintGroup1
-        .append("text")
-        .attr("class", "hint-header")
-        .attr("x", 3)
-        .attr("y", 0)
-        .text("Hover or click on college")
 
 
-      let hintGroup2 = headerRowEnter
+      let hintGroup = headerRowEnter
         .append("g")
         .attr("transform", "translate(" + (nameWidth + colPadding + colWidthTotal + colPadding + colWidthScore + colPadding - 160 - colPadding) + "," + (((weightHeight/2)*-1)+12) + ")");
 
-      hintGroup2
+      hintGroup
         .append("rect")
         .attr("class", "hint-header")
         .attr("x", 0)
         .attr("y", -13)
         .attr("width", 160)
         .attr("height", 20)
-      hintGroup2
+      hintGroup
         .append("text")
         .attr("class", "hint-header")
         .attr("x", 3)
@@ -518,6 +502,8 @@ function rankchart() {
         .text("Click to adjust weights >")
 
   }
+
+
 
   var initFieldDescriptors = function() {
     totalCategoryPadding = 0;

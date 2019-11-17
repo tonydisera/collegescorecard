@@ -113,7 +113,7 @@
  
             <div class="row state-overview custom">
 
-              <div class="col-lg-4 col-sm-6">
+              <div class="col-lg-3 col-sm-6">
                 <section class="card">
                     <div class="symbol navy">
                         <i class="fa fa-sort-amount-desc"></i>
@@ -143,17 +143,27 @@
                     <div class="selections" >
 
                       <div id="scorecard-select-container">
-                        <span style="padding-right:4px">Metrics</span>
+                        <span class="step-circle">1.</span>
+                        <span style="padding-right:4px">Pick Metrics</span>
                         <select id="scorecard-select" multiple="multiple">
                         </select>
                       </div>
 
-                      <button id="search-colleges-button" type="button" class="btn btn-info " data-toggle="modal" data-target="#search-dialog"> Search Colleges</button>
+                      <div style="display:flex;max-width: 510px;">
+                        <span class="step-circle">2.</span>
+                        <button id="search-colleges-button" type="button" class="btn btn-info " data-toggle="modal" data-target="#search-dialog"> Search Colleges</button>
 
-                      <div id="filter-badges">
+                        <span id="college-count" class="badge primary-badge"></span>
+
+                        <div id="filter-badges">
+                        </div>
                       </div>
 
-                      <span id="college-count" class="badge primary-badge"></span>
+                      <div style="display:flex">
+                        <span class="step-circle">3.</span>
+                        <span class="step-instructions">Hover over college to activate gauges, click to see detail</span>
+                      </div>
+
                     </div>
 
                     <center >

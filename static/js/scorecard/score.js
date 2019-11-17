@@ -79,6 +79,11 @@ function init() {
 
 }
 
+var capitalize = function(theString) {
+  return theString.charAt(0).toUpperCase() + 
+         theString.slice(1)
+}
+
 function formatRankColumnHeader(d) {
   if ( d == "_total") {
       return ""
@@ -86,9 +91,9 @@ function formatRankColumnHeader(d) {
     let hdr = d.split("_").join(" ");
     let tokens = hdr.split("demographics ");
     if (tokens.length > 1) {
-      return tokens[1];
+      return capitalize(tokens[1]);
     } else {
-      return hdr;
+      return capitalize(hdr);
     }
   }
 }
@@ -159,7 +164,7 @@ function promiseShowHistograms() {
 
     let fieldDescriptors = getSelectedMetricFields();
     let categories = []
-    categories.push({category: 'overall', width: rankColWidthTotal })
+    
     let category = null;
     fieldDescriptors.forEach(function(field,i) {
       if (i == 0 || field.category != fieldDescriptors[i-1].category) {
@@ -177,7 +182,7 @@ function promiseShowHistograms() {
 
     let headerContainerSelector  = "#hist-chart-categories"
     let headerSelector  = "#hist-chart-categories .category-header"
-    d3.select(headerContainerSelector).style("margin-left", (rankNameWidth+rankColPadding+rankColWidthScore) + "px");
+    d3.select(headerContainerSelector).style("margin-left", (rankNameWidth+rankColPadding+rankColWidthScore+rankColPadding+rankColWidthTotal) + "px");
     d3.selectAll(headerSelector).remove();
 
 
@@ -189,14 +194,14 @@ function promiseShowHistograms() {
           return cat.width + "px";
         })
         .style("margin-left", function() {
-          if (i > 0 && i < categories.length - 1) {
-            return rankCategoryPadding+rankColPadding + "px";            
-          } else {
+          if (i > 0) {
+            return rankCategoryPadding+rankColPadding + "px";  
+          }  else {
             return "0px"
-          }
+          }         
         })
         .text(function(d,i) {
-          return cat.category
+          return capitalize(cat.category);
         })
     })
 
