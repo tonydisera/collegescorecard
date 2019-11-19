@@ -284,6 +284,25 @@ button.multiselect.btn-default.active,
   fill: #a5a2a2;
 }
 
+.rankchart .delta path.up {
+  fill: #b3e13d;
+  stroke: #5a7a05;
+}
+.rankchart .delta text.up {
+  font-size: 11px;
+  fill: #328216;
+  font-weight: 600;
+}
+.rankchart .delta path.down {
+  fill: #df9e9e;
+  stroke: #8e4a4a;
+}
+.rankchart .delta text.down {
+  font-size: 11px;
+  fill: #8e4a4a;
+  font-weight: 600;
+}
+
 .rankchart rect.bar {
   stroke: black;
   stroke-width: 1px;

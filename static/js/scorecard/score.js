@@ -12,8 +12,9 @@ let rankBarHeight = 15;
 let rankColPadding = 10;
 let rankColWidth = 70;
 let rankColWidthTotal = 100;
-let rankColWidthScore = 50;
+let rankColWidthScore = 10;
 let rankNameWidth = 260;
+let rankColWidthRank = 60;
 let rankMaxNameLength = 40;
 let rankCategoryPadding = 0;
 
@@ -41,16 +42,17 @@ function init() {
   rankChart.colWidth(rankColWidth);
   rankChart.colWidthTotal(rankColWidthTotal);
   rankChart.nameWidth(rankNameWidth);
+  rankChart.colWidthRank(rankColWidthRank);
   rankChart.maxNameLength(rankMaxNameLength);
   rankChart.categoryPadding(rankCategoryPadding)
   rankChart.colWidthScore(rankColWidthScore)
   rankChart.formatColumnHeader(function(d,i) {
     return formatRankColumnHeader(d)
   })
-  rankChart.onRescale(function() {
+  rankChart.onRescale(function(data) {
     rankChart.initFieldDescriptors()()
     promiseShowHistograms();
-    promiseShowRankings(getSelectedCollegeNames());
+    showRescaledRankings(data)
   })
   rankChart.onHover(function(record) {
     highlightHistogram(record.name, record.field)
@@ -130,6 +132,17 @@ function promiseShowRankings(selectedCollegeNames) {
 
 }
 
+function showRescaledRankings(data) {
+
+
+  let selection = d3.select("#rank-chart");
+  rankChart.fieldDescriptors(getSelectedMetricFields())
+  selection.datum(data);
+  rankChart(selection, d3.select("#rank-chart-heading"));
+
+
+}
+
 function promiseGetCollegeData(selectedCollegeNames, fieldNames) {
   return new Promise(function(resolve, reject) {
     promiseMetricGetData(fieldNames)
@@ -182,7 +195,7 @@ function promiseShowHistograms() {
 
     let headerContainerSelector  = "#hist-chart-categories"
     let headerSelector  = "#hist-chart-categories .category-header"
-    d3.select(headerContainerSelector).style("margin-left", (rankNameWidth+rankColPadding+rankColWidthScore+rankColPadding+rankColWidthTotal) + "px");
+    d3.select(headerContainerSelector).style("margin-left", (rankColWidthRank+rankNameWidth+rankColPadding+rankColWidthScore+rankColPadding+rankColWidthTotal) + "px");
     d3.selectAll(headerSelector).remove();
 
 
@@ -211,7 +224,7 @@ function promiseShowHistograms() {
 
 
       let chartContainerSelector  = "#hist-chart"
-      d3.select(chartContainerSelector).style("margin-left", (rankNameWidth+rankColPadding+rankColWidthScore+rankColPadding+rankColWidthTotal+rankColPadding) + "px");
+      d3.select(chartContainerSelector).style("margin-left", (rankColWidthRank + rankNameWidth+rankColPadding+rankColWidthScore+rankColPadding+rankColWidthTotal+rankColPadding) + "px");
 
 
       let chartSelector           = "#hist-chart .hist"

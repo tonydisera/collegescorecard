@@ -11,6 +11,7 @@ function rankchart() {
     return d.name + "<br>" + d.field.name + ": " + d.value
   }
 
+
   var fieldDescriptors = [];
   var totalField = null;
   var totalCategoryPadding = 0;
@@ -24,6 +25,8 @@ function rankchart() {
   var headerHeight  = 70;
   var rowHeight     = 40;
   var barHeight     = 15;
+  var colWidthScore = 20;
+  var colWidthRank  = 60;
   var colWidth      = 80;
   var colWidthTotal = 300;
   var colPadding    = 10;
@@ -31,13 +34,11 @@ function rankchart() {
   var categoryPadding = 30;
   var weightHeight    = 14;
   var rowTextHeight   = 10;
-  var colWidthScore = 50;
   var maxNameLength = 50;
-  var rankColWidth = 40;
 
   var inverseBarMin = 2;
 
-  let onRescale = function() {
+  let onRescale = function(data) {
 
   }
 
@@ -194,7 +195,7 @@ function rankchart() {
       function(d,i) {
         //return d.name + "-" + i + "-" + totalColWidth + "-" + totalCategoryPadding;
         //return d.name + "-" + i + "-" + scaleForScore(d._total);
-        return d.name + "-" + i;
+        return d.name + "-" + i + "-" + d.position;
       });
 
       rows.exit().remove();
@@ -203,23 +204,29 @@ function rankchart() {
         .append('g')
         .attr('class', 'row')
         .attr('transform',function(record,i){ 
-           return "translate(0," + ((rowHeight * record.position) ) + ")";
+            let position = record.firstPass ? record.positionOrig : record.position;
+            return "translate(0," + ((rowHeight * position) ) + ")";
          })
        
 
       rowsEnter
         .append("text")
+        .attr("class", "rank")
         .attr("y", (rowTextHeight/2))
         .attr("dx", 0)
         .attr("dy", 0)
         .text(function (d,i) {
-          return i+1 
+          return (i+1);
         })
+      rowsEnter
+        .append("g")
+        .attr("class", "delta")
+        .attr("transform", "translate(" + (colWidthRank/2) + "," + (rowTextHeight/2) + ")")
        
 
       rowsEnter
         .append("g")
-        .attr("transform", "translate(" + rankColWidth + ",0)")
+        .attr("transform", "translate(" + colWidthRank + ",0)")
         .append("text")
         .attr("y", (rowTextHeight/2))
         .attr("dx", 0)
@@ -243,7 +250,7 @@ function rankchart() {
         })
 
       rowsEnter.append("g")
-        .attr("transform", "translate(" + (nameWidth+rankColWidth) + ",0)")
+        .attr("transform", "translate(" + (nameWidth+colWidthRank) + ",0)")
         .append("text")
         .attr("class", "score")
         .attr("x", 0)
@@ -394,14 +401,14 @@ function rankchart() {
       headerRowEnter
         .append("text")
         .attr("class", "col-header")
-        .attr("x", rankColWidth)
+        .attr("x", colWidthRank)
         .attr("y", weightHeight+30)
         .text("College")
 
       headerRowEnter
         .append("text")
         .attr("class", "col-header")
-        .attr("x", rankColWidth+nameWidth)
+        .attr("x", colWidthRank+nameWidth)
         .attr("y", weightHeight+30)
         .text("Score")      
 
@@ -480,7 +487,7 @@ function rankchart() {
 
           })
 
-          onRescale()
+          onRescale(data)
 
         })
 
@@ -539,7 +546,8 @@ function rankchart() {
       field.currentWeight = field.currentWeight ? field.currentWeight : 1;
       field.width = field.name == "_total" ? colWidthTotal : colWidth*field.currentWeight;
 
-      field.colX = nameWidth + colPadding + colWidthScore + colPadding + field.paddingCumulative + totalColWidth;
+      field.colX =  colWidthRank + nameWidth + colPadding + colWidthScore + colPadding 
+                    + field.paddingCumulative + totalColWidth;
 
       totalColWidth += field.width;
       totalColWidth += colPadding;
@@ -598,14 +606,49 @@ function rankchart() {
       })
       d._total = total;
     })
-    
+
+
+    // Set flag if we haven't ranked this data before
+    data.forEach(function(record, i) {
+      if (record.delta == null) {
+        record.firstPass = true;
+      } else {
+        record.firstPass = false;
+      }
+    })
+
+
+    // Store the position before the entries were ranked 
+    data.forEach(function(record, i) {
+      if (record.firstPass) {
+        record.positionOrig = i;
+      }
+    })
+
 
     // Sort the rows according to the overall score
-    data.forEach(function(record, i) {
-      record.position = i;
-    })
     data = data.sort(function(a,b) {
       return d3.descending(a._total, b._total);
+    })
+
+
+    // Store the position for the first
+    // time the entries are ranked
+    data.forEach(function(record, i) {
+      if (record.firstPass) {
+        record.position = i;
+      }
+    })
+
+
+    // Capture the different in ranking between the initial ranking
+    // and the current ranking 
+    data.forEach(function(rec,i) {
+      if (rec.firstPass) {
+        rec.delta = 0;
+      } else {
+        rec.delta = i - rec.position;
+      }
     })
 
     
@@ -620,6 +663,55 @@ function rankchart() {
 
   var addTotalBars = function() {
 
+
+    var symbolGenerator = d3.symbol()
+      .size(30).type(d3.symbolTriangle)
+
+
+    container.selectAll("g.delta")
+    .each(function(d,i) {
+      let deltaGroup = d3.select(this)
+      let record = data[i];
+      deltaGroup.select("path").remove();
+      deltaGroup.select("text").remove();
+      if (record.delta !=  0) {
+        deltaGroup
+          .append('path')
+          .attr("transform", function() {
+            if (record.delta > 0) {
+              return "rotate(180),translate(0,4)"
+            } else {
+              return "translate(0,-2)"
+            }
+          })
+          .attr("class", function() {
+            if (record.delta > 0) {
+              return "down"
+            } else if (record.delta < 0) {
+              return "up"
+            } else {
+              return "";
+            }
+          })
+          .attr('d', function(d) {
+            return symbolGenerator(); 
+          })
+        deltaGroup
+          .append("text")
+          .attr("class", function() {
+            if (record.delta > 0) {
+              return "down"
+            } else if (record.delta < 0) {
+              return "up"
+            } else {
+              return "";
+            }
+          })          
+          .attr("x", 5)
+          .attr("y", 0)
+          .text(Math.abs(record.delta))
+      }
+    })
 
     container.selectAll("text.score")
     .each(function(d,i) {
@@ -925,6 +1017,11 @@ function rankchart() {
   chart.colWidthScore = function(_) {
     if (!arguments.length) return colWidthScore;
     colWidthScore = _;
+    return chart;
+  }
+  chart.colWidthRank = function(_) {
+    if (!arguments.length) return colWidthRank;
+    colWidthRank = _;
     return chart;
   }
   chart.maxNameLength = function(_) {
