@@ -149,9 +149,9 @@
                         </select>
                       </div>
 
-                      <div style="display:flex;max-width: 510px;">
+                      <div id="search-colleges-container">
                         <span class="step-circle">2.</span>
-                        <button id="search-colleges-button" type="button" class="btn btn-info " data-toggle="modal" data-target="#search-dialog"> Search Colleges</button>
+                        <button id="search-colleges-button" type="button" class="btn btn-info " data-toggle="modal" data-target="#search-dialog"> Pick Colleges</button>
 
                         <span id="college-count" class="badge primary-badge"></span>
 
@@ -159,9 +159,14 @@
                         </div>
                       </div>
 
-                      <div style="display:flex">
+                      <div style="display:flex;margin-right:20px">
                         <span class="step-circle">3.</span>
                         <span class="step-instructions">Hover over college to activate gauges, click to see detail</span>
+                      </div>
+
+                      <div style="display:flex">
+                        <span class="step-circle">4.</span>
+                        <span class="step-instructions">Click on weight square to adjust importance of each metric</span>
                       </div>
 
                     </div>
@@ -174,7 +179,7 @@
                       <div id="hist-chart-categories">
                       </div>
                       <div id="hist-chart" class="chart-container">
-                        <span style="display:none" class="hint">Metrics, all colleges &gt;</span>
+                        <span style="display:none" class="hint">Metrics across all colleges</span>
                       </div>
 
                       <div id="rank-chart-heading"></div>

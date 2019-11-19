@@ -495,21 +495,14 @@ function rankchart() {
 
       let hintGroup = headerRowEnter
         .append("g")
-        .attr("transform", "translate(" + (nameWidth + colPadding + colWidthTotal + colPadding + colWidthScore + colPadding - 160 - colPadding) + "," + (((weightHeight/2)*-1)+12) + ")");
+        .attr("transform", "translate(" + (nameWidth + colWidthRank) + "," + (((weightHeight/2)*-1)+12) + ")");
 
-      hintGroup
-        .append("rect")
-        .attr("class", "hint-header")
-        .attr("x", 0)
-        .attr("y", -13)
-        .attr("width", 160)
-        .attr("height", 20)
       hintGroup
         .append("text")
         .attr("class", "hint-header")
-        .attr("x", 3)
+        .attr("x", 0)
         .attr("y", 0)
-        .text("Click to adjust weights >")
+        .text("Weight")
 
   }
 

@@ -28,7 +28,6 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
 }
 
 .selections #college-count {
-    margin-right: 5px;
     max-height: 20px;
     font-size: 15px;
     padding-top: 2px;
@@ -101,19 +100,24 @@ body .selections {
   margin-right: 10px;
   margin-left: 0px;
   font-size: 15px;
-  min-width: 340px;
-  max-width: 340px;
+  min-width: 280px;
+  max-width: 280px;
 }
 
 #search-colleges-button {
   margin-top: 0px;
-  margin-right: 15px;
+  margin-right: 5px;
   max-height: 30px;
   min-width: 150px;
   font-size: 15px;
   padding-top: 3px;
   background-color: white !important;
   color: #486db1;
+}
+
+.selections #search-colleges-container {
+  display: flex;
+  max-width: 450px;
 }
 
 .multiselect-container {
@@ -129,8 +133,8 @@ body .selections {
 }
 
 .step-instructions {
-  min-width: 120px;
-  max-width: 170px;
+  min-width: 90px;
+  max-width: 140px;
 }
 
 #filter-badges {
@@ -254,17 +258,14 @@ button.multiselect.btn-default.active,
 }
 
 #hist-chart span.hint {
-  display: inline-block;
-  margin-left: -150px;
-  margin-right: 10px;
-  min-width: 140px;
+  margin-left: -145px;
+  min-width: 145px;
   line-height: 13px;
   height: 20px;
-  background-color: #fffef0;
-  border: solid thin #f0d897;
   padding: 2px;
   margin-top: 30px;
-  font-size: 12px;  
+  font-size: 13px;
+  color: #585757;  
 }
 
 #rank-chart.chart-container {
@@ -325,15 +326,12 @@ button.multiselect.btn-default.active,
 }
 
 .rankchart text.hint-header {
-  font-size: 12px;
   text-anchor: start;
-  fill: #717171;
+  fill: #585757;
+  font-size: 13px;
+
 }
 
-.rankchart rect.hint-header {
-  fill: #fffef0;
-  stroke: #f0d897;
-}
 
 .rankchart .row text {
   cursor: pointer;
@@ -373,8 +371,10 @@ div.tooltip {
     border-radius: 50% !important;
     -webkit-border-radius: 50% !important;
     width: 35px;
+    min-width: 35px;
     height: 35px;
-    line-height: 35px;
+    min-height: 35px;
+    line-height: 32px;
     font-weight: 500;
     display: inline-block;
     text-align: center;
