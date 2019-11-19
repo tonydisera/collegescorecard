@@ -700,7 +700,7 @@ function rankchart() {
               return "";
             }
           })          
-          .attr("x", 5)
+          .attr("x", 7)
           .attr("y", 0)
           .text(Math.abs(record.delta))
       }

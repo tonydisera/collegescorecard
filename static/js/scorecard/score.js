@@ -10,12 +10,12 @@ let rankRowHeight = 24;
 let rankBarHeight = 15;
 
 let rankColPadding = 10;
-let rankColWidth = 70;
+let rankColWidth = 80;
 let rankColWidthTotal = 100;
 let rankColWidthScore = 10;
-let rankNameWidth = 260;
+let rankNameWidth = 275;
 let rankColWidthRank = 60;
-let rankMaxNameLength = 40;
+let rankMaxNameLength = 41;
 let rankCategoryPadding = 0;
 
 let slidebarClicks = 0;
