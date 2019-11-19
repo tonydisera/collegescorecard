@@ -193,7 +193,8 @@ function rankchart() {
       var rows = g.selectAll(".row").data(data,
       function(d,i) {
         //return d.name + "-" + i + "-" + totalColWidth + "-" + totalCategoryPadding;
-        return d.name + "-" + i + "-" + scaleForScore(d._total);
+        //return d.name + "-" + i + "-" + scaleForScore(d._total);
+        return d.name + "-" + i;
       });
 
       rows.exit().remove();
@@ -244,12 +245,13 @@ function rankchart() {
       rowsEnter.append("g")
         .attr("transform", "translate(" + (nameWidth+rankColWidth) + ",0)")
         .append("text")
+        .attr("class", "score")
         .attr("x", 0)
         .attr("y", 5)
         .text(function(record,i) {
           return Math.ceil(scaleForScore(record._total))
         })
-        
+
 
        
 
@@ -321,6 +323,7 @@ function rankchart() {
 
       // Add the stacked bar showing the overall score for each row
       addTotalBars()
+
 
       // Show the transitions, reordering the rows and shrinking/expanding
       // the column bars
@@ -601,7 +604,7 @@ function rankchart() {
     data.forEach(function(record, i) {
       record.position = i;
     })
-    data.sort(function(a,b) {
+    data = data.sort(function(a,b) {
       return d3.descending(a._total, b._total);
     })
 
@@ -618,6 +621,14 @@ function rankchart() {
   var addTotalBars = function() {
 
 
+    container.selectAll("text.score")
+    .each(function(d,i) {
+      let scoreElement = d3.select(this)
+      let record = data[i];
+      scoreElement.text(function() {
+        return Math.ceil(scaleForScore(record._total))
+      })
+    })
 
 
     // Add the overall bar (a stacked bar)
