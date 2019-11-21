@@ -332,6 +332,12 @@ button.multiselect.btn-default.active,
   fill: #585757;
 }
 
+.rankchart .col-header text tspan,
+.rankchart .row text.name {
+  font-size: 12px;
+  font-weight: 500;
+}
+
 .rankchart text.hint-header {
   text-anchor: start;
   fill: #585757;

@@ -228,6 +228,7 @@ function rankchart() {
         .append("g")
         .attr("transform", "translate(" + colWidthRank + ",0)")
         .append("text")
+        .attr("class", "name")
         .attr("y", (rowTextHeight/2))
         .attr("dx", 0)
         .attr("dy", 0)
