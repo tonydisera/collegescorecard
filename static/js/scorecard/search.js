@@ -57,6 +57,7 @@ class Search {
       function(d,i) {
           let checked = d3.select(this).property("checked");
           self.usnewsChecked = checked;
+          d3.select("#usnews-cb-label").classed("is-checked", self.usnewsChecked)
           self.filterColleges();
       })
 
@@ -180,6 +181,7 @@ class Search {
         if (self.minACT == "") {
           self.minACT = null;
         }
+        d3.select("#labelACT").classed("has-value", self.minACT != null || self.maxACT != null)
         self.filterColleges();
       })
       $('#maxACT').on("focusout", function(event) {
@@ -187,6 +189,7 @@ class Search {
         if (self.maxACT == "") {
           self.maxACT = null;
         }
+        d3.select("#labelACT").classed("has-value", self.minACT != null || self.maxACT != null)
         self.filterColleges();
       })
 
@@ -320,6 +323,7 @@ class Search {
     }
   }
 
+
   selectCollege(collegeName, checked) {
     let self = this;
     if (checked) {
@@ -330,6 +334,9 @@ class Search {
       let idx = self.selectedColleges.indexOf(collegeName);
       self.selectedColleges.splice(idx,1)
     }
+    d3.select(d3.select(self.collegeSelector).node().parentElement)
+      .select('.multiselect-selected-text')
+      .classed('has-selections', self.selectedColleges.length > 0);
 
   }
   selectRegion(regionKey, regionLabel, checked) {
@@ -344,6 +351,10 @@ class Search {
       self.selectedRegions.splice(idx,1)
       self.selectedRegionLabels.splice(idx,1)
     }
+    d3.select(d3.select(self.regionSelector).node().parentElement)
+      .select('.multiselect-selected-text')
+      .classed('has-selections', self.selectedRegions.length > 0);
+
   }
   selectProgram(programKey, checked) {
     let self = this;
@@ -355,6 +366,10 @@ class Search {
       let idx = self.selectedPrograms.indexOf(programKey);
       self.selectedPrograms.splice(idx,1)
     }
+    d3.select(d3.select(self.programSelector).node().parentElement)
+      .select('.multiselect-selected-text')
+      .classed('has-selections', self.selectedPrograms.length > 0);
+
   }
   selectControl(controlKey, controlLabel, checked) {
     let self = this;
@@ -368,6 +383,11 @@ class Search {
       self.selectedControl.splice(idx,1)
       self.selectedControlLabels.splice(idx,1)
     }
+
+    d3.select(d3.select(self.controlSelector).node().parentElement)
+      .select('.multiselect-selected-text')
+      .classed('has-selections', self.selectedControl.length > 0);
+
   }
   selectDegreeLevel(degreeLevelKey, degreeLevelLabel, checked) {
     let self = this;
@@ -381,6 +401,70 @@ class Search {
       self.selectedDegreeLevel.splice(idx,1)
       self.selectedDegreeLevelLabels.splice(idx,1)
     }
+
+    d3.select(d3.select(self.degreeLevelSelector).node().parentElement)
+      .select('.multiselect-selected-text')
+      .classed('has-selections', self.selectedDegreeLevel.length > 0);
+    
+  }
+  resetFilters() {
+
+    let self = this;
+
+
+    $(self.usnewsSelector).prop( "checked", false );
+
+    $(self.programSelector).multiselect('deselect', self.selectedPrograms, false);
+    $(self.collegeSelector).multiselect('deselect', self.selectedColleges, false);
+    $(self.regionSelector).multiselect('deselect', self.selectedRegions, false);
+    $(self.degreeLevelSelector).multiselect('deselect', self.selectedDegreeLevel, false);
+    $(self.controlSelector).multiselect('deselect', self.selectedControl, false);
+
+
+    $('#minACT').val("");
+    $('#maxACT').val("");
+    self.minACT = null;
+    self.maxACT = null;
+    d3.select("#labelACT").classed("has-value", self.minACT != null || self.maxACT != null)
+
+
+    self.selectedColleges = []
+    self.selectedDegreeLevel = []
+    self.selectedDegreeLevelLabels = []
+    self.selectedRegions = []
+    self.selectedRegionLabels = []
+    self.selectedPrograms = []
+    self.selectedControl = []
+    self.selectedControlLabels = []
+    self.usnewsChecked = false;
+
+
+/*
+    $(self.programSelector).multiselect('refresh');
+    $(self.collegeSelector).multiselect('refresh');
+    $(self.regionSelector).multiselect('refresh');
+    $(self.controlSelector).multiselect('refresh');
+    $(self.degreeLevelSelector).multiselect('refresh');
+*/
+
+    d3.select(d3.select(self.programSelector).node().parentElement)
+      .select('.multiselect-selected-text')
+      .classed('has-selections', self.selectedPrograms.length > 0);
+    d3.select(d3.select(self.collegeSelector).node().parentElement)
+      .select('.multiselect-selected-text')
+      .classed('has-selections', self.selectedColleges.length > 0);
+    d3.select(d3.select(self.regionSelector).node().parentElement)
+      .select('.multiselect-selected-text')
+      .classed('has-selections', self.selectedRegions.length > 0);
+    d3.select(d3.select(self.controlSelector).node().parentElement)
+      .select('.multiselect-selected-text')
+      .classed('has-selections', self.selectedControl.length > 0);
+    d3.select(d3.select(self.degreeLevelSelector).node().parentElement)
+      .select('.multiselect-selected-text')
+      .classed('has-selections', self.selectedDegreeLevel.length > 0);
+
+    self.filterColleges();
+
   }
   filterColleges() {
     let self = this;

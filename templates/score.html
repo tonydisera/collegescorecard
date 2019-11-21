@@ -317,11 +317,11 @@
           <div class="card" style="flex-grow:1;max-width:420px;min-width:420px;">
             <div class="card-header">Filter</div>
             <div class="card-body" style="display:flex;justify-content: space-between;flex-direction: column;">
-              <div>
+              <div style="min-height:520px;max-height:520px;">
 
                 <div class="form-check" style="margin-left: -10px;padding-top: 15px;padding-bottom: 35px;">
                   <input type="checkbox" false id="usnews-cb" class="form-checked-input">
-                  <label class="form-check-label" for="usnews-cb">
+                  <label id="usnews-cb-label" class="form-check-label" for="usnews-cb">
                     Top Ranked (US News and World Report)
                   </label>
                 </div>
@@ -377,7 +377,7 @@
 
 
                 <div style="display:flex;font-size:16px">
-                  <label for="minACT" style="margin-top:7px">ACT</label>
+                  <label id="labelACT" class="has-value" for="minACT" style="margin-top:7px">ACT</label>
                   <input type="text" value="30" class="form-control mb-2" id="minACT" placeholder="Min" 
                   style="margin-left:5px;margin-right:10px;width:55px;font-size:15px"/>
                   <input type="text" class="form-control mb-3" id="maxACT" placeholder="Max"
@@ -385,7 +385,13 @@
                 </div>
 
 
+
               </div>
+
+              <div style="justify-content: flex-end;display: flex;">
+                 <button id="reset-button"  type="button" onclick="search.resetFilters()" class="btn btn-primary">Reset</button>
+              </div>  
+
             </div>
 
           </div>
@@ -402,13 +408,13 @@
             </div>
             <div class="card-body" style="margin-bottom:0px;display:flex;justify-content: space-between;flex-direction: column;">
                 <div class="form-check" style="margin-left:20px">
-                  <input type="checkbox" id="select-all-cb" class="form-checked-input">
+                  <input checked type="checkbox" id="select-all-cb" class="form-checked-input">
                   <label class="form-check-label" for="select-all-cb" style="padding-bottom:10px">
                     Select all
                   </label>
                 </div>
              
-              <div id="filtered-colleges" style="min-height:500px;max-height:500px;overflow-y:scroll">
+              <div id="filtered-colleges" style="min-height:520px;max-height:520px;overflow-y:scroll">
               </div>
               <div style="justify-content: flex-end;display: flex;">
                  <button id="rank-button" disabled type="button" onclick="rankColleges()" class="btn btn-primary">Rank</button>

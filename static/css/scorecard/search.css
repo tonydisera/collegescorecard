@@ -37,3 +37,16 @@
 	padding-bottom: 2px;
 	background-color: #4a7fbd;
 }
+
+#minACT, #maxACT {
+	color: #486db1 !important;
+	font-weight: 600;
+}
+
+#labelACT.has-value {
+	color: #486db1 !important;
+}
+
+#usnews-cb-label.is-checked {
+	color: #486db1;
+}
