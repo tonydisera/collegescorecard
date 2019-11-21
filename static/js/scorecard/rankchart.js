@@ -22,7 +22,7 @@ function rankchart() {
   var stackedData = null;
   var scaleForScore = 0;
 
-  var headerHeight  = 70;
+  var headerHeight  = 60;
   var rowHeight     = 40;
   var barHeight     = 15;
   var colWidthScore = 20;
@@ -33,6 +33,7 @@ function rankchart() {
   var nameWidth     = 250;
   var categoryPadding = 30;
   var weightHeight    = 14;
+  var weightWidth     = 20;
   var rowTextHeight   = 10;
   var maxNameLength = 50;
 
@@ -396,21 +397,21 @@ function rankchart() {
         .append("text")
         .attr("class", "col-header")
         .attr("x", 0)
-        .attr("y", weightHeight+30)
+        .attr("y", weightHeight+20)
         .text("Rank")
 
       headerRowEnter
         .append("text")
         .attr("class", "col-header")
         .attr("x", colWidthRank)
-        .attr("y", weightHeight+30)
+        .attr("y", weightHeight+20)
         .text("College")
 
       headerRowEnter
         .append("text")
         .attr("class", "col-header")
         .attr("x", colWidthRank+nameWidth)
-        .attr("y", weightHeight+30)
+        .attr("y", weightHeight+20)
         .text("Score")      
 
 
@@ -424,7 +425,7 @@ function rankchart() {
 
       let colHeadersText = colHeadersEnter
         .append("g")
-        .attr("transform", "translate(0," +  (weightHeight+30) + ")")
+        .attr("transform", "translate(0," +  (weightHeight+20) + ")")
       colHeadersText  
         .append("text")
         .attr("dx", 0)
@@ -445,7 +446,7 @@ function rankchart() {
       let weightGroupEnter = weightGroup
         .enter()
         .append("g")
-        .attr("transform", "translate(0," + ((weightHeight/2)*-1) + ")")
+        .attr("transform", "translate(" + ((colWidth - (weightWidth*4))/2) + "," + ((weightHeight/2)*-1) + ")")
         .attr("class", "weights")
 
       let weightRectEnter = weightGroupEnter.selectAll("rect.weight")
@@ -466,12 +467,12 @@ function rankchart() {
           }
         })
         .attr("x", function(weightObject) {
-          return weightObject.weight*weightHeight;
+          return weightObject.weight*weightWidth;
         })
         .attr("y", "0")
         .attr("width", function(weightObject) {
           if (weightObject.field.name != "_total") {
-            return weightHeight;
+            return weightWidth;
           } else {
             return "0";
           }
@@ -1023,6 +1024,17 @@ function rankchart() {
     maxNameLength = _;
     return chart;
   }
+  chart.weightWidth = function(_) {
+    if (!arguments.length) return weightWidth;
+    weightWidth = _;
+    return chart;
+  }
+  chart.weightHeight = function(_) {
+    if (!arguments.length) return weightHeight;
+    weightHeight = _;
+    return chart;
+  }
+
 
   chart 
   return chart;

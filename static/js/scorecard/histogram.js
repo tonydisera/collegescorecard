@@ -11,6 +11,8 @@ function histogram() {
   var x = null;
   var y = null;
 
+  var rankDescending = false;
+
   var bins = null;
   var data = null;
   var container = null;
@@ -83,16 +85,16 @@ function histogram() {
       let markers = container.select("svg .markers")
 
 
-      markers.select("line")
-       .attr("y2", yPos)
-       .attr("opacity", 1)
+      //markers.select("line")
+      // .attr("y2", yPos)
+      // .attr("opacity", 1)
 
       markers.select("circle")
        .attr("cy", yPos)
        .attr("opacity", 1)
 
       markers.select("text")
-       .attr("y", -2)
+       .attr("y", 0)
        .text(xValue(selectedData[0]))
        .attr("opacity", 1)
 
@@ -108,7 +110,7 @@ function histogram() {
       markers.selectAll("text")
              .transition()
              .duration(1000)
-             .attr("x", xPos < 11 ? 11 : xPos)
+             .attr("x", xPos < 14 ? 14 : xPos)
     
     })
 
@@ -140,11 +142,18 @@ function histogram() {
 
       x = d3.scaleLinear()
         .domain(d3.extent(dataValues))
-        .range([0, innerWidth])
+
+      if (rankDescending) {
+        x.range([innerWidth, 0])
+
+      } else {
+        x.range([0, innerWidth])
+
+      }
 
       bins = d3.histogram()
           .domain(x.domain())
-          .thresholds(x.ticks(40))(dataValues)
+          .thresholds(x.ticks(20))(dataValues)
 
       y = d3.scaleLinear()
         .domain([0, d3.max(bins, d => d.length)]).nice()
@@ -200,8 +209,16 @@ function histogram() {
 
       bars.enter()
          .append("rect")
-         .attr("x", d => x(d.x0) + 1)
-         .attr("width", d => Math.max(0, x(d.x1) - x(d.x0) - 1))
+         .attr("x", d => {
+            if (rankDescending) {
+              return x(d.x1)
+            } else {
+              return x(d.x0)
+            }
+         })
+         .attr("width", d => {
+            return Math.max(0, Math.abs(x(d.x1) - x(d.x0)));
+         })
          .attr("y", d => y(d.length))
          .attr("height", d => y(0) - y(d.length));
 
@@ -285,5 +302,10 @@ function histogram() {
     return chart;
   };
 
+  chart.rankDescending = function(_) {
+    if (!arguments.length) return rankDescending;
+    rankDescending = _;
+    return chart;
+  };
   return chart;
 }

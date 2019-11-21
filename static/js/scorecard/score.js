@@ -5,17 +5,17 @@ let search = null;
 let rankChart = null;
 let metricCategories = ['selectivity', 'instruction', 'diversity', 'cost', 'outcome', 'rank']
 
-let rankHeaderHeight =  100;
-let rankRowHeight = 24;
-let rankBarHeight = 15;
+let rankHeaderHeight    = 85;
+let rankRowHeight       = 24;
+let rankBarHeight       = 15;
 
-let rankColPadding = 10;
-let rankColWidth = 70;
-let rankColWidthTotal = 100;
-let rankColWidthScore = 10;
-let rankNameWidth = 275;
-let rankColWidthRank = 60;
-let rankMaxNameLength = 46;
+let rankColPadding      = 10;
+let rankColWidth        = 70;
+let rankColWidthTotal   = 100;
+let rankColWidthScore   = 10;
+let rankNameWidth       = 275;
+let rankColWidthRank    = 60;
+let rankMaxNameLength   = 46;
 let rankCategoryPadding = 0;
 
 let slidebarClicks = 0;
@@ -40,6 +40,8 @@ function init() {
   rankChart.rowHeight(rankRowHeight);
   rankChart.barHeight(rankBarHeight);
   rankChart.colWidth(rankColWidth);
+  rankChart.weightHeight(14)
+  rankChart.weightWidth(rankColWidth/4)
   rankChart.colWidthTotal(rankColWidthTotal);
   rankChart.nameWidth(rankNameWidth);
   rankChart.colWidthRank(rankColWidthRank);
@@ -233,7 +235,7 @@ function promiseShowHistograms() {
 
       let prevCategory = null;
 
-      getSelectedMetricFields().forEach(function(selectedField) {
+      getSelectedMetricFields().forEach(function(selectedField, i) {
         let selectedFieldName = selectedField.name.split(" ").join("_");
 
         let clazzes = "hist " + selectedFieldName + " " + selectedField.category;
@@ -250,12 +252,13 @@ function promiseShowHistograms() {
         let histChart = histogram();
         histChart.width(selectedField.width ? (selectedField.width+rankColPadding) : (rankColWidth+rankColPadding))
                  .height(70)
-                 .margin({top: 10, bottom: 10, left: 3, right: rankColPadding})
+                 .margin({top: 10, bottom: 10, left: 0, right: rankColPadding})
                 
         histChart.xValue(function(d) {
           return d[selectedField.name];
         })
         histChart.showAxis(false)
+        histChart.rankDescending(selectedField.rankDescending)
         selection.datum(data)
         histChart(selection);
 

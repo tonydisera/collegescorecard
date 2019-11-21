@@ -183,8 +183,8 @@ body .selections {
 }
 
 #hist-chart .hist svg rect {
-  fill: #b7b7b9;
-  stroke: #6c6c6c;
+  fill: #d3d3d3;
+  stroke: #515050;
   stroke-width: .5px;
 }
 
@@ -194,11 +194,11 @@ body .selections {
 }
 
 #hist-chart .hist svg text.marker-label {
-  font-size: 10px;
-  font-weight: 500;
+  font-size: 11px;
+  fill: #278abc;
 }
 #hist-chart .hist svg .marker {
-  fill: #1d68de
+  fill: #278abc;
 }
 #hist-chart .hist svg line.marker  {
   stroke: #1d68de;
@@ -264,8 +264,8 @@ button.multiselect.btn-default.active,
 }
 
 #hist-chart span.hint {
-  margin-left: -145px;
-  min-width: 145px;
+  margin-left: -140px;
+  min-width: 140px;
   line-height: 13px;
   height: 20px;
   padding: 2px;
@@ -357,7 +357,8 @@ button.multiselect.btn-default.active,
 }
 
 #rank-chart-heading {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
+  margin-top: 5px;
   display: flex;
 }
 
