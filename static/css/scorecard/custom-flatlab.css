@@ -2,6 +2,9 @@
     background: rgba(92, 145, 247, 0.08);
 }
 
+a.logo {
+    color: #818481;
+}
 ul.sidebar-menu li a {
 	font-size: 16px
 }

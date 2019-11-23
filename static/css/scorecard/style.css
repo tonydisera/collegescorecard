@@ -13,7 +13,7 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
 
 .btn-info {
     background-color: #486db1 !important;
-    border-color: #486db1!important;
+    border-color: rgb(73, 100, 150) !important;
     font-weight: 500;
 }
 
@@ -58,7 +58,7 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
 
 .selections button.multiselect {
     max-height: 30px;
-    border: 1px solid #486db1;
+    border: 1px solid rgb(73, 100, 150) !important;
     padding: .375rem .75rem;
     font-size: 1rem;
     line-height: 1.5;
@@ -167,7 +167,7 @@ body .selections {
   font-size: 15px;
   padding-top: 3px;
   background-color: white !important;
-  color: #486db1;
+  color: rgb(73, 100, 150) !important;
 }
 
 .selections #search-colleges-container {
