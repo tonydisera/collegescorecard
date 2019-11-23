@@ -108,19 +108,19 @@ function rankColleges() {
   
   d3.selectAll("#filter-badges badge").remove();
   d3.select("#filter-badges").html(search.getBadges())
-  d3.select(".selections #college-count").text(getSelectedCollegeNames().length + " colleges")
+  d3.select(".selections #college-count").text(getSelectedCollegeIds().length + " colleges")
 
   promiseShowHistograms();
-  promiseShowRankings(getSelectedCollegeNames())
+  promiseShowRankings(getSelectedCollegeIds())
   .then(function() {
       d3.select('#loading').style("display", "none")
   })
 }
 
-function promiseShowRankings(selectedCollegeNames) {
+function promiseShowRankings(selectedCollegeIds) {
 
 
-  return promiseGetCollegeData(selectedCollegeNames, getSelectedFieldNames())
+  return promiseGetCollegeData(selectedCollegeIds, getSelectedFieldNames())
   .then(function(selectedCollegeData) {
 
     let selection = d3.select("#rank-chart");
@@ -145,11 +145,12 @@ function showRescaledRankings(data) {
 
 }
 
-function promiseGetCollegeData(selectedCollegeNames, fieldNames) {
+function promiseGetCollegeData(selectedCollegeIds, fieldNames) {
   return new Promise(function(resolve, reject) {
-    promiseMetricGetData(fieldNames)
+    promiseMetricGetData(fieldNames, selectedCollegeIds)
     .then(function(data) {
 
+      /*
       let selectedColleges = [];
       selectedCollegeNames.forEach(function(collegeName) {
           var found = false;
@@ -164,6 +165,8 @@ function promiseGetCollegeData(selectedCollegeNames, fieldNames) {
       })
 
       resolve(selectedColleges)
+      */
+      resolve(data);
     })    
   })
 
@@ -313,7 +316,7 @@ function getFieldCategory(fieldName) {
   }
 }
 
-function getSelectedCollegeNames() {
+function getSelectedCollegeIds() {
   return search.checkedColleges;
 }
 

@@ -266,6 +266,7 @@ button.multiselect.btn-default.active,
 #hist-chart span.hint {
   margin-left: -140px;
   min-width: 140px;
+  max-width: 140px;
   line-height: 13px;
   height: 20px;
   padding: 2px;

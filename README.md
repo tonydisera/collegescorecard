@@ -8,14 +8,14 @@ A flask app for serving and showing US College Scorecard data.
 Make sure you have Flask installed (if having problems make sure to check [the Flask documentation on installation](http://flask.pocoo.org/docs/1.0/installation/) )
 
 ```
-$ pip install Flask
-$ pip install pandas
+$ pip3 install Flask
+$ pip3 install pandas
 ```
 
-Then run it like this:
+Then run it like this (running on port 5000):
 
 ```
-$ FLASK_APP=w209.py flask run
+python3 w209 5000
 ```
 
 Then open your browser on http://localhost:5000

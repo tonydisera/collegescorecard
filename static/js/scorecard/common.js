@@ -1,4 +1,5 @@
 let defaultMetricFieldNames = [
+  "id",
   "name",
   "admission_rate overall",
   "act_scores midpoint cumulative",
@@ -43,7 +44,7 @@ function promiseGetData(fieldNames) {
 
 }
 
-function promiseMetricGetData(fieldNames) {
+function promiseMetricGetData(fieldNames, collegeIds) {
   return new Promise(function(resolve, reject) {
 
     if (fieldNames.length == 0) {
@@ -56,7 +57,12 @@ function promiseMetricGetData(fieldNames) {
 
       })
 
-      d3.json("getMetricData?fields=" + fieldNames.join(","),
+      let url = "getMetricData?fields=" + fieldNames.join(",");
+      if (collegeIds && collegeIds.length > 0) {
+        url += "&ids=" + collegeIds.join(",")
+      }
+
+      d3.json(url,
       function (err, data) {
         if (err) {
           console.log(err)

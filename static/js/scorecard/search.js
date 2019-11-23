@@ -319,7 +319,7 @@ class Search {
     let self = this;
     for (var i=0; i < self.filteredColleges.length; i++) {
       $("#college-cb-" + i).prop("checked", self.selectAll);
-      self.checkCollege(self.filteredColleges[i].name, self.selectAll)
+      self.checkCollege(self.filteredColleges[i].id, self.selectAll)
     }
   }
 
@@ -604,7 +604,7 @@ class Search {
       .attr("class", "form-checked-input")
       .on("change", function(d,i) {
         let checked = d3.select(this).property("checked");
-        self.checkCollege(d.name, checked)
+        self.checkCollege(d.id, checked)
       })
 
     itemForms
@@ -618,14 +618,14 @@ class Search {
       })
 
   }
-  checkCollege(collegeName, checked) {
+  checkCollege(collegeId, checked) {
     let self = this;
     if (checked) {
-      if (self.checkedColleges.indexOf(collegeName) < 0) {
-        self.checkedColleges.push(collegeName);
+      if (self.checkedColleges.indexOf(collegeId) < 0) {
+        self.checkedColleges.push(collegeId);
       }
     } else {
-      let idx = self.checkedColleges.indexOf(collegeName);
+      let idx = self.checkedColleges.indexOf(collegeId);
       self.checkedColleges.splice(idx,1)
     }
     
