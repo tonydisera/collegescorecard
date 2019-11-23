@@ -1,17 +1,29 @@
 .light-sidebar-nav ul.sidebar-menu > li > a.active, .light-sidebar-nav ul.sidebar-menu > li > a:hover, .light-sidebar-nav ul.sidebar-menu > li > a:focus {
     background: rgba(92, 145, 247, 0.08);
+    border-left: 3px solid #4d74a3;
+    color: #4d74a3 !important;
+}
+
+.light-sidebar-nav ul.sidebar-menu li a.active i, .light-sidebar-nav ul.sidebar-menu li a:hover i, ul.sidebar-menu li a:focus i {
+    color: #4d74a3 !important;
 }
 
 a.logo {
     color: #818481;
 }
+
+
+a.logo span {
+    color: #4d74a3;
+}
+
 ul.sidebar-menu li a {
 	font-size: 16px
 }
 
 ul.sidebar-menu li ul.sub li a {
     font-size: 14px;
-    color: #4b4c4e;
+    color: #4d74a3;
 }
 
 .sb-slidebar.sb-right  {

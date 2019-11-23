@@ -1,6 +1,7 @@
 body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
 
 
+
 .navbar.bg-info {
   background-color: #486db1 !important
 }
@@ -33,6 +34,11 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
 
 .user-heading {
   text-align: center !important;
+  padding: 20px !important;
+}
+
+.profile-nav {
+  cursor: pointer !important;
 }
 
 .profile-nav .btn {
@@ -48,7 +54,7 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
   background-color: rgb(234, 200, 87) !important;
 }
 .profile-nav .bg-blue {
-  background-color: rgb(73, 100, 150) !important;
+  background-color: #4d74a3 !important;
 }
 
 .profile-nav .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
@@ -58,7 +64,7 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
 
 .selections button.multiselect {
     max-height: 30px;
-    border: 1px solid rgb(73, 100, 150) !important;
+    border: 1px solid #4d74a3 !important;
     padding: .375rem .75rem;
     font-size: 1rem;
     line-height: 1.5;
@@ -167,7 +173,7 @@ body .selections {
   font-size: 15px;
   padding-top: 3px;
   background-color: white !important;
-  color: rgb(73, 100, 150) !important;
+  color: #4d74a3 !important;
 }
 
 .selections #search-colleges-container {
@@ -431,7 +437,7 @@ div.tooltip {
 
 .step-circle {
     color: #fff;
-    background: rgb(73, 100, 150) !important;
+    background: #4d74a3 !important;
     border-radius: 50% !important;
     -webkit-border-radius: 50% !important;
     width: 35px;

@@ -315,7 +315,10 @@
         <div style="display:flex;flex-flow:row;">
 
           <div class="card" style="flex-grow:1;max-width:420px;min-width:420px;">
-            <div class="card-header">Filter</div>
+            <div class="card-header">
+              Filter
+             <button id="reset-button"  type="button" onclick="search.resetFilters()" class="btn btn-info btn-sm" style="margin-top: 0px;margin-left: 20px;display:inline-block">Reset</button>
+            </div>
             <div class="card-body" style="display:flex;justify-content: space-between;flex-direction: column;">
               <div style="min-height:520px;max-height:520px;">
 
@@ -388,10 +391,7 @@
 
               </div>
 
-              <div style="justify-content: flex-end;display: flex;">
-                 <button id="reset-button"  type="button" onclick="search.resetFilters()" class="btn btn-primary">Reset</button>
-              </div>  
-
+       
             </div>
 
           </div>

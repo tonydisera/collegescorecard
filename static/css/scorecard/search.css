@@ -38,6 +38,12 @@
 	background-color: #4a7fbd;
 }
 
+#search-dialog .card-header {
+	font-weight: 600;
+    font-size: 18px;	
+    min-height: 55px;
+}
+
 #minACT, #maxACT {
 	color: #486db1 !important;
 	font-weight: 600;
