@@ -1,3 +1,7 @@
+.light-sidebar-nav ul.sidebar-menu > li > a.active, .light-sidebar-nav ul.sidebar-menu > li > a:hover, .light-sidebar-nav ul.sidebar-menu > li > a:focus {
+    background: rgba(92, 145, 247, 0.08);
+}
+
 ul.sidebar-menu li a {
 	font-size: 16px
 }

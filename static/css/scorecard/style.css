@@ -1,5 +1,6 @@
 body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
 
+
 .navbar.bg-info {
   background-color: #486db1 !important
 }
@@ -17,6 +18,43 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
 }
 
 
+
+.user-heading i.fa {
+  font-size: 30px;
+  color: white;
+  padding-right: 5px;
+}
+
+.user-heading h1 {
+  font-weight: 500 !important;
+  font-size: 20px !important;
+  display: inline-block;
+}
+
+.user-heading {
+  text-align: center !important;
+}
+
+.profile-nav .btn {
+  color: gray !important; 
+  font-weight: 500 !important;
+  font-size: 20px !important;
+}
+
+.profile-nav  .bg-green {
+  background-color: #a5c373 !important;
+}
+.profile-nav .bg-yellow{
+  background-color: rgb(234, 200, 87) !important;
+}
+.profile-nav .bg-blue {
+  background-color: rgb(73, 100, 150) !important;
+}
+
+.profile-nav .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
+    background-color: #fdfdfd;
+    border-color: #84af3d;
+}
 
 .selections button.multiselect {
     max-height: 30px;
@@ -65,6 +103,17 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
   font-family: 'Raleway';
   font-weight: 500;
 }
+
+
+.card.custom-overview {
+}
+.card.custom-overview .card-title {
+  font-size: 24px;
+}
+.card.custom-overview .card-body {
+  font-size: 16px;
+}
+
 
 .multiselect-container {
   color:  #486db1;  
@@ -382,7 +431,7 @@ div.tooltip {
 
 .step-circle {
     color: #fff;
-    background: #5883b5;
+    background: rgb(73, 100, 150) !important;
     border-radius: 50% !important;
     -webkit-border-radius: 50% !important;
     width: 35px;
