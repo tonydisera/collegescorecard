@@ -387,11 +387,23 @@ button.multiselect.btn-default.active,
   font-size: 13px;
   fill: #585757;
 }
-
 .rankchart .col-header text tspan,
 .rankchart .row text.name {
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
+  fill: #585757;
+}
+
+.rankchart .col-header text,
+.rankchart text.col-header {
+  font-weight: 600;
+  fill: #3c5f8a;
+}
+
+.rankchart .col-header text tspan {
+  font-size: 12px;
+  font-weight: 600;
+  fill: #3c5f8a;
 }
 
 .rankchart text.hint-header {
@@ -414,7 +426,7 @@ button.multiselect.btn-default.active,
 
 #rank-chart-heading {
   margin-bottom: 5px;
-  margin-top: 5px;
+  margin-top: 10px;
   display: flex;
 }
 

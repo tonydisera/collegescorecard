@@ -110,7 +110,7 @@ function histogram() {
       markers.selectAll("text")
              .transition()
              .duration(1000)
-             .attr("x", xPos < 14 ? 14 : xPos)
+             .attr("x", xPos < 16 ? 16 : xPos)
     
     })
 

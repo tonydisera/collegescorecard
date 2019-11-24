@@ -5,7 +5,7 @@ let search = null;
 let rankChart = null;
 let metricCategories = ['selectivity', 'instruction', 'diversity', 'cost', 'outcome', 'rank']
 
-let rankHeaderHeight    = 85;
+let rankHeaderHeight    = 100;
 let rankRowHeight       = 24;
 let rankBarHeight       = 15;
 
@@ -77,7 +77,9 @@ function init() {
   search = new Search();
   search.promiseInit()
   .then(function() {
-    rankColleges();  
+    if (getSelectedCollegeIds().length > 0) {
+      rankColleges();  
+    }
   })
 
 
@@ -147,7 +149,7 @@ function showRescaledRankings(data) {
 
 function promiseGetCollegeData(selectedCollegeIds, fieldNames) {
   return new Promise(function(resolve, reject) {
-    promiseMetricGetData(fieldNames, selectedCollegeIds)
+    promiseMetricGetData(fieldNames, selectedCollegeIds, {includeDefaultFields: true})
     .then(function(data) {
 
       /*
@@ -223,7 +225,7 @@ function promiseShowHistograms() {
         })
     })
 
-    promiseMetricGetData(fieldNames)
+    promiseMetricGetData(fieldNames, null, {includeDefaultFields: false, includeNameField: true})
     .then(function(data) {
 
 

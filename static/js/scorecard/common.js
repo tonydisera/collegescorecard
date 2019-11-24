@@ -44,18 +44,29 @@ function promiseGetData(fieldNames) {
 
 }
 
-function promiseMetricGetData(fieldNames, collegeIds) {
+function promiseMetricGetData(fieldNames, collegeIds=null, options={includeDefaultFields: true, includeNameField: false}) {
   return new Promise(function(resolve, reject) {
 
     if (fieldNames.length == 0) {
       resolve([])
     } else {
-      defaultMetricFieldNames.forEach(function(defaultFieldName) {
-        if (fieldNames.indexOf(defaultFieldName) < 0) {
-          fieldNames.push(defaultFieldName);
-        }
+      if (options && options.includeDefaultFields) {
+        defaultMetricFieldNames.forEach(function(defaultFieldName) {
+          if (fieldNames.indexOf(defaultFieldName) < 0) {
+            fieldNames.push(defaultFieldName);
+          }
 
-      })
+        })
+
+      }
+      if (options && options.includeNameField) {
+        ["id", "name"].forEach(function(theFieldName) {
+          if (fieldNames.indexOf(theFieldName) < 0) {
+            fieldNames.push(theFieldName);
+          }
+
+        })
+      }
 
       let url = "getMetricData?fields=" + fieldNames.join(",");
       if (collegeIds && collegeIds.length > 0) {

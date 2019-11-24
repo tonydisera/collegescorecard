@@ -33,8 +33,9 @@ class Search {
     this.checkedColleges = []
 
 
-    this.fieldNames = ["usnews_2019_rank", "control", "region", 
-                       "degrees_awarded predominant_recoded", "city", "state"]
+    this.fieldNames = ["id", "name", "usnews_2019_rank", "control", "region", 
+                       "degrees_awarded predominant_recoded", "city", "state",
+                       "act_scores midpoint cumulative"]
 
 
 
@@ -199,9 +200,9 @@ class Search {
         
         let options = []
         programs.forEach(function(program) {
-          if (self.fieldNames.indexOf(program) < 0) {
-            self.fieldNames.push(program)
-          }
+          //if (self.fieldNames.indexOf(program) < 0) {
+          //  self.fieldNames.push(program)
+          //}
 
           let tokens = program.split("program_bachelors");
           let display = tokens[1].substring(1, tokens[1].length)
@@ -212,7 +213,7 @@ class Search {
         })
         $(self.programSelector).multiselect('dataprovider', options);
 
-        promiseMetricGetData(self.fieldNames)
+        promiseMetricGetData(self.fieldNames, null, {includeDefaultFields: false})
         .then(function(colleges) {
           self.allColleges = colleges.sort(function(a,b) {
             return a.name.localeCompare(b.name);
@@ -224,8 +225,9 @@ class Search {
           $(self.collegeSelector).multiselect('dataprovider', options);
 
 
-            self.filterColleges();
+            self.filterColleges({selectAll: true});
             self.selectAllColleges();
+
 
             resolve();
 
@@ -466,7 +468,7 @@ class Search {
     self.filterColleges();
 
   }
-  filterColleges() {
+  filterColleges(options={selectAll:false}) {
     let self = this;
 
     $(self.selectAllSelector).prop( "checked", false );
@@ -475,7 +477,7 @@ class Search {
   
 
     if (self.selectedColleges.length == 0 &&
-        self.selectedPrograms.length == 0 &&
+        //self.selectedPrograms.length == 0 &&
         self.selectedRegions.length == 0 &&
         self.selectedControl.length == 0 &&
         self.selectedDegreeLevel.length == 0 &&
@@ -508,6 +510,7 @@ class Search {
           }
         } 
 
+/*
         let matchesProgram = self.selectedPrograms.length == 0;
         if (self.selectedPrograms.length > 0) {
           self.selectedPrograms.forEach(function(programKey) {
@@ -516,6 +519,7 @@ class Search {
             }
           })
         } 
+*/
 
         let matchesControl = self.selectedControl.length == 0;
         if (self.selectedControl.length > 0) {
@@ -549,13 +553,15 @@ class Search {
           return matchesCollege
         } else {
           if (self.selectedDegreeLevel.length > 0 ||
-              self.selectedPrograms.length > 0 ||
+              //self.selectedPrograms.length > 0 ||
               self.selectedRegions.length > 0 ||
               self.selectedControl.length > 0 ||
               self.usnewsChecked ||
               self.minACT ||
               self.maxACT) {
-            return (matchesUsnews && matchesDegreeLevel && matchesRegion && matchesProgram && matchesControl && matchesACTMin && matchesACTMax);
+            return (matchesUsnews && matchesDegreeLevel && matchesRegion 
+              //&& matchesProgram 
+              && matchesControl && matchesACTMin && matchesACTMax);
           } else {
             return false;
           }
@@ -569,6 +575,12 @@ class Search {
         return a.name.localeCompare(b.name);
       }
     })
+
+    if (options && options.selectAll) {
+      self.filteredColleges.forEach(function(college) {
+        self.checkedColleges.push(college.id);
+      })      
+    }
     self.showFilteredColleges()
   }
 

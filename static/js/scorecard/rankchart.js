@@ -397,21 +397,21 @@ function rankchart() {
         .append("text")
         .attr("class", "col-header")
         .attr("x", 0)
-        .attr("y", weightHeight+20)
+        .attr("y", weightHeight+35)
         .text("Rank")
 
       headerRowEnter
         .append("text")
         .attr("class", "col-header")
         .attr("x", colWidthRank)
-        .attr("y", weightHeight+20)
+        .attr("y", weightHeight+35)
         .text("College")
 
       headerRowEnter
         .append("text")
         .attr("class", "col-header")
         .attr("x", colWidthRank+nameWidth)
-        .attr("y", weightHeight+20)
+        .attr("y", weightHeight+35)
         .text("Score")      
 
 
@@ -425,7 +425,7 @@ function rankchart() {
 
       let colHeadersText = colHeadersEnter
         .append("g")
-        .attr("transform", "translate(0," +  (weightHeight+20) + ")")
+        .attr("transform", "translate(0," +  (weightHeight+35) + ")")
       colHeadersText  
         .append("text")
         .attr("dx", 0)
