@@ -77,15 +77,19 @@ function init() {
   search = new Search();
   search.promiseInit()
   .then(function() {
-    if (getSelectedCollegeIds().length > 0) {
-      rankColleges();  
-    }
+    search.applyCustomFilter("public_high_act");
+    rankColleges();
   })
 
 
   $('input:radio[name="searchoption"]').change(function(){
-      if($(this).val() === 'advanced_search'){
+      let self = this;
+      let option = $(self).val();
+      if(option === 'advanced_search'){
         $("#search-dialog").modal()
+      } else {
+        search.applyCustomFilter(option);
+        rankColleges();
       }
   });
 

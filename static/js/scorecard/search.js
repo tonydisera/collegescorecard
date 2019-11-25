@@ -13,19 +13,19 @@ class Search {
 
     this.selectedColleges = []
     
-    this.selectedDegreeLevel = ["3"]
-    this.selectedDegreeLevelLabels = ["Bachelors"]
+    this.selectedDegreeLevel = []
+    this.selectedDegreeLevelLabels = []
 
     this.selectedRegions = []
     this.selectedRegionLabels = []
 
     this.selectedPrograms = []
 
-    this.selectedControl = ["1"]
-    this.selectedControlLabels = ["Public"]
+    this.selectedControl = []
+    this.selectedControlLabels = []
 
     this.usnewsChecked = false;
-    this.minACT = 30;
+    this.minACT = null;
     this.maxACT = null;
 
     this.allColleges = []
@@ -84,7 +84,6 @@ class Search {
           self.filterColleges();
         }    
       })
-       $(self.degreeLevelSelector).multiselect('select', ['3'], true)
 
       $(self.collegeSelector).multiselect(
       { enableCaseInsensitiveFiltering: true,
@@ -174,7 +173,6 @@ class Search {
           self.filterColleges();
         }    
       })
-      $(self.controlSelector).multiselect('select', ['1'], true)
 
 
       $('#minACT').on("focusout", function(event) {
@@ -468,6 +466,25 @@ class Search {
     self.filterColleges();
 
   }
+
+  applyCustomFilter(customFilter) {
+    let self = this;
+    if (customFilter == "usnews_top_200") {
+      self.resetFilters();
+      $(self.usnewsSelector).prop( "checked", true );
+      self.usnewsChecked = true;
+      self.filterColleges({selectAll: true});
+    } else if (customFilter == "public_high_act") {
+      self.resetFilters();
+      $(self.controlSelector).multiselect('select', ['1'], true)
+      $('#minACT').val("30");
+      self.minACT = 30;
+      self.filterColleges({selectAll: true});
+    } else if (customFilter == "ivy") {
+    //      self.resetFilters();
+    //      self.filterColleges({selectAll: true});
+    } 
+  }
   filterColleges(options={selectAll:false}) {
     let self = this;
 
@@ -576,15 +593,11 @@ class Search {
       }
     })
 
-    if (options && options.selectAll) {
-      self.filteredColleges.forEach(function(college) {
-        self.checkedColleges.push(college.id);
-      })      
-    }
-    self.showFilteredColleges()
+
+    self.showFilteredColleges(options)
   }
 
-  showFilteredColleges() {
+  showFilteredColleges(options) {
     let self = this;
     self.checkedColleges = [];
     d3.select("#filtered-college-count").text(self.filteredColleges.length)
@@ -614,6 +627,13 @@ class Search {
         return "college-cb-" + i;
       })
       .attr("class", "form-checked-input")
+      .attr("checked", function(d,i) {
+        if (options && options.selectAll) {
+          return "checked";
+        } else {
+          return false;
+        }
+      })
       .on("change", function(d,i) {
         let checked = d3.select(this).property("checked");
         self.checkCollege(d.id, checked)
@@ -628,6 +648,15 @@ class Search {
       .text(function(d,i) {
         return (i+1) + ".  " +  d.name
       })
+
+
+    if (options && options.selectAll) {
+      $(self.selectAllSelector).prop( "checked", true );
+      self.filteredColleges.forEach(function(college) {
+        self.checkedColleges.push(college.id);
+      })     
+      $("#search-dialog  #rank-button").attr("disabled", false); 
+    }
 
   }
   checkCollege(collegeId, checked) {
