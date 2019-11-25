@@ -83,6 +83,13 @@ function init() {
   })
 
 
+  $('input:radio[name="searchoption"]').change(function(){
+      if($(this).val() === 'advanced_search'){
+        $("#search-dialog").modal()
+      }
+  });
+
+
 }
 
 var capitalize = function(theString) {
@@ -110,13 +117,17 @@ function rankColleges() {
   
   d3.selectAll("#filter-badges badge").remove();
   d3.select("#filter-badges").html(search.getBadges())
-  d3.select(".selections #college-count").text(getSelectedCollegeIds().length + " colleges")
+  d3.select("#rank-college-count").text("Ranking " + getSelectedCollegeIds().length + " Colleges")
 
   promiseShowHistograms();
   promiseShowRankings(getSelectedCollegeIds())
   .then(function() {
       d3.select('#loading').style("display", "none")
   })
+}
+
+function onAdvancedSearch() {
+  d3.select(".selections .btn-group .btn-sm.active").classed("active", false)
 }
 
 function promiseShowRankings(selectedCollegeIds) {

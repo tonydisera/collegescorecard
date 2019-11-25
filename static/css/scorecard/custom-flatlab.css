@@ -1,3 +1,9 @@
+[data-toggle=buttons]>.btn input[type=checkbox], [data-toggle=buttons]>.btn input[type=radio], [data-toggle=buttons]>.btn-group>.btn input[type=checkbox], [data-toggle=buttons]>.btn-group>.btn input[type=radio] {
+    position: absolute;
+    clip: rect(0,0,0,0);
+    pointer-events: none;
+}
+
 .light-sidebar-nav ul.sidebar-menu > li > a.active, .light-sidebar-nav ul.sidebar-menu > li > a:hover, .light-sidebar-nav ul.sidebar-menu > li > a:focus {
     background: rgba(92, 145, 247, 0.08);
     border-left: 3px solid #4d74a3;

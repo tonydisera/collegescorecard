@@ -57,10 +57,6 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
   background-color: #4d74a3 !important;
 }
 
-.profile-nav .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
-    background-color: #fdfdfd;
-    border-color: #84af3d;
-}
 
 .selections button.multiselect {
     max-height: 30px;
@@ -73,17 +69,19 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
     padding-top: 3px;
 }
 
-.selections #college-count {
-    max-height: 20px;
-    font-size: 15px;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    background-color: white;
-    color: #5a5a5a;
-    margin-top: 5px;
-    font-weight: 500;
+#rank-college-count {
+  font-size: 20px;
+  padding-bottom: 2px;
+  color: #3c5f8a;
+  font-weight: 600;
 }
 
+#rank-chart-title {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  margin-bottom: 25px;  
+}
 
 
 #college-detail h5 {
@@ -150,9 +148,9 @@ body #body-contents {
 body .selections {
   display: flex;
   flex-flow: row;
-  margin-bottom: 30px;
+  margin-bottom: 0px;
   margin-top: 0px;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-wrap: wrap;
 }
 
@@ -165,9 +163,10 @@ body .selections {
   max-width: 280px;
 }
 
+
 #search-colleges-button {
   margin-top: 0px;
-  margin-right: 5px;
+  margin-left: 5px;
   max-height: 30px;
   min-width: 150px;
   font-size: 15px;
@@ -176,9 +175,37 @@ body .selections {
   color: #4d74a3 !important;
 }
 
+#search-colleges-button.active {
+  background-color: #5b89c0 !important;
+  border-color: #3c587e !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+}
+
 .selections #search-colleges-container {
   display: flex;
-  max-width: 450px;
+  flex-flow: row;
+  font-size: 15px;
+}
+
+.btn-sm {
+  margin-top:   0px !important;
+}
+
+
+.btn-group .btn-sm {
+    font-weight: 500 !important;
+    background: white;
+    color: #757474;
+    border-color: #9f9f9f;
+    font-weight: 500 !important;
+}
+
+.btn-sm.active {
+    background-color: #5b89c0 !important;
+    border-color: #3c587e !important;
+    color: #fff !important;
+    font-weight: 600 !important;
 }
 
 .multiselect-container {
@@ -199,8 +226,8 @@ body .selections {
 }
 
 #filter-badges {
-  min-width: 120px;
-  max-width: 350px;
+  display: flex;
+  justify-content: center;
 }
 
 #filter-badges .badge {
@@ -263,11 +290,6 @@ body .selections {
 
 
 
-
-.btn-group-sm>.btn, .btn-sm {
-    height: 30px;
-    margin-top: 12px;
-}
 
 button.multiselect {
   text-align: left;
