@@ -37,6 +37,34 @@ class Search {
                        "degrees_awarded predominant_recoded", "city", "state",
                        "act_scores midpoint cumulative"]
 
+    this.customFilter = null;
+
+    this.ivySchools = [
+      "Harvard University",
+      "Yale University",
+      "University of Pennsylvania",
+      "Princeton University",
+      "Columbia University in the City of New York",
+      "Brown University",
+      "Dartmouth College",
+      "Cornell University"
+    ]
+
+    this.ivyPlusSchools = [
+      "Harvard University",
+      "Yale University",
+      "University of Pennsylvania",
+      "Princeton University",
+      "Columbia University in the City of New York",
+      "Brown University",
+      "Dartmouth College",
+      "Cornell University",
+      "Massachusetts Institute of Technology",
+      "Stanford University",
+      "Duke University",
+      "University of Chicago",
+      "Johns Hopkins University"
+     ]
 
 
 	}
@@ -246,21 +274,34 @@ class Search {
 
     let buf = "";
 
-    buf += self.formatBadgeUSNews();
-    buf += self.formatBadge(self.selectedColleges);
-    buf += self.formatDegreeLevelBadge();
-    buf += self.formatRegionBadge();
-    buf += self.formatControlBadge();
-    buf += self.formatBadge(self.selectedPrograms);
-    buf += self.formatBadgeACT();
+    if (self.customFilter == "ivy") {
+      buf = self.formatBadge(["Ivy League colleges"])
+    } else if (self.customFilter == "ivy_plus") {
+      buf = self.formatBadge(["Ivy League + colleges"])
+    } else {
+      buf += self.formatBadgeUSNews();
+      if (self.selectedColleges.length > 3) {
+        buf += self.formatBadge(self.selectedColleges.slice(0,2), ", ...");
+
+      } else {
+        buf += self.formatBadge(self.selectedColleges);
+      }
+      buf += self.formatDegreeLevelBadge();
+      buf += self.formatRegionBadge();
+      buf += self.formatControlBadge();
+      buf += self.formatBadge(self.selectedPrograms);
+      buf += self.formatBadgeACT();
+
+    }
+
 
     return buf;
   }
 
-  formatBadge(items) {
+  formatBadge(items, appendString="") {
     let self = this;
     if (items.length > 0) {
-      return "<span class='badge badge-secondary'>" + items.join(", ").split("_").join(" ") + "</span>";
+      return "<span class='badge badge-secondary'>" + items.join(", ").split("_").join(" ") + appendString + "</span>";
     } else {
       return "";
     }
@@ -469,6 +510,7 @@ class Search {
 
   applyCustomFilter(customFilter) {
     let self = this;
+    self.customFilter = customFilter;
     if (customFilter == "usnews_top_200") {
       self.resetFilters();
       $(self.usnewsSelector).prop( "checked", true );
@@ -481,8 +523,13 @@ class Search {
       self.minACT = 30;
       self.filterColleges({selectAll: true});
     } else if (customFilter == "ivy") {
-    //      self.resetFilters();
-    //      self.filterColleges({selectAll: true});
+      self.resetFilters();
+      self.selectedColleges = self.ivySchools;
+      self.filterColleges({selectAll: true});
+    } else if (customFilter == "ivy_plus") {
+      self.resetFilters();
+      self.selectedColleges = self.ivyPlusSchools;
+      self.filterColleges({selectAll: true});
     } 
   }
   filterColleges(options={selectAll:false}) {

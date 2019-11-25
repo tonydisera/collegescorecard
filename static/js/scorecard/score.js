@@ -115,6 +115,12 @@ function formatRankColumnHeader(d) {
   }
 }
 
+function rankCollegesAdvancedSearch() {
+  search.customFilter = null;
+  rankColleges();
+  d3.select("#search-colleges-container .btn-group .btn-sm.active").classed("active", false)
+}
+
 function rankColleges() {
   d3.select('#loading').style("display", "initial")
   search.close();
