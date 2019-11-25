@@ -81,6 +81,10 @@ function init() {
     rankColleges();
   })
 
+  $('#search-dialog').on('hidden.bs.modal', function (e) {
+    deselectFilterButtons();
+  })
+
 
   $('input:radio[name="searchoption"]').change(function(){
       let self = this;
@@ -115,10 +119,14 @@ function formatRankColumnHeader(d) {
   }
 }
 
+function deselectFilterButtons() {
+  d3.select("#search-colleges-container .btn-group .btn-sm.active").classed("active", false)
+}
+
 function rankCollegesAdvancedSearch() {
+  deselectFilterButtons();
   search.customFilter = null;
   rankColleges();
-  d3.select("#search-colleges-container .btn-group .btn-sm.active").classed("active", false)
 }
 
 function rankColleges() {
