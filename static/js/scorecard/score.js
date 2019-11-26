@@ -156,8 +156,9 @@ function rankColleges() {
           document.querySelector('#rank-chart #row-0 text.name')._tippy.show();
 
           setTimeout(function() {
-            document.querySelector('#rank-chart #row-0 text.name')._tippy.hide();
-    
+            if (document.querySelector('#rank-chart #row-0 text.name')._tippy) {
+              document.querySelector('#rank-chart #row-0 text.name')._tippy.hide();
+            }  
 
             tippy('.col-header#col-metric-1 rect#weight-square-1', {
               content: 'Click on squares to adjust weight',
@@ -166,7 +167,9 @@ function rankColleges() {
             });
             document.querySelector('.col-header#col-metric-1 rect#weight-square-1')._tippy.show();
             setTimeout(function() {
-              document.querySelector('.col-header#col-metric-1 rect#weight-square-1')._tippy.hide();
+              if (document.querySelector('.col-header#col-metric-1 rect#weight-square-1')._tippy) {
+                document.querySelector('.col-header#col-metric-1 rect#weight-square-1')._tippy.hide();
+              }
             }, 5000)
 
 
@@ -181,28 +184,6 @@ function rankColleges() {
 
 
   })
-
-  
-  /*
-  toastr.options = {
-    "closeButton": true,
-    "debug": false,
-    "progressBar": false,
-    "positionClass": "toast-top-left",
-    "onclick": null,
-    "showDuration": "2000",
-    "hideDuration": "1000",
-    "timeOut": "5000",
-    "extendedTimeOut": "1000",
-    "showEasing": "swing",
-    "hideEasing": "linear",
-    "showMethod": "fadeIn",
-    "hideMethod": "fadeOut"
-  }
-  toastr.success("here is a hint", "Hint")
-
-  */
-
 
 }
 
@@ -235,8 +216,23 @@ function showRescaledRankings(data) {
   selection.datum(data);
   rankChart(selection, d3.select("#rank-chart-heading"));
 
+  if ($('#rank-chart .delta text') && $('#rank-chart .delta text').length > 0) {
+    setTimeout(function() {
+      tippy('#rank-chart .delta text', {
+        content: 'See how rank changed after weights are adjusted',
+        placement: 'top',
+        theme: 'blue',
+      });
+      document.querySelector('#rank-chart .delta text')._tippy.show();
 
+      setTimeout(function() {
+        if (document.querySelector('#rank-chart .delta text') && document.querySelector('#rank-chart .delta text')._tippy) {
+          document.querySelector('#rank-chart .delta text')._tippy.hide();
+        }
+      }, 5000)
+    } ,1000)
 
+  }
 
 }
 
