@@ -80,6 +80,13 @@ function histogram() {
         xPos = x(xValue(selectedData[0]));
       }
 
+      var xPosText = xPos;
+      if (xPos < 16) {
+        xPosText = 16;
+      } else if (xPos+16 > innerWidth) {
+        xPosText = innerWidth - 16;
+      }
+
 
 
       let markers = container.select("svg .markers")
@@ -110,7 +117,7 @@ function histogram() {
       markers.selectAll("text")
              .transition()
              .duration(1000)
-             .attr("x", xPos < 16 ? 16 : xPos)
+             .attr("x", xPosText)
     
     })
 

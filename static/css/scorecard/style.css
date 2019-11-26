@@ -202,10 +202,28 @@ body .selections {
 }
 
 .btn-sm.active {
-    background-color: #5b89c0 !important;
+    background-color: #7ea9dc !important;
     border-color: #3c587e !important;
     color: #fff !important;
     font-weight: 600 !important;
+}
+
+.tippy-tooltip.blue-theme {
+  background-color: #4d74a3;
+  color: white;
+  font-weight: 600;
+}
+.tippy-tooltip.blue-theme[data-placement^='top'] .tippy-arrow {
+  border-top-color: #4d74a3;
+}
+.tippy-tooltip.blue-theme[data-placement^='bottom'] .tippy-arrow {
+  border-bottom-color: #4d74a3;
+}
+.tippy-tooltip.blue-theme[data-placement^='left'] .tippy-arrow {
+  border-left-color: #4d74a3;
+}
+.tippy-tooltip.blue-theme[data-placement^='right'] .tippy-arrow {
+  border-right-color: #4d74a3;
 }
 
 .multiselect-container {

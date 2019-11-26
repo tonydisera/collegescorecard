@@ -93,6 +93,14 @@ ul.sidebar-menu li ul.sub li a {
     margin-bottom: 10px;
 }
 
+.toast-top-left {
+    top: 220px !important;
+    left: 220px !important;
+}
+
+.toast-success {
+
+}
 
 
 .wrapper {

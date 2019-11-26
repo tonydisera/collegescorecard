@@ -5,7 +5,7 @@ let search = null;
 let rankChart = null;
 let metricCategories = ['selectivity', 'instruction', 'diversity', 'cost', 'outcome', 'rank']
 
-let rankHeaderHeight    = 100;
+let rankHeaderHeight    = 113;
 let rankRowHeight       = 24;
 let rankBarHeight       = 15;
 
@@ -20,6 +20,7 @@ let rankCategoryPadding = 0;
 
 let slidebarClicks = 0;
 
+let tippyShowCount = 0;
 
 
 $(document).ready(function() {
@@ -30,6 +31,8 @@ $(document).ready(function() {
 });
 
 function init() {
+
+
 
   initFieldDropdown();
 
@@ -141,7 +144,66 @@ function rankColleges() {
   promiseShowRankings(getSelectedCollegeIds())
   .then(function() {
       d3.select('#loading').style("display", "none")
+
+      if (tippyShowCount < 3) {
+        tippyShowCount++
+        setTimeout(function() {
+          tippy('#rank-chart #row-0 text.name', {
+            content: 'Hover or click on row',
+            placement: 'top',
+            theme: 'blue'
+          });
+          document.querySelector('#rank-chart #row-0 text.name')._tippy.show();
+
+          setTimeout(function() {
+            document.querySelector('#rank-chart #row-0 text.name')._tippy.hide();
+    
+
+            tippy('.col-header#col-metric-1 rect#weight-square-1', {
+              content: 'Click on squares to adjust weight',
+              placement: 'bottom',
+              theme: 'blue'
+            });
+            document.querySelector('.col-header#col-metric-1 rect#weight-square-1')._tippy.show();
+            setTimeout(function() {
+              document.querySelector('.col-header#col-metric-1 rect#weight-square-1')._tippy.hide();
+            }, 5000)
+
+
+
+          }, 5000)
+
+        },1000)
+
+      }
+
+  
+
+
   })
+
+  
+  /*
+  toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "progressBar": false,
+    "positionClass": "toast-top-left",
+    "onclick": null,
+    "showDuration": "2000",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+  }
+  toastr.success("here is a hint", "Hint")
+
+  */
+
+
 }
 
 function onAdvancedSearch() {
@@ -172,6 +234,8 @@ function showRescaledRankings(data) {
   rankChart.fieldDescriptors(getSelectedMetricFields())
   selection.datum(data);
   rankChart(selection, d3.select("#rank-chart-heading"));
+
+
 
 
 }
