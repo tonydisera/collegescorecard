@@ -37,7 +37,7 @@ function init() {
   initFieldDropdown();
 
   rankChart = rankchart();
-  rankChart.margin( { top: 10, right: 5, bottom: 0, left: 0 } )
+  rankChart.margin( { top: 60, right: 5, bottom: 0, left: 0 } )
 
   rankChart.headerHeight(rankHeaderHeight);
   rankChart.rowHeight(rankRowHeight);
@@ -149,9 +149,9 @@ function rankColleges() {
         tippyShowCount++
         setTimeout(function() {
           tippy('#rank-chart #row-0 text.name', {
-            content: 'Hover or click on row',
+            content: 'Hover over or click on row for more info',
             placement: 'top',
-            theme: 'blue'
+            theme: 'blue',
           });
           document.querySelector('#rank-chart #row-0 text.name')._tippy.show();
 
@@ -171,7 +171,7 @@ function rankColleges() {
 
 
 
-          }, 5000)
+          }, 6000)
 
         },1000)
 

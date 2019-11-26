@@ -374,7 +374,7 @@ function rankchart() {
       var g = svg
         .merge(svgEnter)
         .select("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        .attr("transform", "translate(" + margin.left + ",0)");
 
 
       // Add the column headers
@@ -453,7 +453,7 @@ function rankchart() {
       let weightGroupEnter = weightGroup
         .enter()
         .append("g")
-        .attr("transform", "translate(" + ((colWidth - (weightWidth*4))/2) + "," + ((weightHeight/2)*-1) + ")")
+        .attr("transform", "translate(" + ((colWidth - (weightWidth*4))/2) + "," + (weightHeight+((weightHeight/2)*-1)) + ")")
         .attr("class", "weights")
 
       let weightRectEnter = weightGroupEnter.selectAll("rect.weight")
@@ -507,7 +507,7 @@ function rankchart() {
 
       let hintGroup = headerRowEnter
         .append("g")
-        .attr("transform", "translate(" + (nameWidth + colWidthRank) + "," + (((weightHeight/2)*-1)+12) + ")");
+        .attr("transform", "translate(" + (nameWidth + colWidthRank) + "," + (weightHeight + (((weightHeight/2)*-1)+12)) + ")");
 
       hintGroup
         .append("text")

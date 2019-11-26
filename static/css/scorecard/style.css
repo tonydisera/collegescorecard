@@ -202,7 +202,7 @@ body .selections {
 }
 
 .btn-sm.active {
-    background-color: #7ea9dc !important;
+    background-color: #4d73a3 !important;
     border-color: #3c587e !important;
     color: #fff !important;
     font-weight: 600 !important;
@@ -374,6 +374,7 @@ button.multiselect.btn-default.active,
   overflow-x: unset;
   overflow-y: scroll;
   height: 100vh;
+  margin-top: -50px;
 }
 
 .rankchart rect.weight {
