@@ -518,13 +518,15 @@ class Search {
       self.filterColleges({selectAll: true});
     } else if (customFilter == "public_high_act") {
       self.resetFilters();
+      $(self.degreeLevelSelector).multiselect('select', ['3'], true)
       $(self.controlSelector).multiselect('select', ['1'], true)
       $('#minACT').val("30");
       self.minACT = 30;
       self.filterColleges({selectAll: true});
-    } else if (customFilter == "ivy") {
+    } else if (customFilter == "west_coast") {
       self.resetFilters();
-      self.selectedColleges = self.ivySchools;
+      $(self.regionSelector).multiselect('select', ['8'], true)
+      $(self.degreeLevelSelector).multiselect('select', ['3'], true)
       self.filterColleges({selectAll: true});
     } else if (customFilter == "ivy_plus") {
       self.resetFilters();

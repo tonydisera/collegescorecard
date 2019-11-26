@@ -161,6 +161,7 @@ body .selections {
   font-size: 15px;
   min-width: 280px;
   max-width: 280px;
+  margin-bottom: 10px;
 }
 
 
@@ -186,6 +187,7 @@ body .selections {
   display: flex;
   flex-flow: row;
   font-size: 15px;
+  margin-bottom: 10px;
 }
 
 .btn-sm {
