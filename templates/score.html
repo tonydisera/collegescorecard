@@ -28,9 +28,7 @@
 
 
 
-
-
-
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@5/dist/backdrop.css" />
 
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,500i,600,700&display=swap" rel="stylesheet">
@@ -151,22 +149,20 @@
 
                       <div id="search-colleges-container">
                         <div>
-                          <span class="step-circle">2.</span>
+                          <span   class="step-circle">2.</span>
                           <span style="padding-right:10px">Pick Colleges</span>
                         </div>
 
                         <div class="btn-group"  data-toggle="buttons">
-                            <label class="btn btn-sm btn-default active">
-                                <input type="radio" name="searchoption" value="public_high_act"> Public, ACT > 30
+                            <label  class="btn btn-sm btn-default active">
+                                <input id="custom-filter-button-1"  type="radio" name="searchoption" value="public_high_act">Highly selective, Public
                             </label>
                             <label class="btn btn-sm btn-default">
                                 <input type="radio" name="searchoption" value="usnews_top_200"> US News Top 200
                             </label>
-                            <!--
                             <label class="btn btn-sm btn-default ">
-                                <input type="radio" name="searchoption" value="ivy"> Ivy League
+                                <input type="radio" name="searchoption" value="west_coast"> West Coast
                             </label>
-                            -->
                             <label class="btn btn-sm btn-default ">
                                 <input type="radio" name="searchoption" value="ivy_plus"> Ivy League +
                             </label>
@@ -184,7 +180,7 @@
                       <img id="loading" style="display:none;width:800px" src="static/assets/scorecard/charts-loader-2x.gif"></img>
                     </center>
 
-                    <div style="display:flex;flex-flow:column;margin-top:10px">
+                    <div style="display:flex;flex-flow:column;">
                       <div id="rank-chart-title">
                         <span id="rank-college-count" class="badge primary-badge"></span>
 
@@ -474,6 +470,9 @@
     <script src="static/js/flatlab/easy-pie-chart.js"></script>
     <script src="static/js/flatlab/count.js"></script>
 
+
+    <script src="https://unpkg.com/popper.js@1"></script>
+    <script src="https://unpkg.com/tippy.js@5"></script>
 
   <script>
 

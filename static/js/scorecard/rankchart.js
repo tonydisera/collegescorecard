@@ -203,6 +203,9 @@ function rankchart() {
 
       let rowsEnter  = rows.enter()
         .append('g')
+        .attr("id", function(d,i) {
+          return "row-" + i;
+        })
         .attr('class', 'row')
         .attr('transform',function(record,i){ 
             let position = record.firstPass ? record.positionOrig : record.position;
@@ -371,7 +374,7 @@ function rankchart() {
       var g = svg
         .merge(svgEnter)
         .select("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        .attr("transform", "translate(" + margin.left + ",0)");
 
 
       // Add the column headers
@@ -397,35 +400,39 @@ function rankchart() {
         .append("text")
         .attr("class", "col-header")
         .attr("x", 0)
-        .attr("y", weightHeight+35)
+        .attr("y", weightHeight+45)
         .text("Rank")
 
       headerRowEnter
         .append("text")
-        .attr("class", "col-header")
+        .attr("id", "col-header-name")
+        .attr("class", "col-header col-name")
         .attr("x", colWidthRank)
-        .attr("y", weightHeight+35)
+        .attr("y", weightHeight+45)
         .text("College")
 
       headerRowEnter
         .append("text")
-        .attr("class", "col-header")
+        .attr("class", "col-header col-score")
         .attr("x", colWidthRank+nameWidth)
-        .attr("y", weightHeight+35)
+        .attr("y", weightHeight+45)
         .text("Score")      
 
 
       var colHeadersEnter = colHeaders
         .enter()
         .append("g")
-        .attr("class", "col-header")
+        .attr("id", function(d,i) {
+          return "col-metric-" + i;
+        })
+        .attr("class", "col-header col-metric")
         .attr("transform", function(field,i) {
           return "translate(" + field.colX + ",0)";
         })
 
       let colHeadersText = colHeadersEnter
         .append("g")
-        .attr("transform", "translate(0," +  (weightHeight+35) + ")")
+        .attr("transform", "translate(0," +  (weightHeight+45) + ")")
       colHeadersText  
         .append("text")
         .attr("dx", 0)
@@ -446,7 +453,7 @@ function rankchart() {
       let weightGroupEnter = weightGroup
         .enter()
         .append("g")
-        .attr("transform", "translate(" + ((colWidth - (weightWidth*4))/2) + "," + ((weightHeight/2)*-1) + ")")
+        .attr("transform", "translate(" + ((colWidth - (weightWidth*4))/2) + "," + (weightHeight+((weightHeight/2)*-1)) + ")")
         .attr("class", "weights")
 
       let weightRectEnter = weightGroupEnter.selectAll("rect.weight")
@@ -459,6 +466,9 @@ function rankchart() {
 
       weightRectEnter
         .append("rect")
+        .attr("id", function(d,i) {
+          return "weight-square-" + i;
+        })
         .attr("class", function(weightObject) {
           if (weightObject.weight <= weightObject.field.currentWeight-1) {
             return "weight selected";
@@ -497,10 +507,11 @@ function rankchart() {
 
       let hintGroup = headerRowEnter
         .append("g")
-        .attr("transform", "translate(" + (nameWidth + colWidthRank) + "," + (((weightHeight/2)*-1)+12) + ")");
+        .attr("transform", "translate(" + (nameWidth + colWidthRank) + "," + (weightHeight + (((weightHeight/2)*-1)+12)) + ")");
 
       hintGroup
         .append("text")
+        .attr("id", "col-header-weight")
         .attr("class", "hint-header")
         .attr("x", 0)
         .attr("y", 0)

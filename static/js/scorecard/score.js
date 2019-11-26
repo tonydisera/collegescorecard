@@ -5,7 +5,7 @@ let search = null;
 let rankChart = null;
 let metricCategories = ['selectivity', 'instruction', 'diversity', 'cost', 'outcome', 'rank']
 
-let rankHeaderHeight    = 100;
+let rankHeaderHeight    = 113;
 let rankRowHeight       = 24;
 let rankBarHeight       = 15;
 
@@ -20,6 +20,8 @@ let rankCategoryPadding = 0;
 
 let slidebarClicks = 0;
 
+let tippyShowCount = 0;
+let tippyDeltaCount = 0;
 
 
 $(document).ready(function() {
@@ -31,10 +33,12 @@ $(document).ready(function() {
 
 function init() {
 
+
+
   initFieldDropdown();
 
   rankChart = rankchart();
-  rankChart.margin( { top: 10, right: 5, bottom: 0, left: 0 } )
+  rankChart.margin( { top: 60, right: 5, bottom: 0, left: 0 } )
 
   rankChart.headerHeight(rankHeaderHeight);
   rankChart.rowHeight(rankRowHeight);
@@ -141,7 +145,47 @@ function rankColleges() {
   promiseShowRankings(getSelectedCollegeIds())
   .then(function() {
       d3.select('#loading').style("display", "none")
+
+      if (tippyShowCount < 3) {
+        tippyShowCount++
+        setTimeout(function() {
+          tippy('#rank-chart #row-0 text.name', {
+            content: 'Hover over or click on row for more info',
+            placement: 'top',
+            theme: 'blue',
+          });
+          document.querySelector('#rank-chart #row-0 text.name')._tippy.show();
+
+          setTimeout(function() {
+            if (document.querySelector('#rank-chart #row-0 text.name')._tippy) {
+              document.querySelector('#rank-chart #row-0 text.name')._tippy.hide();
+            }  
+
+            tippy('.col-header#col-metric-1 rect#weight-square-1', {
+              content: 'Click on squares to adjust weight',
+              placement: 'bottom',
+              theme: 'blue'
+            });
+            document.querySelector('.col-header#col-metric-1 rect#weight-square-1')._tippy.show();
+            setTimeout(function() {
+              if (document.querySelector('.col-header#col-metric-1 rect#weight-square-1')._tippy) {
+                document.querySelector('.col-header#col-metric-1 rect#weight-square-1')._tippy.hide();
+              }
+            }, 5000)
+
+
+
+          }, 6000)
+
+        },1000)
+
+      }
+
+  
+
+
   })
+
 }
 
 function onAdvancedSearch() {
@@ -173,6 +217,28 @@ function showRescaledRankings(data) {
   selection.datum(data);
   rankChart(selection, d3.select("#rank-chart-heading"));
 
+  if ($('#rank-chart .delta text') && $('#rank-chart .delta text').length > 0) {
+    if (tippyDeltaCount < 3) {
+      tippyDeltaCount++
+  
+      setTimeout(function() {
+        tippy('#rank-chart .delta text', {
+          content: 'See how rank changed after weights are adjusted',
+          placement: 'top',
+          theme: 'blue',
+        });
+        document.querySelector('#rank-chart .delta text')._tippy.show();
+
+        setTimeout(function() {
+          if (document.querySelector('#rank-chart .delta text') && document.querySelector('#rank-chart .delta text')._tippy) {
+            document.querySelector('#rank-chart .delta text')._tippy.hide();
+          }
+        }, 5000)
+      } ,1000)
+
+    }
+  
+  }
 
 }
 
@@ -231,7 +297,7 @@ function promiseShowHistograms() {
 
     let headerContainerSelector  = "#hist-chart-categories"
     let headerSelector  = "#hist-chart-categories .category-header"
-    d3.select(headerContainerSelector).style("margin-left", (rankColWidthRank+rankNameWidth+rankColPadding+rankColWidthScore+rankColPadding+rankColWidthTotal) + "px");
+    d3.select(headerContainerSelector).style("margin-left", (rankColWidthRank + rankNameWidth+rankColPadding+rankColWidthScore+rankColPadding+rankColWidthTotal+rankColPadding) + "px");
     d3.selectAll(headerSelector).remove();
 
 
