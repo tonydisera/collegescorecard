@@ -21,6 +21,7 @@ let rankCategoryPadding = 0;
 let slidebarClicks = 0;
 
 let tippyShowCount = 0;
+let tippyDeltaCount = 0;
 
 
 $(document).ready(function() {
@@ -217,21 +218,26 @@ function showRescaledRankings(data) {
   rankChart(selection, d3.select("#rank-chart-heading"));
 
   if ($('#rank-chart .delta text') && $('#rank-chart .delta text').length > 0) {
-    setTimeout(function() {
-      tippy('#rank-chart .delta text', {
-        content: 'See how rank changed after weights are adjusted',
-        placement: 'top',
-        theme: 'blue',
-      });
-      document.querySelector('#rank-chart .delta text')._tippy.show();
-
+    if (tippyDeltaCount < 3) {
+      tippyDeltaCount++
+  
       setTimeout(function() {
-        if (document.querySelector('#rank-chart .delta text') && document.querySelector('#rank-chart .delta text')._tippy) {
-          document.querySelector('#rank-chart .delta text')._tippy.hide();
-        }
-      }, 5000)
-    } ,1000)
+        tippy('#rank-chart .delta text', {
+          content: 'See how rank changed after weights are adjusted',
+          placement: 'top',
+          theme: 'blue',
+        });
+        document.querySelector('#rank-chart .delta text')._tippy.show();
 
+        setTimeout(function() {
+          if (document.querySelector('#rank-chart .delta text') && document.querySelector('#rank-chart .delta text')._tippy) {
+            document.querySelector('#rank-chart .delta text')._tippy.hide();
+          }
+        }, 5000)
+      } ,1000)
+
+    }
+  
   }
 
 }
