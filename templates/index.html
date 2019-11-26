@@ -45,298 +45,255 @@
   <body class="light-sidebar-nav">
 
   <section id="container">
-      <!--header start-->
-      <header class="header white-bg">
-          <div class="sidebar-toggle-box">
-              <i class="fa fa-bars"></i>
-          </div>
-          <!--logo start-->
-          <a href="." class="logo">US College<span> Scorecard</span></a>
-            <div class="top-nav ">
-                <!--search & user info start-->
-                <ul class="nav pull-right top-menu">
-                    <li class="sb-toggle-right">
-                        <i class="fa  fa-align-right"></i>
-                    </li>
-                </ul>
-            </div>
-      </header>
-      <!--header end-->
-      <!--sidebar start-->
-      <aside>
-          <div id="sidebar"  class="nav-collapse ">
-              <!-- sidebar menu start-->
-              <ul class="sidebar-menu" id="nav-accordion">
-                  <li>
-                      <a class="active" href=".">
-                          <i class="fa "></i>
-                          <span>Home</span>
-                      </a>
-                  </li>
-
-                  <li>
-                      <a class="" href="summary">
-                          <i class="fa fa-dashboard"></i>
-                          <span>By the numbers</span>
-                      </a>
-                  </li>
-
-                  <li>
-                      <a class="" href="segment">
-                          <i class="fa fa-bar-chart-o"></i>
-                          <span>Breaking it down</span>
-                      </a>
-                  </li>
-
-
-                  <li>
-                      <a class="" href="score">
-                          <i class="fa fa-sort-amount-desc"></i>
-                          <span>Compare and Rank</span>
-                      </a>
-                  </li>
-
-  
-
-              </ul>
-              <!-- sidebar menu end-->
-          </div>
-      </aside>
-      <!--sidebar end-->
-      <!--main content start-->
-      <section id="main-content">
-          <section class="wrapper">
-
-
-            <div class="card custom-overview">
-                <div class="card-body">
-                  The <a href="https://collegescorecard.ed.gov/" style="font-weight:600">College Scorecard</a> is a federal website that allows users to find, select, and compare higher-education institutions based on a few provided
-                    variables. While the website has its benefits, we found that the interface did not take advantage of the extensive dataset collected on schools, and lacked the detailed reasons users would pick certain schools.
-                    We decided that it would be an interesting project to leverage the college scorecard dataset and cover over 7000 higher education institutions by focusing on institutional, academic, admission, financial, and future value data.
-                    Combining all of this, we want to present an addendum to the college scorecard tool for prospective students to look beyond opaque college rankings to evaluate and compare particular colleges.</div>
-                   
-                   <!-- an extensive federal dataset that places a focus on outcomes and overall-value for more than 7000 higher education institutions. A variety of data is represented by the   Data on student-debt, attendance-cost, and median salary after graduation offer metrics for prospective students to look beyond opaque college rankings to evaluate and compare particular colleges. -->
-                </div>
-            </div>
-            <div class="row" style="margin-top:30px">
-
-              <div class="col-lg-3">
-                <aside class="profile-nav alt ">
-                  <section class="panel">
-                    <a href="summary" class="panel">
-                        <div class="user-heading alt bg-blue" width="450px">
-                            <i class="fa fa-dashboard"></i>
-                            <h4>By the Numbers</h4>
-                            <p>Here we present an overview of the college scorecard dataset to help you see what's going on.</p>
-                            <img style="width:300px;height:200px;" src="static/img/overview/SummaryPic.png" alt="Summary view">
-                        </div>
-    
-                        <a href="segment" class="btn btn-default btn-white btn-block" id="pulsate-once">Go</a>
-                      </a>
-                  </section>
-                </aside>
-              </div>
-
-              <div class="col-lg-3">
-                <aside class="profile-nav alt ">
-                    <a href="segment" class="panel">
-                        <div class="user-heading alt bg-blue" width="450px">
-                            <i class="fa fa-bar-chart-o"></i>
-                            <h4>Breaking it Down</h4>
-                            <p>Here we want to encourage a deep-dive into the data to see trends hidden from users.</p>
-                            <img style="width:300px;height:200px;" src="static/img/overview/SegmentPic.png" alt="Segment view">
-                        </div>
-    
-                        <a href="segment" class="btn btn-default btn-white btn-block" id="pulsate-once">Go</a>
-                      </a>
-                </aside>
-              </div>
-
-              <div class="col-lg-3">
-                <aside class="profile-nav alt ">
-                    <a href="score" class="panel">
-                        <div class="user-heading alt bg-blue" width="450px">
-                            <i class="fa fa-sort-amount-desc"></i>
-                            <h4>Compare &amp; Rank</h4>
-                            <p>Here we showcase our tool that allows both more control over the data as well as high-level insights.</p>
-                            <img style="width:300px;height:200px;" src="static/img/overview/ScorePic.png" alt="Segment view">
-                        </div>
-    
-                        <a href="segment" class="btn btn-default btn-white btn-block" id="pulsate-once">Go</a>
-                      </a>
-                </aside>
-              </div>
-                    
-
-<!--
-                    <a  href="summary"  class="user-heading alt bg-blue">
-                        <i class="fa fa-dashboard"></i>
-                        <h1>By the Numbers</h1>
-                    </a>
-
-                    <a href="summary" class="btn btn-default btn-white btn-block" id="pulsate-once" >Show</a>
-                  </section>
-                </aside>
-              </div>
-            --
-              
-              <div class="col-lg-3">
-                <aside class="profile-nav alt ">
-                  <a href="segment" class="panel">
-                    <div class="user-heading alt bg-blue">
-                        <i class="fa fa-bar-chart-o"></i>
-                        <h1>Breaking it Down</h1>
-                    </div>
-
-                    <a href="segment" class="btn btn-default btn-white btn-block" id="pulsate-once" >Show</a>
-                  </a>
-                </aside>
-              </div>
-              
-              <div class="col-lg-3">
-                <aside class="profile-nav alt ">
-                  <a  href="score"  class="panel">
-                    <div class="user-heading alt bg-blue">
-                        <i class="fa fa-sort-amount-desc"></i>
-                        <h1>Score &amp; Rank</h1>
-                    </div>
-
-                    <a href="score" class="btn btn-default btn-white btn-block" id="pulsate-once" >Show</a>
-                  </a>
-                </aside>
-              </div>
-            -->
-
-            </div>
-
-           
-
-            <div style="margin-top:30px;display: flex;justify-content: center;">
-              <div class='tableauPlaceholder' id='viz1574181402991' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;co&#47;collegescorecard_summary_viz&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='collegescorecard_summary_viz&#47;Dashboard1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;co&#47;collegescorecard_summary_viz&#47;Dashboard1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1574181402991');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1210px';vizElement.style.height='777px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1210px';vizElement.style.height='777px';} else { vizElement.style.width='100%';vizElement.style.height='1327px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
-            </div>
-
-          </section>
-      </section>
-      <!--main content end-->
-
-      <!-- Right Slidebar start -->
-      <div class="sb-slidebar sb-right sb-style-overlay">
-          <h4 style="padding-left:10px">US College Detail</h4>
-          <h5 class="side-title">Overview</h5>
-
-          <h5 class="side-title">Selectivity</h5>
-          <ul class="p-task tasks-bar">
-            <li>
-              <div class="task-info">
-                  <div class="desc">Admission Rate</div>
-                  <div class="value">10%</div>
-              </div>
-            </li>
-            <li>
-              <div class="task-info">
-                  <div class="desc">ACT Cumulative - Midpoint</div>
-                  <div class="value">32</div>
-              </div>
-              <div class="task-info">
-                  <div class="desc">ACT Cumulative - 75 percentile</div>
-                  <div class="value">33</div>
-              </div>
-            </li>
-          </ul>
-          <h5 class="side-title">Instruction</h5>
-          <ul class="p-task tasks-bar">
-            <li>
-              <div class="task-info">
-                  <div class="desc">Faculty Salary</div>
-                  <div class="value">$50,000</div>
-              </div>
-              <div class="task-info">
-                  <div class="desc">Full-time Faculty Ratio</div>
-                  <div class="value">79%</div>
-              </div>
-            </li>
-            <li>
-              <div class="task-info">
-                  <div class="desc">Instructional Cost per full-time student</div>
-                  <div class="value">$12,000</div>
-              </div>
-            </li>
-          </ul>
-          <h5 class="side-title">Diversity</h5>
-          <ul class="p-task tasks-bar">
-            <li>
-              <div class="task-info">
-                  <div class="desc">Percent Black</div>
-                  <div class="value">.5%</div>
-              </div>
-              <div class="task-info">
-                  <div class="desc">Percent Hispanic</div>
-                  <div class="value">10%</div>
-              </div>
-              <div class="task-info">
-                  <div class="desc">Percent Asian</div>
-                  <div class="value">12%</div>
-              </div>
-            </li>
-            <li>
-              <div class="task-info">
-                  <div class="desc">Median Household Income</div>
-                  <div class="value">$57,000</div>
-              </div>
-            </li>
-          </ul>          
-          <h5 class="side-title">Cost</h5>
-          <ul class="p-task tasks-bar">
-            <li>
-              <div class="task-info">
-                  <div class="desc">Tuition In-state</div>
-                  <div class="value">$7000</div>
-              </div>
-              <div class="task-info">
-                  <div class="desc">Tuition Out-of-state</div>
-                  <div class="value">$30,000</div>
-              </div>
-              <div class="task-info">
-                  <div class="desc">Cost of attendance</div>
-                  <div class="value">$17,000</div>
-              </div>
-            </li>
-            <li>
-              <div class="task-info">
-                  <div class="desc">Median Debt</div>
-                  <div class="value">$22,000</div>
-              </div>
-            </li>
-          </ul>          
-
-          <h5 class="side-title">Outcomes</h5>
-          <ul class="p-task tasks-bar">
-            <li>
-              <div class="task-info">
-                  <div class="desc">Retention Rate</div>
-                  <div class="value">78%</div>
-              </div>
-              <div class="task-info">
-                  <div class="desc">Completion Rate</div>
-                  <div class="value">78%</div>
-              </div>
-            </li>
-            <li>
-              <div class="task-info">
-                  <div class="desc">Median Salary - 2 years post graduation</div>
-                  <div class="value">$60,200</div>
-              </div>
-              <div class="task-info">
-                  <div class="desc">Median Salary - 6 years post graduation</div>
-                  <div class="value">$78,300</div>
-              </div>
-            </li>
-          </ul>
+    <!--header start-->
+    <header class="header white-bg">
+      <div class="sidebar-toggle-box">
+        <i class="fa fa-bars"></i>
       </div>
-      <!-- Right Slidebar end -->
-
-
-      <!--footer end-->
+      <!--logo start-->
+      <a href="." class="logo">US College<span> Scorecard</span></a>
+      <div class="top-nav ">
+        <!--search & user info start-->
+        <ul class="nav pull-right top-menu">
+          <li class="sb-toggle-right">
+            <i class="fa  fa-align-right"></i>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <!--header end-->
+    <!--sidebar start-->
+    <aside>
+      <div id="sidebar" class="nav-collapse ">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu" id="nav-accordion">
+          <li>
+            <a class="active" href=".">
+              <i class="fa "></i>
+              <span>Home</span>
+            </a>
+          </li>
+  
+          <li>
+            <a class="" href="summary">
+              <i class="fa fa-dashboard"></i>
+              <span>By the numbers</span>
+            </a>
+          </li>
+  
+          <li>
+            <a class="" href="segment">
+              <i class="fa fa-bar-chart-o"></i>
+              <span>Breaking it down</span>
+            </a>
+          </li>
+  
+  
+          <li>
+            <a class="" href="score">
+              <i class="fa fa-sort-amount-desc"></i>
+              <span>Compare and Rank</span>
+            </a>
+          </li>
+  
+  
+  
+        </ul>
+        <!-- sidebar menu end-->
+      </div>
+    </aside>
+    <!--sidebar end-->
+    <!--main content start-->
+    <section id="main-content">
+      <section class="wrapper">
+        <div class="card custom-overview">
+          <div class="card-body">
+            The <a href="https://collegescorecard.ed.gov/" style="font-weight:600">College Scorecard</a> is a federal
+            website that allows users to find, select, and compare higher-education institutions based on a few provided
+            variables. While the website has its benefits, we found that the interface did not take advantage of the
+            extensive dataset collected on schools, and lacked the detailed reasons users would pick certain schools.
+            We decided that it would be an interesting project to leverage the college scorecard dataset and cover over
+            7000 higher education institutions by focusing on institutional, academic, admission, financial, and future
+            value data.
+            Combining all of this, we want to present an addendum to the college scorecard tool for prospective students
+            to look beyond opaque college rankings to evaluate and compare particular colleges.</div>
+        </div>
+        </div>
+  
+        <div class="row" style="justify-content:center;margin-top:30px">
+          <div class="col-lg-4">
+            <aside class="profile-nav alt ">
+              <section class="panel">
+                <a href="summary" class="panel">
+                  <div class="user-heading alt bg-blue" width="450px">
+                    <i class="fa fa-dashboard"></i>
+                    <h4>By the Numbers</h4>
+                    <p>Here we present an overview of the college scorecard dataset to help you see what's going on.</p>
+                    <img style="width:320px;height:240px;" src="static/img/overview/SummaryPic.png" alt="Summary view">
+                  </div>
+  
+                  <a href="summary" class="btn btn-default btn-white btn-block" id="pulsate-once">Go!</a>
+                </a>
+              </section>
+            </aside>
+          </div>
+  
+          <div class="col-lg-4">
+            <aside class="profile-nav alt ">
+              <a href="segment" class="panel">
+                <div class="user-heading alt bg-blue" width="450px">
+                  <i class="fa fa-bar-chart-o"></i>
+                  <h4>Breaking it Down</h4>
+                  <p>Here we want to encourage a deep-dive into the data to see trends hidden from users.</p>
+                  <img style="width:320px;height:240px;" src="static/img/overview/SegmentPic.png" alt="Segment view">
+                </div>
+  
+                <a href="segment" class="btn btn-default btn-white btn-block" id="pulsate-once">Go!</a>
+              </a>
+            </aside>
+          </div>
+  
+          <div class="col-lg-4">
+            <aside class="profile-nav alt ">
+              <a href="score" class="panel">
+                <div class="user-heading alt bg-blue" width="450px">
+                  <i class="fa fa-sort-amount-desc"></i>
+                  <h4>Compare &amp; Rank</h4>
+                  <p>Here we showcase our tool that allows both more control over the data as well as high-level insights.
+                  </p>
+                  <img style="width:320px;height:240px;" src="static/img/overview/ScorePic.png" alt="Segment view">
+                </div>
+  
+                <a href="score" class="btn btn-default btn-white btn-block" id="pulsate-once">Go!</a>
+              </a>
+            </aside>
+          </div>
+  
+        </div>
+      </section>
+    </section>
+  
+    <!--main content end-->
+  
+    <!-- Right Slidebar start --
+        <div class="sb-slidebar sb-right sb-style-overlay">
+            <h4 style="padding-left:10px">US College Detail</h4>
+            <h5 class="side-title">Overview</h5>
+  
+            <h5 class="side-title">Selectivity</h5>
+            <ul class="p-task tasks-bar">
+              <li>
+                <div class="task-info">
+                    <div class="desc">Admission Rate</div>
+                    <div class="value">10%</div>
+                </div>
+              </li>
+              <li>
+                <div class="task-info">
+                    <div class="desc">ACT Cumulative - Midpoint</div>
+                    <div class="value">32</div>
+                </div>
+                <div class="task-info">
+                    <div class="desc">ACT Cumulative - 75 percentile</div>
+                    <div class="value">33</div>
+                </div>
+              </li>
+            </ul>
+            <h5 class="side-title">Instruction</h5>
+            <ul class="p-task tasks-bar">
+              <li>
+                <div class="task-info">
+                    <div class="desc">Faculty Salary</div>
+                    <div class="value">$50,000</div>
+                </div>
+                <div class="task-info">
+                    <div class="desc">Full-time Faculty Ratio</div>
+                    <div class="value">79%</div>
+                </div>
+              </li>
+              <li>
+                <div class="task-info">
+                    <div class="desc">Instructional Cost per full-time student</div>
+                    <div class="value">$12,000</div>
+                </div>
+              </li>
+            </ul>
+            <h5 class="side-title">Diversity</h5>
+            <ul class="p-task tasks-bar">
+              <li>
+                <div class="task-info">
+                    <div class="desc">Percent Black</div>
+                    <div class="value">.5%</div>
+                </div>
+                <div class="task-info">
+                    <div class="desc">Percent Hispanic</div>
+                    <div class="value">10%</div>
+                </div>
+                <div class="task-info">
+                    <div class="desc">Percent Asian</div>
+                    <div class="value">12%</div>
+                </div>
+              </li>
+              <li>
+                <div class="task-info">
+                    <div class="desc">Median Household Income</div>
+                    <div class="value">$57,000</div>
+                </div>
+              </li>
+            </ul>          
+            <h5 class="side-title">Cost</h5>
+            <ul class="p-task tasks-bar">
+              <li>
+                <div class="task-info">
+                    <div class="desc">Tuition In-state</div>
+                    <div class="value">$7000</div>
+                </div>
+                <div class="task-info">
+                    <div class="desc">Tuition Out-of-state</div>
+                    <div class="value">$30,000</div>
+                </div>
+                <div class="task-info">
+                    <div class="desc">Cost of attendance</div>
+                    <div class="value">$17,000</div>
+                </div>
+              </li>
+              <li>
+                <div class="task-info">
+                    <div class="desc">Median Debt</div>
+                    <div class="value">$22,000</div>
+                </div>
+              </li>
+            </ul>          
+  
+            <h5 class="side-title">Outcomes</h5>
+            <ul class="p-task tasks-bar">
+              <li>
+                <div class="task-info">
+                    <div class="desc">Retention Rate</div>
+                    <div class="value">78%</div>
+                </div>
+                <div class="task-info">
+                    <div class="desc">Completion Rate</div>
+                    <div class="value">78%</div>
+                </div>
+              </li>
+              <li>
+                <div class="task-info">
+                    <div class="desc">Median Salary - 2 years post graduation</div>
+                    <div class="value">$60,200</div>
+                </div>
+                <div class="task-info">
+                    <div class="desc">Median Salary - 6 years post graduation</div>
+                    <div class="value">$78,300</div>
+                </div>
+              </li>
+            </ul>
+        </div>
+        <-- Right Slidebar end --
+        -->
+  
+  
+    <!--footer end-->
   </section>
 
     <!-- js placed at the end of the document so the pages load faster -->
