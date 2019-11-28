@@ -3,7 +3,6 @@ class Search {
     this.collegeSelector   = '#search-dialog #select-college';
 		this.regionSelector   = '#search-dialog #select-region';
     this.programSelector  = '#search-dialog #select-program';
-    this.controlSelector  = '#search-dialog #select-control';
     this.filteredCollegesSelector = "#search-dialog #filtered-colleges";
     this.usnewsSelector = "#search-dialog #usnews-cb";
 
@@ -32,9 +31,14 @@ class Search {
     this.checkedColleges = []
 
     this.degrees = {
-      '1': 'certificate',
-      '2': 'associates',
-      '3': 'bachelors'
+      '1': 'Certificate',
+      '2': 'Associates',
+      '3': 'Bachelors'
+    }
+    this.controls = {
+      '1': 'Public',
+      '2': 'Private',
+      '3': 'Private for profit'
     }
 
 
@@ -102,6 +106,13 @@ class Search {
       });
 
 
+      $('input:checkbox[name="control_option"]').change(function(){
+        let key = $(this).val();
+        let checked = d3.select(this).property("checked");
+        self.selectControl(key, self.controls[key], checked)
+        self.filterColleges();
+      });
+
 
       $(self.collegeSelector).multiselect(
       { enableCaseInsensitiveFiltering: true,
@@ -161,29 +172,6 @@ class Search {
           } else {
             let rec = options[0].value
             self.selectProgram(rec, checked);
-          }
-
-        },
-        onDropdownHide: function(event) {
-          self.filterColleges();
-        }    
-      })
-
-      $(self.controlSelector).multiselect(
-      { enableCaseInsensitiveFiltering: true,
-        nonSelectedText: "Control",
-        buttonWidth: '400px',
-        onChange: function(options, checked) {
-          if (Array.isArray(options)) {
-            options.forEach(function(option) {
-              let key = option[0].value
-              let label = option[0].label
-              self.selectControl(key, label, checked);
-            })
-          } else {
-            let key = options[0].value
-            let label = options[0].label
-            self.selectControl(key, label, checked);
           }
 
         },
@@ -415,10 +403,6 @@ class Search {
       self.selectedControlLabels.splice(idx,1)
     }
 
-    d3.select(d3.select(self.controlSelector).node().parentElement)
-      .select('.multiselect-selected-text')
-      .classed('has-selections', self.selectedControl.length > 0);
-
   }
   selectDegreeLevel(degreeLevelKey, degreeLevelLabel, checked) {
     let self = this;
@@ -442,13 +426,13 @@ class Search {
 
     d3.select("#degree-radio-buttons.btn-group .btn-sm.active").classed("active", false)
 
+    d3.selectAll("#control-buttons.btn-group .btn-sm.active").classed("active", false)
 
     $(self.usnewsSelector).prop( "checked", false );
 
     $(self.programSelector).multiselect('deselect', self.selectedPrograms, false);
     $(self.collegeSelector).multiselect('deselect', self.selectedColleges, false);
     $(self.regionSelector).multiselect('deselect', self.selectedRegions, false);
-    $(self.controlSelector).multiselect('deselect', self.selectedControl, false);
 
 
     $('#minACT').val("");
@@ -469,14 +453,6 @@ class Search {
     self.usnewsChecked = false;
 
 
-/*
-    $(self.programSelector).multiselect('refresh');
-    $(self.collegeSelector).multiselect('refresh');
-    $(self.regionSelector).multiselect('refresh');
-    $(self.controlSelector).multiselect('refresh');
-    $(self.degreeLevelSelector).multiselect('refresh');
-*/
-
     d3.select(d3.select(self.programSelector).node().parentElement)
       .select('.multiselect-selected-text')
       .classed('has-selections', self.selectedPrograms.length > 0);
@@ -486,9 +462,6 @@ class Search {
     d3.select(d3.select(self.regionSelector).node().parentElement)
       .select('.multiselect-selected-text')
       .classed('has-selections', self.selectedRegions.length > 0);
-    d3.select(d3.select(self.controlSelector).node().parentElement)
-      .select('.multiselect-selected-text')
-      .classed('has-selections', self.selectedControl.length > 0);
    
     self.filterColleges();
 
@@ -499,16 +472,25 @@ class Search {
     self.customFilter = customFilter;
     if (customFilter == "usnews_top_200") {
       self.resetFilters();
+
       $(self.usnewsSelector).prop( "checked", true );
       self.usnewsChecked = true;
+
       self.filterColleges({selectAll: true});
     } else if (customFilter == "public_high_act") {
       self.resetFilters();
+
       d3.select("#degree-radio-buttons.btn-group .btn-sm.active").classed("active", false)
       d3.select("#degree-radio-buttons.btn-group #degree-bachelors-radio").classed("active", true)
-      $(self.controlSelector).multiselect('select', ['1'], true)
+
+      d3.selectAll("#control-buttons.btn-group #control-public input").property("checked", true)
+      d3.selectAll("#control-buttons.btn-group #control-public").classed("active", true)
+      self.selectControl("1", "Public", true)
+
+
       $('#minACT').val("30");
       self.minACT = 30;
+
       self.filterColleges({selectAll: true});
     } else if (customFilter == "west_coast") {
       self.resetFilters();

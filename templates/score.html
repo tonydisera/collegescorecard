@@ -349,14 +349,18 @@
                 </div>
 
 
-                <div class="select-container"  >
-                  <select id="select-control" multiple="multiple">
-                    <option value="1" selected="selected">Public</option>
-                    <option value="2">Private</option>
-                    <option value="3">Private for profit</option>
-                  </select>
-                </div>
 
+                <div id="control-buttons" class="btn-group"  data-toggle="buttons" style="margin-bottom: 20px;margin-top: 20px">
+                  <label   class="btn btn-sm btn-default" id="control-public">
+                    <input type="checkbox"  name="control_option" value="1">Public
+                  </label>
+                  <label  class="btn btn-sm btn-default ">
+                    <input type="checkbox" name="control_option" value="2">Private
+                  </label>
+                  <label class="btn btn-sm btn-default ">
+                    <input type="checkbox" name="control_option" value="3">Private for Profit
+                  </label>
+                </div>
 
                 <div class="select-container" >
                   <select id="select-program" multiple="multiple">
@@ -418,7 +422,7 @@
           <div class="card" style="flex-grow:1;margin-left:10px;margin-bottom:0px">
             <div class="card-header">Select
               <div style="float:right;display:inline-block;max-height:20px">
-                <label style="padding-right:4px">
+                <label style="padding-right:4px;font-size:16px">
                   Colleges found
                 </label>
                 <span id="filtered-college-count" style="max-height:20px" class="badge badge-primary"></span>
