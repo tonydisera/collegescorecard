@@ -330,35 +330,38 @@
           <div class="card" style="flex-grow:1;max-width:420px;min-width:420px;">
             <div class="card-header">
               Filter
-             <button id="reset-button"  type="button" onclick="search.resetFilters()" class="btn btn-info btn-sm" style="margin-top: 0px;margin-left: 20px;display:inline-block">Reset</button>
+             <button id="reset-button"  type="button" onclick="search.resetFilters()" class="btn btn-white btn-sm" style="margin-top: 0px;margin-left: 100px;width:100px;display:inline-block">Reset</button>
             </div>
             <div class="card-body" style="display:flex;justify-content: space-between;flex-direction: column;">
               <div style="min-height:520px;max-height:520px;">
 
-                <div class="form-check" style="margin-left: -10px;padding-top: 15px;padding-bottom: 35px;">
-                  <input type="checkbox" false id="usnews-cb" class="form-checked-input">
-                  <label id="usnews-cb-label" class="form-check-label" for="usnews-cb">
-                    Top Ranked (US News and World Report)
-                  </label>
+
+                <div id="degree-radio-buttons" class="btn-group"  data-toggle="buttons" style="margin-bottom: 20px;margin-top: 20px">
+                    <label  class="btn btn-sm btn-default ">
+                        <input  type="radio" name="degree_option" value="1">Certificate
+                    </label>
+                    <label class="btn btn-sm btn-default ">
+                        <input type="radio" name="degree_option" value="2">Associates
+                    </label>
+                    <label id="degree-bachelors-radio" class="btn btn-sm btn-default active ">
+                        <input type="radio" name="degree_option" value="3">Bachelors
+                    </label>
                 </div>
 
 
-                <div class="select-container">
-                  <select id="select-degree-level" multiple="multiple">
-
-                     <option value="1">Certificate</option>
-                     <option value="2">Associates</option>
-                     <option value="3" selected="selected">Bachelors</option>
-                     <option value="4">Graduate</option>
+                <div class="select-container"  >
+                  <select id="select-control" multiple="multiple">
+                    <option value="1" selected="selected">Public</option>
+                    <option value="2">Private</option>
+                    <option value="3">Private for profit</option>
                   </select>
                 </div>
 
 
                 <div class="select-container" >
-                  <select id="select-college" multiple="multiple">
+                  <select id="select-program" multiple="multiple">
                   </select>
                 </div>
-
 
 
                 <div class="select-container" >
@@ -377,22 +380,11 @@
                 </div>
 
 
-                <div class="select-container" >
-                  <select id="select-program" multiple="multiple">
-                  </select>
-                </div>
-
-                <div class="select-container" >
-                  <select id="select-control" multiple="multiple">
-                    <option value="1" selected="selected">Public</option>
-                    <option value="2">Private</option>
-                    <option value="3">Private for profit</option>
-                  </select>
-                </div>
 
 
 
-                <div style="display:flex;font-size:16px">
+
+                <div style="display:flex;font-size:16px;margin-bottom:20px">
                   <label id="labelACT" class="has-value" for="minACT" style="margin-top:7px">ACT</label>
                   <input type="text" value="30" class="form-control mb-2" id="minACT" placeholder="Min" 
                   style="margin-left:5px;margin-right:10px;width:55px;font-size:15px"/>
@@ -401,6 +393,20 @@
                 </div>
 
 
+
+                <div class="select-container" >
+                  <select id="select-college" multiple="multiple">
+                  </select>
+                </div>
+
+
+
+                <div class="form-check" style="margin-left: -10px;padding-top: 5px;padding-bottom: 25px;">
+                  <input type="checkbox" false id="usnews-cb" class="form-checked-input">
+                  <label id="usnews-cb-label" class="form-check-label" for="usnews-cb">
+                    Top Ranked (US News and World Report)
+                  </label>
+                </div>
 
               </div>
 

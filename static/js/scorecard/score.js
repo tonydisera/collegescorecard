@@ -91,8 +91,7 @@ function init() {
 
 
   $('input:radio[name="searchoption"]').change(function(){
-      let self = this;
-      let option = $(self).val();
+      let option = $(this).val();
       if(option === 'advanced_search'){
         $("#search-dialog").modal()
       } else {

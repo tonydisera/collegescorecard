@@ -1,7 +1,6 @@
 class Search {
 	constructor() {
     this.collegeSelector   = '#search-dialog #select-college';
-    this.degreeLevelSelector   = '#search-dialog #select-degree-level';
 		this.regionSelector   = '#search-dialog #select-region';
     this.programSelector  = '#search-dialog #select-program';
     this.controlSelector  = '#search-dialog #select-control';
@@ -31,6 +30,12 @@ class Search {
     this.allColleges = []
     this.filteredColleges = []
     this.checkedColleges = []
+
+    this.degrees = {
+      '1': 'certificate',
+      '2': 'associates',
+      '3': 'bachelors'
+    }
 
 
     this.fieldNames = ["id", "name", "usnews_2019_rank", "control", "region", 
@@ -90,28 +95,13 @@ class Search {
           self.filterColleges();
       })
 
-      $(self.degreeLevelSelector).multiselect(
-      { 
-        buttonWidth: '400px',
-        nonSelectedText: "Predominant Degree Awarded",
-        onChange: function(options, checked) {
-          if (Array.isArray(options)) {
-            options.forEach(function(option) {
-              let key = option[0].value
-              let label = option[0].label
-              self.selectDegreeLevel(key, label, checked);
-            })
-          } else {
-            let key = options[0].value
-            let label = options[0].label
-            self.selectDegreeLevel(key, label, checked);
-          }
+      $('input:radio[name="degree_option"]').change(function(){
+        let key = $(this).val();
+        self.selectDegreeLevel(key, self.degrees[key], true)
+        self.filterColleges();
+      });
 
-        },
-        onDropdownHide: function(event) {
-          self.filterColleges();
-        }    
-      })
+
 
       $(self.collegeSelector).multiselect(
       { enableCaseInsensitiveFiltering: true,
@@ -434,6 +424,8 @@ class Search {
     let self = this;
     if (checked) {
       if (self.selectedDegreeLevel.indexOf(degreeLevelKey) < 0) {
+        self.selectedDegreeLevel = []
+        self.selectedDegreeLevelLabels = []
         self.selectedDegreeLevel.push(degreeLevelKey);
         self.selectedDegreeLevelLabels.push(degreeLevelLabel);
       }
@@ -443,14 +435,12 @@ class Search {
       self.selectedDegreeLevelLabels.splice(idx,1)
     }
 
-    d3.select(d3.select(self.degreeLevelSelector).node().parentElement)
-      .select('.multiselect-selected-text')
-      .classed('has-selections', self.selectedDegreeLevel.length > 0);
-    
   }
   resetFilters() {
 
     let self = this;
+
+    d3.select("#degree-radio-buttons.btn-group .btn-sm.active").classed("active", false)
 
 
     $(self.usnewsSelector).prop( "checked", false );
@@ -458,7 +448,6 @@ class Search {
     $(self.programSelector).multiselect('deselect', self.selectedPrograms, false);
     $(self.collegeSelector).multiselect('deselect', self.selectedColleges, false);
     $(self.regionSelector).multiselect('deselect', self.selectedRegions, false);
-    $(self.degreeLevelSelector).multiselect('deselect', self.selectedDegreeLevel, false);
     $(self.controlSelector).multiselect('deselect', self.selectedControl, false);
 
 
@@ -500,10 +489,7 @@ class Search {
     d3.select(d3.select(self.controlSelector).node().parentElement)
       .select('.multiselect-selected-text')
       .classed('has-selections', self.selectedControl.length > 0);
-    d3.select(d3.select(self.degreeLevelSelector).node().parentElement)
-      .select('.multiselect-selected-text')
-      .classed('has-selections', self.selectedDegreeLevel.length > 0);
-
+   
     self.filterColleges();
 
   }
@@ -518,7 +504,8 @@ class Search {
       self.filterColleges({selectAll: true});
     } else if (customFilter == "public_high_act") {
       self.resetFilters();
-      $(self.degreeLevelSelector).multiselect('select', ['3'], true)
+      d3.select("#degree-radio-buttons.btn-group .btn-sm.active").classed("active", false)
+      d3.select("#degree-radio-buttons.btn-group #degree-bachelors-radio").classed("active", true)
       $(self.controlSelector).multiselect('select', ['1'], true)
       $('#minACT').val("30");
       self.minACT = 30;
@@ -526,7 +513,8 @@ class Search {
     } else if (customFilter == "west_coast") {
       self.resetFilters();
       $(self.regionSelector).multiselect('select', ['8'], true)
-      $(self.degreeLevelSelector).multiselect('select', ['3'], true)
+      d3.select("#degree-radio-buttons.btn-group .btn-sm.active").classed("active", false)
+      d3.select("#degree-radio-buttons.btn-group #degree-bachelors-radio").classed("active", true)
       self.filterColleges({selectAll: true});
     } else if (customFilter == "ivy_plus") {
       self.resetFilters();
@@ -680,7 +668,7 @@ class Search {
         if (options && options.selectAll) {
           return "checked";
         } else {
-          return false;
+          return null;
         }
       })
       .on("change", function(d,i) {
@@ -705,6 +693,7 @@ class Search {
         self.checkedColleges.push(college.id);
       })     
       $("#search-dialog  #rank-button").attr("disabled", false); 
+      $(self.selectAllSelector).prop( "checked", true );
     }
 
   }
