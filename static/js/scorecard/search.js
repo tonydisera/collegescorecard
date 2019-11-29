@@ -37,7 +37,7 @@ class Search {
       '3': 'Private for profit'
     }
 
-    this.RANK_COLLEGE_LIMIT = 400;
+    this.RANK_COLLEGE_LIMIT = 500;
 
 
     this.fieldNames = ["id", "name", "usnews_2019_rank", "control", "region", 
