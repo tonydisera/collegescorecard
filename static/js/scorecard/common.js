@@ -44,35 +44,42 @@ function promiseGetData(fieldNames) {
 
 }
 
+function metricGetDataURL(fieldNames, collegeIds, options) {
+  let url = null;
+  if (fieldNames.length > 0) {
+    if (options && options.includeDefaultFields) {
+      defaultMetricFieldNames.forEach(function(defaultFieldName) {
+        if (fieldNames.indexOf(defaultFieldName) < 0) {
+          fieldNames.push(defaultFieldName);
+        }
+
+      })
+
+    }
+    if (options && options.includeNameField) {
+      ["id", "name"].forEach(function(theFieldName) {
+        if (fieldNames.indexOf(theFieldName) < 0) {
+          fieldNames.push(theFieldName);
+        }
+
+      })
+    }
+
+    url = "getMetricData?fields=" + fieldNames.join(",");
+    if (collegeIds && collegeIds.length > 0) {
+      url += "&ids=" + collegeIds.join(",")
+    }
+  }
+  return url;
+
+}
+
 function promiseMetricGetData(fieldNames, collegeIds=null, options={includeDefaultFields: true, includeNameField: false}) {
   return new Promise(function(resolve, reject) {
 
-    if (fieldNames.length == 0) {
-      resolve([])
-    } else {
-      if (options && options.includeDefaultFields) {
-        defaultMetricFieldNames.forEach(function(defaultFieldName) {
-          if (fieldNames.indexOf(defaultFieldName) < 0) {
-            fieldNames.push(defaultFieldName);
-          }
+    let url = metricGetDataURL(fieldNames, collegeIds, options);
 
-        })
-
-      }
-      if (options && options.includeNameField) {
-        ["id", "name"].forEach(function(theFieldName) {
-          if (fieldNames.indexOf(theFieldName) < 0) {
-            fieldNames.push(theFieldName);
-          }
-
-        })
-      }
-
-      let url = "getMetricData?fields=" + fieldNames.join(",");
-      if (collegeIds && collegeIds.length > 0) {
-        url += "&ids=" + collegeIds.join(",")
-      }
-
+    if (url) {
       d3.json(url,
       function (err, data) {
         if (err) {
@@ -80,8 +87,11 @@ function promiseMetricGetData(fieldNames, collegeIds=null, options={includeDefau
           reject(err)
         }
         resolve(data)
-      })
+      })        
+    } else {
+      resolve([])
     }
+    
   })
 
 }

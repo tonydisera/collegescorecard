@@ -195,12 +195,15 @@ body .selections {
 }
 
 
+
+
 .btn-group .btn-sm {
     font-weight: 500 !important;
     background: white;
     color: #757474;
     border-color: #9f9f9f;
     font-weight: 500 !important;
+    min-width: 90px;
 }
 
 .btn-sm.active {

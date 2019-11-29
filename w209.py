@@ -112,6 +112,7 @@ def getMetricData():
   global scorecard_data_metric
   fieldsArg = request.args.get('fields', '');
   fields = fieldsArg.split(",")
+  search = request.args.get('search', '')
 
   idsArg = request.args.get("ids", '')
   if (idsArg != ''):
@@ -139,6 +140,10 @@ def getMetricData():
     data = scorecard_data_metric[scorecard_data_metric.id.isin(ids)]
   else:
     data = scorecard_data_metric
+
+  if (len(search) > 0):
+    data = scorecard_data_metric[scorecard_data_metric.name.str.contains(search, case=False)]
+
 
   jsonData = data[fields].to_json(orient='records')
 

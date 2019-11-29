@@ -20,6 +20,9 @@
 	padding: 10px;
 }
 
+#search-dialog .btn-group .btn-sm {
+	width: 125px;
+}
 
 
 #search-dialog #rank-button {
@@ -46,13 +49,20 @@
 
 #minACT, #maxACT {
 	color: #486db1 !important;
-	font-weight: 600;
 }
 
 #labelACT.has-value {
 	color: #486db1 !important;
 }
+#minACT.has-value, #maxACT.has-value {
+	border: 1.5px solid #486db1 !important;
+	font-weight: 600;
+}
 
 #usnews-cb-label.is-checked {
 	color: #486db1;
+}
+
+#search-dialog #usnews-cb-label {
+	font-size: 14px !important;
 }
