@@ -475,7 +475,7 @@ button.multiselect.btn-default.active,
   margin-top: 10px;
   display: flex;
   background-color: white;
-  z-index: 1000;  
+  z-index: 2;  
 }
 
 div.tooltip {
