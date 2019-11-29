@@ -651,7 +651,7 @@ class Search {
     }
     
     if (self.checkedColleges.length > 0) {
-      d3.select("#limit-exceeded").classed("hide", self.checkedColleges.length > self.RANK_COLLEGE_LIMIT)
+      d3.select("#limit-exceeded").classed("hide", self.checkedColleges.length <= self.RANK_COLLEGE_LIMIT)
       $("#search-dialog  #rank-button").attr("disabled", self.checkedColleges.length > self.RANK_COLLEGE_LIMIT); 
     } else {
       $("#search-dialog  #rank-button").attr("disabled", true);
