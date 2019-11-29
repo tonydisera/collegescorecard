@@ -30,8 +30,14 @@
 	margin-top: 5px;
 	margin-bottom: 5px;
 	min-width: 120px;
+	height: 36px;
 }
 
+#limit-exceeded {
+	margin-bottom: 0px;
+	margin-left: 10px;
+	margin-right: 10px;	
+}
 #search-dialog #filtered-college-count {
 	max-height: 20px;
 	min-height: 20px;
@@ -45,6 +51,18 @@
 	font-weight: 600;
     font-size: 22px;	
     min-height: 55px;
+}
+
+#reset-button {
+	background-color: #b1b1b1;
+	border-color: #adadad;
+	font-weight: 600;
+	margin-left: 40px;
+	color: white;
+	margin-top: 0px;
+	margin-left: 100px;
+	width: 100px;
+	display: inline-block;
 }
 
 #minACT, #maxACT {
@@ -65,4 +83,12 @@
 
 #search-dialog #usnews-cb-label {
 	font-size: 14px !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+    color: white;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+	background-color: #4d72a3;
+    color: white;
 }

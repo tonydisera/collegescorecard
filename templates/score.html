@@ -333,7 +333,7 @@
           <div class="card" style="flex-grow:1;max-width:420px;min-width:420px;">
             <div class="card-header">
               Filter
-             <button id="reset-button"  type="button" onclick="search.resetFilters()" class="btn btn-white btn-sm" style="margin-top: 0px;margin-left: 100px;width:100px;display:inline-block">Reset</button>
+             <button id="reset-button"  type="button" onclick="search.resetFilters()" class="btn btn-white btn-sm">Reset</button>
             </div>
             <div class="card-body" style="display:flex;justify-content: space-between;flex-direction: column;">
               <div style="min-height:520px;max-height:520px;">
@@ -453,7 +453,10 @@
              
               <div id="filtered-colleges" style="min-height:520px;max-height:520px;overflow-y:scroll">
               </div>
-              <div style="justify-content: flex-end;display: flex;">
+              <div style="justify-content: flex-end;display: flex;margin-top:10px">
+                 <div id="limit-exceeded" class="hide alert alert-primary" role="alert">
+                  Only 400 colleges can be ranked at a time. 
+                 </div>
                  <button id="rank-button" disabled type="button" onclick="rankCollegesAdvancedSearch()" class="btn btn-primary">Rank</button>
               </div>      
             </div>

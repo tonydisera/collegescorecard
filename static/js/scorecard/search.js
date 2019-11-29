@@ -37,6 +37,8 @@ class Search {
       '3': 'Private for profit'
     }
 
+    this.RANK_COLLEGE_LIMIT = 400;
+
 
     this.fieldNames = ["id", "name", "usnews_2019_rank", "control", "region", 
                        "degrees_awarded predominant_recoded", "city", "state",
@@ -466,6 +468,8 @@ class Search {
     $(self.selectAllSelector).prop( "checked", false );
     self.checkedColleges = []
     $("#search-dialog  #rank-button").attr("disabled", true);
+    d3.select("#limit-exceeded").classed("hide", true)
+
   
 
     if (self.selectedColleges.length == 0 &&
@@ -628,8 +632,9 @@ class Search {
       $(self.selectAllSelector).prop( "checked", true );
       self.filteredColleges.forEach(function(college) {
         self.checkedColleges.push(college.id);
-      })     
-      $("#search-dialog  #rank-button").attr("disabled", false); 
+      })    
+      d3.select("#limit-exceeded").classed("hide", self.filteredColleges.length <= self.RANK_COLLEGE_LIMIT)
+      $("#search-dialog  #rank-button").attr("disabled", self.filteredColleges.length > self.RANK_COLLEGE_LIMIT); 
       $(self.selectAllSelector).prop( "checked", true );
     }
 
@@ -646,7 +651,8 @@ class Search {
     }
     
     if (self.checkedColleges.length > 0) {
-      $("#search-dialog  #rank-button").attr("disabled", false);
+      d3.select("#limit-exceeded").classed("hide", self.filteredColleges.length <= self.RANK_COLLEGE_LIMIT)
+      $("#search-dialog  #rank-button").attr("disabled", self.filteredColleges.length > self.RANK_COLLEGE_LIMIT); 
     } else {
       $("#search-dialog  #rank-button").attr("disabled", true);
 
