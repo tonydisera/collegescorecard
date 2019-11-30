@@ -10,6 +10,8 @@
 
     <title>US College Scorecard</title>
 
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,500i,600,700&display=swap" rel="stylesheet"/>
+
     <!-- Bootstrap core CSS -->
     <link href="static/css/flatlab/bootstrap.min.css" rel="stylesheet">
     <link href="static/css/flatlab/bootstrap-reset.css" rel="stylesheet">
@@ -27,10 +29,10 @@
     <link href="static/css/flatlab/style-responsive.css" rel="stylesheet" />
 
 
+    <link href="static/css/scorecard/animate.min.css" rel="stylesheet" />
 
 
 
-    <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,500i,600,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="static/css/scorecard/custom-flatlab.css" rel="stylesheet">
     <link rel="stylesheet" href="static/css/scorecard/style.css">
     <link rel="stylesheet" href="static/css/scorecard/search.css">
@@ -109,20 +111,16 @@
         <div class="card custom-overview">
           <div class="card-body">
             The <a href="https://collegescorecard.ed.gov/" style="font-weight:600">College Scorecard</a> is a federal
-            dataset website that allows users to find, select, and compare higher-education institutions based on a few provided
-            variables. While the website has its benefits, we found that the interface did not take advantage of the
-            extensive dataset collected on schools, and lacked the detailed reasons users would pick certain schools.
-            <p><p>
+            dataset and website that allows users to find, select, and compare higher-education institutions.
             Here, we leverage the college scorecard dataset that covers over
             7000 higher education institutions by focusing on institutional, academic, admission, financial, and future
             value data.
-            Through these visualizations, we offer prospective students to tool that
-            to looks beyond opaque college rankings to evaluate and compare particular colleges.</div>
+            We offer prospective students visualizations that go beyond opaque college rankings to better understand the US college landscape and evaluate and compare particular colleges of interest.
+          </div>
         </div>
-        </div>
-  
+        
         <div class="row" style="justify-content:center;margin-top:30px">
-          <div class="col-lg-4">
+          <div class="col-lg-4  animated fadeInDown delay-1s">
             <aside class="profile-nav alt ">
               <section class="panel">
                 <a href="summary" class="panel">
@@ -139,7 +137,7 @@
             </aside>
           </div>
   
-          <div class="col-lg-4">
+          <div class="col-lg-4  animated fadeInDown delay-2s">
             <aside class="profile-nav alt ">
               <a href="segment" class="panel">
                 <div class="user-heading alt bg-blue" width="450px">
@@ -155,7 +153,7 @@
             </aside>
           </div>
   
-          <div class="col-lg-4">
+          <div class="col-lg-4  animated fadeInDown delay-3s">
             <aside class="profile-nav alt ">
               <a href="score" class="panel">
                 <div class="user-heading alt bg-blue" width="450px">
@@ -325,29 +323,10 @@
 
   <script>
 
-      //owl carousel
-
-      $(document).ready(function() {
-          $("#owl-demo").owlCarousel({
-              navigation : true,
-              slideSpeed : 300,
-              paginationSpeed : 400,
-              singleItem : true,
-			  autoPlay:true
-
-          });
-      });
-
-      //custom select box
-
       $(function(){
           $('select.styled').customSelect();
       });
 
-      $(window).on("resize",function(){
-          var owl = $("#owl-demo").data("owlCarousel");
-          owl.reinit();
-      });
 
 
 
@@ -362,13 +341,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.js" integrity="sha256-gh5oDg46rxRDr9QF4nehk1UNULQ05EhbM9wOerElwRc=" crossorigin="anonymous"></script>
 
 
-
-  <script src="static/js/scorecard/common.js"></script>
-  <script src="static/js/scorecard/search.js"></script>
-  <script src="static/js/scorecard/rankchart.js"></script>
-  <script src="static/js/scorecard/scatterplot.js"></script>
-  <script src="static/js/scorecard/histogram.js"></script>
-  <script src="static/js/scorecard/score.js"></script>  
 
   </body>
 </html>

@@ -45,7 +45,6 @@
 
 
 
-
   </head>
 
   <body class="light-sidebar-nav">
@@ -143,17 +142,12 @@
                   <div class="card-body" style="overflow-x: scroll">
                     <div class="selections" >
 
-                      <div id="scorecard-select-container">
-                        <span class="step-circle">1.</span>
-                        <span style="padding-right:4px">Pick Metrics</span>
-                        <select id="scorecard-select" multiple="multiple">
-                        </select>
-                      </div>
+
 
                       <div id="search-colleges-container">
-                        <div>
-                          <span   class="step-circle">2.</span>
-                          <span style="padding-right:10px">Pick Colleges</span>
+                        <div class="step-container">
+                          <span   class="step-circle">1.</span>
+                          <span class="step-label" >Pick Colleges</span>
                         </div>
 
                         <div class="btn-group"  data-toggle="buttons">
@@ -175,6 +169,15 @@
                         </div>
 
                       
+                      </div>
+
+                      <div id="scorecard-select-container">
+                        <div class="step-container">
+                          <span class="step-circle">2.</span>
+                          <span class="step-label" >Pick Metrics</span>
+                        </div>
+                        <select id="scorecard-select" multiple="multiple">
+                        </select>
                       </div>
 
                     </div>
@@ -501,7 +504,8 @@
     <script src="https://unpkg.com/popper.js@1"></script>
     <script src="https://unpkg.com/tippy.js@5"></script>
 
-    <script src="static/assets/flatlab/select2/js/select2.full.min.js"></script>
+    <script src="static/assets/flatlab/select2/js/select2.min.js"></script>
+
 
 
   <script>

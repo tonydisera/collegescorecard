@@ -69,18 +69,21 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
 
 
 .selections button.multiselect {
-    max-height: 30px;
-    border: 1px solid #4d74a3 !important;
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    border-radius: .25rem;
-    margin-top: 0px;
-    padding-top: 3px;
+  max-height: 28px;
+  border: 1px solid #4d74a3 !important;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+  margin-top: 0px;
+  padding-top: 1px;
+  background-color: #4d72a3;
+  color: white;
+  min-width: 140px;
 }
 
 #rank-college-count {
-  font-size: 20px;
+  font-size: 18px;
   padding-bottom: 2px;
   color: #3c5f8a;
   font-weight: 500;
@@ -92,7 +95,7 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
   display: flex;
   flex-flow: column;
   justify-content: center;
-  margin-bottom: 25px;  
+  margin-bottom: 30px;  
 }
 
 
@@ -142,7 +145,9 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
 }
 
 .multiselect-selected-text {
-  color: #5d5d5d;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .multiselect-selected-text.has-selections {
@@ -162,7 +167,7 @@ body .selections {
   flex-flow: row;
   margin-bottom: 0px;
   margin-top: 0px;
-  justify-content: space-around;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
@@ -174,6 +179,12 @@ body .selections {
   min-width: 280px;
   max-width: 280px;
   margin-bottom: 10px;
+  display: flex;
+  flex-flow: column;
+}
+
+#scorecard-select-container .multiselect-native-select {
+  text-align: center;
 }
 
 
@@ -197,7 +208,7 @@ body .selections {
 
 .selections #search-colleges-container {
   display: flex;
-  flex-flow: row;
+  flex-flow: column;
   font-size: 15px;
   margin-bottom: 10px;
 }
@@ -210,12 +221,11 @@ body .selections {
 
 
 .btn-group .btn-sm {
-    font-weight: 500 !important;
     background: white;
     color: #757474;
     border-color: #9f9f9f;
-    font-weight: 500 !important;
-    min-width: 90px;
+    font-weight: 600 !important;
+    font-size: 13px;
 }
 
 .btn-sm.active {
@@ -266,14 +276,14 @@ body .selections {
 }
 
 #filter-badges .badge {
-  font-size: 12px;
+  font-size: 13px;
+  font-weight: 600 !important;
   margin-right: 5px;
   margin-top: 5px;
-  height: 20px;
-  color: #4e4e4e;
-  background-color: #f2f1f1;
-  border: thin solid #d1d1d1;
-  font-weight: normal;
+  height: 22px;
+  color: white;
+  background-color: #afaeae;
+  border: thin solid #949494;
 }
 
 #hist-chart-categories {
@@ -326,19 +336,6 @@ body .selections {
 
 
 
-button.multiselect {
-  text-align: left;
-  background-color: transparent;
-  border-color: #eeeeee;
-}
-button.multiselect.btn-default:hover, 
-button.multiselect.btn-default:focus, 
-button.multiselect.btn-default:active, 
-button.multiselect.btn-default.active, 
-.open button.multiselect.dropdown-toggle.btn-default {
-  background-color: transparent;
-  border-color: #eeeeee;
-}
 
 
 .multiselect-container.dropdown-menu > li > a:hover label, 
@@ -507,20 +504,31 @@ div.tooltip {
     text-align: left;
 }
 
+.step-container {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
 .step-circle {
-    color: #fff;
-    background: #4d74a3 !important;
-    border-radius: 50% !important;
-    -webkit-border-radius: 50% !important;
-    width: 35px;
-    min-width: 35px;
-    height: 35px;
-    min-height: 35px;
-    line-height: 32px;
-    font-weight: 500;
-    display: inline-block;
-    text-align: center;
-    margin-right: 5px;
-    font-size: 20px;
-    margin-top: -5px;
+  color: #fff;
+  background: #4d72a3 !important;
+  border-radius: 50% !important;
+  -webkit-border-radius: 50% !important;
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  min-height: 30px;
+  line-height: 29px;
+  font-weight: 500;
+  display: inline-block;
+  text-align: center;
+  margin-right: 5px;
+  font-size: 20px;
+  margin-top: -8px;
+}
+
+.step-label {
+  color: #3c5f8a;
+  font-size: 18px;
+  padding-right: 4px;
 }
