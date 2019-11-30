@@ -24,6 +24,7 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
   font-size: 30px;
   color: white;
   padding-right: 5px;
+  padding-bottom: 5px;
 }
 
 .user-heading h1 {
@@ -35,6 +36,10 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
 .user-heading {
   text-align: center !important;
   padding: 20px !important;
+}
+
+.user-heading img {
+  width: 300px;
 }
 
 .profile-nav {
@@ -57,6 +62,11 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
   background-color: #4d74a3 !important;
 }
 
+.summary-description {
+  font-size: 18px;
+  margin: 10px;
+}
+
 
 .selections button.multiselect {
     max-height: 30px;
@@ -75,6 +85,8 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
   color: #3c5f8a;
   font-weight: 500;
 }
+
+
 
 #rank-chart-title {
   display: flex;
