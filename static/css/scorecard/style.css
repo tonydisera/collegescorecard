@@ -52,9 +52,13 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
 }
 
 .profile-nav .btn {
-  color: gray !important; 
-  font-weight: 500 !important;
+  color: white;
+  font-weight: 600 !important;
   font-size: 20px !important;
+  background-color: #a4be66;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  border-color: #a5be66;
 }
 
 .profile-nav  .bg-green {
