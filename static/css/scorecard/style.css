@@ -223,6 +223,10 @@ body .selections {
   color: #908d8d !important;
 }
 
+#home-page-content a {
+    color: #86af1d;
+}
+
 
 
 .selections #search-colleges-container {
