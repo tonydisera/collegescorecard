@@ -117,8 +117,15 @@
             <section class="card">
               <div class="card-body">
                 <h5>Schools at a Glance</h5>
-                <p>There a variety of schools serving various purposes in the US and its territories. Here, we can see a
-                  high-level approach to the different attributes for schools.</p>
+                <p>There a variety of schools serving various purposes in the US and its territories. At a high-level, what is going on with the schools? What's their distributions look like? Would someone
+                    know whether schools are generally expensive or cheap? Questions like these require an initial understanding of the data, and hopefully we can provide some of that insight here.</p>
+
+                There are some interesting variables to comb over in the college data, which lead to interesting conclusions. Some of the facts about the data might even blow your mind!
+                <ul>
+                  <li>Did you know that there over 7000 accredited institutions in the US and its territories?</li>
+                  <li>A variety of programs are offered - in fact, well over 35 major programs are offered across the institutions.</li>
+                  <li>Over 50% of students get Pell grants when applying for colleges - makes the financial aid easier to get!</li>
+                </ul>
               </div>
             </section>
           </div>
@@ -130,6 +137,11 @@
             <section class="card">
               <div class="card-body">
                 <h5>School Type</h5>
+                <p>There are three primary school types - Public, Private, and Private for Profit. Public schools are open to all students and funded through local, state, and federal taxes. Private schools are those
+                  that are funded primarily through tuition and grants, but don't operate as profit-institutions. Private for profit are schools that tend to serve specific purposes, such as additional professional training
+                  and vocational education.</p>
+
+                <p>We can see here, all of the higher-education institutions across the US fall into these types. We can see the distribution below:</p>
                 <div class='tableauPlaceholder' id='viz1573569107250' style='position: relative'><noscript><a
                       href='#'><img alt=' '
                         src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;CollegeScorecardProjectWorkbook&#47;School-Type-Dashboard&#47;1_rss.png'
@@ -157,7 +169,10 @@
             <section class="card">
               <div class="card-body">
                 <h5>School Enrollment</h5>
+                <p>While there are three different types of schools, the enrollment of each time is far from equal. Here, we can see that there is a heavy skew towards public schools, almost three times that of the next highest
+                  enrollment type, Private. Why is that?</p>
 
+                <p>Perhaps one reason might be that public schools are more affordable than private schools. Hovering over each type shows how much each school type costs, which can show some clear results.</p>
                 <div class='tableauPlaceholder' id='viz1573569107251' style='position: relative'><noscript><a
                     href='#'><img alt=' '
                       src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;CollegeScorecardProjectWorkbook&#47;Enrollment-Size-Dashboard&#47;1_rss.png'
@@ -177,7 +192,14 @@
                   <param name='display_count' value='yes' /></object>
                 </div>
                 <script
-                  type='text/javascript'>                    var divElement = document.getElementById('viz1573569107251'); var vizElement = divElement.getElementsByTagName('object')[0]; vizElement.style.width = '540px'; vizElement.style.height = '540px'; var scriptElement = document.createElement('script'); scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+                  type='text/javascript'>                    
+                  var divElement = document.getElementById('viz1573569107251'); 
+                  var vizElement = divElement.getElementsByTagName('object')[0]; 
+                  vizElement.style.width = '540px'; 
+                  vizElement.style.height = '540px'; 
+                  var scriptElement = document.createElement('script'); 
+                  scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; 
+                  vizElement.parentNode.insertBefore(scriptElement, vizElement);                
                 </script>
               </div>
             </section>
@@ -188,6 +210,10 @@
             <section class="card">
               <div class="card-body">
                 <h5>Degrees Awarded</h5>
+                <p>Due to the nature of each type of school, they tend to server different crowds of students. Public schools allow for studies in many fields, and often present opportunities in further study after graduation.
+                  Private schools can leverage the value of their brand, and students may only rely on a bachelors for enhancing their career prospects. Private for profit schools are generally not extensive academic institutions,
+                  providing only the knowledge needed to advance down a specific career path.
+                </p>
                 <div class='tableauPlaceholder' id='viz1573569107252' style='position: relative'><noscript><a
                       href='#'><img alt=' '
                         src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;CollegeScorecardProjectWorkbook&#47;Degree-Awarded-Dashboard&#47;1_rss.png'
@@ -323,6 +349,41 @@
             </section>
           </div>
         </div>
+
+        <div class="row">
+            <div class="col-lg-10 col-sm-10 col-lg-offset-1 col-sm-offset-1">
+              <section class="card">
+                  <h5>US News Top 200 Schools - Average Earnings after graduation vs Average Debt</h5>
+                  <p>Note that </p>
+                  <div class='tableauPlaceholder' id='viz1573569107256' style='position: relative'><noscript><a
+                        href='#'><img alt=' '
+                          src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;CollegeScorecardProjectWorkbook&#47;Sct-Earn-Debt-Dashboard&#47;1_rss.png'
+                          style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'>
+                      <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                      <param name='embed_code_version' value='3' />
+                      <param name='site_root' value='' />
+                      <param name='name' value='CollegeScorecardProjectWorkbook&#47;Sct-Earn-Debt-Dashboard' />
+                      <param name='tabs' value='no' />
+                      <param name='toolbar' value='yes' />
+                      <param name='static_image'
+                        value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;CollegeScorecardProjectWorkbook&#47;Sct-Earn-Debt-Dashboard&#47;1.png' />
+                      <param name='animate_transition' value='yes' />
+                      <param name='display_static_image' value='yes' />
+                      <param name='display_spinner' value='yes' />
+                      <param name='display_overlay' value='yes' />
+                      <param name='display_count' value='yes' /></object></div>
+                  <script type='text/javascript'>                    
+                    var divElement = document.getElementById('viz1573569107256'); 
+                    var vizElement = divElement.getElementsByTagName('object')[0]; 
+                    vizElement.style.width = '1100px'; 
+                    vizElement.style.height = '800px'; 
+                    var scriptElement = document.createElement('script'); 
+                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; 
+                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+                  </script>
+              </section>
+            </div>
+          </div>
 
 
 
