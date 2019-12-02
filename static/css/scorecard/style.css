@@ -30,15 +30,16 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
 
 .user-heading i.fa {
   font-size: 30px;
-  color: white;
+  color: #908e8e;
   padding-right: 5px;
   padding-bottom: 5px;
 }
 
-.user-heading h1 {
+.user-heading h3 {
   font-weight: 500 !important;
   font-size: 20px !important;
   display: inline-block;
+  color: #908e8e;
 }
 
 .user-heading {
@@ -53,6 +54,7 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
 .user-heading img {
   width: 300px;
   height: 234px;
+  border: thin solid lightgray;
 }
 
 .profile-nav {
@@ -63,26 +65,21 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
   color: white;
   font-weight: 600 !important;
   font-size: 20px !important;
-  background-color: #a4be66;
+  background-color: #c8c8c8;;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
-  border-color: #a5be66;
 }
 
-.profile-nav  .bg-green {
-  background-color: #a5c373 !important;
-}
-.profile-nav .bg-yellow{
-  background-color: rgb(234, 200, 87) !important;
-}
-.profile-nav .bg-blue {
-  background-color: #4d74a3 !important;
+
+.profile-nav .bg-white {
+  background-color: white !important;
 }
 
 .summary-description {
   font-size: 18px;
   margin: 10px;
   height: 60px;
+  color: #908e8e;
 }
 
 .selections button.multiselect {
@@ -215,6 +212,7 @@ body .selections {
   border-color: #4d74a3 !important;
   font-weight: 500;
 }
+
 
 
 .selections #search-colleges-container {

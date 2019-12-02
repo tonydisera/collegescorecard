@@ -83,6 +83,9 @@ function init() {
   .then(function() {
     search.applyCustomFilter("public_high_act");
     rankColleges();
+    setTimeout(function() {
+      pulsateTourButton();
+    }, 5000)
   })
 
   $('#search-dialog').on('hidden.bs.modal', function (e) {
@@ -106,6 +109,20 @@ function init() {
   });
 
 
+
+
+}
+
+var pulsateTourButton = function() {
+    $('#tour-button').pulsate({
+//    color: "#FF6C60",
+//    color:  "#73c2f7",
+    color: "rgb(78, 121, 167)",
+    reach:   13,
+    pause:   700,
+    speed:   1300,
+    glow:    true,
+    repeat:  4 });
 }
 
 var startTour = function() {
@@ -155,7 +172,7 @@ function rankColleges() {
   .then(function() {
       d3.select('#loading').style("display", "none")
 
-      if (tippyShowCount < 3) {
+      if (tippyShowCount < 2) {
         tippyShowCount++
         setTimeout(function() {
           tippy('#rank-chart #row-0 text.name', {
@@ -180,11 +197,11 @@ function rankColleges() {
               if (document.querySelector('.col-header#col-metric-1 rect#weight-square-1')._tippy) {
                 document.querySelector('.col-header#col-metric-1 rect#weight-square-1')._tippy.hide();
               }
-            }, 5000)
+            }, 2000)
 
 
 
-          }, 6000)
+          }, 2000)
 
         },1000)
 
@@ -224,7 +241,7 @@ function showRescaledRankings(data) {
   rankChart(selection, d3.select("#rank-chart-heading"));
 
   if ($('#rank-chart .delta text') && $('#rank-chart .delta text').length > 0) {
-    if (tippyDeltaCount < 3) {
+    if (tippyDeltaCount < 2) {
       tippyDeltaCount++
   
       setTimeout(function() {
