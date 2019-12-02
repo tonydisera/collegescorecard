@@ -211,8 +211,7 @@ function rankchart() {
             let position = record.firstPass ? record.positionOrig : record.position;
             return "translate(0," + ((rowHeight * position) ) + ")";
          })
-       
-
+ 
       rowsEnter
         .append("text")
         .attr("class", "rank")
@@ -265,7 +264,6 @@ function rankchart() {
         })
 
 
-       
 
 
       // Add the column bars
@@ -502,12 +500,23 @@ function rankchart() {
           onRescale(data)
 
         })
+        
 
 
 
       let hintGroup = headerRowEnter
         .append("g")
-        .attr("transform", "translate(" + (nameWidth + colWidthRank) + "," + (weightHeight + (((weightHeight/2)*-1)+12)) + ")");
+        .attr("transform", "translate(" + (nameWidth + colWidthRank) + "," + (weightHeight + (((weightHeight/2)*-1)+12)) + ")")
+        .attr("data-step", function(d,i) {
+
+            return "5"
+
+        })
+        .attr("data-intro", function(d,i) {
+
+            return "Click on the squares to the right to adjust the weight so that a factor is given more importance in the overall score.";
+
+        })
 
       hintGroup
         .append("text")
@@ -516,7 +525,7 @@ function rankchart() {
         .attr("x", 0)
         .attr("y", 0)
         .text("Weight")
-
+        
   }
 
 
@@ -834,6 +843,20 @@ function rankchart() {
         }        
      })
      */
+
+     setTimeout(function() {
+
+      container.selectAll("svg>g")
+        .attr("data-step", function(d,i) {
+            return "6"
+        })
+        .attr("data-intro", function(d,i) {
+            return "Hover over row to see college metrics compared to all 7000 schools. Click on row to see details on college";
+        })
+
+       
+
+     }, 1300)
 
   }
 

@@ -89,17 +89,27 @@ function init() {
     deselectFilterButtons();
   })
 
+  $('#search-colleges-button').click(function() {
+    deselectFilterButtons();
+    if (search.customFilter != null) {
+      search.resetFilters();
+    }
+    search.customFilter = null; 
+    $("#search-dialog").modal()
+  })
 
   $('input:radio[name="searchoption"]').change(function(){
       let option = $(this).val();
-      if(option === 'advanced_search'){
-        $("#search-dialog").modal()
-      } else {
-        search.applyCustomFilter(option);
-        rankColleges();
-      }
+
+      search.applyCustomFilter(option);
+      rankColleges();
   });
 
+
+}
+
+var startTour = function() {
+  introJs().start();
 
 }
 
@@ -187,9 +197,6 @@ function rankColleges() {
 
 }
 
-function onAdvancedSearch() {
-  d3.select(".selections .btn-group .btn-sm.active").classed("active", false)
-}
 
 function promiseShowRankings(selectedCollegeIds) {
 

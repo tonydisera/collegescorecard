@@ -1,6 +1,14 @@
 body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
 
 
+#home-page-content {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  height: -webkit-fill-available;  
+}
+
+
 
 .navbar.bg-info {
   background-color: #486db1 !important
@@ -74,20 +82,19 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
 .summary-description {
   font-size: 18px;
   margin: 10px;
+  height: 60px;
 }
-
 
 .selections button.multiselect {
   max-height: 28px;
-  border: 1px solid #4d74a3 !important;
+  border: 1px solid #4d72a3 !important;
   padding: .375rem .75rem;
   font-size: 1rem;
   line-height: 1.5;
   border-radius: .25rem;
   margin-top: 0px;
   padding-top: 1px;
-  background-color: #4d72a3;
-  color: white;
+  background-color: white;
   min-width: 140px;
 }
 
@@ -154,13 +161,12 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
 }
 
 .multiselect-selected-text {
-  color: white;
-  font-size: 14px;
-  font-weight: 600;
+  color: #4d72a3;
+  font-size: 15px;
 }
 
 .multiselect-selected-text.has-selections {
-  color: #486db1;
+  color: #4d72a3;
 }
 
 body #body-contents {
@@ -176,7 +182,7 @@ body .selections {
   flex-flow: row;
   margin-bottom: 0px;
   margin-top: 0px;
-  justify-content: center;
+  justify-content: space-around;
   flex-wrap: wrap;
 }
 
@@ -197,7 +203,7 @@ body .selections {
 }
 
 
-#search-colleges-button {
+#search-colleges-button, #tour-button {
   margin-top: 0px;
   margin-left: 5px;
   max-height: 30px;
@@ -205,15 +211,11 @@ body .selections {
   font-size: 15px;
   padding-top: 3px;
   background-color: white !important;
-  color: #4d74a3 !important;
+  color:  #4d74a3  !important;
+  border-color: #4d74a3 !important;
+  font-weight: 500;
 }
 
-#search-colleges-button.active {
-  background-color: #5b89c0 !important;
-  border-color: #3c587e !important;
-  color: #fff !important;
-  font-weight: 600 !important;
-}
 
 .selections #search-colleges-container {
   display: flex;
@@ -233,7 +235,7 @@ body .selections {
     background: white;
     color: #757474;
     border-color: #9f9f9f;
-    font-weight: 600 !important;
+    font-weight: 500 !important;
     font-size: 13px;
 }
 
@@ -242,6 +244,24 @@ body .selections {
     border-color: #3c587e !important;
     color: #fff !important;
     font-weight: 600 !important;
+
+}
+
+.selections .btn-group .btn-sm {
+  font-size: 12px;
+  background: white;
+  color: #757474;
+  border-color: #ffffff;
+  font-weight: 500 !important;
+  font-size: 12px;
+  padding: 5px;
+}
+.selections .btn-sm.active {
+    background-color: white !important;
+    border-color: white !important;
+    color: #4d74a3!important;
+    font-weight: 600 !important;
+    text-decoration: underline;
 }
 
 .tippy-tooltip.blue-theme {
