@@ -96,19 +96,20 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
 }
 
 #rank-college-count {
-  font-size: 18px;
-  padding-bottom: 2px;
-  color: #3c5f8a;
-  font-weight: 500;
+  font-size: 20px;
+  color: #908d8d;
+  font-weight: 600;
+  padding-right: 5px;
 }
 
 
 
 #rank-chart-title {
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  margin-bottom: 30px;  
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    margin-bottom: 25px;
+    margin-top: 15px; 
 }
 
 
@@ -199,9 +200,13 @@ body .selections {
   text-align: center;
 }
 
+#tour-button-container {
+  margin-top: 5px;
+  margin-left: 20px;
+}
 
 #search-colleges-button, #tour-button {
-  margin-top: 0px;
+  margin-top: 1px;
   margin-left: 5px;
   max-height: 30px;
   min-width: 150px;
@@ -211,6 +216,11 @@ body .selections {
   color:  #4d74a3  !important;
   border-color: #4d74a3 !important;
   font-weight: 500;
+}
+
+#tour-button {
+  border-color: #c6c6c6 !important;
+  color: #908d8d !important;
 }
 
 
@@ -303,13 +313,13 @@ body .selections {
 }
 
 #filter-badges .badge {
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 600 !important;
   margin-right: 5px;
   margin-top: 5px;
-  height: 22px;
-  color: white;
-  background-color: #afaeae;
+  height: 20px;
+  color: #767575;
+  background-color: #f1f1f1;
   border: thin solid #949494;
 }
 
@@ -533,7 +543,7 @@ div.tooltip {
 
 .step-container {
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .step-circle {
@@ -555,7 +565,8 @@ div.tooltip {
 }
 
 .step-label {
-  color: #3c5f8a;
-  font-size: 18px;
-  padding-right: 4px;
+    color: #3c5f8a;
+    font-size: 16px;
+    padding-right: 4px;
+    font-weight: 600;
 }

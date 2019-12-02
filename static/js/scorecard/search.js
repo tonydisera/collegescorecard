@@ -455,6 +455,10 @@ class Search {
       d3.select("#degree-radio-buttons.btn-group .btn-sm.active").classed("active", false)
       d3.select("#degree-radio-buttons.btn-group #degree-bachelors-radio").classed("active", true)
 
+      d3.selectAll("#control-buttons.btn-group #control-public input").property("checked", true)
+      d3.selectAll("#control-buttons.btn-group #control-public").classed("active", true)
+      self.selectControl("1", "Public", true)
+
       self.filterColleges({selectAll: true});
     } else if (customFilter == "ivy_plus") {
       self.resetFilters();

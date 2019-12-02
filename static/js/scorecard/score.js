@@ -115,8 +115,6 @@ function init() {
 
 var pulsateTourButton = function() {
     $('#tour-button').pulsate({
-//    color: "#FF6C60",
-//    color:  "#73c2f7",
     color: "rgb(78, 121, 167)",
     reach:   13,
     pause:   700,
