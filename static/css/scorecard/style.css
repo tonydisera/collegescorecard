@@ -4,10 +4,12 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
 #home-page-content {
   display: flex;
   flex-flow: column;
-  justify-content: space-around;
-  height: -webkit-fill-available;  
+  justify-content: space-between; 
 }
 
+#home-page-content a {
+    color: #86af1d;
+}
 
 
 .navbar.bg-info {
@@ -225,9 +227,6 @@ body .selections {
   color: #908d8d !important;
 }
 
-#home-page-content a {
-    color: #86af1d;
-}
 
 
 
