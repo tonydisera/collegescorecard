@@ -3,7 +3,7 @@ let selectedFieldMap = {}
 let histChartMap = {};
 let search = null;
 let rankChart = null;
-let metricCategories = ['selectivity', 'instruction', 'diversity', 'cost', 'outcome', 'rank']
+let metricCategories = ['selectivity', 'instruction', 'cost', 'outcome', 'diversity', 'rank']
 
 let rankHeaderHeight    = 113;
 let rankRowHeight       = 24;

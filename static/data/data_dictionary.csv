@@ -49,7 +49,7 @@ tuition in_state,Tuition in-state,cost,Y,Y,
 tuition out_of_state,Tuition out-of-state,cost,Y,Y,
 tuition program_year,,cost,,,
 tuition_revenue_per_fte,Revenue earned per student (academic yr),cost,Y,Y,
-instructional_expenditure_per_fte,Dollors spent per student (academic yr),instruction,Y,,Y
+instructional_expenditure_per_fte,Dollars spent per student (academic yr),instruction,Y,,Y
 faculty_salary,Faculty salary,instruction,Y,,
 ft_faculty_rate,Ratio of full-time faculty,instruction,Y,,Y
 pell_grant_rate,Pell grant rate,cost,Y,,
