@@ -52,9 +52,6 @@ function init() {
   rankChart.maxNameLength(rankMaxNameLength);
   rankChart.categoryPadding(rankCategoryPadding)
   rankChart.colWidthScore(rankColWidthScore)
-  rankChart.formatColumnHeader(function(d,i) {
-    return formatRankColumnHeader(d)
-  })
   rankChart.onRescale(function(data) {
     rankChart.initFieldDescriptors()()
     promiseShowHistograms();
@@ -133,19 +130,6 @@ var capitalize = function(theString) {
          theString.slice(1)
 }
 
-function formatRankColumnHeader(d) {
-  if ( d == "_total") {
-      return ""
-  } else {
-    let hdr = d.split("_").join(" ");
-    let tokens = hdr.split("demographics ");
-    if (tokens.length > 1) {
-      return capitalize(tokens[1]);
-    } else {
-      return capitalize(hdr);
-    }
-  }
-}
 
 function deselectFilterButtons() {
   d3.select("#search-colleges-container .btn-group .btn-sm.active").classed("active", false)
@@ -525,13 +509,13 @@ function getMetricFields() {
     
 
     optGroups = metricCategories.map(function(category) {
-      let optGroup = {label: category, children: null};
+      let optGroup = {label: capitalize(category), children: null};
       optGroup.children = fields.filter(function(field) {
         return field.category == category;
       })
       .map(function(field) {
-        return { label: formatRankColumnHeader(field.name), 
-                 title: field.name, 
+        return { label: field.display, 
+                 title: field.display, 
                  value: field.name }
       })
       return optGroup;

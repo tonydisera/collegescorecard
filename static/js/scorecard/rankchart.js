@@ -436,7 +436,7 @@ function rankchart() {
         .attr("dx", 0)
         .attr("dy", 0)
         .text(function(d,i) {
-          return formatColumnHeader(d.name,i);
+          return d.display;
         })
         .call(wrap, colWidth +3)
 
