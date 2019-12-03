@@ -24,6 +24,15 @@
 	width: 125px;
 }
 
+#control-buttons {
+	margin-bottom: 20px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    width: 370px;
+    font-size: 14px;
+}
+
 
 #search-dialog #rank-button {
 	margin-right: 10px;
@@ -65,14 +74,14 @@
 	display: inline-block;
 }
 
-#minACT, #maxACT {
+#minACT, #maxACT, #minAdmission, #maxAdmission {
 	color: #486db1 !important;
 }
 
-#labelACT.has-value {
+#labelACT.has-value, #labelAdmission.has-value {
 	color: #486db1 !important;
 }
-#minACT.has-value, #maxACT.has-value {
+#minACT.has-value, #maxACT.has-value, #minAdmission.has-value, #maxAdmission.has-value {
 	border: 1.5px solid #486db1 !important;
 	font-weight: 600;
 }
@@ -91,4 +100,10 @@
 .select2-container--default .select2-selection--multiple .select2-selection__choice {
 	background-color: #4d72a3;
     color: white;
+}
+
+.act-label, .admission-label {
+	font-size: 12px;
+    padding-top: 10px;
+    padding-right: 5px;
 }

@@ -361,26 +361,26 @@
 
 
 
-                <div id="control-buttons" class="btn-group"  data-toggle="buttons" style="margin-bottom: 20px;margin-top: 20px">
-                  <label   class="btn btn-sm btn-default" id="control-public">
+                <div id="control-buttons"  style="margin-bottom: 20px;margin-top: 0px">
+                  <label   class="" id="control-public">
                     <input type="checkbox"  name="control_option" value="1">Public
                   </label>
-                  <label  class="btn btn-sm btn-default ">
+                  <label  class=" ">
                     <input type="checkbox" name="control_option" value="2">Private
                   </label>
-                  <label class="btn btn-sm btn-default ">
+                  <label class=" ">
                     <input type="checkbox" name="control_option" value="3">Private for Profit
                   </label>
                 </div>
 
 
-                <label for="select2-programs" style="width: 100%;margin-bottom: 40px;">
+                <label for="select2-programs" style="width: 100%;margin-bottom: 30px;">
                   Select field of study
                   <select id="select2-programs" multiple="multiple">
                   </select>
                 </label>
 
-                <label for="select2-regions" style="width: 100%;margin-bottom: 40px;">
+                <label for="select2-regions" style="width: 100%;margin-bottom: 30px;">
                   Select specific region
                   <select id="select2-regions" multiple="multiple">
                     <option value="0">U.S. Service Schools</option>
@@ -398,13 +398,16 @@
 
 
 
-                <div style="display:flex;flex-flow:column;margin-bottom:20px">
-                  <div id="labelACT" >ACT midpoint</div>
+                <div style="display:flex;flex-flow:column;margin-bottom:10px">
+                  <div id="labelACT" >Students attending school have average an ACT score</div>
 
 
                   <div style="display:flex;font-size:18px;">
-                    <input type="text" value="30" class="form-control mb-2" id="minACT" placeholder="Min" 
+                    <label class="act-label" for="minACT">between</label>
+                    <input type="text"  class="form-control mb-2" id="minACT" placeholder="Min" 
                     style="margin-right:10px;width:55px;font-size:15px"/>
+                    <label  class="act-label" for="maxACT" style="padding-left:10px;padding-right:10px">and</label>
+
                     <input type="text" class="form-control mb-3" id="maxACT" placeholder="Max"
                     style="margin-left:5px;margin-right:10px;width:55px;font-size:15px"/>
                 
@@ -412,15 +415,24 @@
                 </div>
 
 
+                <div style="display:flex;flex-flow:column;margin-bottom:10px">
+                  <div id="labelACT" >Admission rate</div>
 
 
-                <label for="select2-colleges" style="width: 100%;margin-bottom: 40px;">
-                  Select specific colleges
-                  <select id="select2-colleges" multiple="multiple">
-                  </select>
-                </label>
+                  <div style="display:flex;font-size:18px;">
+                    <label class="admission-label" for="minAdmission">between</label>
+                    <input type="text"  class="form-control mb-2" id="minAdmission" placeholder="Min %" 
+                    style="margin-right:3px;width:55px;font-size:15px"/>
+                    <label class="admission-label" style="font-size:15px;font-weight:600" for="minAdmission">%</label>
 
+                    <label  class="admission-label" for="maxAdmission" style="padding-left:10px">and</label>
 
+                    <input type="text" class="form-control mb-3" id="maxAdmission" placeholder="Max %"
+                    style="margin-left:5px;margin-right:3px;width:55px;font-size:15px"/>
+                    <label class="admission-label" style="font-size:15px;font-weight:600" for="minAdmission">%</label>
+                
+                  </div>
+                </div>
 
 
                 <div class="form-check" style="margin-left: -10px;padding-top: 10px;padding-bottom: 25px;">
@@ -429,6 +441,15 @@
                     Top Ranked (US News and World Report)
                   </label>
                 </div>
+
+
+                <label for="select2-colleges" style="width: 100%;">
+                  Select specific colleges
+                  <select id="select2-colleges" multiple="multiple">
+                  </select>
+                </label>
+
+
 
 
 
