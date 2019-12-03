@@ -359,11 +359,11 @@ class Search {
   formatBadgeAdmission(title, items) {
     let self = this;
     if (self.minAdmission != null && self.maxAdmission != null) {
-      return "<span class='badge badge-secondary'>" + "Admission between " + self.minAdmission + "-" + self.maxAdmission + "</span>";
+      return "<span class='badge badge-secondary'>" + "Admission rate between " + self.minAdmission + "% - " + self.maxAdmission + "%</span>";
     } else if (self.minAdmission != null) {
-      return "<span class='badge badge-secondary'>" + "Admission at least " + self.minAdmission + "</span>";
+      return "<span class='badge badge-secondary'>" + "Admission rate at least " + self.minAdmission + "%</span>";
     } else if (self.maxAdmission != null) {
-      return "<span class='badge badge-secondary'>" + "Admission lower or equal to " + self.maxAdmission + "</span>";
+      return "<span class='badge badge-secondary'>" + "Admission rate lower or equal to " + self.maxAdmission + "%</span>";
     } else {
       return "";
     }
