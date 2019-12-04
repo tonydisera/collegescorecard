@@ -120,11 +120,11 @@
                 <p>There a variety of schools serving various purposes in the US and its territories. At a high-level, what is going on with the schools? What's their distributions look like? Would someone
                     know whether schools are generally expensive or cheap? Questions like these require an initial understanding of the data, and hopefully we can provide some of that insight here.</p>
 
-                There are some interesting variables to comb over in the college data, which lead to interesting conclusions. Some of the facts about the data might even blow your mind!
-                <ul>
-                  <li>Did you know that there over 7000 accredited institutions in the US and its territories?</li>
-                  <li>A variety of programs are offered - in fact, well over 35 major programs are offered across the institutions.</li>
-                  <li>Over 50% of students get Pell grants when applying for colleges - makes the financial aid easier to get!</li>
+                <p>There are some interesting variables to comb over in the college data, which lead to interesting conclusions. Some of the facts about the data might even blow your mind!</p>
+                <ul class="list-group">
+                  <li class="list-group-item">Did you know that there over 7000 accredited institutions in the US and its territories?</li>
+                  <li class="list-group-item">A variety of programs are offered - in fact, well over 35 major programs are offered across the institutions.</li>
+                  <li class="list-group-item">Over 50% of students get Pell grants when applying for colleges - makes the financial aid easier to get!</li>
                 </ul>
               </div>
             </section>
@@ -133,9 +133,141 @@
   
         <!--Overview Graphs-->
         <div class="row">
+          <div class="col-lg-12 col-sm-12">
+            <section class="card">
+              <div class="card-body">
+                <h5>School Types - An Overview</h5>
+                <p>There are three primary school types - Public, Private, and Private for Profit. Public schools are open to
+                  all students and funded through local, state, and federal taxes. Private schools are those
+                  that are funded primarily through tuition and grants, but don't operate as profit-institutions. Private for
+                  profit are schools that tend to serve specific purposes, such as additional professional training
+                  and vocational education.
+                </p>
+                <div class='tableauPlaceholder' id='viz1573569107251' style='position: relative'><noscript><a href='#'><img
+                        alt=' '
+                        src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;CollegeScorecardProjectWorkbook&#47;School-Type-Overview-Dashboard&#47;1_rss.png'
+                        style='border: none' /></a></noscript>
+                  <object class='tableauViz' style='display:none;'>
+                    <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                    <param name='embed_code_version' value='3' />
+                    <param name='site_root' value='' />
+                    <param name='name' value='CollegeScorecardProjectWorkbook&#47;School-Type-Overview-Dashboard' />
+                    <param name='tabs' value='no' />
+                    <param name='toolbar' value='yes' />
+                    <param name='static_image'
+                      value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;CollegeScorecardProjectWorkbook&#47;School-Type-Overview-Dashboard&#47;1.png' />
+                    <param name='animate_transition' value='yes' />
+                    <param name='display_static_image' value='no' />
+                    <param name='display_spinner' value='yes' />
+                    <param name='display_overlay' value='yes' />
+                    <param name='display_count' value='yes' />
+                  </object>
+                </div>
+                <script type='text/javascript'>
+                  var divElement = document.getElementById('viz1573569107251');
+                  var vizElement = divElement.getElementsByTagName('object')[0];
+                  vizElement.style.width = '1200px';
+                  vizElement.style.height = '800px';
+                  var scriptElement = document.createElement('script');
+                  scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+                  vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+                </script>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 col-sm-12">
+              <section class="card">
+                <div class="card-body">
+                  <h5>School Types - The Finances</h5>
+                  <p>Costs to attend school are always important considerations for prospective students and their families. Here, the <b>average net cost</b> is binned for students.
+                    This measure is the total amount of expenses for students - from tuititon to books to campus fees and more. The <b>average value</b> across all schools is <b>$16,200</b> per semester, 
+                    which is where most of the clustering can be seen. Note that this is across all three types of schools..
+                  </p>
+                  <div class='tableauPlaceholder' id='viz1573569107252' style='position: relative'><noscript><a href='#'><img
+                          alt=' '
+                          src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;CollegeScorecardProjectWorkbook&#47;School-Type-Financial-Dashboard&#47;1_rss.png'
+                          style='border: none' /></a></noscript>
+                    <object class='tableauViz' style='display:none;'>
+                      <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                      <param name='embed_code_version' value='3' />
+                      <param name='site_root' value='' />
+                      <param name='name' value='CollegeScorecardProjectWorkbook&#47;School-Type-Financial-Dashboard' />
+                      <param name='tabs' value='no' />
+                      <param name='toolbar' value='yes' />
+                      <param name='static_image'
+                        value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;CollegeScorecardProjectWorkbook&#47;School-Type-Financial-Dashboard&#47;1.png' />
+                      <param name='animate_transition' value='yes' />
+                      <param name='display_static_image' value='yes' />
+                      <param name='display_spinner' value='yes' />
+                      <param name='display_overlay' value='yes' />
+                      <param name='display_count' value='yes' />
+                    </object>
+                  </div>
+                  <script type='text/javascript'>
+                    var divElement = document.getElementById('viz1573569107252');
+                    var vizElement = divElement.getElementsByTagName('object')[0];
+                    vizElement.style.width = '1200px';
+                    vizElement.style.height = '800px';
+                    var scriptElement = document.createElement('script');
+                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+                  </script>
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <div class="row">
+              <div class="col-lg-12 col-sm-12">
+                <section class="card">
+                  <div class="card-body">
+                    <h5>School Admissions and You</h5>
+                    <p>Test text
+                    </p>
+                    <div class='tableauPlaceholder' id='viz1573569107253' style='position: relative'><noscript><a href='#'><img
+                            alt=' '
+                            src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;CollegeScorecardProjectWorkbook&#47;Adm-Overview-Dashboard&#47;1_rss.png'
+                            style='border: none' /></a></noscript>
+                      <object class='tableauViz' style='display:none;'>
+                        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                        <param name='embed_code_version' value='3' />
+                        <param name='site_root' value='' />
+                        <param name='name' value='CollegeScorecardProjectWorkbook&#47;Adm-Overview-Dashboard' />
+                        <param name='tabs' value='no' />
+                        <param name='toolbar' value='yes' />
+                        <param name='static_image'
+                          value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;CollegeScorecardProjectWorkbook&#47;Adm-Overview-Dashboard&#47;1.png' />
+                        <param name='animate_transition' value='yes' />
+                        <param name='display_static_image' value='no' />
+                        <param name='display_spinner' value='yes' />
+                        <param name='display_overlay' value='yes' />
+                        <param name='display_count' value='yes' />
+                      </object>
+                    </div>
+                    <script type='text/javascript'>
+                      var divElement = document.getElementById('viz1573569107253');
+                      var vizElement = divElement.getElementsByTagName('object')[0];
+                      vizElement.style.width = '1200px';
+                      vizElement.style.height = '800px';
+                      var scriptElement = document.createElement('script');
+                      scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+                      vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+                    </script>
+                  </div>
+                </section>
+              </div>
+            </div>
+        
+
+        <!-- OLD
+        <div class="row">
           <div class="col-lg-6 col-sm-6">
             <section class="card">
               <div class="card-body">
+                
                 <h5>School Type</h5>
                 <p>There are three primary school types - Public, Private, and Private for Profit. Public schools are open to all students and funded through local, state, and federal taxes. Private schools are those
                   that are funded primarily through tuition and grants, but don't operate as profit-institutions. Private for profit are schools that tend to serve specific purposes, such as additional professional training
@@ -392,6 +524,7 @@
             </div>
           </div>
 
+        -->
 
 
 
