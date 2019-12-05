@@ -81,10 +81,10 @@ function histogram() {
       }
 
       var xPosText = xPos;
-      if (xPos < 16) {
-        xPosText = 16;
-      } else if (xPos+16 > innerWidth) {
-        xPosText = innerWidth - 16;
+      if (xPos < 18) {
+        xPosText = 18;
+      } else if (xPos+18 > innerWidth) {
+        xPosText = innerWidth - 18;
       }
 
 

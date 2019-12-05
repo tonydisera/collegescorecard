@@ -135,9 +135,13 @@
                 <button onclick="startTour()" class="btn btn-sm btn-default" id="tour-button">Quick Tour</button>
               </div>
 
+
               <button style="display: none" id="slide-right-button" class="btn btn-info sb-toggle-right">Slide</button>
-              
-                        
+
+
+
+                
+
             </div>
 
             <div class="row">
@@ -205,10 +209,35 @@
 
                       </div>
 
-                      <div id="hist-chart-categories">
+                      <div id="distribution-container">
+                        <div id="distribution-controls">
+                          Summary across colleges
+                          <div class="btn-group"  data-toggle="buttons" >
+                              <label class="btn active btn-sm btn-default">
+                                  <input type="radio" name="distoption" value="ranked"> Ranked
+                              </label>
+                              <label  class="btn btn-sm btn-default ">
+                                  <input   type="radio" name="distoption" value="all">All 
+                              </label>
+                              <label class="btn btn-sm btn-default  ">
+                                  <input type="radio" name="distoption" value="none"> 
+                                  Hide
+                              </label>
+                          </div>
+                        </div>
+                        <div>
+                          <div id="hist-chart-container">
+                          </div>
+                          <div id="swarm-container">
+                          </div>
+                        </div>                                  
                       </div>
+
                       <div id="hist-chart" data-step="4" data-intro="These charts show how each factor (metric) is distributed in all 7000 schools.  When you hover over a particular college, you will see how that college's metric places among all 7000 colleges" class="chart-container">
-                        <span style="display:none" class="hint">Metrics across all colleges</span>
+                       
+                      </div>
+
+                      <div id="hist-chart-categories">
                       </div>
 
                       <div id="rank-chart-heading"></div>
@@ -337,7 +366,7 @@
       </div>
       <!-- Right Slidebar end -->
 
-  <div id="search-dialog" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div id="search-dialog" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"  aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content" style="width:1000px;padding:10px">
 
@@ -505,6 +534,16 @@
 
     </div>
   </div>
+
+   <div id="swarm-dialog" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content" style="width:1000px;padding:10px">
+        <div id="swarm-container1">
+        </div>
+      </div>
+    </div>
+   </div>
+
      
   </section>
 
@@ -561,10 +600,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.js" integrity="sha256-gh5oDg46rxRDr9QF4nehk1UNULQ05EhbM9wOerElwRc=" crossorigin="anonymous"></script>
 
   <script src="static/js/introjs/intro.js"></script>
-
+  <script src="static/js/d3-beeswarm/d3-beeswarm.min.js"></script>
 
 
   <script src="static/js/scorecard/common.js"></script>
+  <script src="static/js/scorecard/swarm.js"></script>
   <script src="static/js/scorecard/search.js"></script>
   <script src="static/js/scorecard/rankchart.js"></script>
   <script src="static/js/scorecard/scatterplot.js"></script>

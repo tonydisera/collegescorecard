@@ -9,9 +9,9 @@ let rankHeaderHeight    = 113;
 let rankRowHeight       = 24;
 let rankBarHeight       = 15;
 
-let rankColPadding      = 10;
-let rankColWidth        = 70;
-let rankColWidthTotal   = 100;
+let rankColPadding      = 20;
+let rankColWidth        = 80;
+let rankColWidthTotal   = 130;
 let rankColWidthScore   = 10;
 let rankNameWidth       = 275;
 let rankColWidthRank    = 60;
@@ -24,6 +24,13 @@ let tippyShowCount = 0;
 let tippyDeltaCount = 0;
 
 
+let rankedCollegeData = null;
+let allCollegeData = null;
+let swarm = null;
+
+let distributionOption = 'ranked'
+
+
 $(document).ready(function() {
 
   init();  
@@ -33,6 +40,7 @@ $(document).ready(function() {
 
 function init() {
 
+  swarm = new Swarm();
 
 
   initFieldDropdown();
@@ -41,9 +49,10 @@ function init() {
   rankChart.margin( { top: 60, right: 5, bottom: 0, left: 0 } )
 
   rankChart.headerHeight(rankHeaderHeight);
+  rankChart.colWidth(rankColWidth);
+  rankChart.colPadding(rankColPadding)
   rankChart.rowHeight(rankRowHeight);
   rankChart.barHeight(rankBarHeight);
-  rankChart.colWidth(rankColWidth);
   rankChart.weightHeight(14)
   rankChart.weightWidth(rankColWidth/4)
   rankChart.colWidthTotal(rankColWidthTotal);
@@ -54,22 +63,29 @@ function init() {
   rankChart.colWidthScore(rankColWidthScore)
   rankChart.onRescale(function(data) {
     rankChart.initFieldDescriptors()()
-    promiseShowHistograms();
+    showCategoryHeadings();
+    promiseShowHistogramCharts();
+    showSwarm();
     showRescaledRankings(data)
   })
   rankChart.onHover(function(record) {
     highlightHistogram(record.name, record.field)
+    swarm.highlight(record.name)
   })
   rankChart.onHoverEnd(function(record) {
     unhighlightHistograms(record.name);
+    swarm.unhighlight()
   })
   rankChart.onHoverRow(function(record) {
     highlightHistograms(record.name)
+    swarm.highlight(record.name)
   })
   rankChart.onHoverRowEnd(function(record) {
     unhighlightHistograms(record.name);
+    swarm.unhighlight()
   })  
   rankChart.onRowClicked(function(college) {
+    swarm.highlight(college.name)
     showCollegeDetail(college)
   })
 
@@ -106,8 +122,121 @@ function init() {
   });
 
 
+  $('#distribution-controls input:radio[name="distoption"]').change(function(){
+    let key = $(this).val();
+    let checked = d3.select(this).property("checked");
+    if (checked) {
+      distributionOption = key;
+      if (distributionOption == 'all') {
+        hideSwarm();
+        promiseShowHistogramCharts();
+      } else if (distributionOption == 'ranked') {
+        hideHistograms();
+        showSwarm();
+      } else if (distributionOption == 'none') {
+        hideHistograms();
+        hideSwarm();
+      }
+    } else {
+      distributionOption = 'none';
+    }
+
+  });
 
 
+}
+
+var hideSwarm = function() {
+  d3.select("#swarm-container").classed("hide", true)
+}
+
+var showSwarm = function() {
+  if (distributionOption == 'ranked') {
+    d3.select("#swarm-container").classed("hide", false)
+    d3.select("#distribution-container").style("margin-left", 
+       (rankColWidthRank 
+          + rankNameWidth 
+          + rankColPadding 
+          + rankColWidthScore 
+          + rankColWidthTotal - 200) + "px");
+    swarm.load(rankedCollegeData, getSelectedMetricFields())    
+  }
+}
+
+hideHistograms  = function() {
+  d3.select("#hist-chart-container").classed("hide", true)
+}
+
+promiseShowHistogramCharts = function() {
+  return new Promise(function(resolve, reject) {
+    if (distributionOption == 'all') {
+      d3.select("#hist-chart-container").classed("hide", false)
+
+      let fieldNames = getSelectedFieldNames();
+      promiseMetricGetData(fieldNames, null, {includeDefaultFields: false, includeNameField: true})
+      .then(function(data) {
+
+        allCollegeData = data;
+
+
+        d3.select("#distribution-container").style("margin-left", 
+          (rankColWidthRank 
+          + rankNameWidth 
+          + rankColPadding 
+          + rankColWidthScore 
+          + rankColWidthTotal - 200) + "px");
+
+
+        let chartSelector           = "#hist-chart-container .hist"
+        let chartContainerSelector  = "#hist-chart-container"
+        d3.selectAll(chartSelector).remove()
+        histChartMap = {};
+
+        let prevCategory = null;
+
+        getSelectedMetricFields().forEach(function(selectedField, i) {
+          let selectedFieldName = selectedField.name.split(" ").join("_");
+
+          let clazzes = "hist " + selectedFieldName + " " + selectedField.category;
+          let selection = d3.select(chartContainerSelector).append("div").attr("class", clazzes);
+          if (prevCategory != null && prevCategory != selectedField.category) {
+            selection.style("margin-left", rankCategoryPadding + "px");
+          }
+
+          let nonNullValues = data.filter(function(d) {
+            return d[selectedField.name];
+          })
+
+
+          let histChart = histogram();
+          histChart.width(selectedField.width ? (selectedField.width+rankColPadding) : (rankColWidth+rankColPadding))
+                   .height(90)
+                   .margin({top: 10, bottom: 10, left: 0, right: rankColPadding})
+                  
+          histChart.xValue(function(d) {
+            return d[selectedField.name];
+          })
+          histChart.showAxis(false)
+          histChart.rankDescending(selectedField.rankDescending)
+          selection.datum(data)
+          histChart(selection);
+
+          histChartMap[selectedField.name] = histChart;
+
+          prevCategory = selectedField.category;
+
+        })
+        d3.select(chartContainerSelector).select(".hint").style("display", "initial");
+
+        resolve();
+
+
+      })  
+    } else {
+      resolve();
+    }
+
+  })
 }
 
 var pulsateTourButton = function() {
@@ -149,50 +278,57 @@ function rankColleges() {
   d3.select("#filter-badges").html(search.getBadges())
   d3.select("#rank-college-count").text("Ranking " + getSelectedCollegeIds().length + " Colleges")
 
-  promiseShowHistograms();
-  promiseShowRankings(getSelectedCollegeIds())
+  showCategoryHeadings();
+
+  promiseShowHistogramCharts()
   .then(function() {
-      d3.select('#loading').style("display", "none")
+    promiseShowRankings(getSelectedCollegeIds())
+    .then(function() {
+        showSwarm();
 
-      if (tippyShowCount < 2) {
-        tippyShowCount++
-        setTimeout(function() {
-          tippy('#rank-chart #row-0 text.name', {
-            content: 'Hover over or click on row for more info',
-            placement: 'top',
-            theme: 'blue',
-          });
-          document.querySelector('#rank-chart #row-0 text.name')._tippy.show();
+        d3.select('#loading').style("display", "none")
 
+        if (tippyShowCount < 2) {
+          tippyShowCount++
           setTimeout(function() {
-            if (document.querySelector('#rank-chart #row-0 text.name')._tippy) {
-              document.querySelector('#rank-chart #row-0 text.name')._tippy.hide();
-            }  
-
-            tippy('.col-header#col-metric-1 rect#weight-square-1', {
-              content: 'Click on squares to adjust weight',
-              placement: 'bottom',
-              theme: 'blue'
+            tippy('#rank-chart #row-0 text.name', {
+              content: 'Hover over or click on row for more info',
+              placement: 'top',
+              theme: 'blue',
             });
-            document.querySelector('.col-header#col-metric-1 rect#weight-square-1')._tippy.show();
+            document.querySelector('#rank-chart #row-0 text.name')._tippy.show();
+
             setTimeout(function() {
-              if (document.querySelector('.col-header#col-metric-1 rect#weight-square-1')._tippy) {
-                document.querySelector('.col-header#col-metric-1 rect#weight-square-1')._tippy.hide();
-              }
+              if (document.querySelector('#rank-chart #row-0 text.name')._tippy) {
+                document.querySelector('#rank-chart #row-0 text.name')._tippy.hide();
+              }  
+
+              tippy('.col-header#col-metric-1 rect#weight-square-1', {
+                content: 'Click on squares to adjust weight',
+                placement: 'bottom',
+                theme: 'blue'
+              });
+              document.querySelector('.col-header#col-metric-1 rect#weight-square-1')._tippy.show();
+              setTimeout(function() {
+                if (document.querySelector('.col-header#col-metric-1 rect#weight-square-1')._tippy) {
+                  document.querySelector('.col-header#col-metric-1 rect#weight-square-1')._tippy.hide();
+                }
+              }, 2000)
+
+
+
             }, 2000)
 
+          },1000)
+
+        }
+
+    
 
 
-          }, 2000)
-
-        },1000)
-
-      }
-
-  
-
-
+    })
   })
+
 
 }
 
@@ -202,6 +338,7 @@ function promiseShowRankings(selectedCollegeIds) {
 
   return promiseGetCollegeData(selectedCollegeIds, getSelectedFieldNames())
   .then(function(selectedCollegeData) {
+    rankedCollegeData = selectedCollegeData;
 
     let selection = d3.select("#rank-chart");
     rankChart.fieldDescriptors(getSelectedMetricFields())
@@ -276,108 +413,60 @@ function promiseGetCollegeData(selectedCollegeIds, fieldNames) {
 
 
 
-function promiseShowHistograms() {
+function showCategoryHeadings() {
 
-  return new Promise(function(resolve, reject) {
 
-    let fieldNames = getSelectedFieldNames();
+  let fieldNames = getSelectedFieldNames();
 
-    let fieldDescriptors = getSelectedMetricFields();
-    let categories = []
-    
-    let category = null;
-    fieldDescriptors.forEach(function(field,i) {
-      if (i == 0 || field.category != fieldDescriptors[i-1].category) {
-        if (category) {
-          category.width -= rankColPadding;
-        }
-        category = {category: field.category, count: 1, width: 0}
-        categories.push(category)
-      } else {
-        category.count++;
+  let fieldDescriptors = getSelectedMetricFields();
+  let categories = []
+  
+  let category = null;
+  fieldDescriptors.forEach(function(field,i) {
+    if (i == 0 || field.category != fieldDescriptors[i-1].category) {
+      if (category) {
+        category.width -= rankColPadding;
       }
-      let theWidth = field.width ? (field.width+rankColPadding) : (rankColWidth+rankColPadding);
-      category.width += theWidth;
-    })
+      category = {category: field.category, count: 1, width: 0}
+      categories.push(category)
+    } else {
+      category.count++;
+    }
+    let theWidth = field.width ? (field.width+rankColPadding) : (rankColWidth+rankColPadding);
+    category.width += theWidth;
+  })
 
-    let headerContainerSelector  = "#hist-chart-categories"
-    let headerSelector  = "#hist-chart-categories .category-header"
-    d3.select(headerContainerSelector).style("margin-left", (rankColWidthRank + rankNameWidth+rankColPadding+rankColWidthScore+rankColPadding+rankColWidthTotal+rankColPadding) + "px");
-    d3.selectAll(headerSelector).remove();
+  let headerContainerSelector  = "#hist-chart-categories"
+  let headerSelector  = "#hist-chart-categories .category-header"
+  d3.select(headerContainerSelector).style("margin-left", 
+    (rankColWidthRank 
+      + rankNameWidth 
+      + rankColPadding 
+      + rankColWidthScore 
+      + rankColWidthTotal)
+     + "px");
 
-
-    categories.forEach(function(cat,i) {
-      d3.select(headerContainerSelector)
-        .append("span")
-        .attr("class", "category-header")
-        .style("min-width", function() {
-          return cat.width + "px";
-        })
-        .style("margin-left", function() {
-          if (i > 0) {
-            return rankCategoryPadding+rankColPadding + "px";  
-          }  else {
-            return "0px"
-          }         
-        })
-        .text(function(d,i) {
-          return capitalize(cat.category);
-        })
-    })
-
-    promiseMetricGetData(fieldNames, null, {includeDefaultFields: false, includeNameField: true})
-    .then(function(data) {
+  
+  d3.selectAll(headerSelector).remove();
 
 
-
-      let chartContainerSelector  = "#hist-chart"
-      d3.select(chartContainerSelector).style("margin-left", (rankColWidthRank + rankNameWidth+rankColPadding+rankColWidthScore+rankColPadding+rankColWidthTotal+rankColPadding) + "px");
-
-
-      let chartSelector           = "#hist-chart .hist"
-      d3.selectAll(chartSelector).remove()
-      histChartMap = {};
-
-      let prevCategory = null;
-
-      getSelectedMetricFields().forEach(function(selectedField, i) {
-        let selectedFieldName = selectedField.name.split(" ").join("_");
-
-        let clazzes = "hist " + selectedFieldName + " " + selectedField.category;
-        let selection = d3.select(chartContainerSelector).append("div").attr("class", clazzes);
-        if (prevCategory != null && prevCategory != selectedField.category) {
-          selection.style("margin-left", rankCategoryPadding + "px");
-        }
-
-        let nonNullValues = data.filter(function(d) {
-          return d[selectedField.name];
-        })
-
-
-        let histChart = histogram();
-        histChart.width(selectedField.width ? (selectedField.width+rankColPadding) : (rankColWidth+rankColPadding))
-                 .height(70)
-                 .margin({top: 10, bottom: 10, left: 0, right: rankColPadding})
-                
-        histChart.xValue(function(d) {
-          return d[selectedField.name];
-        })
-        histChart.showAxis(false)
-        histChart.rankDescending(selectedField.rankDescending)
-        selection.datum(data)
-        histChart(selection);
-
-        histChartMap[selectedField.name] = histChart;
-
-        prevCategory = selectedField.category;
-
+  categories.forEach(function(cat,i) {
+    d3.select(headerContainerSelector)
+      .append("span")
+      .attr("class", "category-header")
+      .style("min-width", function() {
+        return cat.width + "px";
       })
-      d3.select(chartContainerSelector).select(".hint").style("display", "initial");
-
-      resolve();
-
-
-    })
+      .style("margin-left", function() {
+        if (i > 0) {
+          return rankCategoryPadding+rankColPadding + "px";  
+        }  else {
+          return "0px"
+        }         
+      })
+      .text(function(d,i) {
+        return capitalize(cat.category);
+      })
   })
 
 }

@@ -1,6 +1,10 @@
 body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
 
 
+.hide {
+  display: none !important;
+}
+
 #home-page-content {
   display: flex;
   flex-flow: column;
@@ -134,7 +138,7 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
     display: flex;
     flex-flow: row;
     justify-content: center;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     margin-top: 15px; 
 }
 
@@ -266,6 +270,7 @@ body .selections {
 
 
 
+
 .btn-group .btn-sm {
     background: white;
     color: #757474;
@@ -280,6 +285,11 @@ body .selections {
     color: #fff !important;
     font-weight: 600 !important;
 
+}
+
+#distribution-controls .btn-group .btn-sm {
+  font-size: 11px;
+  max-height: 23px;  
 }
 
 .selections .btn-group .btn-sm {
@@ -350,7 +360,23 @@ body .selections {
   border: thin solid #949494;
 }
 
+#distribution-container {
+  display: flex;
+}
+
+#distribution-controls {
+  display: flex;
+  flex-flow: column;
+  min-width: 180px;
+  margin-right: 20px;
+  align-self: center;
+}
+
 #hist-chart-categories {
+  display: flex;
+}
+
+#hist-chart-container {
   display: flex;
 }
 
@@ -362,36 +388,34 @@ body .selections {
   background-color: #f2f0f0
 }
 
-#hist-chart {
-  display: flex;
-  flex-flow: row;
-}
 
 
-#hist-chart .hist svg .x.axis .tick text {
+#hist-chart-container .hist svg .x.axis .tick text {
   transform: rotate(90deg) translate(6px,-12px);
   text-anchor: start;
 }
 
-#hist-chart .hist svg rect {
+#hist-chart-container .hist svg rect {
   fill: #d3d3d3;
   stroke: #515050;
   stroke-width: .5px;
 }
 
-#hist-chart .hist svg rect.highlight {
+#hist-chart-container .hist svg rect.highlight {
   stroke: #2d96cb;
   stroke-width: 2px;
 }
 
-#hist-chart .hist svg text.marker-label {
-  font-size: 11px;
-  fill: #278abc;
+#hist-chart-container .hist svg text.marker-label {
+  fill: #286db6;
+  font-weight: 600;
+  font-size: 12px;
+  text-anchor: middle;
 }
-#hist-chart .hist svg .marker {
-  fill: #278abc;
+#hist-chart-container .hist svg .marker {
+  fill: #286db6;
 }
-#hist-chart .hist svg line.marker  {
+#hist-chart-container .hist svg line.marker  {
   stroke: #1d68de;
   stroke-width: 2px;
   stroke-opacity: .5;
@@ -437,9 +461,8 @@ body .selections {
 }
 
 #hist-chart span.hint {
-  margin-left: -140px;
-  min-width: 140px;
-  max-width: 140px;
+  min-width: 160px;
+  max-width: 160px;
   line-height: 13px;
   height: 20px;
   padding: 2px;
@@ -456,14 +479,14 @@ body .selections {
 }
 
 .rankchart rect.weight {
-  stroke: #727070;
+  stroke: #bcbcbc;
   stroke-width: 1px;
   fill: #edebeb;
 }
 
 .rankchart rect.weight.selected {
   stroke-width: 1px;
-  fill: #a5a2a2;
+  fill: #4d73a3;
 }
 
 .rankchart .delta path.up {
@@ -508,7 +531,7 @@ body .selections {
 }
 .rankchart .col-header text tspan,
 .rankchart .row text.name {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   fill: #585757;
 }
@@ -545,7 +568,7 @@ body .selections {
 
 #rank-chart-heading {
   margin-bottom: 5px;
-  margin-top: 10px;
+  margin-top: 3px;
   display: flex;
   background-color: white;
   z-index: 2;  
@@ -597,3 +620,35 @@ div.tooltip {
     padding-right: 4px;
     font-weight: 600;
 }
+
+#swarm-container {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+#swarm-container circle.point {
+  stroke: darkgray;
+  fill: lightgray;
+  opacity: .7;
+}
+
+#swarm-container circle.highlight {
+  fill: #286db6;
+  stroke: #286db6;
+}
+#swarm-container text.highlight {
+  fill: #286db6;
+  font-weight: 600;
+  font-size: 12px;
+  text-anchor: middle;
+}
+
+#swarm-container line {
+  stroke: #6c6a6a;
+}
+
+#swarm-container svg {
+}
+

@@ -27,7 +27,7 @@ function rankchart() {
   var barHeight     = 15;
   var colWidthScore = 20;
   var colWidthRank  = 60;
-  var colWidth      = 80;
+  var colWidth      = 100;
   var colWidthTotal = 300;
   var colPadding    = 10;
   var nameWidth     = 250;
@@ -398,7 +398,7 @@ function rankchart() {
         .append("text")
         .attr("class", "col-header")
         .attr("x", 0)
-        .attr("y", weightHeight+45)
+        .attr("y", 12)
         .text("Rank")
 
       headerRowEnter
@@ -406,14 +406,14 @@ function rankchart() {
         .attr("id", "col-header-name")
         .attr("class", "col-header col-name")
         .attr("x", colWidthRank)
-        .attr("y", weightHeight+45)
+        .attr("y", 12)
         .text("College")
 
       headerRowEnter
         .append("text")
         .attr("class", "col-header col-score")
         .attr("x", colWidthRank+nameWidth)
-        .attr("y", weightHeight+45)
+        .attr("y", 12)
         .text("Score")      
 
 
@@ -430,7 +430,7 @@ function rankchart() {
 
       let colHeadersText = colHeadersEnter
         .append("g")
-        .attr("transform", "translate(0," +  (weightHeight+45) + ")")
+        .attr("transform", "translate(0,12)")
       colHeadersText  
         .append("text")
         .attr("dx", 0)
@@ -451,7 +451,7 @@ function rankchart() {
       let weightGroupEnter = weightGroup
         .enter()
         .append("g")
-        .attr("transform", "translate(" + ((colWidth - (weightWidth*4))/2) + "," + (weightHeight+((weightHeight/2)*-1)) + ")")
+        .attr("transform", "translate(" + ((colWidth - (weightWidth*4))/2) + "," + (60+ weightHeight+((weightHeight/2)*-1)) + ")")
         .attr("class", "weights")
 
       let weightRectEnter = weightGroupEnter.selectAll("rect.weight")
@@ -523,7 +523,7 @@ function rankchart() {
         .attr("id", "col-header-weight")
         .attr("class", "hint-header")
         .attr("x", 0)
-        .attr("y", 0)
+        .attr("y", 60)
         .text("Weight")
         
   }
@@ -551,7 +551,7 @@ function rankchart() {
 
 
     fieldDescriptors.forEach(function(field,i) {
-      if (i > 0 && field.category != fieldDescriptors[i-1].category) {
+      if (i > 1 && field.category != fieldDescriptors[i-1].category) {
         totalCategoryPadding += categoryPadding;
       } 
       field.paddingCumulative = totalCategoryPadding;
@@ -561,11 +561,13 @@ function rankchart() {
       field.currentWeight = field.currentWeight ? field.currentWeight : 1;
       field.width = field.name == "_total" ? colWidthTotal : colWidth*field.currentWeight;
 
-      field.colX =  colWidthRank + nameWidth + colPadding + colWidthScore + colPadding 
-                    + field.paddingCumulative + totalColWidth;
+      field.colX =  colWidthRank + nameWidth + colWidthScore + colPadding + totalColWidth 
+                    + field.paddingCumulative;
 
       totalColWidth += field.width;
-      totalColWidth += colPadding;
+      if (i > 0) {
+        totalColWidth += colPadding;
+      }
     })
     // Add padding for total
     totalCategoryPadding += categoryPadding;
@@ -589,7 +591,8 @@ function rankchart() {
     // Set up column scales
     fieldDescriptors.forEach(function(field,i) {
       field.scale = d3.scaleLinear()
-          .domain([d3.min(data, d => d[field.name]), d3.max(data, d => d[field.name])])
+          //.domain([d3.min(data, d => d[field.name]), d3.max(data, d => d[field.name])])
+          .domain([0, d3.max(data, d => d[field.name])])
           .clamp(true)
       if (field.rankDescending) {
         field.scale.range([colWidth * field.currentWeight, 2])
@@ -598,7 +601,8 @@ function rankchart() {
       }
 
       field.scaleTotal = d3.scaleLinear()
-          .domain([d3. min(data, d => d[field.name]), d3.max(data, d => d[field.name])])
+          //.domain([d3. min(data, d => d[field.name]), d3.max(data, d => d[field.name])])
+          .domain([0, d3.max(data, d => d[field.name])])
           .clamp(true)
       if (field.rankDescending) {
         field.scaleTotal.range([(colWidthTotal/units) * field.currentWeight, 2])
@@ -975,7 +979,7 @@ function rankchart() {
   }
   chart.colPadding = function(_) {
     if (!arguments.length) return colPadding;
-    colWidth = _;
+    colPadding = _;
     return chart;
   }
   chart.colWidthTotal = function(_) {
