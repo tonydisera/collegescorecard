@@ -129,7 +129,7 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
 #rank-college-count {
   font-size: 20px;
   color: #908d8d;
-  font-weight: 600;
+  font-weight: 500;
   padding-right: 10px;
   padding-left: 0px;
 }
@@ -140,7 +140,7 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
     display: flex;
     flex-flow: row;
     justify-content: flex-start;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
     margin-top: 10px;
 }
 
@@ -219,11 +219,11 @@ body .selections {
 #scorecard-select-container {
   margin-top: 0px;
   margin-right: 10px;
-  margin-left: 50px;
+  margin-left: 160px;
   font-size: 15px;
   min-width: 280px;
   max-width: 280px;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
   display: flex;
   flex-flow: column;
 }
@@ -262,7 +262,7 @@ body .selections {
   display: flex;
   flex-flow: column;
   font-size: 15px;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
 }
 
 .btn-sm {
@@ -291,8 +291,9 @@ body .selections {
 
 
 #distribution-display {
-  min-width: 110px;
+  min-width: 80px;
   margin-right: 10px;
+  margin-left: 20px;
   align-self: center;
   line-height: 14px;
   font-size: 12px;
