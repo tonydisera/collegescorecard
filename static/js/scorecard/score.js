@@ -5,7 +5,7 @@ let search = null;
 let rankChart = null;
 let metricCategories = ['selectivity', 'instruction', 'cost', 'outcome', 'diversity', 'rank']
 
-let rankHeaderHeight    = 113;
+let rankHeaderHeight    = 90;
 let rankRowHeight       = 24;
 let rankBarHeight       = 15;
 
@@ -147,6 +147,7 @@ function init() {
 }
 
 var hideSwarm = function() {
+  d3.select("#distribution-display").text("")
   d3.select("#swarm-container").classed("hide", true)
 }
 
@@ -158,18 +159,22 @@ var showSwarm = function() {
           + rankNameWidth 
           + rankColPadding 
           + rankColWidthScore 
-          + rankColWidthTotal - 200) + "px");
+          + rankColWidthTotal - 120) + "px");
+    d3.select("#distribution-display").text("Summary across ranked colleges")
     swarm.load(rankedCollegeData, getSelectedMetricFields())    
   }
 }
 
 hideHistograms  = function() {
+  d3.select("#distribution-display").text("")
   d3.select("#hist-chart-container").classed("hide", true)
 }
 
 promiseShowHistogramCharts = function() {
   return new Promise(function(resolve, reject) {
     if (distributionOption == 'all') {
+      d3.select("#distribution-display").text("Summary across all colleges")
+
       d3.select("#hist-chart-container").classed("hide", false)
 
       let fieldNames = getSelectedFieldNames();
@@ -184,7 +189,7 @@ promiseShowHistogramCharts = function() {
           + rankNameWidth 
           + rankColPadding 
           + rankColWidthScore 
-          + rankColWidthTotal - 200) + "px");
+          + rankColWidthTotal - 120) + "px");
 
 
         let chartSelector           = "#hist-chart-container .hist"
@@ -526,6 +531,15 @@ function initFieldDropdown() {
     enableCaseInsensitiveFiltering: true,
     inheritClass: true,
     nonSelectedText: "Select fields",
+    buttonText: function(options, select) 
+    {
+      if (options.length === 0) {
+        return 'Pick Metrics';
+      }
+      else  {
+        return 'Pick Metrics (' + options.length + ' selected)';
+      }         
+    },
     onChange: function(options, checked) {
 
       if (options && options.length > 0) {

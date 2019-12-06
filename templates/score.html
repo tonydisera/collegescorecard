@@ -155,17 +155,24 @@
 
 
                   <div class="card-body" style="overflow-x: scroll;padding-top:10px">
-                    <div class="selections" >
-                      <div id="search-colleges-container">
-                        <div class="step-container">
-                          <span class="step-label" >Colleges</span>
+
+                    <div id="rank-chart-title">
+                        <span  id="rank-college-count" class="badge primary-badge"></span>
+
+                        <div  id="filter-badges">
                         </div>
 
+                    </div>
+
+                    <div class="selections" >
+                      <div id="search-colleges-container">
+
+
                         <div style="display:flex;">
-                          <button data-step="1" data-intro="Choose colleges to rank by performing your own search" id="search-colleges-button" class="btn btn-sm btn-primary">Search for colleges
+                          <button data-step="1" data-intro="Choose colleges to rank by performing your own search" id="search-colleges-button" class="btn btn-sm btn-primary">Pick Colleges
                           </button>
 
-                          <div data-step="2" data-intro="Or choose the colleges to rank using one of these pre-built filters" class="btn-group"  data-toggle="buttons" style="margin-left:10px">
+                          <div  id="college-filters" ådata-step="2" data-intro="Or choose the colleges to rank using one of these pre-built filters" class="btn-group"  data-toggle="buttons" style="margin-left:10px">
                               <label  class="btn btn-sm btn-default active">
                                   <input id="custom-filter-button-1"  type="radio" name="searchoption" value="public_high_act">Highly selective, Public
                               </label>
@@ -187,31 +194,13 @@
                       </div>
 
                       <div id="scorecard-select-container">
-                        <div class="step-container">
-                          <span class="step-label" >Factors for comparing colleges</span>
-                        </div>
+                        
                         <select data-step="3" data-intro="Choose which factors to consider when scoring the colleges"  id="scorecard-select" multiple="multiple">
                         </select>
                       </div>
 
-                    </div>
-
-                    <center >
-                      <img id="loading" style="display:none;width:800px" src="static/assets/scorecard/charts-loader-2x.gif"></img>
-                    </center>
-
-                    <div style="display:flex;flex-flow:column;">
-                      <div id="rank-chart-title">
-                        <span  id="rank-college-count" class="badge primary-badge"></span>
-
-                        <div  id="filter-badges">
-                        </div>
-
-                      </div>
-
-                      <div id="distribution-container" data-step="4" data-intro="These charts show how each factor (metric) is distributed across all ranked schools.  When you hover over a particular college, you will see how that college's metric places among the ranked colleges.  You can change the chart to show the distribution across all 7000+ colleges in the dataset." class="chart-container">
-                        <div id="distribution-controls">
-                          Summary across colleges
+                      <div id="distribution-controls">
+                          <span>Summary across colleges</span>
                           <div class="btn-group"  data-toggle="buttons" >
                               <label class="btn active btn-sm btn-default">
                                   <input type="radio" name="distoption" value="ranked"> Ranked
@@ -225,6 +214,27 @@
                               </label>
                           </div>
                         </div>
+                      </div>
+
+                    <center >
+                      <img id="loading" style="display:none;width:800px" src="static/assets/scorecard/charts-loader-2x.gif"></img>
+                    </center>
+
+                    <div style="display:flex;flex-flow:column;">
+
+
+
+
+
+                      <div id="hist-chart-categories">
+                      </div>
+
+                      <div id="rank-chart-heading"></div>
+
+                      <div id="distribution-container" data-step="4" data-intro="These charts show how each factor (metric) is distributed across all ranked schools.  When you hover over a particular college, you will see how that college's metric places among the ranked colleges.  You can change the chart to show the distribution across all 7000+ colleges in the dataset." class="chart-container">
+                        <div id="distribution-display">
+                          Summary across ranked colleges
+                        </div>
                         <div>
                           <div id="hist-chart-container">
                           </div>
@@ -233,11 +243,6 @@
                         </div>                                  
                       </div>
 
-
-                      <div id="hist-chart-categories">
-                      </div>
-
-                      <div id="rank-chart-heading"></div>
                       <div id="rank-chart" class="chart-container">
                       </div>
                     </div>

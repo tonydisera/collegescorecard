@@ -121,15 +121,17 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
   border-radius: .25rem;
   margin-top: 0px;
   padding-top: 1px;
-  background-color: white;
+  background-color: #4d72a3;
   min-width: 140px;
+  color: white;
 }
 
 #rank-college-count {
   font-size: 20px;
   color: #908d8d;
   font-weight: 600;
-  padding-right: 5px;
+  padding-right: 10px;
+  padding-left: 0px;
 }
 
 
@@ -137,9 +139,9 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
 #rank-chart-title {
     display: flex;
     flex-flow: row;
-    justify-content: center;
-    margin-bottom: 15px;
-    margin-top: 15px; 
+    justify-content: flex-start;
+    margin-bottom: 25px;
+    margin-top: 10px;
 }
 
 
@@ -189,7 +191,7 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
 }
 
 .multiselect-selected-text {
-  color: #4d72a3;
+  color: white;
   font-size: 15px;
 }
 
@@ -210,14 +212,14 @@ body .selections {
   flex-flow: row;
   margin-bottom: 0px;
   margin-top: 0px;
-  justify-content: space-around;
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
 
 #scorecard-select-container {
   margin-top: 0px;
   margin-right: 10px;
-  margin-left: 0px;
+  margin-left: 50px;
   font-size: 15px;
   min-width: 280px;
   max-width: 280px;
@@ -237,20 +239,20 @@ body .selections {
 
 #search-colleges-button, #tour-button {
   margin-top: 1px;
-  margin-left: 5px;
+  margin-left: 0px;
   max-height: 30px;
   min-width: 150px;
   font-size: 15px;
   padding-top: 3px;
-  background-color: white !important;
-  color:  #4d74a3  !important;
+  background-color: #4d74a3  !important;
+  color:  white !important;
   border-color: #4d74a3 !important;
   font-weight: 500;
 }
 
 #tour-button {
   border-color: #c6c6c6 !important;
-  color: #908d8d !important;
+  color: white !important;
 }
 
 
@@ -287,26 +289,55 @@ body .selections {
 
 }
 
-#distribution-controls .btn-group .btn-sm {
-  font-size: 11px;
-  max-height: 23px;  
+
+#distribution-display {
+  min-width: 110px;
+  margin-right: 10px;
+  align-self: center;
+  line-height: 14px;
+  font-size: 12px;
 }
 
-.selections .btn-group .btn-sm {
+.selections  .btn-group .btn-sm {
   font-size: 12px;
   background: white;
   color: #757474;
   border-color: #ffffff;
   font-weight: 500 !important;
   font-size: 12px;
-  padding: 5px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  padding-top: 0px;
+}
+
+.selections #college-filters.btn-group {
+  display: flex;
+  flex-flow: column;
+  padding-top: 5px;
+}
+
+.selections #college-filters.btn-group .btn-sm {
+    font-size: 12px;
+    background: white;
+    color: #757474;
+    border-color: #ffffff;
+    font-weight: 500 !important;
+    font-size: 12px;
+    padding: 5px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+    align-self: start;  
 }
 .selections .btn-sm.active {
-    background-color: white !important;
-    border-color: white !important;
+    border-color: #6f8eb4 !important;
+    border-radius: 0 !important;
     color: #4d74a3!important;
-    font-weight: 600 !important;
-    text-decoration: underline;
+    font-weight: 700 !important;
+    background-color: white !important;
+}
+.selections #college-filters.btn-group .btn-sm.active {
+    font-weight: 700 !important;
 }
 
 .tippy-tooltip.blue-theme {
@@ -366,10 +397,15 @@ body .selections {
 
 #distribution-controls {
   display: flex;
-  flex-flow: column;
-  min-width: 180px;
-  margin-right: 20px;
-  align-self: center;
+  flex-flow: row;
+  align-items: flex-start;
+  padding-top: 5px;
+}
+
+#distribution-controls span {
+  display: inline-block;
+  padding-right: 5px;
+  font-weight: 600;
 }
 
 #hist-chart-categories {
@@ -385,7 +421,7 @@ body .selections {
   display: inline-block;
   font-size: 13px;
   color: #464646;
-  background-color: #f2f0f0
+  border-bottom: #c6c6c6 solid .5px;
 }
 
 
@@ -468,7 +504,7 @@ body .selections {
   padding: 2px;
   margin-top: 30px;
   font-size: 13px;
-  color: #585757;  
+  color: rgb(121, 121, 121);  
 }
 
 #rank-chart.chart-container {
@@ -527,31 +563,31 @@ body .selections {
 .rankchart text.col-header,
 .row text {
   font-size: 13px;
-  fill: #585757;
+  fill: #464646;;
 }
 .rankchart .col-header text tspan,
 .rankchart .row text.name {
   font-size: 13px;
   font-weight: 600;
-  fill: #585757;
+  fill: #464646;;
 }
 
 .rankchart .col-header text,
 .rankchart text.col-header {
   font-weight: 600;
-  fill: #3c5f8a;
+  fill: #464646;;
 }
 
 .rankchart .col-header text tspan {
   font-size: 12px;
   font-weight: 600;
-  fill: #3c5f8a;
+  fill: #464646;;
 }
 
 .rankchart text.hint-header {
   text-anchor: start;
-  fill: #585757;
-  font-size: 13px;
+  fill: rgb(121, 121, 121);
+  font-size: 12px;
 
 }
 

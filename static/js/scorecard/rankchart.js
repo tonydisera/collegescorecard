@@ -506,7 +506,7 @@ function rankchart() {
 
       let hintGroup = headerRowEnter
         .append("g")
-        .attr("transform", "translate(" + (nameWidth + colWidthRank) + "," + (weightHeight + (((weightHeight/2)*-1)+12)) + ")")
+        .attr("transform", "translate(" + (nameWidth + colWidthRank + 40) + "," + (weightHeight + (((weightHeight/2)*-1)+12)) + ")")
         .attr("data-step", function(d,i) {
 
             return "5"
