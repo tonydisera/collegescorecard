@@ -35,7 +35,6 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
 }
 
 
-
 .user-heading i.fa {
   font-size: 26px;
   color: #4d72a3;
@@ -57,6 +56,13 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
 .state-overview.custom .symbol .icon-scatter {
   font-size: 25px;
   color: #908e8e !important;
+}
+
+.state-overview.custom .card {
+    margin-bottom: 10px;
+    margin-left: 10px;
+    padding-right: 20px;
+    height: 48px;
 }
 
 .user-heading h3 {
@@ -190,10 +196,7 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
   color:  #5d5d5d;
 }
 
-.multiselect-selected-text {
-  color: white;
-  font-size: 15px;
-}
+
 
 .multiselect-selected-text.has-selections {
   color: #4d72a3;
@@ -233,7 +236,6 @@ body .selections {
 }
 
 #tour-button-container {
-  margin-top: 5px;
   margin-left: 20px;
 }
 
@@ -244,17 +246,40 @@ body .selections {
   min-width: 150px;
   font-size: 15px;
   padding-top: 3px;
-  background-color: #4d74a3  !important;
-  color:  white !important;
-  border-color: #4d74a3 !important;
+  border-color: lightgray;
   font-weight: 500;
+  -webkit-box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
+  box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
+
 }
+
 
 #tour-button {
   border-color: #c6c6c6 !important;
-  color: white !important;
+  color: #275b97  !important;
+  font-weight: 600;
+  background-color: white;
+  -webkit-box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
+  box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
 }
 
+.selections #search-colleges-button, 
+.selections #scorecard-select-container button.multiselect {
+  border: 1px solid #d5d2d2 !important;
+  background-color: #f1f1f1 !important;
+  color: #e9e8e8  !important;
+  -webkit-box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
+  box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
+}
+
+.selections #search-colleges-button {
+  color: #275b97 !important;
+}
+
+.multiselect-selected-text {
+  color: #275b97 !important;
+  font-size: 15px;
+}
 
 
 
@@ -420,7 +445,8 @@ body .selections {
 #hist-chart-categories .category-header {
   text-align: center;
   display: inline-block;
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: 600;
   color: #464646;
   border-bottom: #c6c6c6 solid .5px;
 }
@@ -564,25 +590,26 @@ body .selections {
 .rankchart text.col-header,
 .row text {
   font-size: 13px;
-  fill: #464646;;
+  fill: #464646;
 }
 .rankchart .col-header text tspan,
 .rankchart .row text.name {
   font-size: 13px;
   font-weight: 600;
-  fill: #464646;;
+  fill: #464646;
 }
 
 .rankchart .col-header text,
 .rankchart text.col-header {
   font-weight: 600;
-  fill: #464646;;
+  fill: #464646;
+  font-size: 15px;
 }
 
 .rankchart .col-header text tspan {
   font-size: 12px;
   font-weight: 600;
-  fill: #464646;;
+  fill: #464646;
 }
 
 .rankchart text.hint-header {

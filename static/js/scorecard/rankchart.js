@@ -172,6 +172,7 @@ function rankchart() {
 
       // Otherwise, create the skeletal chart.
       var svgEnter = svg.enter().append("svg");
+
       var gEnter = svgEnter.append("g");
 
 
@@ -309,6 +310,7 @@ function rankchart() {
         .append("rect")
         .attr("class", "bar");
 
+
       cols.merge(colsEnter).selectAll(".bar")
         .attr("x", 0)
         .attr("y", (barHeight/2)*-1)
@@ -359,6 +361,22 @@ function rankchart() {
 
       // Otherwise, create the skeletal chart.
       var svgEnter = svg.enter().append("svg");
+
+      svgEnter.append("filter")
+              .attr("id", "shadow")
+              .attr("x", 0)
+              .attr("y", 0)
+              .attr("width", "110%")
+              .attr("height", "110%")
+                .append("feDropShadow")
+                .attr("dx", 1)
+                .attr("dy", 1)
+                .attr("stdDeviation", 2)
+                .attr("flood-color", "darkgray")
+                .attr("flood-opacity", "1")
+
+
+
       var gEnter = svgEnter.append("g");
 
 
@@ -368,6 +386,9 @@ function rankchart() {
         .attr("class", "rankchart")
         .attr("width", width)
         .attr("height", headerHeight );
+
+
+
 
       var g = svg
         .merge(svgEnter)
@@ -467,6 +488,7 @@ function rankchart() {
         .attr("id", function(d,i) {
           return "weight-square-" + i;
         })
+        .attr("style", "filter:url(#shadow)")
         .attr("class", function(weightObject) {
           if (weightObject.weight <= weightObject.field.currentWeight-1) {
             return "weight selected";

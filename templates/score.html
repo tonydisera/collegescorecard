@@ -119,28 +119,24 @@
  
             <div class="row state-overview custom">
 
-              <div class="col-lg-3 col-sm-6">
+              <div >
                 <section class="card">
                     <div class="symbol navy">
                         <i class="fa fa-sort-amount-desc"></i>
                     </div>
-                    <div class="value">
+                    <div class="value" style="display:flex">
                         <h3 class="">Compare and Rank</h3>
-                        <p></p>
+                        <div id="tour-button-container" > 
+                          <button onclick="startTour()" class="btn btn-sm btn-default" id="tour-button">Quick Tour</button>
+                        </div>
                     </div>
 
                 </section>
               </div>
-              <div id="tour-button-container" > 
-                <button onclick="startTour()" class="btn btn-sm btn-default" id="tour-button">Quick Tour</button>
-              </div>
+
 
 
               <button style="display: none" id="slide-right-button" class="btn btn-info sb-toggle-right">Slide</button>
-
-
-
-                
 
             </div>
 
@@ -156,7 +152,7 @@
 
                   <div class="card-body" style="overflow-x: scroll;padding-top:10px">
 
-                    <div id="rank-chart-title">
+                    <div id="rank-chart-title" class="hide">
                         <span  id="rank-college-count" class="badge primary-badge"></span>
 
                         <div  id="filter-badges">

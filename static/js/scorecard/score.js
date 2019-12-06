@@ -40,7 +40,7 @@ $(document).ready(function() {
 
 function init() {
 
-  swarm = new Swarm();
+  swarm = new Swarm("#swarm-container", 60, 2);
 
 
   initFieldDropdown();
@@ -215,7 +215,7 @@ promiseShowHistogramCharts = function() {
 
           let histChart = histogram();
           histChart.width(selectedField.width ? (selectedField.width+rankColPadding) : (rankColWidth+rankColPadding))
-                   .height(90)
+                   .height(50)
                    .margin({top: 10, bottom: 10, left: 0, right: rankColPadding})
                   
           histChart.xValue(function(d) {
