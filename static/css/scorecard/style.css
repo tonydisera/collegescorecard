@@ -13,7 +13,7 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
 }
 
 #home-page-content a {
-    color: #7ba118;
+    color: #4c71a3;
     font-weight: 600;
 }
 
@@ -44,7 +44,7 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
 .user-heading .icon-scatter,
 .user-heading .icon-graphic {
   color: #4c72a3;
-  font-size: 30px;
+  font-size: 20px;
   font-weight: 500;
   padding-right: 5px;
 }
@@ -54,7 +54,7 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
 
 .state-overview.custom .symbol .icon-graphic,
 .state-overview.custom .symbol .icon-scatter {
-  font-size: 25px;
+  font-size: 20px;
   color: #908e8e !important;
 }
 
@@ -62,7 +62,6 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
     margin-bottom: 10px;
     margin-left: 15px;
     padding-right: 20px;
-    height: 48px;
 }
 
 .user-heading h3 {

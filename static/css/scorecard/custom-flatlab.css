@@ -20,7 +20,7 @@ a.logo {
 
 
 a.logo span {
-    color: #85b11c;
+    color: #4c71a3;
 }
 
 ul.sidebar-menu li a {
@@ -80,12 +80,12 @@ ul.sidebar-menu li ul.sub li a {
 }
 
 .state-overview.custom .value h3 {
-    font-size: 22px;
+    font-size: 18px;
     color:  #908e8e !important;
 }
 
 .state-overview.custom .symbol i {
-    font-size: 20px;
+    font-size: 18px;
     color:  #908e8e !important;
 }
 
@@ -116,3 +116,35 @@ ul.sidebar-menu li ul.sub li a {
     height: 100vh;
 }
 
+.top-nav ul.top-menu.nav.pull-left > li > a {
+    border: none !important;
+    padding: 6px;
+    background: none;
+    margin-right: 30px;
+    color: #818480;
+    font-size: 18px !important;
+    margin-top: 5px;
+}
+
+.top-nav ul.top-menu.nav.pull-left > li > a:hover i, .top-nav ul.top-menu > li > a:focus i {
+    color: #4d74a3 !important;
+}
+
+
+.top-nav ul.top-menu.nav.pull-left > li > a.active, 
+.top-nav ul.top-menu.nav.pull-left > li > a:hover, 
+.top-nav ul.top-menu.nav.pull-left > li > a:focus {
+    background: rgba(92, 145, 247, 0.08);
+    border-left: 3px solid #4d74a3;
+    color: #4d74a3 !important;
+}
+
+
+.top-nav .nav.pull-left {
+    margin-left: 40px;
+}
+
+
+#main-content {
+    margin-left: 0px;
+}
