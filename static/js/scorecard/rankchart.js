@@ -428,7 +428,7 @@ function rankchart() {
         .attr("class", "col-header col-name")
         .attr("x", colWidthRank)
         .attr("y", 12)
-        .text("College")
+        .text("Colleges (" + data.length + ")")
 
       headerRowEnter
         .append("text")
@@ -544,7 +544,7 @@ function rankchart() {
         .append("text")
         .attr("id", "col-header-weight")
         .attr("class", "hint-header")
-        .attr("x", 0)
+        .attr("x", 10)
         .attr("y", 60)
         .text("Weight")
         

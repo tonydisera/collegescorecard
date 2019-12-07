@@ -94,7 +94,7 @@ function init() {
   search = new Search();
   search.promiseInit()
   .then(function() {
-    search.applyCustomFilter("public_high_act");
+    search.applyCustomFilter("usnews_top_200");
     rankColleges();
     setTimeout(function() {
       pulsateTourButton();
@@ -154,7 +154,7 @@ var hideSwarm = function() {
 var showSwarm = function() {
   if (distributionOption == 'ranked') {
     d3.select("#swarm-container").classed("hide", false)
-    d3.select("#distribution-container").style("margin-left", 
+    d3.select("#distribution-container").style("padding-left", 
        (rankColWidthRank 
           + rankNameWidth 
           + rankColPadding 
@@ -184,7 +184,7 @@ promiseShowHistogramCharts = function() {
         allCollegeData = data;
 
 
-        d3.select("#distribution-container").style("margin-left", 
+        d3.select("#distribution-container").style("padding-left", 
           (rankColWidthRank 
           + rankNameWidth 
           + rankColPadding 

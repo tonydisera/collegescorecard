@@ -60,7 +60,7 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
 
 .state-overview.custom .card {
     margin-bottom: 10px;
-    margin-left: 10px;
+    margin-left: 15px;
     padding-right: 20px;
     height: 48px;
 }
@@ -213,7 +213,7 @@ body #body-contents {
 body .selections {
   display: flex;
   flex-flow: row;
-  margin-bottom: 0px;
+  margin-bottom: 30px;
   margin-top: 0px;
   justify-content: flex-start;
   flex-wrap: wrap;
@@ -222,10 +222,10 @@ body .selections {
 #scorecard-select-container {
   margin-top: 0px;
   margin-right: 10px;
-  margin-left: 160px;
+  margin-left: 50px;
   font-size: 15px;
-  min-width: 280px;
-  max-width: 280px;
+  min-width: 270px;
+  max-width: 270px;
   margin-bottom: 0px;
   display: flex;
   flex-flow: column;
@@ -236,7 +236,8 @@ body .selections {
 }
 
 #tour-button-container {
-  margin-left: 20px;
+  margin-left: 30px;
+  margin-top: 7px;
 }
 
 #search-colleges-button, #tour-button {
@@ -248,19 +249,21 @@ body .selections {
   padding-top: 3px;
   border-color: lightgray;
   font-weight: 500;
+
+}
+
+#search-colleges-button {
+  min-width: 230px;
   -webkit-box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
   box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
-
 }
 
 
 #tour-button {
   border-color: #c6c6c6 !important;
-  color: #275b97  !important;
-  font-weight: 600;
+  color: #908e8e  !important;
+  font-weight: 500;
   background-color: white;
-  -webkit-box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
-  box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
 }
 
 .selections #search-colleges-button, 
@@ -270,15 +273,19 @@ body .selections {
   color: #e9e8e8  !important;
   -webkit-box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
   box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
+  min-height: 34px;
 }
 
 .selections #search-colleges-button {
   color: #275b97 !important;
+  font-size: 16px;
 }
 
 .multiselect-selected-text {
   color: #275b97 !important;
-  font-size: 15px;
+  font-size: 16px;
+  padding-top: 3px;
+  display: inline-block;
 }
 
 
@@ -295,7 +302,16 @@ body .selections {
 }
 
 
-
+.selections #college-examples {
+  display: flex;
+  flex-flow: column;
+  margin-left: 20px;
+  margin-top: -4px;
+}
+.selections #college-examples span {
+  font-size: 13px;
+  font-weight: 600;
+}
 
 
 .btn-group .btn-sm {
@@ -318,7 +334,7 @@ body .selections {
 #distribution-display {
   min-width: 80px;
   margin-right: 10px;
-  margin-left: 20px;
+  margin-left: 30px;
   align-self: center;
   line-height: 14px;
   font-size: 12px;
@@ -334,12 +350,12 @@ body .selections {
   margin-bottom: 0px;
   padding-bottom: 0px;
   padding-top: 0px;
+  padding-right: 3px;
 }
 
 .selections #college-filters.btn-group {
   display: flex;
-  flex-flow: column;
-  padding-top: 5px;
+  flex-flow: row;
 }
 
 .selections #college-filters.btn-group .btn-sm {
@@ -419,13 +435,15 @@ body .selections {
 
 #distribution-container {
   display: flex;
+  z-index: 2;
+  background-color: white;
 }
 
 #distribution-controls {
   display: flex;
-  flex-flow: row;
+  flex-flow: column;
   align-items: flex-start;
-  padding-top: 5px;
+  margin-top: -4px;
 }
 
 #distribution-controls span {

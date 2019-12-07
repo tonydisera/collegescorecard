@@ -75,7 +75,7 @@ ul.sidebar-menu li ul.sub li a {
 .state-overview.custom .value {
     width: calc(100% - 50px);    
     margin-top: 0px;
-    padding-top: 7px;
+    padding-top: 9px;
     color:  #908e8e !important;
 }
 
