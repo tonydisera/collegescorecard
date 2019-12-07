@@ -69,24 +69,24 @@ ul.sidebar-menu li ul.sub li a {
 }
 
 .state-overview.custom .symbol {
-    background-color: white !important
+    background-color: transparent !important
 }
 
 .state-overview.custom .value {
     width: calc(100% - 50px);    
     margin-top: 0px;
     padding-top: 9px;
-    color:  #908e8e !important;
+    color:  #4c72a3 !important;
 }
 
 .state-overview.custom .value h3 {
     font-size: 18px;
-    color:  #908e8e !important;
+    color:  #4c72a3 !important;
 }
 
 .state-overview.custom .symbol i {
     font-size: 18px;
-    color:  #908e8e !important;
+    color:  #4c72a3 !important;
 }
 
 .state-overview.custom .card {
