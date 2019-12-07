@@ -209,6 +209,7 @@ class Search {
           allowClear: true,
           ajax: {
             url: "getMetricData",
+            delay: 250, // wait 250 milliseconds before triggering the request
             data: function (params) {
               var query = {
                 search: params.term,

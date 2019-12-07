@@ -10,6 +10,7 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
   flex-flow: column;
   justify-content: space-between; 
   height: -webkit-fill-available;
+  padding-top: 20px;
 }
 
 #home-page-content a {
@@ -260,8 +261,8 @@ body .selections {
 
 
 #tour-button {
-  border-color: #c6c6c6 !important;
-  color: #908e8e  !important;
+  border-color: #a4b4ca !important;
+  color: #4f72a4 !important;  
   font-weight: 500;
   background-color: transparent !important
 }
