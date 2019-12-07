@@ -40,7 +40,7 @@ $(document).ready(function() {
 
 function init() {
 
-  swarm = new Swarm("#swarm-container", 60, 2);
+  swarm = new Swarm("#swarm-container", 80, 2);
 
 
   initFieldDropdown();
