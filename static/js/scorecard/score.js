@@ -543,7 +543,7 @@ function initFieldDropdown() {
         return 'Pick Metrics';
       }
       else  {
-        return 'Pick Metrics (' + options.length + ' selected)';
+        return 'Pick Metrics';
       }         
     },
     onChange: function(options, checked) {

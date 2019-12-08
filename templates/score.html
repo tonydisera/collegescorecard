@@ -129,8 +129,6 @@
                     <div id="rank-chart-title" class="hide">
                         <span  id="rank-college-count" class="badge primary-badge"></span>
 
-                        <div  id="filter-badges">
-                        </div>
 
                     </div>
 
@@ -138,29 +136,12 @@
                       <div id="search-colleges-container">
 
 
-                        <div style="display:flex;flex-flow:row">
+                        <div style="display:flex;flex-flow:column">
                           <button data-step="1" data-intro="Choose colleges to rank by performing your own search" id="search-colleges-button" class="btn btn-sm btn-primary">Pick Colleges
                           </button>
 
-                          <div id="college-examples">
-                            <span>Try out</span>
-                              <div  id="college-filters" data-step="2" data-intro="Or choose the colleges to rank using one of these pre-built filters" class="btn-group"  data-toggle="buttons" style="margin-left:0px">
-                                  <label class="btn btn-sm btn-default active">
-                                      <input type="radio" name="searchoption" value="usnews_top_200"> US News (top)  
-                                  </label>
-                                  <label  class="hide btn btn-sm btn-default">
-                                      <input id="custom-filter-button-1"  type="radio" name="searchoption" value="public_high_act">Highly selective, Public
-                                  </label>
-                                  <label class="hide btn btn-sm btn-default ">
-                                      <input type="radio" name="searchoption" value="west_coast"> West Coast, Public
-                                  </label>
-                                  <label class="btn btn-sm btn-default ">
-                                      <input type="radio" name="searchoption" value="ivy_plus"> Ivy League +
-                                  </label>
-                              </div>
+                          <div  id="filter-badges">
                           </div>
-
-                        
                         </div>
 
                       
@@ -346,22 +327,51 @@
       </div>
       <!-- Right Slidebar end -->
 
-  <div id="search-dialog" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"  aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+  <div id="search-dialog" class="modal fade " tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog ">
       <h3>Pick Colleges</h3>
       <div class="modal-content" style="padding:10px">
        <div>
-          <h5 class="modal-title">Pick Colleges</h5>
+          <h4 class="modal-title">Pick Colleges</h4>
        </div>
 
         <div style="display:flex;flex-flow:row;">
 
           <div class="card" style="flex-grow:1;max-width:420px;min-width:420px;">
             <div class="card-body" style="display:flex;justify-content: space-between;flex-direction: column;">
-              <div >
-                 <button id="reset-button"  type="button" onclick="search.resetFilters()" class="btn btn-white btn-sm">Reset</button>
 
-                <div id="degree-radio-buttons" class="btn-group"  data-toggle="buttons" style="margin-bottom: 20px;margin-top: 20px">
+              <div id="college-examples" style="margin-top:10px">
+  
+                  <div  id="college-filters" data-step="2" data-intro="Or choose the colleges to rank using one of these pre-built filters" class="btn-group"  data-toggle="buttons" style="margin-left:0px">
+                      <label class="btn btn-sm btn-default active">
+                          <input type="radio" name="searchoption" value="usnews_top_200"> US News (top)  
+                      </label>
+                      <label  class=" btn btn-sm btn-default">
+                          <input id="custom-filter-button-1"  type="radio" name="searchoption" value="public_high_act">Highly selective, Public
+                      </label>
+                      <label class=" btn btn-sm btn-default ">
+                          <input type="radio" name="searchoption" value="west_coast"> West Coast, Public
+                      </label>
+                      <label class="btn btn-sm btn-default ">
+                          <input type="radio" name="searchoption" value="ivy_plus"> Ivy League +
+                      </label>
+                  </div>
+              </div>
+
+
+              <div style="margin-top:10px" >
+
+
+                <div>
+                  <hr>
+                  <h5 style="display: inline-block;">Advanced search</h5>
+                  <button id="reset-button" type="button" onclick="search.resetFilters()" class="btn btn-white btn-sm">Reset</button>
+                </div>
+                 
+
+
+                          
+                <div id="degree-radio-buttons" class="btn-group"  data-toggle="buttons" style="margin-bottom: 10px;margin-top: 10px;"">
                     <label  class="btn btn-sm btn-default ">
                         <input  type="radio" name="degree_option" value="1">Certificate
                     </label>
@@ -375,7 +385,7 @@
 
 
 
-                <div id="control-buttons"  style="margin-bottom: 20px;margin-top: 0px">
+                <div id="control-buttons"  style="margin-bottom: 15px;margin-top: 0px">
                   <label   class="" id="control-public">
                     <input type="checkbox" style="margin-right:5px" name="control_option" value="1">Public
                   </label>
@@ -388,13 +398,13 @@
                 </div>
 
 
-                <label for="select2-programs" style="width: 100%;margin-bottom: 30px;">
+                <label for="select2-programs" style="width: 100%;margin-bottom: 15px;">
                   Select field of study
                   <select id="select2-programs" multiple="multiple">
                   </select>
                 </label>
 
-                <label for="select2-regions" style="width: 100%;margin-bottom: 30px;">
+                <label for="select2-regions" style="width: 100%;margin-bottom: 15px;">
                   Select specific region
                   <select id="select2-regions" multiple="multiple">
                     <option value="0">U.S. Service Schools</option>
@@ -412,7 +422,7 @@
 
 
 
-                <div style="display:flex;flex-flow:column;margin-bottom:10px">
+                <div style="display:flex;flex-flow:column;">
                   <div id="labelACT" >Students attending school have average an ACT score</div>
 
 
@@ -429,7 +439,7 @@
                 </div>
 
 
-                <div style="display:flex;flex-flow:column;margin-bottom:10px">
+                <div style="display:flex;flex-flow:column;">
                   <div id="labelACT" >Admission rate</div>
 
 
@@ -449,14 +459,6 @@
                 </div>
 
 
-                <div class="form-check" style="margin-left: -10px;padding-top: 10px;padding-bottom: 25px;">
-                  <input type="checkbox" false id="usnews-cb" class="form-checked-input">
-                  <label id="usnews-cb-label" class="form-check-label" for="usnews-cb">
-                    Top Ranked (US News and World Report)
-                  </label>
-                </div>
-
-
                 <label for="select2-colleges" style="width: 100%;">
                   Select specific colleges
                   <select id="select2-colleges" multiple="multiple">
@@ -472,11 +474,8 @@
        
             </div>
 
-          </div>
-                
-
           <div class="card counter-section" >
-            <div style="display: flex;align-items: center;margin-bottom: 40px;">
+            <div style="display: flex;align-items: center;">
               <div class="college-count counter" data-count="0">0</div>
               <div class="counter-label">Colleges</div>
             </div>
@@ -487,6 +486,11 @@
                    </div>
             </div>      
           </div>
+
+          </div>
+                
+
+
 
              
               
