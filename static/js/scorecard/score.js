@@ -28,7 +28,8 @@ let rankedCollegeData = null;
 let allCollegeData = null;
 let swarm = null;
 
-let distributionOption = 'ranked'
+let distributionOption = 'ranked';
+
 
 
 $(document).ready(function() {
@@ -649,6 +650,7 @@ function getMetricFields() {
 
   })
 }
+
 
 
 

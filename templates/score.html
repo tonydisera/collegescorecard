@@ -114,10 +114,6 @@
                 </section>
               </div>
 
-              <div id="tour-button-container" > 
-                <button onclick="startTour()" class="btn btn-sm btn-default" id="tour-button">Quick Tour</button>
-              </div>
-
 
               <button style="display: none" id="slide-right-button" class="btn btn-info sb-toggle-right">Slide</button>
 
@@ -190,8 +186,13 @@
                                   Hide
                               </label>
                           </div>
-                        </div>
                       </div>
+
+                      <div id="tour-button-container" > 
+                        <button onclick="startTour()" class="btn btn-sm btn-default" id="tour-button">Quick Tour</button>
+                      </div>
+                      
+                    </div>
 
                     <center >
                       <img id="loading" style="display:none;width:800px" src="static/assets/scorecard/charts-loader-2x.gif"></img>
@@ -347,18 +348,18 @@
 
   <div id="search-dialog" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"  aria-hidden="true">
     <div class="modal-dialog modal-lg">
-      <div class="modal-content" style="width:1000px;padding:10px">
+      <h3>Pick Colleges</h3>
+      <div class="modal-content" style="padding:10px">
+       <div>
+          <h5 class="modal-title">Pick Colleges</h5>
+       </div>
 
         <div style="display:flex;flex-flow:row;">
 
           <div class="card" style="flex-grow:1;max-width:420px;min-width:420px;">
-            <div class="card-header">
-              Filter
-             <button id="reset-button"  type="button" onclick="search.resetFilters()" class="btn btn-white btn-sm">Reset</button>
-            </div>
             <div class="card-body" style="display:flex;justify-content: space-between;flex-direction: column;">
-              <div style="min-height:520px;max-height:520px;">
-
+              <div >
+                 <button id="reset-button"  type="button" onclick="search.resetFilters()" class="btn btn-white btn-sm">Reset</button>
 
                 <div id="degree-radio-buttons" class="btn-group"  data-toggle="buttons" style="margin-bottom: 20px;margin-top: 20px">
                     <label  class="btn btn-sm btn-default ">
@@ -466,16 +467,32 @@
 
 
 
-
-
               </div>
 
        
             </div>
 
           </div>
+                
 
-          <div class="card" style="flex-grow:1;margin-left:10px;margin-bottom:0px">
+          <div class="card counter-section" >
+            <div style="display: flex;align-items: center;margin-bottom: 40px;">
+              <div class="college-count counter" data-count="0">0</div>
+              <div class="counter-label">Colleges</div>
+            </div>
+            <div class="actions">
+                   <button id="rank-button" type="button" onclick="rankCollegesAdvancedSearch()" class="btn btn-primary">Go</button>
+                   <div id="limit-exceeded" class="alert alert-primary hide" role="alert">
+                    Only 500 colleges can be ranked at a time. 
+                   </div>
+            </div>      
+          </div>
+
+             
+              
+          
+
+          <div class="card hide " style="flex-grow:1;margin-left:10px;margin-bottom:0px">
             <div class="card-header">Select
               <div style="float:right;display:inline-block;max-height:20px">
                 <label style="padding-right:4px;font-size:16px">
@@ -580,6 +597,7 @@
 
   <script src="static/js/introjs/intro.js"></script>
   <script src="static/js/d3-beeswarm/d3-beeswarm.min.js"></script>
+
 
 
   <script src="static/js/scorecard/common.js"></script>

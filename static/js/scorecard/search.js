@@ -74,7 +74,7 @@ class Search {
       "University of Chicago",
       "Johns Hopkins University"
      ]
-
+    
 
 	}
 
@@ -82,7 +82,6 @@ class Search {
     let self = this;
 
     return new Promise(function(resolve, reject) {
-
 
       $(self.selectAllSelector).on("change", 
       function(d,i) {
@@ -424,7 +423,9 @@ class Search {
 
     d3.select("#degree-radio-buttons.btn-group .btn-sm.active").classed("active", false)
 
-    d3.selectAll("#control-buttons.btn-group .btn-sm.active").classed("active", false)
+    $("#control-buttons input").prop( "checked", false );
+
+
 
     $(self.usnewsSelector).prop( "checked", false );
 
@@ -510,6 +511,7 @@ class Search {
   }
   filterColleges(options={selectAll:true}) {
     let self = this;
+
 
     $(self.selectAllSelector).prop( "checked", false );
     self.checkedColleges = []
@@ -644,6 +646,9 @@ class Search {
 
   showFilteredColleges(options) {
     let self = this;
+
+    self.countUp(self.filteredColleges.length)
+
     self.checkedColleges = [];
     d3.select("#filtered-college-count").text(self.filteredColleges.length)
 
@@ -729,4 +734,34 @@ class Search {
     $('#search-dialog ').modal('hide')
   }
 
+  countUp(count) {
+    d3.select('#search-dialog .counter').attr('data-count', count)
+
+    $('.counter').each(function() {
+      var $this = $(this),
+          countTo = $this.attr('data-count');
+      
+      $({ countNum: $this.text()}).animate({
+        countNum: countTo
+      },
+
+      {
+
+        duration: 1000,
+        easing:'linear',
+        step: function() {
+          $this.text(Math.floor(this.countNum));
+        },
+        complete: function() {
+          $this.text(this.countNum);
+          //alert('finished');
+        }
+
+      });  
+    });    
+
+  }
+  
+  
+ 
 }
