@@ -461,6 +461,68 @@ function rankchart() {
         })
         .call(wrap, colWidth +3)
 
+
+     /*
+     <g transform="translate(0,50)">
+    .  <text y="11" style="
+    font-size: 12px;
+    fill: #296db6;
+    text-anchor: end;
+" x="70">lower</text>
+        <line x1="0" x2="80" y1="0" y2="0" style="
+    stroke: #b5b4b4;
+    stroke-width: 1.5px;
+"></line><line x1="73" x2="80" y1="-6" y2="0" style="stroke: #b5b4b4;stroke-width: 1.5px;"></line>
+    
+    <line x1="73" x2="80" y1="6" y2="0" style="stroke: #b5b4b4;stroke-width: 1.5px;"></line></g>
+    */
+
+
+      // Add the line with arrow when rank is descending
+      let reverseGroup = colHeadersEnter.selectAll("g.reverse")
+        .data(function(fieldDescriptor) {
+          return [fieldDescriptor.rankDescending];
+        })
+      reverseGroup.exit().remove();
+
+      let reverseGroupEnter = reverseGroup
+        .enter()
+        .append("g")
+        .attr("transform", "translate(" + ((colWidth - (weightWidth*4))/2) +  ",50)")
+        .attr("class", function(rankDescending,i) {
+          if (rankDescending) {
+            return "reverse"; 
+          } else {
+            return "reverse hide"
+          }
+        })
+
+
+      reverseGroupEnter
+        .append("line")
+        .attr("x1", 0)
+        .attr("x2", colWidth)
+        .attr("y1", 0)
+        .attr("y2", 0)
+      reverseGroupEnter
+        .append("line")
+        .attr("x1", colWidth-7)
+        .attr("x2", colWidth)
+        .attr("y1", 6)
+        .attr("y2", 0)
+      reverseGroupEnter
+        .append("line")
+        .attr("x1", colWidth-7 )
+        .attr("x2", colWidth)
+        .attr("y1", -6)
+        .attr("y2", 0)
+      reverseGroupEnter
+        .append("text")
+        .attr("x", colWidth-10)
+        .attr("y", 11)
+        .text("lower")
+
+
       // Add the weight boxes to the column header
       let weightGroup = colHeadersEnter.selectAll("g.weights")
         .data(function(fieldDescriptor) {
@@ -472,7 +534,7 @@ function rankchart() {
       let weightGroupEnter = weightGroup
         .enter()
         .append("g")
-        .attr("transform", "translate(" + ((colWidth - (weightWidth*4))/2) + "," + (60+ weightHeight+((weightHeight/2)*-1)) + ")")
+        .attr("transform", "translate(" + ((colWidth - (weightWidth*4))/2) + "," + (70+ weightHeight+((weightHeight/2)*-1)) + ")")
         .attr("class", "weights")
 
       let weightRectEnter = weightGroupEnter.selectAll("rect.weight")
@@ -528,7 +590,7 @@ function rankchart() {
 
       let hintGroup = headerRowEnter
         .append("g")
-        .attr("transform", "translate(" + (nameWidth + colWidthRank + 60) + "," + (weightHeight + (((weightHeight/2)*-1)+12)) + ")")
+        .attr("transform", "translate(" + (nameWidth + colWidthRank + 70) + "," + (weightHeight + (((weightHeight/2)*-1)+12)) + ")")
         .attr("data-step", function(d,i) {
 
             return "5"
@@ -545,7 +607,7 @@ function rankchart() {
         .attr("id", "col-header-weight")
         .attr("class", "hint-header")
         .attr("x", 10)
-        .attr("y", 60)
+        .attr("y", 70)
         .text("Weight")
         
   }

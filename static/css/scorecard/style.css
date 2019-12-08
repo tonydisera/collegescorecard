@@ -561,6 +561,16 @@ body .selections {
   margin-top: -50px;
 }
 
+.rankchart g.reverse line {
+  stroke-width: 1.5px;
+  stroke: #b5b4b4;
+}
+.rankchart g.reverse text {
+  font-size: 11px;
+  fill:  #296db6;
+  text-anchor: end;
+}
+
 .rankchart rect.weight {
   stroke: #bcbcbc;
   stroke-width: 1px;

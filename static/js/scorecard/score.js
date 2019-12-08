@@ -5,7 +5,7 @@ let search = null;
 let rankChart = null;
 let metricCategories = ['selectivity', 'instruction', 'cost', 'outcome', 'diversity', 'rank']
 
-let rankHeaderHeight    = 90;
+let rankHeaderHeight    = 100;
 let rankRowHeight       = 24;
 let rankBarHeight       = 15;
 
@@ -149,11 +149,13 @@ function init() {
 var hideSwarm = function() {
   d3.select("#distribution-display").text("")
   d3.select("#swarm-container").classed("hide", true)
+  d3.select ("#distribution-display").classed("hide", true)
 }
 
 var showSwarm = function() {
   if (distributionOption == 'ranked') {
     d3.select("#swarm-container").classed("hide", false)
+    d3.select ("#distribution-display").classed("hide", false)
     d3.select("#distribution-container").style("padding-left", 
        (rankColWidthRank 
           + rankNameWidth 
@@ -168,12 +170,15 @@ var showSwarm = function() {
 hideHistograms  = function() {
   d3.select("#distribution-display").text("")
   d3.select("#hist-chart-container").classed("hide", true)
+  d3.select ("#distribution-display").classed("hide", true)
+
 }
 
 promiseShowHistogramCharts = function() {
   return new Promise(function(resolve, reject) {
     if (distributionOption == 'all') {
       d3.select("#distribution-display").text("Summary across all colleges")
+      d3.select ("#distribution-display").classed("hide", false)
 
       d3.select("#hist-chart-container").classed("hide", false)
 
