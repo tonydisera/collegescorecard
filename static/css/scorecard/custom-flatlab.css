@@ -23,6 +23,12 @@ a.logo span {
     color: #4c71a3;
 }
 
+a.logo {
+    font-size: 16px;
+    padding-top: 4px;
+    margin-right: 40px;
+}
+
 ul.sidebar-menu li a {
 	font-size: 16px
 }
@@ -122,7 +128,7 @@ ul.sidebar-menu li ul.sub li a {
     background: none;
     margin-right: 30px;
     color: #818480;
-    font-size: 18px !important;
+    font-size: 16px !important;
     margin-top: 5px;
 }
 

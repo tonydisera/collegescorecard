@@ -64,6 +64,8 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
     margin-left: 15px;
     padding-right: 20px;
     background-color: white !important;
+
+    display: none;
 }
 
 .user-heading h3 {
@@ -130,7 +132,7 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
   padding-top: 1px;
   background-color: #4d72a3;
   min-width: 140px;
-  color: white;
+  color: white !important;
 }
 
 #rank-college-count {
@@ -147,7 +149,6 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
     display: flex;
     flex-flow: row;
     justify-content: flex-start;
-    margin-bottom: 30px;
     margin-top: 10px;
 }
 
@@ -214,7 +215,7 @@ body #body-contents {
 body .selections {
   display: flex;
   flex-flow: row;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
   margin-top: 0px;
   justify-content: flex-start;
   flex-wrap: wrap;
@@ -237,8 +238,11 @@ body .selections {
 }
 
 #tour-button-container {
-  margin-left: 40px;
-  margin-top: 0px;
+    margin-left: 40px;
+    margin-top: 0px;
+    flex-grow: 2;
+    justify-content: flex-end;
+    display: flex;
 }
 
 #search-colleges-button, #tour-button {
@@ -264,14 +268,17 @@ body .selections {
   border-color: #a4b4ca !important;
   color: #4f72a4 !important;  
   font-weight: 500;
-  background-color: transparent !important
+  background-color: transparent !important;
+   -webkit-box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12) !important;
+  box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12) !important;
 }
 
 .selections #search-colleges-button, 
 .selections #scorecard-select-container button.multiselect {
-  border: 1px solid #d5d2d2 !important;
-  background-color: #f6f5f5 !important;
-  color: #e9e8e8  !important;
+  border-color: #a4b4ca !important;
+  color: #4f72a4;  
+  font-weight: 500;
+  background-color: transparent !important;
   -webkit-box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
   box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
   min-height: 34px;
