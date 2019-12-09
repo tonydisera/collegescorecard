@@ -40,14 +40,17 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,500i,600,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.css">
 
-
-    <link rel="stylesheet" href="static/css/scorecard/custom-flatlab.css" rel="stylesheet">
-    <link rel="stylesheet" href="static/css/scorecard/style.css">
-    <link rel="stylesheet" href="static/css/scorecard/search.css">
-
     <link href="static/css/introjs/introjs.css" rel="stylesheet" />
+    <link href="static/css/ion-rangeslider/ion.rangeSlider.css" rel="stylesheet">
 
     <link href="static/assets/icomoon/css/icomoon.css" rel="stylesheet">
+
+
+
+    <link rel="stylesheet" href="static/css/scorecard/custom-flatlab.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/scorecard/custom-ion-rangeslider.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/scorecard/style.css">
+    <link rel="stylesheet" href="static/css/scorecard/search.css">
 
 
   </head>
@@ -375,7 +378,7 @@
               </h5>
             </div>
             <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
-              <div class="card-body" style="padding-top:0px">
+              <div class="card-body" style="padding-top:0px;padding-bottom:0px">
 
 
                 <div >
@@ -397,7 +400,7 @@
 
 
 
-                  <div id="control-buttons"  style="margin-bottom: 15px;margin-top: 0px">
+                  <div id="control-buttons"  style="margin-bottom: 10px;margin-top: 0px">
                     <label   class="" id="control-public">
                       <input type="checkbox" style="margin-right:5px" name="control_option" value="1">Public
                     </label>
@@ -436,37 +439,16 @@
 
                   <div style="display:flex;flex-flow:column;">
                     <div id="labelACT" >Students attending school have average an ACT score</div>
-
-
-                    <div style="display:flex;font-size:18px;">
-                      <label class="act-label" for="minACT">between</label>
-                      <input type="text"  class="form-control mb-2" id="minACT" placeholder="Min" 
-                      style="margin-right:10px;width:55px;font-size:15px"/>
-                      <label  class="act-label" for="maxACT" style="padding-left:10px;padding-right:10px">and</label>
-
-                      <input type="text" class="form-control mb-3" id="maxACT" placeholder="Max"
-                      style="margin-left:5px;margin-right:10px;width:55px;font-size:15px"/>
-                  
+                    <div>
+                       <input id="act-slider" type="text" class="js-range-slider" name="act_range" value="" />
                     </div>
                   </div>
 
 
                   <div style="display:flex;flex-flow:column;">
                     <div id="labelACT" >Admission rate</div>
-
-
-                    <div style="display:flex;font-size:18px;">
-                      <label class="admission-label" for="minAdmission">between</label>
-                      <input type="text"  class="form-control mb-2" id="minAdmission" placeholder="Min %" 
-                      style="margin-right:3px;width:55px;font-size:15px"/>
-                      <label class="admission-label" style="font-size:15px;font-weight:600" for="minAdmission">%</label>
-
-                      <label  class="admission-label" for="maxAdmission" style="padding-left:10px">and</label>
-
-                      <input type="text" class="form-control mb-3" id="maxAdmission" placeholder="Max %"
-                      style="margin-left:5px;margin-right:3px;width:55px;font-size:15px"/>
-                      <label class="admission-label" style="font-size:15px;font-weight:600" for="minAdmission">%</label>
-                  
+                    <div>
+                       <input id="admission-slider" type="text" class="js-range-slider" name="admission_range" value="" />
                     </div>
                   </div>
 
@@ -592,7 +574,7 @@
     <script src="static/js/flatlab/jquery.pulsate.min.js"></script>
     <script src="static/assets/flatlab/select2/js/select2.min.js"></script>
 
-
+    <script src="static/js/ion-rangeslider/ion.rangeSlider.min.js"></script>
 
   <script>
 

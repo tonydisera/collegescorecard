@@ -21,8 +21,11 @@ class Search {
     this.usnewsChecked = false;
     this.minACT = null;
     this.maxACT = null;
-    this.minAdmission = null;
-    this.maxAdmission = null;
+    this.minAdmission = 0;
+    this.maxAdmission = 100;
+
+    this.actSlider = null;
+    this.admissionSlider = null;
 
     this.allColleges = []
     this.filteredColleges = []
@@ -83,6 +86,37 @@ class Search {
 
     return new Promise(function(resolve, reject) {
 
+       $("#admission-slider").ionRangeSlider({
+        type: "int",
+        min: 0,
+        max: 100,
+        from: 0,
+        to: 0,
+        grid: true,
+        postfix: '%',
+        onFinish: function (data) {
+            self.minAdmission = +data.from
+            self.maxAdmission = +data.to
+            self.filterColleges();
+        },
+      });
+      self.admissionSlider = $("#admission-slider").data("ionRangeSlider");
+
+      $("#act-slider").ionRangeSlider({
+        type: "int",
+        min: 0,
+        max: 36,
+        from: 0,
+        to: 0,
+        grid: true,
+        onFinish: function (data) {
+            self.minACT = +data.from
+            self.maxACT = +data.to
+            self.filterColleges();
+        },
+      });
+      self.actSlider = $("#act-slider").data("ionRangeSlider");
+
       $(self.selectAllSelector).on("change", 
       function(d,i) {
           let checked = d3.select(this).property("checked");
@@ -113,41 +147,6 @@ class Search {
       });
 
 
-
-
-      $('#minACT').on("focusout", function(event) {
-        self.minACT = $('#minACT').val();
-        if (self.minACT == "") {
-          self.minACT = null;
-        }
-        d3.select("#minACT").classed("has-value", self.minACT != null)
-        self.filterColleges();
-      })
-      $('#maxACT').on("focusout", function(event) {
-        self.maxACT = $('#maxACT').val();
-        if (self.maxACT == "") {
-          self.maxACT = null;
-        }
-        d3.select("#maxACT").classed("has-value", self.maxACT != null)
-        self.filterColleges();
-      })
-
-       $('#minAdmission').on("focusout", function(event) {
-        self.minAdmission = $('#minAdmission').val();
-        if (self.minAdmission == "") {
-          self.minAdmission = null;
-        }
-        d3.select("#minAdmission").classed("has-value", self.minAdmission != null)
-        self.filterColleges();
-      })
-      $('#maxAdmission').on("focusout", function(event) {
-        self.maxAdmission = $('#maxAdmission').val();
-        if (self.maxAdmission == "") {
-          self.maxAdmission = null;
-        }
-        d3.select("#maxAdmission").classed("has-value", self.maxAdmission != null)
-        self.filterColleges();
-      })
 
 
       promiseGetDegreesOffered()
@@ -345,11 +344,11 @@ class Search {
 
   formatBadgeACT(title, items) {
     let self = this;
-    if (self.minACT != null && self.maxACT != null) {
+    if (self.minACT != null && self.maxACT != null && (self.minACT > 0 || self.maxACT < 36)) {
       return "<span class='badge badge-secondary'>" + "ACT between " + self.minACT + "-" + self.maxACT + "</span>";
-    } else if (self.minACT != null) {
+    } else if (self.minACT != null && (self.minACT > 0 || self.maxACT < 36)) {
       return "<span class='badge badge-secondary'>" + "ACT at least " + self.minACT + "</span>";
-    } else if (self.maxACT != null) {
+    } else if (self.maxACT != null && (self.minACT > 0 || self.maxACT < 36)) {
       return "<span class='badge badge-secondary'>" + "ACT lower or equal to " + self.maxACT + "</span>";
     } else {
       return "";
@@ -358,11 +357,11 @@ class Search {
 
   formatBadgeAdmission(title, items) {
     let self = this;
-    if (self.minAdmission != null && self.maxAdmission != null) {
+    if (self.minAdmission != null && self.maxAdmission != null  && (self.minAdmission > 0 || self.maxAdmission < 100)) {
       return "<span class='badge badge-secondary'>" + "Admission rate between " + self.minAdmission + "% - " + self.maxAdmission + "%</span>";
-    } else if (self.minAdmission != null) {
+    } else if (self.minAdmission != null && (self.minAdmission > 0 || self.maxAdmission < 100)) {
       return "<span class='badge badge-secondary'>" + "Admission rate at least " + self.minAdmission + "%</span>";
-    } else if (self.maxAdmission != null) {
+    } else if (self.maxAdmission != null && (self.minAdmission > 0 || self.maxAdmission < 100)) {
       return "<span class='badge badge-secondary'>" + "Admission rate lower or equal to " + self.maxAdmission + "%</span>";
     } else {
       return "";
@@ -434,20 +433,20 @@ class Search {
     $('#select2-colleges').val(null).trigger('change');
     $('#select2-programs').val(null).trigger('change');
 
-    $('#minACT').val("");
-    $('#maxACT').val("");
     self.minACT = null;
     self.maxACT = null;
-    d3.select("#minACT").classed("has-value", self.minACT != null)
-    d3.select("#maxACT").classed("has-value", self.maxACT != null)
+    self.actSlider.update( {
+      from: 0,
+      to: 0
+    });
 
-
-    $('#minAdmission').val("");
-    $('#maxAdmission').val("");
+    
     self.minAdmission = null;
     self.maxAdmission = null;
-    d3.select("#minAdmission").classed("has-value", self.minAdmission != null)
-    d3.select("#maxAdmission").classed("has-value", self.maxAdmission != null)
+    self.admissionSlider.update( {
+      from: 0,
+      to: 0
+    });
 
     self.selectedColleges = []
     self.selectedDegreeLevel = []
@@ -483,10 +482,15 @@ class Search {
       d3.selectAll("#control-buttons.btn-group #control-public").classed("active", true)
       self.selectControl("1", "Public", true)
 
-
-      $('#minACT').val("30");
+      self.actSlider.update( {
+        from: 30,
+        to: 36
+      })
+      
+      
       self.minACT = 30;
-      d3.select("#minACT").classed("has-value", self.minACT != null)
+      self.maxACT = 36;
+
 
       self.filterColleges({selectAll: true});
     } else if (customFilter == "west_coast") {
@@ -582,31 +586,60 @@ class Search {
         } 
 
         let matchesACTMin = self.minACT == null;
-        if (self.minACT != null) {
-          if (college["act_scores midpoint cumulative"] >= +self.minACT) {
-            matchesACTMin = true;
-          }
-        }
         let matchesACTMax = self.maxACT == null;
-        if (self.maxACT != null) {
-          if (college["act_scores midpoint cumulative"] <= +self.maxACT) {
-            matchesACTMax = true;
-          }
+        if ((college["act_scores midpoint cumulative"] == null || college["act_scores midpoint cumulative"] == 0) && (self.minACT == 0 || self.minACT == null) && (self.maxACT == 36 || self.maxACT == null)) {
+          matchesACTMin = true;
+          matchesACTMax = true;
+        } else {
+
+          let ACTMin = self.minACT ? +self.minACT : 0;
+          if (college["act_scores midpoint cumulative"] && college["act_scores midpoint cumulative"] != "") {
+            if (+college["act_scores midpoint cumulative"] >= ACTMin) {
+              matchesACTMin = true;
+            } else {
+              matchesACTMin = false;
+            }
+          } 
+    
+          let ACTMax = self.maxACT ? +self.maxACT : 36;
+          if (college["act_scores midpoint cumulative"] && college["act_scores midpoint cumulative"] != "") {
+            if (+college["act_scores midpoint cumulative"] <= ACTMax) {
+              matchesACTMax= true;
+            } else {
+              matchesACTMax = false;
+            }
+          } 
         }
 
 
 
         let matchesAdmissionMin = self.minAdmission == null;
-        if (self.minAdmission != null) {
-          if (college["admission_rate overall"] >= (+self.minAdmission/100)) {
-            matchesAdmissionMin = true;
-          }
-        }
         let matchesAdmissionMax = self.maxAdmission == null;
-        if (self.maxAdmission != null) {
-          if (college["admission_rate overall"] <= (+self.maxAdmission/100)) {
-            matchesAdmissionMax = true;
-          }
+        if ((college["admission_rate overall"] == null || college["admission_rate overall"] == 0) && self.minAdmission == 0 && self.maxAdmission == 100) {
+          matchesAdmissionMin = true;
+          matchesAdmissionMax = true;
+        } else if ((college["admission_rate overall"] == null || college["admission_rate overall"] == 0) && self.minAdmission == null && self.maxAdmission == null) {
+          matchesAdmissionMin = true;
+          matchesAdmissionMax = true;
+        } else {
+
+          let admissionRateMin = self.minAdmission && self.minAdmission > 0 ? +self.minAdmission/100 : 0;
+          if (college["admission_rate overall"] && college["admission_rate overall"] != "") {
+            if (+college["admission_rate overall"] >= admissionRateMin) {
+              matchesAdmissionMin = true;
+            } else {
+              matchesAdmissionMin = false;
+            }
+          } 
+    
+          let admissionRateMax = self.maxAdmission && self.maxAdmission > 0 ? +self.maxAdmission/100 : 1;
+          if (college["admission_rate overall"] && college["admission_rate overall"] != "") {
+            if (+college["admission_rate overall"] <= admissionRateMax) {
+              matchesAdmissionMax= true;
+            } else {
+              matchesAdmissionMax = false;
+            }
+          } 
         }
 
         if (matchesCollege) {
@@ -621,11 +654,16 @@ class Search {
               self.maxACT ||
               self.minAdmission ||
               self.maxAdmission) {
-            return (matchesUsnews && matchesDegreeLevel && matchesRegion 
+            let matches = (matchesUsnews && matchesDegreeLevel && matchesRegion 
               && matchesProgram 
               && matchesControl 
               && matchesACTMin && matchesACTMax
               && matchesAdmissionMin && matchesAdmissionMax);
+            if (matches) {
+              return true;
+            } else {
+              return false;
+            }
           } else {
             return false;
           }
