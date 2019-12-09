@@ -371,7 +371,7 @@ class Search {
   formatBadgeUSNews(title, items) {
     let self = this;
     if (self.usnewsChecked) {
-      return "<span class='badge badge-secondary'>" + "US News top 200 " + "</span>";
+      return "<span class='badge badge-secondary'>" + "US News top ranked " + "</span>";
     }else {
       return "";
     }
