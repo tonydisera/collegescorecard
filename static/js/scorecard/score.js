@@ -99,7 +99,7 @@ function init() {
   search = new Search();
   search.promiseInit()
   .then(function() {
-    search.applyCustomFilter("usnews_top_200");
+    search.applyCustomFilter("public_high_act");
     rankColleges();
     setTimeout(function() {
       pulsateTourButton();
