@@ -9,6 +9,8 @@
     <link rel="shortcut icon" href="img/favicon.png">
 
     <title>US College Scorecard</title>
+    <!-- Yamm styles-->
+    <link href="static/css/flatlab/yamm.css" rel="stylesheet">
 
     <!-- Bootstrap core CSS -->
     <link href="static/css/flatlab/bootstrap.min.css" rel="stylesheet">
@@ -19,6 +21,7 @@
 
     <link href="static/assets/flatlab/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
     <link rel="stylesheet" href="static/css/flatlab/owl.carousel.css" type="text/css">
+
 
     <!--right slidebar-->
     <link href="static/css/flatlab/slidebars.css" rel="stylesheet">
@@ -330,180 +333,173 @@
   <div id="search-dialog" class="modal fade " tabindex="-1" role="dialog"  aria-hidden="true">
     <div class="modal-dialog ">
       <div class="modal-content" style="padding:10px">
-       <div>
-          <h4 class="modal-title">Pick Colleges</h4>
-       </div>
+        <div>
+          <h5 class="modal-title">Pick Colleges</h5>
+        </div>
 
-       <div id="accordion">
-        <div class="card">
-          <div class="card-header bg-light" id="headingOne">
-            <h5 class="mb-0">
-              <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                Try it out
-              </button>
-            </h5>
+        <div class="card-header bg-light" >
+          <div id="try-it-out-label">
+            Try it out
           </div>
-          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-            <div class="card-body">
-              
-              <div id="college-examples" style="margin-top:10px">
-  
-                  <div  id="college-filters" data-step="2" data-intro="Or choose the colleges to rank using one of these pre-built filters" class="btn-group"  data-toggle="buttons" style="margin-left:0px">
-                      <label class="btn btn-sm btn-default active">
-                          <input type="radio" name="searchoption" value="usnews_top_200"> US News (top)  
-                      </label>
-                      <label  class=" btn btn-sm btn-default">
-                          <input id="custom-filter-button-1"  type="radio" name="searchoption" value="public_high_act">Highly selective, Public
-                      </label>
-                      <label class=" btn btn-sm btn-default ">
-                          <input type="radio" name="searchoption" value="west_coast"> West Coast, Public
+        </div>          
+        <div id="college-examples" style="margin-top:5px">
+
+            <div  id="college-filters" data-step="2" data-intro="Or choose the colleges to rank using one of these pre-built filters" class="btn-group"  data-toggle="buttons" style="margin-left:0px">
+                <label class="btn btn-sm btn-default active">
+                    <input type="radio" name="searchoption" value="usnews_top_200"> US News (top)  
+                </label>
+                <label  class=" btn btn-sm btn-default">
+                    <input id="custom-filter-button-1"  type="radio" name="searchoption" value="public_high_act">Highly selective, Public
+                </label>
+                <label class=" btn btn-sm btn-default ">
+                    <input type="radio" name="searchoption" value="west_coast"> West Coast, Public
+                </label>
+                <label class="btn btn-sm btn-default ">
+                    <input type="radio" name="searchoption" value="ivy_plus"> Ivy League +
+                </label>
+            </div>
+        </div>
+
+
+        <div id="accordion" style="margin-top: 20px;">
+
+
+          <div class="card">
+            <div class="card-header bg-light" id="headingTwo">
+              <h5 class="mb-0">
+                <button style="display:inline-block" class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                  Customize your list of colleges
+                </button>
+                <button id="reset-button" type="button" onclick="search.resetFilters()" class="btn btn-white btn-sm">Reset</button>
+
+              </h5>
+            </div>
+            <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+              <div class="card-body" style="padding-top:0px">
+
+
+                <div >
+
+
+
+                            
+                  <div id="degree-radio-buttons" class="btn-group"  data-toggle="buttons" style="margin-bottom: 10px;margin-top: 10px;"">
+                      <label  class="btn btn-sm btn-default ">
+                          <input  type="radio" name="degree_option" value="1">Certificate
                       </label>
                       <label class="btn btn-sm btn-default ">
-                          <input type="radio" name="searchoption" value="ivy_plus"> Ivy League +
+                          <input type="radio" name="degree_option" value="2">Associates
+                      </label>
+                      <label id="degree-bachelors-radio" class="btn btn-sm btn-default active ">
+                          <input type="radio" name="degree_option" value="3">Bachelors
                       </label>
                   </div>
+
+
+
+                  <div id="control-buttons"  style="margin-bottom: 15px;margin-top: 0px">
+                    <label   class="" id="control-public">
+                      <input type="checkbox" style="margin-right:5px" name="control_option" value="1">Public
+                    </label>
+                    <label  class=" ">
+                      <input type="checkbox" style="margin-right:5px" name="control_option" value="2">Private
+                    </label>
+                    <label class=" ">
+                      <input type="checkbox" style="margin-right:5px" name="control_option" value="3">Private for Profit
+                    </label>
+                  </div>
+
+
+                  <label for="select2-programs" style="width: 100%;margin-bottom: 15px;">
+                    Select field of study
+                    <select id="select2-programs" multiple="multiple">
+                    </select>
+                  </label>
+
+                  <label for="select2-regions" style="width: 100%;margin-bottom: 15px;">
+                    Select specific region
+                    <select id="select2-regions" multiple="multiple">
+                      <option value="0">U.S. Service Schools</option>
+                      <option value="1">New England </option>
+                      <option value="2">Mid East</option>
+                      <option value="3">Great Lakes </option>
+                      <option value="4">Plains</option>
+                      <option value="5">Southeast</option>
+                      <option value="6">Southwest</option>
+                      <option value="7">Rocky Mountains </option>
+                      <option value="8">Far West</option>
+                      <option value="9">Outlying Areas</option>
+                    </select>
+                  </label>
+
+
+
+                  <div style="display:flex;flex-flow:column;">
+                    <div id="labelACT" >Students attending school have average an ACT score</div>
+
+
+                    <div style="display:flex;font-size:18px;">
+                      <label class="act-label" for="minACT">between</label>
+                      <input type="text"  class="form-control mb-2" id="minACT" placeholder="Min" 
+                      style="margin-right:10px;width:55px;font-size:15px"/>
+                      <label  class="act-label" for="maxACT" style="padding-left:10px;padding-right:10px">and</label>
+
+                      <input type="text" class="form-control mb-3" id="maxACT" placeholder="Max"
+                      style="margin-left:5px;margin-right:10px;width:55px;font-size:15px"/>
+                  
+                    </div>
+                  </div>
+
+
+                  <div style="display:flex;flex-flow:column;">
+                    <div id="labelACT" >Admission rate</div>
+
+
+                    <div style="display:flex;font-size:18px;">
+                      <label class="admission-label" for="minAdmission">between</label>
+                      <input type="text"  class="form-control mb-2" id="minAdmission" placeholder="Min %" 
+                      style="margin-right:3px;width:55px;font-size:15px"/>
+                      <label class="admission-label" style="font-size:15px;font-weight:600" for="minAdmission">%</label>
+
+                      <label  class="admission-label" for="maxAdmission" style="padding-left:10px">and</label>
+
+                      <input type="text" class="form-control mb-3" id="maxAdmission" placeholder="Max %"
+                      style="margin-left:5px;margin-right:3px;width:55px;font-size:15px"/>
+                      <label class="admission-label" style="font-size:15px;font-weight:600" for="minAdmission">%</label>
+                  
+                    </div>
+                  </div>
+
+
+                  <label for="select2-colleges" style="width: 100%;">
+                    Select specific colleges
+                    <select id="select2-colleges" multiple="multiple">
+                    </select>
+                  </label>
+
+
+
+
+
+                </div>    
+
+                <div class="card counter-section" >
+                  <div style="display: flex;align-items: center;">
+                    <div class="college-count counter" data-count="0">0</div>
+                    <div class="counter-label">Colleges</div>
+                  </div>
+                  <div class="actions">
+                         <button id="rank-button" disabled type="button" onclick="rankCollegesAdvancedSearch()" class="btn btn-primary">Go</button>
+                         <div id="limit-exceeded" class="alert alert-primary hide" role="alert">
+                          Only 500 colleges can be ranked at a time. 
+                         </div>
+                  </div>      
+                </div>          
+         
               </div>
-
             </div>
           </div>
         </div>
-
-        <div class="card">
-          <div class="card-header bg-light" id="headingTwo">
-            <h5 class="mb-0">
-              <button style="display:inline-block" class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                Customize your list of colleges
-              </button>
-              <button id="reset-button" type="button" onclick="search.resetFilters()" class="btn btn-white btn-sm">Reset</button>
-
-            </h5>
-          </div>
-          <div id="collapseTwo" class="collapse " aria-labelledby="headingTwo" data-parent="#accordion">
-            <div class="card-body">
-
-
-              <div >
-
-
-
-                          
-                <div id="degree-radio-buttons" class="btn-group"  data-toggle="buttons" style="margin-bottom: 10px;margin-top: 10px;"">
-                    <label  class="btn btn-sm btn-default ">
-                        <input  type="radio" name="degree_option" value="1">Certificate
-                    </label>
-                    <label class="btn btn-sm btn-default ">
-                        <input type="radio" name="degree_option" value="2">Associates
-                    </label>
-                    <label id="degree-bachelors-radio" class="btn btn-sm btn-default active ">
-                        <input type="radio" name="degree_option" value="3">Bachelors
-                    </label>
-                </div>
-
-
-
-                <div id="control-buttons"  style="margin-bottom: 15px;margin-top: 0px">
-                  <label   class="" id="control-public">
-                    <input type="checkbox" style="margin-right:5px" name="control_option" value="1">Public
-                  </label>
-                  <label  class=" ">
-                    <input type="checkbox" style="margin-right:5px" name="control_option" value="2">Private
-                  </label>
-                  <label class=" ">
-                    <input type="checkbox" style="margin-right:5px" name="control_option" value="3">Private for Profit
-                  </label>
-                </div>
-
-
-                <label for="select2-programs" style="width: 100%;margin-bottom: 15px;">
-                  Select field of study
-                  <select id="select2-programs" multiple="multiple">
-                  </select>
-                </label>
-
-                <label for="select2-regions" style="width: 100%;margin-bottom: 15px;">
-                  Select specific region
-                  <select id="select2-regions" multiple="multiple">
-                    <option value="0">U.S. Service Schools</option>
-                    <option value="1">New England </option>
-                    <option value="2">Mid East</option>
-                    <option value="3">Great Lakes </option>
-                    <option value="4">Plains</option>
-                    <option value="5">Southeast</option>
-                    <option value="6">Southwest</option>
-                    <option value="7">Rocky Mountains </option>
-                    <option value="8">Far West</option>
-                    <option value="9">Outlying Areas</option>
-                  </select>
-                </label>
-
-
-
-                <div style="display:flex;flex-flow:column;">
-                  <div id="labelACT" >Students attending school have average an ACT score</div>
-
-
-                  <div style="display:flex;font-size:18px;">
-                    <label class="act-label" for="minACT">between</label>
-                    <input type="text"  class="form-control mb-2" id="minACT" placeholder="Min" 
-                    style="margin-right:10px;width:55px;font-size:15px"/>
-                    <label  class="act-label" for="maxACT" style="padding-left:10px;padding-right:10px">and</label>
-
-                    <input type="text" class="form-control mb-3" id="maxACT" placeholder="Max"
-                    style="margin-left:5px;margin-right:10px;width:55px;font-size:15px"/>
-                
-                  </div>
-                </div>
-
-
-                <div style="display:flex;flex-flow:column;">
-                  <div id="labelACT" >Admission rate</div>
-
-
-                  <div style="display:flex;font-size:18px;">
-                    <label class="admission-label" for="minAdmission">between</label>
-                    <input type="text"  class="form-control mb-2" id="minAdmission" placeholder="Min %" 
-                    style="margin-right:3px;width:55px;font-size:15px"/>
-                    <label class="admission-label" style="font-size:15px;font-weight:600" for="minAdmission">%</label>
-
-                    <label  class="admission-label" for="maxAdmission" style="padding-left:10px">and</label>
-
-                    <input type="text" class="form-control mb-3" id="maxAdmission" placeholder="Max %"
-                    style="margin-left:5px;margin-right:3px;width:55px;font-size:15px"/>
-                    <label class="admission-label" style="font-size:15px;font-weight:600" for="minAdmission">%</label>
-                
-                  </div>
-                </div>
-
-
-                <label for="select2-colleges" style="width: 100%;">
-                  Select specific colleges
-                  <select id="select2-colleges" multiple="multiple">
-                  </select>
-                </label>
-
-
-
-
-
-              </div>    
-
-              <div class="card counter-section" >
-                <div style="display: flex;align-items: center;">
-                  <div class="college-count counter" data-count="0">0</div>
-                  <div class="counter-label">Colleges</div>
-                </div>
-                <div class="actions">
-                       <button id="rank-button" disabled type="button" onclick="rankCollegesAdvancedSearch()" class="btn btn-primary">Go</button>
-                       <div id="limit-exceeded" class="alert alert-primary hide" role="alert">
-                        Only 500 colleges can be ranked at a time. 
-                       </div>
-                </div>      
-              </div>          
-       
-            </div>
-          </div>
-        </div>
-      </div>
 
 
 

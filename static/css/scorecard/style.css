@@ -313,18 +313,6 @@ body .selections {
 }
 
 
-.selections #college-examples {
-  display: flex;
-  flex-flow: column;
-  margin-left: 20px;
-  margin-top: -4px;
-  display: none;
-}
-.selections #college-examples span {
-  font-size: 13px;
-  font-weight: 600;
-}
-
 
 .btn-group .btn-sm {
     background: white;
@@ -353,7 +341,7 @@ body .selections {
   font-size: 12px;
 }
 
-.selections  .btn-group .btn-sm {
+#distribution-controls .btn-group .btn-sm {
   font-size: 12px;
   background: white;
   color: #757474;
@@ -367,16 +355,14 @@ body .selections {
 }
 
 
-.selections .btn-sm.active {
+#distribution-controls .btn-sm.active {
     border-color: #6f8eb4 !important;
     border-radius: 0 !important;
     color: #4d74a3!important;
     font-weight: 700 !important;
     background-color: white !important;
 }
-.selections #college-filters.btn-group .btn-sm.active {
-    font-weight: 700 !important;
-}
+
 
 .tippy-tooltip.blue-theme {
   background-color: #4d74a3;

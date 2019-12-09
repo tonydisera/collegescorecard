@@ -65,10 +65,12 @@
 }
 
 #search-dialog .card-header {
-	font-weight: 600;
-    font-size: 22px;	
-    min-height: 55px;
+    font-weight: 600;
+    font-size: 22px;
+    min-height: 25px;
     padding-left: 0px;
+    padding: 0px;
+    margin-top: 10px;
 }
 
 #search-dialog .btn-link {
@@ -77,8 +79,16 @@
     font-weight: 500;
 }
 
+#search-dialog #try-it-out-label {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #4f74a4;
+    padding-left: 10px;
+    font-weight: 500;
+}
+
 #reset-button {
-background-color: white;
+    background-color: white;
     border-color: transparent;
     font-weight: 600;
     color: #4d73a3;
@@ -88,6 +98,8 @@ background-color: white;
     float: right;
     margin-top: 2px !important;
     border: .5px solid #dadada;
+    margin-right: 10px;
+    margin-top: 5px;
 }
 
 #minACT, #maxACT, #minAdmission, #maxAdmission {

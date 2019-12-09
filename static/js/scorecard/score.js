@@ -41,6 +41,10 @@ $(document).ready(function() {
 
 function init() {
 
+  $(document).on('click', '.yamm .dropdown-menu', function(e) {
+    e.stopPropagation()
+  })
+
   swarm = new Swarm("#swarm-container", 80, 2);
 
 

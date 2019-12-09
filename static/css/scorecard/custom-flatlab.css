@@ -154,3 +154,7 @@ ul.sidebar-menu li ul.sub li a {
 #main-content {
     margin-left: 0px;
 }
+
+.dropdown-menu {
+    font-size: 13px;
+}
