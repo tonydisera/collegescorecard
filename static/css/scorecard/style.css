@@ -5,12 +5,16 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
   display: none !important;
 }
 
+#home-page-content .author-credits {
+  margin-top: 5px;
+}
+
 #home-page-content {
   display: flex;
   flex-flow: column;
   justify-content: space-between; 
   height: -webkit-fill-available;
-  padding-top: 20px;
+  padding-top: 10px;
 }
 
 #home-page-content a {
