@@ -127,7 +127,7 @@
                 <section class="card">
 
 
-                  <div class="card-body" style="overflow-x: scroll;padding-top:25px">
+                  <div class="card-body" style="overflow-x: scroll;padding-top:15px">
 
                     <div id="rank-chart-title" class="hide">
                         <span  id="rank-college-count" class="badge primary-badge"></span>
@@ -152,11 +152,11 @@
 
                       <div id="scorecard-select-container">
                         
-                        <select data-step="3" data-intro="Choose which factors to consider when scoring the colleges"  id="scorecard-select" multiple="multiple">
+                        <select data-step="2" data-intro="Choose which factors to consider when scoring the colleges"  id="scorecard-select" multiple="multiple">
                         </select>
                       </div>
 
-                      <div id="distribution-controls">
+                      <div id="distribution-controls" data-step="5" data-intro="You can change the summary chart to show the distribution across all 7000+ colleges in the dataset." class="chart-container">
                           <span>Show summary across</span>
                           <div class="btn-group"  data-toggle="buttons" >
                               <label class="btn active btn-sm btn-default">
@@ -193,7 +193,7 @@
 
                       <div id="rank-chart-heading"></div>
 
-                      <div id="distribution-container" data-step="4" data-intro="These charts show how each factor (metric) is distributed across all ranked schools.  When you hover over a particular college, you will see how that college's metric places among the ranked colleges.  You can change the chart to show the distribution across all 7000+ colleges in the dataset." class="chart-container">
+                      <div id="distribution-container" data-step="4" data-intro="These charts show how each factor (metric) is distributed across all ranked schools.  When you hover over a particular college, you will see how that college's metric places among the ranked colleges." class="chart-container">
                         <div id="distribution-display" class="hide">
                           Summary across ranked colleges
                         </div>
@@ -344,7 +344,7 @@
         </div>          
         <div id="college-examples" style="margin-top:5px">
 
-            <div  id="college-filters" data-step="2" data-intro="Or choose the colleges to rank using one of these pre-built filters" class="btn-group"  data-toggle="buttons" style="margin-left:0px">
+            <div  id="college-filters" class="btn-group"  data-toggle="buttons" style="margin-left:0px">
                 <label class="btn btn-sm btn-default active">
                     <input type="radio" name="searchoption" value="usnews_top_200"> US News (top)  
                 </label>

@@ -593,7 +593,7 @@ function rankchart() {
         .attr("transform", "translate(" + (nameWidth + colWidthRank + 70) + "," + (weightHeight + (((weightHeight/2)*-1)+12)) + ")")
         .attr("data-step", function(d,i) {
 
-            return "5"
+            return "3"
 
         })
         .attr("data-intro", function(d,i) {
