@@ -706,7 +706,7 @@ class Search {
         self.checkedColleges.push(college.id);
       })    
       d3.select("#limit-exceeded").classed("hide", self.filteredColleges.length <= self.RANK_COLLEGE_LIMIT)
-      $("#search-dialog  #rank-button").attr("disabled", self.filteredColleges.length > self.RANK_COLLEGE_LIMIT); 
+      $("#search-dialog  #rank-button").attr("disabled", self.filteredColleges.length == 0 || self.filteredColleges.length > self.RANK_COLLEGE_LIMIT); 
       $(self.selectAllSelector).prop( "checked", true );
     }
 

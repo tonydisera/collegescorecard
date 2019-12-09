@@ -241,6 +241,7 @@ body .selections {
     flex-grow: 2;
     justify-content: flex-end;
     display: flex;
+
 }
 
 #search-colleges-button, #tour-button {
@@ -263,6 +264,7 @@ body .selections {
 
 
 #tour-button {
+  min-height: 34px;
   border-color: #a4b4ca !important;
   color: #4f72a4 !important;  
   font-weight: 500;
@@ -416,7 +418,7 @@ body .selections {
   justify-content: flex-start;
   max-width: 210px;
   flex-wrap: wrap;
-  margin-top: 2px;  
+  margin-top: 5px;  
 }
 
 #filter-badges .badge {

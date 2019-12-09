@@ -334,11 +334,18 @@
           <h4 class="modal-title">Pick Colleges</h4>
        </div>
 
-        <div style="display:flex;flex-flow:row;">
-
-          <div class="card" style="flex-grow:1;max-width:420px;min-width:420px;">
-            <div class="card-body" style="display:flex;justify-content: space-between;flex-direction: column;">
-
+       <div id="accordion">
+        <div class="card">
+          <div class="card-header bg-light" id="headingOne">
+            <h5 class="mb-0">
+              <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Try it out
+              </button>
+            </h5>
+          </div>
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+              
               <div id="college-examples" style="margin-top:10px">
   
                   <div  id="college-filters" data-step="2" data-intro="Or choose the colleges to rank using one of these pre-built filters" class="btn-group"  data-toggle="buttons" style="margin-left:0px">
@@ -357,16 +364,26 @@
                   </div>
               </div>
 
+            </div>
+          </div>
+        </div>
 
-              <div style="margin-top:10px" >
+        <div class="card">
+          <div class="card-header bg-light" id="headingTwo">
+            <h5 class="mb-0">
+              <button style="display:inline-block" class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                Customize your list of colleges
+              </button>
+              <button id="reset-button" type="button" onclick="search.resetFilters()" class="btn btn-white btn-sm">Reset</button>
+
+            </h5>
+          </div>
+          <div id="collapseTwo" class="collapse " aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body">
 
 
-                <div>
-                  <hr>
-                  <h5 style="display: inline-block;">Advanced search</h5>
-                  <button id="reset-button" type="button" onclick="search.resetFilters()" class="btn btn-white btn-sm">Reset</button>
-                </div>
-                 
+              <div >
+
 
 
                           
@@ -468,26 +485,28 @@
 
 
 
-              </div>
+              </div>    
 
+              <div class="card counter-section" >
+                <div style="display: flex;align-items: center;">
+                  <div class="college-count counter" data-count="0">0</div>
+                  <div class="counter-label">Colleges</div>
+                </div>
+                <div class="actions">
+                       <button id="rank-button" disabled type="button" onclick="rankCollegesAdvancedSearch()" class="btn btn-primary">Go</button>
+                       <div id="limit-exceeded" class="alert alert-primary hide" role="alert">
+                        Only 500 colleges can be ranked at a time. 
+                       </div>
+                </div>      
+              </div>          
        
             </div>
-
-          <div class="card counter-section" >
-            <div style="display: flex;align-items: center;">
-              <div class="college-count counter" data-count="0">0</div>
-              <div class="counter-label">Colleges</div>
-            </div>
-            <div class="actions">
-                   <button id="rank-button" type="button" onclick="rankCollegesAdvancedSearch()" class="btn btn-primary">Go</button>
-                   <div id="limit-exceeded" class="alert alert-primary hide" role="alert">
-                    Only 500 colleges can be ranked at a time. 
-                   </div>
-            </div>      
           </div>
+        </div>
+      </div>
 
-          </div>
-                
+
+
 
 
 
