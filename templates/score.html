@@ -230,6 +230,13 @@
        <!-- Right Slidebar start -->
       <div id="college-detail" class="sb-slidebar sb-right sb-style-overlay">
           <h5 id="name" style="padding-left:10px"></h5>
+          <div style="margin-left:10px" >
+            <span id="city"></span>
+            <span id="state"></span>
+            <span style="padding-left:30px" id="size"></span>
+            <span>students</span>
+            
+          </div>
           <button id="close-button" class="sb-toggle-right">X</button>
 
           <h5 class="side-title">Selectivity</h5>
@@ -240,22 +247,15 @@
                   <div id="admission-rate" class="value"></div>
               </div>
               <div class="task-info">
-                  <div class="desc">ACT Cumulative - Midpoint</div>
+                  <div class="desc">ACT (midpoint)</div>
                   <div id="act-midpoint" class="value"></div>
               </div>
-              <div class="task-info">
-                  <div class="desc">ACT Cumulative - 75 percentile</div>
-                  <div id="act-75pctl" class="value"></div>
-              </div>
+             
             </li>
           </ul>
           <h5 class="side-title">Instruction</h5>
           <ul class="p-task tasks-bar">
             <li>
-              <div class="task-info">
-                  <div class="desc">Faculty Salary</div>
-                  <div id="faculty-salary" class="value"></div>
-              </div>
               <div class="task-info">
                   <div class="desc">Full-time Faculty Ratio</div>
                   <div id="full-time-faculty-ratio" class="value"></div>
