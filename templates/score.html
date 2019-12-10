@@ -46,6 +46,9 @@
     <link href="static/assets/icomoon/css/icomoon.css" rel="stylesheet">
 
 
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
 
     <link rel="stylesheet" href="static/css/scorecard/custom-flatlab.css" rel="stylesheet">
     <link rel="stylesheet" href="static/css/scorecard/custom-ion-rangeslider.css" rel="stylesheet">
@@ -143,7 +146,9 @@
 
 
                         <div style="display:flex;flex-flow:column">
-                          <button data-step="1" data-intro="Choose colleges to rank by performing your own search" id="search-colleges-button" class="btn btn-sm btn-primary">Pick Colleges
+                          <button data-step="1" data-intro="Choose colleges to rank by performing your own search" id="search-colleges-button" class="btn btn-sm btn-primary">
+                            <i class="material-icons" style="padding-right:4px">location_city</i>
+                            <span>Pick Colleges</span>
                           </button>
 
                           <div  id="filter-badges">
@@ -176,7 +181,9 @@
                       </div>
 
                       <div id="tour-button-container" > 
-                        <button onclick="startTour()" class="btn btn-sm btn-default" id="tour-button">Quick Tour</button>
+                        <button onclick="startTour()" class="btn btn-sm btn-default" id="tour-button">
+                          <i class="material-icons">map</i>
+                          <span>Quick Tour</span></button>
                       </div>
 
                     </div>
@@ -230,11 +237,13 @@
        <!-- Right Slidebar start -->
       <div id="college-detail" class="sb-slidebar sb-right sb-style-overlay">
           <h5 id="name" style="padding-left:10px"></h5>
-          <div style="margin-left:10px" >
+          <div style="margin-left:10px;margin-bottom:10px" >
             <span id="city"></span>
             <span id="state"></span>
-            <span style="padding-left:30px" id="size"></span>
-            <span>students</span>
+            <div style="float:right;margin-right:10px">
+              <span style="padding-right:5px" id="size"></span>
+              <span id="size-label">students</span>
+            </span>
             
           </div>
           <button id="close-button" class="sb-toggle-right">X</button>
@@ -266,27 +275,7 @@
               </div>
             </li>
           </ul>
-          <h5 class="side-title">Diversity</h5>
-          <ul class="p-task tasks-bar">
-            <li>
-              <div class="task-info">
-                  <div class="desc">Percent Black</div>
-                  <div id="diversity-pct-black" class="value"></div>
-              </div>
-              <div class="task-info">
-                  <div class="desc">Percent Hispanic</div>
-                  <div id="diversity-pct-hispanic" class="value"></div>
-              </div>
-              <div class="task-info">
-                  <div class="desc">Percent Asian</div>
-                  <div id="diversity-pct-asian" class="value"></div>
-              </div>
-              <div class="task-info">
-                  <div class="desc">Median Household Income</div>
-                  <div id="median-hh-income" class="value"></div>
-              </div>
-            </li>
-          </ul>          
+       
           <h5 class="side-title">Cost</h5>
           <ul class="p-task tasks-bar">
             <li>
@@ -330,6 +319,28 @@
               </div>
             </li>
           </ul>
+
+          <h5 class="side-title">Diversity</h5>
+          <ul class="p-task tasks-bar">
+            <li>
+              <div class="task-info">
+                  <div class="desc">Percent Black</div>
+                  <div id="diversity-pct-black" class="value"></div>
+              </div>
+              <div class="task-info">
+                  <div class="desc">Percent Hispanic</div>
+                  <div id="diversity-pct-hispanic" class="value"></div>
+              </div>
+              <div class="task-info">
+                  <div class="desc">Percent Asian</div>
+                  <div id="diversity-pct-asian" class="value"></div>
+              </div>
+              <div class="task-info">
+                  <div class="desc">Median Household Income</div>
+                  <div id="median-hh-income" class="value"></div>
+              </div>
+            </li>
+          </ul>             
       </div>
       <!-- Right Slidebar end -->
 
@@ -391,10 +402,10 @@
                           <input  type="radio" name="degree_option" value="1">Certificate
                       </label>
                       <label class="btn btn-sm btn-default ">
-                          <input type="radio" name="degree_option" value="2">Associates
+                          <input type="radio" name="degree_option" value="2">Associate's
                       </label>
                       <label id="degree-bachelors-radio" class="btn btn-sm btn-default active ">
-                          <input type="radio" name="degree_option" value="3">Bachelors
+                          <input type="radio" name="degree_option" value="3">Bachelor's
                       </label>
                   </div>
 
@@ -408,13 +419,13 @@
                       <input type="checkbox" style="margin-right:5px" name="control_option" value="2">Private
                     </label>
                     <label class=" ">
-                      <input type="checkbox" style="margin-right:5px" name="control_option" value="3">Private for Profit
+                      <input type="checkbox" style="margin-right:5px" name="control_option" value="3">For Profit
                     </label>
                   </div>
 
 
                   <label for="select2-programs" style="width: 100%;margin-bottom: 15px;">
-                    Select field of study
+                    Select field of study (Bachelor's degree only)
                     <select id="select2-programs" multiple="multiple">
                     </select>
                   </label>

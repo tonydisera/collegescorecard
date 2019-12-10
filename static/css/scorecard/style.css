@@ -260,6 +260,12 @@ body .selections {
   box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
 }
 
+#search-colleges-button span {
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 2px;
+}
+
 
 #tour-button {
   min-height: 34px;
@@ -269,6 +275,18 @@ body .selections {
   background-color: transparent !important;
    -webkit-box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12) !important;
   box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12) !important;
+}
+
+#tour-button span {
+  display: inline-block;
+  vertical-align: top;
+  padding-top: 2px;  
+}
+
+#tour-button i {
+  font-size:20px; 
+  padding-top:2px;
+  padding-right:4px;
 }
 
 .selections #search-colleges-button, 
@@ -295,6 +313,12 @@ body .selections {
   padding-left: 40px;
   padding-right: 30px;  
 }
+
+.multiselect-selected-text i {
+  padding-right: 10px;
+  font-size: 18px;
+}
+
 
 
 
@@ -726,4 +750,16 @@ div.tooltip {
 
 #swarm-container svg {
 }
+
+
+#college-detail #city,
+#college-detail #state,
+#college-detail #size,
+#college-detail #size-label {
+  font-size: 14px;
+}
+
+
+
+
 

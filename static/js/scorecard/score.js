@@ -547,10 +547,17 @@ function initFieldDropdown() {
         return 'Pick Metrics';
       }
       else  {
-        return 'Pick Metrics';
+        return "Pick Metrics";
       }         
     },
+    onInitialized: function() {
+      setTimeout(function() {
+         d3.select('.multiselect-selected-text').html("<i class='fa fa-dashboard'></i>Pick Metrics")
+      },100)
+
+    },
     onChange: function(options, checked) {
+       d3.select('.multiselect-selected-text').html("<i class='fa fa-dashboard'></i>Pick Metrics")
 
       if (options && options.length > 0) {
         if (Array.isArray(options)) {
@@ -565,6 +572,7 @@ function initFieldDropdown() {
       }
     },
     onDropdownHide: function(event) {
+      d3.select('.multiselect-selected-text').html("<i class='fa fa-dashboard'></i>Pick Metrics")
       rankColleges();
     },
     onSelectAll: function(event) {

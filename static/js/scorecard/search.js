@@ -156,13 +156,14 @@ class Search {
         
         let programOptions = []
         programs.forEach(function(program) {
-          if (self.fieldNames.indexOf(program) < 0) {
-            self.fieldNames.push(program)
+          //if (self.fieldNames.indexOf(program) < 0) {
+          //  self.fieldNames.push(program)
+          //}
+          if (self.fieldNames.indexOf("field_of_study") < 0) {
+            self.fieldNames.push("field_of_study")
           }
 
-          let tokens = program.split("program_bachelors");
-          let display = tokens[1].substring(1, tokens[1].length)
-          display = display.split("_").join(" ");
+          let display = program.split("_").join(" ");
           display = display[0].toUpperCase() + display.slice(1); 
           programOptions.push({ id: program, text: display  } );
 
@@ -563,10 +564,18 @@ class Search {
 
         let matchesProgram = self.selectedPrograms.length == 0;
         if (self.selectedPrograms.length > 0) {
+          /*
           let matched = self.selectedPrograms.filter(function(program) {
             return college[program.id] == 1;
           })
           matchesProgram = matched.length > 0;
+          */
+          let the_programs = college['field_of_study'].split(",");
+          let matched = self.selectedPrograms.filter(function(program) {
+            return the_programs.indexOf(program.id)>= 0;
+          })
+          matchesProgram = matched.length > 0;
+
         } 
 
 

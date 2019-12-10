@@ -14,7 +14,10 @@ scorecard_data_cleaned = []
 metric_all    = "static/data/college_scorecard_merged.csv"
 cleaned_all   = "static/data/Most-Recent-Cohorts-All-Data-Elements-ExTitleIV-Cleaned.csv"
 
-
+degreesString      = 'program_bachelors_resources,program_bachelors_architecture,program_bachelors_ethnic_cultural_gender,program_bachelors_communication,program_bachelors_communications_technology,program_bachelors_computer,program_bachelors_personal_culinary,program_bachelors_education,program_bachelors_engineering,program_bachelors_engineering_technology,program_bachelors_language,program_bachelors_family_consumer_science,program_bachelors_legal,program_bachelors_english,program_bachelors_humanities,program_bachelors_library,program_bachelors_biological,program_bachelors_mathematics,program_bachelors_military,program_bachelors_multidiscipline,program_bachelors_parks_recreation_fitness,program_bachelors_philosophy_religious,program_bachelors_theology_religious_vocation,program_bachelors_physical_science,program_bachelors_science_technology,program_bachelors_psychology,program_bachelors_security_law_enforcement,program_bachelors_public_administration_social_service,program_bachelors_social_science,program_bachelors_construction,program_bachelors_mechanic_repair_technology,program_bachelors_precision_production,program_bachelors_transportation,program_bachelors_visual_performing,program_bachelors_health,program_bachelors_business_marketing,program_bachelors_history'
+degreesTokenString = 'resources,architecture,ethnic_cultural_gender,communication,communications_technology,computer,personal_culinary,education,engineering,engineering_technology,language,family_consumer_science,legal,english,humanities,library,biological,mathematics,military,multidiscipline,parks_recreation_fitness,philosophy_religious,theology_religious_vocation,physical_science,science_technology,psychology,security_law_enforcement,public_administration_social_service,social_science,construction,mechanic_repair_technology,precision_production,transportation,visual_performing,health,business_marketing,history'
+degrees            = degreesString.split(",")
+degreeTokens       = degreesTokenString.split(",")
 
 @app.route("/")
 def root():
@@ -23,8 +26,23 @@ def root():
       print("\n\nLOADING DATA\n\n")
       # Load the CSV file from the static folder, inside the current path
       scorecard_data_metric = pd.read_csv(os.path.join(APP_FOLDER,metric_all))
+      scorecard_data_metric['field_of_study'] = scorecard_data_metric.apply(parseFieldOfStudy, axis=1)
     
     return render_template("index.html")
+
+
+def parseFieldOfStudy(row):
+    buf = ""
+    i = 0
+    for degree  in degrees:
+        degreeToken = degreeTokens[i]
+        if row[degree] == 1:
+            if len(buf) > 0:
+                buf = buf + ","
+            buf = buf + degreeToken
+        i = i + 1
+    return buf
+
 
 
 @app.route("/summary")
@@ -91,6 +109,7 @@ def getMetricFields():
     if len(scorecard_data_metric) == 0:
       # Load the CSV file from the static folder, inside the current path
       scorecard_data_metric = pd.read_csv(os.path.join(APP_FOLDER,metric_all))
+      scorecard_data_metric['field_of_study'] = scorecard_data_metric.apply(parseFieldOfStudy, axis=1)
 
     cols = scorecard_data_metric.columns.tolist()
 
@@ -124,6 +143,7 @@ def getMetricData():
   if len(scorecard_data_metric) == 0:
     # Load the CSV file from the static folder, inside the current path
     scorecard_data_metric = pd.read_csv(os.path.join(APP_FOLDER,metric_all))
+    scorecard_data_metric['field_of_study'] = scorecard_data_metric.apply(parseFieldOfStudy, axis=1)
 
   # dropping ALL duplicate values
 
