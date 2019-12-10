@@ -62,11 +62,11 @@
 
   <section id="container">
       <!--header start-->
-      <header class="header white-bg">
+      <header class="header white-bg card-shadow-light">
 
           <!--logo start-->
           <a href="." class="logo">US College<span> Scorecard</span></a>
-          <div class="top-nav ">
+          <div class="top-nav card-shadow-light ">
 
               <ul class="nav pull-left top-menu">
 
@@ -107,129 +107,130 @@
       <!--header end-->
       <!--main content start-->
       <section id="main-content">
-          <section class="wrapper">
- 
-            <div class="row state-overview custom">
+          <section class="wrapper" >
+            <div class="">
+   
+              <div class="row state-overview custom">
 
-              <div >
-                <section class="card">
-                    <div class="symbol navy">
-                        <i class="fa fa-sort-amount-desc"></i>
-                    </div>
-                    <div class="value" style="display:flex">
-                        <h3 class="">Compare and Rank</h3>
-                    </div>
-
-                </section>
-              </div>
-
-
-              <button style="display: none" id="slide-right-button" class="btn btn-info sb-toggle-right">Slide</button>
-
-            </div>
-
-            <div class="row">
-              <div class="col-lg-12 col-sm-12">
-                <section class="card">
-
-
-                  <div class="card-body" style="overflow-x: scroll;padding-top:15px">
-
-                    <div id="rank-chart-title" class="hide">
-                        <span  id="rank-college-count" class="badge primary-badge"></span>
-
-
-                    </div>
-
-                    <div class="selections" >
-                      <div id="search-colleges-container">
-
-
-                        <div style="display:flex;flex-flow:column">
-                          <button data-step="1" data-intro="Choose colleges to rank by performing your own search" id="search-colleges-button" class="btn btn-sm btn-primary">
-                            <i class="material-icons" style="padding-right:4px">location_city</i>
-                            <span>Pick Colleges</span>
-                          </button>
-
-                          <div  id="filter-badges">
-                          </div>
-                        </div>
-
-                      
+                <div >
+                  <section class="card">
+                      <div class="symbol navy">
+                          <i class="fa fa-sort-amount-desc"></i>
+                      </div>
+                      <div class="value" style="display:flex">
+                          <h3 class="">Compare and Rank</h3>
                       </div>
 
-                      <div id="scorecard-select-container">
+                  </section>
+                </div>
+
+
+                <button style="display: none" id="slide-right-button" class="btn btn-info sb-toggle-right">Slide</button>
+
+              </div>
+
+              <div class="row">
+                <div class="col-lg-12 col-sm-12">
+                  <section class="card">
+
+
+                    <div class="card-body" style="overflow-x: scroll;padding-top:15px">
+
+                      <div id="rank-chart-title" class="hide">
+                          <span  id="rank-college-count" class="badge primary-badge"></span>
+
+
+                      </div>
+
+                      <div class="selections" >
+                        <div id="search-colleges-container">
+
+
+                          <div style="display:flex;flex-flow:column">
+                            <button data-step="1" data-intro="Choose colleges to rank by performing your own search" id="search-colleges-button" class="btn btn-sm btn-primary">
+                              <i class="material-icons" style="padding-right:4px">location_city</i>
+                              <span>Pick Colleges</span>
+                            </button>
+
+                            <div  id="filter-badges">
+                            </div>
+                          </div>
+
                         
-                        <select data-step="2" data-intro="Choose which factors to consider when scoring the colleges"  id="scorecard-select" multiple="multiple">
-                        </select>
-                      </div>
-
-                      <div id="distribution-controls" data-step="5" data-intro="You can change the summary chart to show the distribution across all 7000+ colleges in the dataset." class="chart-container">
-                          <span>Show summary across</span>
-                          <div class="btn-group"  data-toggle="buttons" >
-                              <label class="btn active btn-sm btn-default">
-                                  <input type="radio" name="distoption" value="ranked"> Ranked colleges
-                              </label>
-                              <label  class="btn btn-sm btn-default ">
-                                  <input   type="radio" name="distoption" value="all">All colleges
-                              </label>
-                              <label class="btn btn-sm btn-default  ">
-                                  <input type="radio" name="distoption" value="none"> 
-                                  Hide
-                              </label>
-                          </div>
-                      </div>
-
-                      <div id="tour-button-container" > 
-                        <button onclick="startTour()" class="btn btn-sm btn-default" id="tour-button">
-                          <i class="material-icons">map</i>
-                          <span>Quick Tour</span></button>
-                      </div>
-
-                    </div>
-
-                    <center >
-                      <img id="loading" style="display:none;width:800px" src="static/assets/scorecard/charts-loader-2x.gif"></img>
-                    </center>
-
-                    <div style="display:flex;flex-flow:column;">
-
-
-
-
-
-                      <div id="hist-chart-categories">
-                      </div>
-
-                      <div id="rank-chart-heading"></div>
-
-                      <div id="distribution-container" data-step="4" data-intro="These charts show how each factor (metric) is distributed across all ranked schools.  When you hover over a particular college, you will see how that college's metric places among the ranked colleges." class="chart-container">
-                        <div id="distribution-display" class="hide">
-                          Summary across ranked colleges
                         </div>
-                        <div>
-                          <div id="hist-chart-container">
-                          </div>
-                          <div id="swarm-container">
-                          </div>
-                        </div>                                  
+
+                        <div id="scorecard-select-container">
+                          
+                          <select data-step="2" data-intro="Choose which factors to consider when scoring the colleges"  id="scorecard-select" multiple="multiple">
+                          </select>
+                        </div>
+
+                        <div id="distribution-controls" data-step="5" data-intro="You can change the summary chart to show the distribution across all 7000+ colleges in the dataset." class="chart-container">
+                            <span>Show summary across</span>
+                            <div class="btn-group"  data-toggle="buttons" >
+                                <label class="btn active btn-sm btn-default">
+                                    <input type="radio" name="distoption" value="ranked"> Ranked colleges
+                                </label>
+                                <label  class="btn btn-sm btn-default ">
+                                    <input   type="radio" name="distoption" value="all">All colleges
+                                </label>
+                                <label class="btn btn-sm btn-default  ">
+                                    <input type="radio" name="distoption" value="none"> 
+                                    Hide
+                                </label>
+                            </div>
+                        </div>
+
+                        <div id="tour-button-container" > 
+                          <button onclick="startTour()" class="btn btn-sm btn-default" id="tour-button">
+                            <i class="material-icons">map</i>
+                            <span>Quick Tour</span></button>
+                        </div>
+
                       </div>
 
-                      <div id="rank-chart" class="chart-container">
+                      <center >
+                        <img id="loading" style="display:none;width:800px" src="static/assets/scorecard/charts-loader-2x.gif"></img>
+                      </center>
+
+                      <div style="display:flex;flex-flow:column;">
+
+
+
+
+
+                        <div id="hist-chart-categories">
+                        </div>
+
+                        <div id="rank-chart-heading"></div>
+
+                        <div id="distribution-container" data-step="4" data-intro="These charts show how each factor (metric) is distributed across all ranked schools.  When you hover over a particular college, you will see how that college's metric places among the ranked colleges." class="chart-container">
+                          <div id="distribution-display" class="hide">
+                            Summary across ranked colleges
+                          </div>
+                          <div>
+                            <div id="hist-chart-container">
+                            </div>
+                            <div id="swarm-container">
+                            </div>
+                          </div>                                  
+                        </div>
+
+                        <div id="rank-chart" class="chart-container">
+                        </div>
                       </div>
+
                     </div>
 
-                  </div>
 
 
 
 
 
-
-                </section>
+                  </section>
+                </div>
               </div>
-            </div>
-
+            <div>
           </section>
       </section>
       <!--main content end-->

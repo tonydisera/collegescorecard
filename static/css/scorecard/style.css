@@ -9,6 +9,15 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
   margin-top: 5px;
 }
 
+.card-shadow {
+  box-shadow: 0px 0px 19px -6px rgba(0,0,0,0.30);
+  -webkit-box-shadow: 0px 0px 19px -6px rgba(0,0,0,0.30);
+}
+.card-shadow-light {
+  box-shadow: 0px 0px 19px -6px rgba(0,0,0,0.10);
+  -webkit-box-shadow: 0px 0px 19px -6px rgba(0,0,0,0.10);
+}
+
 #home-page-content {
   display: flex;
   flex-flow: column;
