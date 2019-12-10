@@ -105,14 +105,15 @@
             <section class="card">
               <div class="card-body">
                 <h5>Schools at a Glance</h5>
-                <p>There a variety of schools serving various purposes in the US and its territories. At a high-level, what is going on with the schools? What's their distributions look like? Would someone
-                    know whether schools are generally expensive or cheap? Questions like these require an initial understanding of the data, and hopefully we can provide some of that insight here.</p>
+                <p>There a variety of schools serving various purposes in the US and its territories. At a high-level, it's important to know what is going on with these schools. What's their distributions look like for different data? 
+                  Would someone know whether schools are generally expensive or cheap, and would they be able to afford it? Is it easy to be admitted into a school based on the type of person you are? Questions like these require an initial understanding of the data, and 
+                  hopefully we can provide some of that insight here.</p>
 
-                <p>There are some interesting variables to comb over in the college data, which lead to interesting conclusions. Some of the facts about the data might even blow your mind!</p>
+                <p>There are some interesting variables to comb over in the college data, which lead to interesting conclusions. To get started, there are some fun facts about the dataset</p>
                 <ul class="list-group">
-                  <li class="list-group-item">Did you know that there over 7000 accredited institutions in the US and its territories?</li>
-                  <li class="list-group-item">A variety of programs are offered - in fact, well over 35 major programs are offered across the institutions.</li>
-                  <li class="list-group-item">Over 50% of students get Pell grants when applying for colleges - makes the financial aid easier to get!</li>
+                  <li class="list-group-item"><span class="fa fa-question-circle"></span>  Did you know that there over 7300 accredited institutions in the US and its territories? There are over 35 major programs offered across the institutions.</li>
+                  <li class="list-group-item"><span class="fa fa-question-circle"></span>  Over 50% of students get Pell grants when applying for colleges - makes the financial aid easier to get!</li>
+                  <li class="list-group-item"><span class="fa fa-question-circle"></span>  Student populations on average tend to be around 1.5% veterans, but some have special incentive programs to allow for more attendance.</li>
                 </ul>
               </div>
             </section>
@@ -125,12 +126,11 @@
             <section class="card">
               <div class="card-body">
                 <h5>School Types - An Overview</h5>
-                <p>There are three primary school types - Public, Private, and Private for Profit. Public schools are open to
-                  all students and funded through local, state, and federal taxes. Private schools are those
-                  that are funded primarily through tuition and grants, but don't operate as profit-institutions. Private for
-                  profit are schools that tend to serve specific purposes, such as additional professional training
-                  and vocational education.
-                </p>
+                <p>There are three primary school types in the dataset - <span style="color: #F28E2B"><b>Public</b></span>, <span style="color: #4A719B"><b>Private</b></span>, and <span style="color: #B07AA1"><b>For Profit</b></span>. It's important to make a distinction between the different school types
+                for the high-level data visualizations since each is different in their education models.</p>
+                <p><span style="color: #F28E2B"><b>Public</b></span> schools are open to all students and funded through local, state, and federal taxes. They tend to have a variety of student population sizes and provide relatively cheap ways to get a full education.</p>
+                <p><span style="color: #4A719B"><b>Private</b></span> schools are those that are funded primarily through tuition and grants, but don't operate as profit-institutions. They have high tuition but also provide extensive research and internship opportunities.</p>
+                <p><span style="color: #B07AA1"><b>For Profit</b></span> are schools that tend to serve specific purposes, such as additional professional training and vocational education. Most tend to be smaller schools that focus on one area and allow for professional specialization.</p>
                 <div class='tableauPlaceholder' id='viz1573569107251' style='position: relative'><noscript><a href='#'><img
                         alt=' '
                         src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;CollegeScorecardProjectWorkbook&#47;School-Type-Overview-Dashboard&#47;1_rss.png'
@@ -154,8 +154,8 @@
                 <script type='text/javascript'>
                   var divElement = document.getElementById('viz1573569107251');
                   var vizElement = divElement.getElementsByTagName('object')[0];
-                  vizElement.style.width = '1200px';
-                  vizElement.style.height = '800px';
+                  vizElement.style.width = '100%';
+                  vizElement.style.height = '1200px';
                   var scriptElement = document.createElement('script');
                   scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
                   vizElement.parentNode.insertBefore(scriptElement, vizElement);                
@@ -170,10 +170,15 @@
               <section class="card">
                 <div class="card-body">
                   <h5>School Types - The Finances</h5>
-                  <p>Costs to attend school are always important considerations for prospective students and their families. Here, the <b>average net cost</b> is binned for students.
-                    This measure is the total amount of expenses for students - from tuititon to books to campus fees and more. The <b>average value</b> across all schools is <b>$16,200</b> per semester, 
-                    which is where most of the clustering can be seen. Note that this is across all three types of schools..
-                  </p>
+                  <p>For most prospective students and their families, costs in attending schools are an incredibly important consideration to make. Across the US, there are a variety of family situations and schools which are available to attend for those families
+                    so the different types of schools can provide varying cost benefits.</p>
+
+                  <p>It is important to note that to put things into perspective, several statistics are needed. To begin with, the <b>average net cost</b> for all schools is <b>$16,200</b> per semester, including tuition, books, campus fees, and more. 
+                  For a two year education, this ends up being almosts <b>$65,000</b>, which can be a heavy load for families. As a result, almost <b>50%</b> of students apply and qualify for Pell grants, which is surprisingly high for a prosperous and 
+                  developed country. But this becomes obvious when the average family income of <b>$38,490</b> for students attending all school types is taken into consideration.</p>
+
+                  <p>Below, explore the data by selecting the School Type <em>color</em> on the left, or even searching for a specific school in the search bar. The displays are <em>linked</em> so they will update based on the selections.</p>
+
                   <div class='tableauPlaceholder' id='viz1573569107252' style='position: relative'><noscript><a href='#'><img
                           alt=' '
                           src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;CollegeScorecardProjectWorkbook&#47;School-Type-Financial-Dashboard&#47;1_rss.png'
@@ -197,8 +202,8 @@
                   <script type='text/javascript'>
                     var divElement = document.getElementById('viz1573569107252');
                     var vizElement = divElement.getElementsByTagName('object')[0];
-                    vizElement.style.width = '1200px';
-                    vizElement.style.height = '800px';
+                    vizElement.style.width = '100%';
+                    vizElement.style.height = '1200px';
                     var scriptElement = document.createElement('script');
                     scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
                     vizElement.parentNode.insertBefore(scriptElement, vizElement);                
@@ -213,8 +218,17 @@
                 <section class="card">
                   <div class="card-body">
                     <h5>School Admissions and You</h5>
-                    <p>Test text
-                    </p>
+                    <p>One of the most nerve-wracking aspects of the application process is figuring out schools which are within the range of attendance. Test scores, grades, resumes, and activites all combine to create a "holistic" view of the student, removing the dependency on the student
+                    being "just a number". However, it is inevitable the students get analyzed based on their test scores and other metrics. Within the US, the SAT - originally the <em>Scholastic Aptitude Test</em> - is the premier test to determine students positioning. As such, it is interesting 
+                    to see that, out of a max possible 1600 (for this dataset), the average score across students is <b>1132</b>. An alternative test, called the ACT, is similarly used for assessment. It is scored out of 36, and across the US, students taking 
+                    the ACT average a <b>23</b>.</p>
+
+                    <p>With the US, there are a variety of races represented, since the US prides itself on being a "melting pot" of cultures and people. While the country is primarily Caucasian, there are still large representations from different races, specifically Black and Hispanic citizens.
+                    This country-level grouping can be seen in the variety of college students who enter different schools across the country. As it is to be reasonably expected, there are around <b>50%</b> white students across all schools, though this is different from the around <b>75%</b> white total population.
+                    A discrepancy like this can be explained by the fact that some schools are located in U.S. territories, and tend to have 100% native populations, which are not white.</p>
+
+                    <p>Explore the admission statistics below comparing test metrics and race. The <em>Highlight</em> selections can make comparing across school types easier.</p>
+
                     <div class='tableauPlaceholder' id='viz1573569107253' style='position: relative'><noscript><a href='#'><img
                             alt=' '
                             src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;CollegeScorecardProjectWorkbook&#47;Adm-Overview-Dashboard&#47;1_rss.png'
@@ -238,8 +252,8 @@
                     <script type='text/javascript'>
                       var divElement = document.getElementById('viz1573569107253');
                       var vizElement = divElement.getElementsByTagName('object')[0];
-                      vizElement.style.width = '1200px';
-                      vizElement.style.height = '800px';
+                      vizElement.style.width = '100%';
+                      vizElement.style.height = '1200px';
                       var scriptElement = document.createElement('script');
                       scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
                       vizElement.parentNode.insertBefore(scriptElement, vizElement);                
@@ -248,275 +262,6 @@
                 </section>
               </div>
             </div>
-        
-
-        <!-- OLD
-        <div class="row">
-          <div class="col-lg-6 col-sm-6">
-            <section class="card">
-              <div class="card-body">
-                
-                <h5>School Type</h5>
-                <p>There are three primary school types - Public, Private, and Private for Profit. Public schools are open to all students and funded through local, state, and federal taxes. Private schools are those
-                  that are funded primarily through tuition and grants, but don't operate as profit-institutions. Private for profit are schools that tend to serve specific purposes, such as additional professional training
-                  and vocational education.</p>
-
-                <p>We can see here, all of the higher-education institutions across the US fall into these types. We can see the distribution below:</p>
-                <div class='tableauPlaceholder' id='viz1573569107250' style='position: relative'><noscript><a
-                      href='#'><img alt=' '
-                        src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;CollegeScorecardProjectWorkbook&#47;School-Type-Dashboard&#47;1_rss.png'
-                        style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'>
-                    <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-                    <param name='embed_code_version' value='3' />
-                    <param name='site_root' value='' />
-                    <param name='name' value='CollegeScorecardProjectWorkbook&#47;School-Type-Dashboard' />
-                    <param name='tabs' value='no' />
-                    <param name='toolbar' value='yes' />
-                    <param name='static_image'
-                      value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;CollegeScorecardProjectWorkbook&#47;School-Type-Dashboard&#47;1.png' />
-                    <param name='animate_transition' value='yes' />
-                    <param name='display_static_image' value='yes' />
-                    <param name='display_spinner' value='yes' />
-                    <param name='display_overlay' value='yes' />
-                    <param name='display_count' value='yes' /></object></div>
-                <script
-                  type='text/javascript'>                    var divElement = document.getElementById('viz1573569107250'); var vizElement = divElement.getElementsByTagName('object')[0]; vizElement.style.width = '540px'; vizElement.style.height = '540px'; var scriptElement = document.createElement('script'); scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
-              </div>
-            </section>
-          </div>
-  
-          <div class="col-lg-6 col-sm-6">
-            <section class="card">
-              <div class="card-body">
-                <h5>School Enrollment</h5>
-                <p>While there are three different types of schools, the enrollment of each time is far from equal. Here, we can see that there is a heavy skew towards public schools, almost three times that of the next highest
-                  enrollment type, Private. Why is that?</p>
-
-                <p>Perhaps one reason might be that public schools are more affordable than private schools. Hovering over each type shows how much each school type costs, which can show some clear results.</p>
-                <div class='tableauPlaceholder' id='viz1573569107251' style='position: relative'><noscript><a
-                    href='#'><img alt=' '
-                      src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;CollegeScorecardProjectWorkbook&#47;Enrollment-Size-Dashboard&#47;1_rss.png'
-                      style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'>
-                  <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-                  <param name='embed_code_version' value='3' />
-                  <param name='site_root' value='' />
-                  <param name='name' value='CollegeScorecardProjectWorkbook&#47;Enrollment-Size-Dashboard' />
-                  <param name='tabs' value='no' />
-                  <param name='toolbar' value='yes' />
-                  <param name='static_image'
-                    value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;CollegeScorecardProjectWorkbook&#47;Enrollment-Size-Dashboard&#47;1.png' />
-                  <param name='animate_transition' value='yes' />
-                  <param name='display_static_image' value='yes' />
-                  <param name='display_spinner' value='yes' />
-                  <param name='display_overlay' value='yes' />
-                  <param name='display_count' value='yes' /></object>
-                </div>
-                <script
-                  type='text/javascript'>                    
-                  var divElement = document.getElementById('viz1573569107251'); 
-                  var vizElement = divElement.getElementsByTagName('object')[0]; 
-                  vizElement.style.width = '540px'; 
-                  vizElement.style.height = '540px'; 
-                  var scriptElement = document.createElement('script'); 
-                  scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; 
-                  vizElement.parentNode.insertBefore(scriptElement, vizElement);                
-                </script>
-              </div>
-            </section>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-12 col-sm-12">
-            <section class="card">
-              <div class="card-body">
-                <h5>Degrees Awarded</h5>
-                <p>Due to the nature of each type of school, they tend to server different crowds of students. Public schools allow for studies in many fields, and often present opportunities in further study after graduation.
-                  Private schools can leverage the value of their brand, and students may only rely on a bachelors for enhancing their career prospects. Private for profit schools are generally not extensive academic institutions,
-                  providing only the knowledge needed to advance down a specific career path.
-                </p>
-                <div class='tableauPlaceholder' id='viz1573569107252' style='position: relative'><noscript><a
-                      href='#'><img alt=' '
-                        src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;CollegeScorecardProjectWorkbook&#47;Degree-Awarded-Dashboard&#47;1_rss.png'
-                        style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'>
-                    <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-                    <param name='embed_code_version' value='3' />
-                    <param name='site_root' value='' />
-                    <param name='name' value='CollegeScorecardProjectWorkbook&#47;Degree-Awarded-Dashboard' />
-                    <param name='tabs' value='no' />
-                    <param name='toolbar' value='yes' />
-                    <param name='static_image'
-                      value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;CollegeScorecardProjectWorkbook&#47;Degree-Awarded-Dashboard&#47;1.png' />
-                    <param name='animate_transition' value='yes' />
-                    <param name='display_static_image' value='yes' />
-                    <param name='display_spinner' value='yes' />
-                    <param name='display_overlay' value='yes' />
-                    <param name='display_count' value='yes' /></object></div>
-                <script type='text/javascript'>                    
-                  var divElement = document.getElementById('viz1573569107252'); 
-                  var vizElement = divElement.getElementsByTagName('object')[0]; 
-                  vizElement.style.width = '1100px'; 
-                  vizElement.style.height = '800px'; 
-                  var scriptElement = document.createElement('script'); 
-                  scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; 
-                  vizElement.parentNode.insertBefore(scriptElement, vizElement);                
-                </script>
-              </div>
-            </section>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-6 col-sm-6">
-            <section class="card">
-              <div class="card-body">
-                <h5>Average Cost of Attendance</h5>
-                <p>Costs to attend school are always important considerations for prospective students and their families. Here, the <b>average net cost</b> is binned for students.
-                  This measure is the total amount of expenses for students - from tuititon to books to campus fees and more. The <b>average value</b> across all schools is <b>$16,200</b> per semester, 
-                  which is where most of the clustering can be seen. Note that this is across all three types of schools.</p>
-                <div class='tableauPlaceholder' id='viz1573569107253' style='position: relative'><noscript><a
-                      href='#'><img alt=' '
-                        src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;CollegeScorecardProjectWorkbook&#47;Hist-Sch-Cost-Dashboard&#47;1_rss.png'
-                        style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'>
-                    <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-                    <param name='embed_code_version' value='3' />
-                    <param name='site_root' value='' />
-                    <param name='name' value='CollegeScorecardProjectWorkbook&#47;Hist-Sch-Cost-Dashboard' />
-                    <param name='tabs' value='no' />
-                    <param name='toolbar' value='yes' />
-                    <param name='static_image'
-                      value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;CollegeScorecardProjectWorkbook&#47;Hist-Sch-Cost-Dashboard&#47;1.png' />
-                    <param name='animate_transition' value='yes' />
-                    <param name='display_static_image' value='yes' />
-                    <param name='display_spinner' value='yes' />
-                    <param name='display_overlay' value='yes' />
-                    <param name='display_count' value='yes' /></object></div>
-                <script type='text/javascript'>                    
-                  var divElement = document.getElementById('viz1573569107253'); 
-                  var vizElement = divElement.getElementsByTagName('object')[0]; 
-                  vizElement.style.width = '540px'; 
-                  vizElement.style.height = '540px'; 
-                  var scriptElement = document.createElement('script'); 
-                  scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; 
-                  vizElement.parentNode.insertBefore(scriptElement, vizElement);                
-                </script>
-              </div>
-            </section>
-          </div>
-          <div class="col-lg-6 col-sm-6">
-            <section class="card">
-              <div class="card-body">
-                <h5>Average Family Income</h5>
-                <p>Family income is a practical determinant of the range of schools a student could attend, and even the financial aid available. Information reported by the schools shows the distrubtion of family income backgrounds
-                    that most students are coming from. The average family income background is <b>$58,000</b>. Compared with an average net cost of $16,200 per semester - meaning around $64,000 over four years - and it becomes
-                    apparent why students take out loans to attend school.</p>
-                <div class='tableauPlaceholder' id='viz1573569107254' style='position: relative'><noscript><a
-                      href='#'><img alt=' '
-                        src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;CollegeScorecardProjectWorkbook&#47;Hist-Fam-Inc-Dashboard&#47;1_rss.png'
-                        style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'>
-                    <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-                    <param name='embed_code_version' value='3' />
-                    <param name='site_root' value='' />
-                    <param name='name' value='CollegeScorecardProjectWorkbook&#47;Hist-Fam-Inc-Dashboard' />
-                    <param name='tabs' value='no' />
-                    <param name='toolbar' value='yes' />
-                    <param name='static_image'
-                      value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;CollegeScorecardProjectWorkbook&#47;Hist-Fam-Inc-Dashboard&#47;1.png' />
-                    <param name='animate_transition' value='yes' />
-                    <param name='display_static_image' value='yes' />
-                    <param name='display_spinner' value='yes' />
-                    <param name='display_overlay' value='yes' />
-                    <param name='display_count' value='yes' /></object></div>
-                <script type='text/javascript'>                    
-                  var divElement = document.getElementById('viz1573569107254'); 
-                  var vizElement = divElement.getElementsByTagName('object')[0]; 
-                  vizElement.style.width = '540px'; 
-                  vizElement.style.height = '540px'; 
-                  var scriptElement = document.createElement('script'); 
-                  scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; 
-                  vizElement.parentNode.insertBefore(scriptElement, vizElement);                
-                </script>
-              </div>
-            </section>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-12 col-sm-12">
-            <section class="card">
-              <div class="card-body">
-                <h5>Average SAT Scores vs Admission Rate</h5>
-                <div class='tableauPlaceholder' id='viz1573569107255' style='position: relative'><noscript><a
-                      href='#'><img alt=' '
-                        src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;CollegeScorecardProjectWorkbook&#47;Sct-SAT-ACT-Adm-Dashboard&#47;1_rss.png'
-                        style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'>
-                    <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-                    <param name='embed_code_version' value='3' />
-                    <param name='site_root' value='' />
-                    <param name='name' value='CollegeScorecardProjectWorkbook&#47;Sct-SAT-ACT-Adm-Dashboard' />
-                    <param name='tabs' value='no' />
-                    <param name='toolbar' value='yes' />
-                    <param name='static_image'
-                      value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;CollegeScorecardProjectWorkbook&#47;Sct-SAT-ACT-Adm-Dashboard&#47;1.png' />
-                    <param name='animate_transition' value='yes' />
-                    <param name='display_static_image' value='yes' />
-                    <param name='display_spinner' value='yes' />
-                    <param name='display_overlay' value='yes' />
-                    <param name='display_count' value='yes' /></object></div>
-                <script type='text/javascript'>                    
-                  var divElement = document.getElementById('viz1573569107255'); 
-                  var vizElement = divElement.getElementsByTagName('object')[0]; 
-                  vizElement.style.width = '1100px'; 
-                  vizElement.style.height = '800px'; 
-                  var scriptElement = document.createElement('script'); 
-                  scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; 
-                  vizElement.parentNode.insertBefore(scriptElement, vizElement);                
-                </script>
-              </div>
-            </section>
-          </div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-10 col-sm-10 col-lg-offset-1 col-sm-offset-1">
-              <section class="card">
-                  <h5>US News Top 200 Schools - Average Earnings after graduation vs Average Debt</h5>
-                  <p>Note that </p>
-                  <div class='tableauPlaceholder' id='viz1573569107256' style='position: relative'><noscript><a
-                        href='#'><img alt=' '
-                          src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;CollegeScorecardProjectWorkbook&#47;Sct-Earn-Debt-Dashboard&#47;1_rss.png'
-                          style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'>
-                      <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-                      <param name='embed_code_version' value='3' />
-                      <param name='site_root' value='' />
-                      <param name='name' value='CollegeScorecardProjectWorkbook&#47;Sct-Earn-Debt-Dashboard' />
-                      <param name='tabs' value='no' />
-                      <param name='toolbar' value='yes' />
-                      <param name='static_image'
-                        value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;CollegeScorecardProjectWorkbook&#47;Sct-Earn-Debt-Dashboard&#47;1.png' />
-                      <param name='animate_transition' value='yes' />
-                      <param name='display_static_image' value='yes' />
-                      <param name='display_spinner' value='yes' />
-                      <param name='display_overlay' value='yes' />
-                      <param name='display_count' value='yes' /></object></div>
-                  <script type='text/javascript'>                    
-                    var divElement = document.getElementById('viz1573569107256'); 
-                    var vizElement = divElement.getElementsByTagName('object')[0]; 
-                    vizElement.style.width = '1100px'; 
-                    vizElement.style.height = '800px'; 
-                    var scriptElement = document.createElement('script'); 
-                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; 
-                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                
-                  </script>
-              </section>
-            </div>
-          </div>
-
-        -->
-
-
-
-
       </section>
     </section>
 
