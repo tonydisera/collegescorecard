@@ -1,8 +1,8 @@
 College Scorecard Visualizations
 =====
-This is the final project for the [UC Berkeley's Data Visualization class](https://datascience.berkeley.edu/academics/curriculum/data-visualization), taught by [John Alexis Guerra Gómez](https://johnguerra.co/) in the Data Sciences Masters (MIDS) program.  
+This is the final project for the [UC Berkeley's Data Visualization class](https://datascience.berkeley.edu/academics/curriculum/data-visualization), taught by [John Alexis Guerra Gómez](https://johnguerra.co/) in the Data Science Masters (MIDS) program.  
 
-[Live Demo](http://people.ischool.berkeley.edu/~tonydisera/w209/)
+#### [Live Demo](http://people.ischool.berkeley.edu/~tonydisera/w209/)
             
 The [College Scorecard](https://collegescorecard.ed.gov/)site is a federal
 dataset and website that allows users to find, select, and compare higher-education institutions.
@@ -17,9 +17,17 @@ The **Breaking it down** visualizations was created by [Michael Shum](https://ww
 
 The **Compare and Rank** visualization was created by [Tony Di Sera](https://www.ischool.berkeley.edu/people/tony-di-sera#profile-main) using D3. 
 
+The rank visualization design was inspired by the  multi-attribute ranking visualization [Line Up](https://caleydo.org/tools/lineup/).  The summary chart uses the [d3-beeswarm plugin](https://github.com/Kcnarf/d3-beeswarm")
+
 
 How to Install
 ======
+
+## Clone the repo
+
+```
+git clone https://github.com/tonydisera/collegescorecard.git
+```
 
 A flask app for serving and showing US College Scorecard data.
 
@@ -32,7 +40,7 @@ $ pip3 install Flask
 $ pip3 install pandas
 ```
 
-Then run it like this (running on port 5000):
+Then run it like this  (running on port 5000):
 
 ```
 python3 w209 5000
