@@ -22,7 +22,13 @@ let defaultMetricFieldNames = [
   "act_scores midpoint cumulative",
   "size",
   "city",
-  "state"
+  "state",
+  "sat_score_average_overall",
+  "sat_score_average",
+  "sat_score_midpoint_critical_reading",
+  "sat_score_midpoint_math",
+  "sat_score_midpoint_critical_writing",
+  "website"
 ]
 let currentCollege = null;
 
@@ -236,8 +242,16 @@ function showCollegeDetail(college) {
     $('#college-detail #city').text(college.city)
     $('#college-detail #state').text(college.state)
     $('#college-detail #size').text(college.size)
+
+    d3.select("#college-detail #website a").remove()
+    d3.select("#college-detail #website").append("a")
+      .attr("href", "http://" + college.website)
+      .attr("target", "_new")
+      .text(college.website);
+
     $('#college-detail #admission-rate').text(college["admission_rate overall"])
     $('#college-detail #act-midpoint').text(college["act_scores midpoint cumulative"])
+    $('#college-detail #sat-average').text(college["sat_score_average"])
     $('#college-detail #full-time-faculty-ratio').text(college["ft_faculty_rate"])
     $('#college-detail #instructional-cost-per-fte').text(college["instructional_expenditure_per_fte"])
     $('#college-detail #diversity-pct-black').text(college["demographics race_ethnicity black"])
