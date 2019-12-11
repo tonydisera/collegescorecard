@@ -29,9 +29,8 @@ How to Install
 git clone https://github.com/tonydisera/collegescorecard.git
 ```
 
-A flask app for serving and showing US College Scorecard data.
 
-## How to run it?
+## How to run it
 
 Make sure you have Flask installed (if having problems make sure to check [the Flask documentation on installation](http://flask.pocoo.org/docs/1.0/installation/) )
 
