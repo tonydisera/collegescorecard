@@ -594,7 +594,7 @@ body .selections {
   overflow-x: unset;
   overflow-y: scroll;
   height: 100vh;
-  margin-top: -30px;
+  margin-top: -50px;
 }
 
 .rankchart g.reverse line {
