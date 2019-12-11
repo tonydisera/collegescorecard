@@ -2,9 +2,9 @@ College Scorecard Data Viz
 =====
 This is the final project for the [UC Berkeley's Data Visualization class](https://datascience.berkeley.edu/academics/curriculum/data-visualization), taught by [John Alexis Guerra Gómez](https://johnguerra.co/) in the Data Science Masters (MIDS) program.  
 
-#### [Live Demo](http://people.ischool.berkeley.edu/~tonydisera/w209/)
+### [Live Demo](http://people.ischool.berkeley.edu/~tonydisera/w209/)
             
-The [College Scorecard](https://collegescorecard.ed.gov/)site is a federal
+The [College Scorecard](https://collegescorecard.ed.gov/) site is a federal
 dataset and website that allows users to find, select, and compare higher-education institutions.
 Here, we leverage the college scorecard dataset that covers over
 7000 higher education institutions by focusing on institutional, academic, admission, financial, and future
