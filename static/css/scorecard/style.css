@@ -760,12 +760,21 @@ div.tooltip {
 #swarm-container svg {
 }
 
+#college-detail {
+  overflow-y: scroll;
+  height: -webkit-fill-available;
+}
 
 #college-detail #city,
 #college-detail #state,
 #college-detail #size,
-#college-detail #size-label {
+#college-detail #size-label,
+#college-detail #website {
   font-size: 14px;
+}
+
+#college-detail #website a {
+  color: #67c2f5;
 }
 
 
