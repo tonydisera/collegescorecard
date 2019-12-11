@@ -265,8 +265,8 @@ body .selections {
 
 #search-colleges-button {
   min-width: 200px;
-  -webkit-box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
-  box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
+  box-shadow: -1px 3px 1px -2px rgba(0,0,0,0.13), 0px 2px 2px 0px rgba(0, 0, 0, .10), 0px 1px 8px 0px rgba(0,0,0,0.08);  
+  -webkit-box-shadow: -1px 3px 1px -2px rgba(0,0,0,0.13), 0px 2px 2px 0px rgba(0, 0, 0, .10), 0px 1px 8px 0px rgba(0,0,0,0.08);  
 }
 
 #search-colleges-button span {
@@ -282,8 +282,8 @@ body .selections {
   color: #4f72a4 !important;  
   font-weight: 500;
   background-color: transparent !important;
-   -webkit-box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12) !important;
-  box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12) !important;
+  box-shadow: -1px 3px 1px -2px rgba(0,0,0,0.13), 0px 2px 2px 0px rgba(0, 0, 0, .10), 0px 1px 8px 0px rgba(0,0,0,0.08) !important;  
+  -webkit-box-shadow: -1px 3px 1px -2px rgba(0,0,0,0.13), 0px 2px 2px 0px rgba(0, 0, 0, .10), 0px 1px 8px 0px rgba(0,0,0,0.08) !important;  
 }
 
 #tour-button span {
@@ -303,10 +303,10 @@ body .selections {
   border-color: #a4b4ca !important;
   color: #4f72a4;  
   font-weight: 500;
-  background-color: transparent !important;
-  -webkit-box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
-  box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
+  background-color: transparent !important;  
   min-height: 34px;
+  box-shadow: -1px 3px 1px -2px rgba(0,0,0,0.13), 0px 2px 2px 0px rgba(0, 0, 0, .10), 0px 1px 8px 0px rgba(0,0,0,0.08);
+  -webkit-box-shadow: -1px 3px 1px -2px rgba(0,0,0,0.13), 0px 2px 2px 0px rgba(0, 0, 0, .10), 0px 1px 8px 0px rgba(0,0,0,0.08);
 }
 
 .selections #search-colleges-button {
