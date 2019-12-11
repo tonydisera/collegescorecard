@@ -136,12 +136,6 @@
 
                     <div class="card-body" style="overflow-x: scroll;padding-top:15px">
 
-                      <div id="rank-chart-title" class="hide">
-                          <span  id="rank-college-count" class="badge primary-badge"></span>
-
-
-                      </div>
-
                       <div class="selections" >
                         <div id="search-colleges-container">
 
@@ -151,9 +145,6 @@
                               <i class="material-icons" style="padding-right:4px">location_city</i>
                               <span>Pick Colleges</span>
                             </button>
-
-                            <div  id="filter-badges">
-                            </div>
                           </div>
 
                         
@@ -166,17 +157,22 @@
                         </div>
 
                         <div id="distribution-controls" data-step="5" data-intro="You can change the summary chart to show the distribution across all 7000+ colleges in the dataset." class="chart-container">
-                            <span>Show summary across</span>
+                            <span class="top-label">Summary</span>
                             <div class="btn-group"  data-toggle="buttons" >
                                 <label class="btn active btn-sm btn-default">
-                                    <input type="radio" name="distoption" value="ranked"> Ranked colleges
+                                    <input type="radio" name="distoption" value="ranked"> 
+                                    <span style="font-size:23px" class="icon-beeswarm-plot"></span>
+                                    <span class="btn-label">Ranked colleges</span>
                                 </label>
                                 <label  class="btn btn-sm btn-default ">
-                                    <input   type="radio" name="distoption" value="all">All colleges
+                                    <input   type="radio" name="distoption" value="all">
+                                    <i class="material-icons" style="font-size:20px;padding-top: 2px;">bar_chart</i>
+                                    <span class="btn-label">All</span>
                                 </label>
                                 <label class="btn btn-sm btn-default  ">
                                     <input type="radio" name="distoption" value="none"> 
-                                    Hide
+                                    <i class="material-icons" style="font-size: 15px;padding-top: 6px;padding-left:2px">close</i>
+                                    <span class="btn-label">Hide</span>
                                 </label>
                             </div>
                         </div>
@@ -195,6 +191,12 @@
 
                       <div style="display:flex;flex-flow:column;">
 
+                        <div id="rank-chart-title" >
+                          <span  id="rank-college-count" class="badge primary-badge">
+                          </span>
+                          <div id="filter-badges">
+                          </div>
+                        </div>
 
 
 

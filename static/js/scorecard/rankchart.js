@@ -428,7 +428,7 @@ function rankchart() {
         .attr("class", "col-header col-name")
         .attr("x", colWidthRank)
         .attr("y", 12)
-        .text("Colleges (" + data.length + ")")
+        .text("College")
 
       headerRowEnter
         .append("text")

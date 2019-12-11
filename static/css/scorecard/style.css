@@ -149,10 +149,10 @@ body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0;padding: 5px; }
 }
 
 #rank-college-count {
-  font-size: 20px;
-  color: #908d8d;
+  font-size: 16px;
+  color: #464646;
   font-weight: 500;
-  padding-right: 10px;
+  display: flex;
   padding-left: 0px;
 }
 
@@ -228,7 +228,7 @@ body #body-contents {
 body .selections {
   display: flex;
   flex-flow: row;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   margin-top: 0px;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -237,7 +237,7 @@ body .selections {
 #scorecard-select-container {
   margin-top: 0px;
   font-size: 15px;
-  margin-bottom: 0px;
+  margin-bottom: 10px;
   display: flex;
   flex-flow: column;
 }
@@ -277,25 +277,28 @@ body .selections {
 
 
 #tour-button {
-  min-height: 34px;
+  min-width: 120px !important;
+  max-height: 27px;
+  padding-top: 2px;
+  margin-top: 3px !important;
   border-color: #a4b4ca !important;
-  color: #4f72a4 !important;  
+  color: #4f72a4 !important;
   font-weight: 500;
   background-color: transparent !important;
-  box-shadow: -1px 3px 1px -2px rgba(0,0,0,0.13), 0px 2px 2px 0px rgba(0, 0, 0, .10), 0px 1px 8px 0px rgba(0,0,0,0.08) !important;  
-  -webkit-box-shadow: -1px 3px 1px -2px rgba(0,0,0,0.13), 0px 2px 2px 0px rgba(0, 0, 0, .10), 0px 1px 8px 0px rgba(0,0,0,0.08) !important;  
+  box-shadow: -1px 3px 1px -2px rgba(0,0,0,0.13), 0px 2px 2px 0px rgba(0, 0, 0, .10), 0px 1px 8px 0px rgba(0,0,0,0.08) !important;
+  -webkit-box-shadow: -1px 3px 1px -2px rgba(0,0,0,0.13), 0px 2px 2px 0px rgba(0, 0, 0, .10), 0px 1px 8px 0px rgba(0,0,0,0.08) !important;
 }
 
 #tour-button span {
-  display: inline-block;
-  vertical-align: top;
-  padding-top: 2px;  
+    display: inline-block;
+    vertical-align: top;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 #tour-button i {
-  font-size:20px; 
-  padding-top:2px;
-  padding-right:4px;
+    font-size: 16px;
+    padding-top: 2px;
 }
 
 .selections #search-colleges-button, 
@@ -311,12 +314,12 @@ body .selections {
 
 .selections #search-colleges-button {
   color: #275b97 !important;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .multiselect-selected-text {
   color: #275b97 !important;
-  font-size: 15px;
+  font-size: 16px;
   padding-top: 3px;
   display: inline-block;
   padding-left: 40px;
@@ -337,6 +340,7 @@ body .selections {
   font-size: 15px;
   margin-bottom: 0px;
   max-width: 210px;
+  margin-bottom: 10px;
 }
 
 .btn-sm {
@@ -376,23 +380,35 @@ body .selections {
   font-size: 12px;
   background: white;
   color: #757474;
-  border-color: #ffffff;
+  border-color: #c6c6c6;
   font-weight: 500 !important;
-  font-size: 12px;
   margin-bottom: 0px;
   padding-bottom: 0px;
   padding-top: 0px;
   padding-right: 3px;
+  padding-left: 3px;
+}
+#distribution-controls .btn-group .btn-sm .btn-label {
+  vertical-align: top;
+  padding-top: 3px;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500 !important;
+  padding-right: 5px;
 }
 
 
 #distribution-controls .btn-sm.active {
     border-color: #6f8eb4 !important;
-    border-radius: 0 !important;
     color: #4d74a3!important;
     font-weight: 700 !important;
     background-color: white !important;
 }
+#distribution-controls .btn-sm.active .btn-label {
+  font-weight: 700 !important;
+  color: #4d74a3!important;
+
+} 
 
 
 .tippy-tooltip.blue-theme {
@@ -433,16 +449,14 @@ body .selections {
 #filter-badges {
   display: flex;
   justify-content: flex-start;
-  max-width: 210px;
   flex-wrap: wrap;
-  margin-top: 5px;  
 }
 
 #filter-badges .badge {
   font-size: 11px;
   font-weight: 600 !important;
   margin-right: 5px;
-  margin-top: 5px;
+  margin-top: 3px;
   height: 20px;
   color: #767575;
   background-color: #f1f1f1;
@@ -456,16 +470,24 @@ body .selections {
 }
 
 #distribution-controls {
-  display: flex;
-  flex-flow: column;
-  align-items: flex-start;
-  margin-top: -4px;
+    display: flex;
+    flex-flow: row;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    margin-top: 3px;
 }
 
-#distribution-controls span {
-  display: inline-block;
-  padding-right: 5px;
-  font-weight: 600;
+#distribution-controls .btn-group {
+    box-shadow: -1px 3px 1px -2px rgba(0,0,0,0.13), 0px 2px 2px 0px rgba(0, 0, 0, .10), 0px 1px 8px 0px rgba(0,0,0,0.08);
+  -webkit-box-shadow: -1px 3px 1px -2px rgba(0,0,0,0.13), 0px 2px 2px 0px rgba(0, 0, 0, .10), 0px 1px 8px 0px rgba(0,0,0,0.08);
+}
+
+#distribution-controls span.top-label {
+    display: inline-block;
+    margin-right: 6px;
+    margin-top: 3px;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 #hist-chart-categories {
@@ -572,7 +594,7 @@ body .selections {
   overflow-x: unset;
   overflow-y: scroll;
   height: 100vh;
-  margin-top: -50px;
+  margin-top: -30px;
 }
 
 .rankchart g.reverse line {
