@@ -1,4 +1,4 @@
-College Scorecard Visualizations
+College Scorecard Data Viz
 =====
 This is the final project for the [UC Berkeley's Data Visualization class](https://datascience.berkeley.edu/academics/curriculum/data-visualization), taught by [John Alexis Guerra Gómez](https://johnguerra.co/) in the Data Science Masters (MIDS) program.  
 
