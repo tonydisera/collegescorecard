@@ -1,1 +1,0 @@
-1.  Handle null values (especiall for inverse scales)

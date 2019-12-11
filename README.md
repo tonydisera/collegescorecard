@@ -1,4 +1,24 @@
-Flask + D3 example
+College Scorecard Visualizations
+=====
+This is the final project for the [UC Berkeley's Data Visualization class](https://datascience.berkeley.edu/academics/curriculum/data-visualization), taught by [John Alexis Guerra Gómez](https://johnguerra.co/) in the Data Sciences Masters (MIDS) program.  
+
+[Live Demo](http://people.ischool.berkeley.edu/~tonydisera/w209/)
+            
+The [College Scorecard](https://collegescorecard.ed.gov/)site is a federal
+dataset and website that allows users to find, select, and compare higher-education institutions.
+Here, we leverage the college scorecard dataset that covers over
+7000 higher education institutions by focusing on institutional, academic, admission, financial, and future
+value data.
+We offer prospective students visualizations that go beyond opaque college rankings to better understand the US college landscape and evaluate and compare particular colleges of interest.
+
+The **By the numbers** visualizations was created by [Vidhu Nath](https://www.ischool.berkeley.edu/people/vidhu-nath#profile-main) using Tableau.  
+
+The **Breaking it down** visualizations was created by [Michael Shum](https://www.ischool.berkeley.edu/people/michael-shum#profile-main) using Tableau.  
+
+The **Compare and Rank** visualization was created by [Tony Di Sera](https://www.ischool.berkeley.edu/people/tony-di-sera#profile-main) using D3. 
+
+
+How to Install
 ======
 
 A flask app for serving and showing US College Scorecard data.
@@ -19,20 +39,4 @@ python3 w209 5000
 ```
 
 Then open your browser on http://localhost:5000
-
-## Backend commands:
-
-http://localhost:5000/getFields
-
-This will return all of the field names in the dataset.  Right now, this is a subset of all of the fields.  It has also merged in data from other rankings.
-
-
-
-http://localhost:5000/getData?fieldNames=field1,field2,field3
-
-This will return an array of JSON objects for each college with the fields provided.
-
-
-
-
 
