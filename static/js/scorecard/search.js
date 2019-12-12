@@ -1,7 +1,7 @@
 class Search {
 	constructor() {
     this.filteredCollegesSelector = "#search-dialog #filtered-colleges";
-    this.usnewsSelector = "#search-dialog #usnews-cb";
+    this.usnewsSelector = "#search-dialog #usnews-radio-button";
 
     this.selectAllSelector = "#search-dialog #select-all-cb";
     this.selectAll = true;
@@ -445,7 +445,8 @@ class Search {
     if (customFilter == "usnews_top_200") {
       self.resetFilters();
 
-      $(self.usnewsSelector).prop( "checked", true );
+      d3.select('#search-dialog #usnews-radio-button').classed("active", true);
+      $("#search-dialog #usnews-radio-button input").prop( "checked", true );
       self.usnewsChecked = true;
 
       self.filterColleges({selectAll: true});
