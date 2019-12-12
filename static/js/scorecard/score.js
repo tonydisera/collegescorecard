@@ -3,7 +3,7 @@ let selectedFieldMap = {}
 let histChartMap = {};
 let search = null;
 let rankChart = null;
-let metricCategories = ['selectivity', 'instruction', 'cost', 'outcome', 'diversity', 'rank']
+let metricCategories = ['selectivity', 'instruction', 'cost', 'outcome', 'diversity']
 
 let rankHeaderHeight    = 100;
 let rankRowHeight       = 24;
@@ -100,6 +100,10 @@ function init() {
   search.promiseInit()
   .then(function() {
     search.applyCustomFilter("ivy_plus");
+    
+    d3.select('#search-dialog #ivyplus-radio-button').classed("active", true);
+    $("#search-dialog #ivyplus-radio-button input").prop( "checked", true );
+    
     rankColleges();
     setTimeout(function() {
       pulsateTourButton();
@@ -291,7 +295,7 @@ function rankColleges() {
   
   d3.selectAll("#filter-badges badge").remove();
   d3.select("#filter-badges").html(search.getBadges())
-  d3.select("#rank-college-count").text("Ranking " + getSelectedCollegeIds().length + " Colleges")
+  d3.select("#rank-college-count").text(getSelectedCollegeIds().length + " Colleges")
 
   showCategoryHeadings();
 
@@ -317,7 +321,7 @@ function rankColleges() {
               if (document.querySelector('#rank-chart #row-0 text.name')._tippy) {
                 document.querySelector('#rank-chart #row-0 text.name')._tippy.hide();
               }  
-
+              /*
               tippy('.col-header#col-metric-1 rect#weight-square-1', {
                 content: 'Click on squares to adjust weight',
                 placement: 'bottom',
@@ -329,6 +333,7 @@ function rankColleges() {
                   document.querySelector('.col-header#col-metric-1 rect#weight-square-1')._tippy.hide();
                 }
               }, 2000)
+              */
 
 
 
@@ -375,7 +380,7 @@ function showRescaledRankings(data) {
   rankChart(selection, d3.select("#rank-chart-heading"));
 
   if ($('#rank-chart .delta text') && $('#rank-chart .delta text').length > 0) {
-    if (tippyDeltaCount < 1) {
+    if (tippyDeltaCount < 0) {
       tippyDeltaCount++
   
       setTimeout(function() {

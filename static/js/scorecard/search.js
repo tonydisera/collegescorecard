@@ -99,13 +99,6 @@ class Search {
           self.selectAllColleges();
       })
 
-      $(self.usnewsSelector).on("change", 
-      function(d,i) {
-          let checked = d3.select(this).property("checked");
-          self.usnewsChecked = checked;
-          d3.select("#usnews-cb-label").classed("is-checked", self.usnewsChecked)
-          self.filterColleges();
-      })
 
       $('input:radio[name="degree_option"]').change(function(){
         let key = $(this).val();
@@ -252,14 +245,15 @@ class Search {
 
     if (self.customFilter && self.customFilter == "ivy_plus") {
       buf = self.formatBadge(["Ivy League + colleges"])
+    } else {
+      if (self.selectedColleges.length > 3) {
+        buf += self.formatBadge(self.selectedColleges.slice(0,2), ", ...");
+
+      } else {
+        buf += self.formatBadge(self.selectedColleges);
+      }
     }
     buf += self.formatBadgeUSNews();
-    if (self.selectedColleges.length > 3) {
-      buf += self.formatBadge(self.selectedColleges.slice(0,2), ", ...");
-
-    } else {
-      buf += self.formatBadge(self.selectedColleges);
-    }
     buf += self.formatDegreeLevelBadge();
     buf += self.formatRegionBadge();
     buf += self.formatControlBadge();
@@ -445,8 +439,6 @@ class Search {
     if (customFilter == "usnews_top_200") {
       self.resetFilters();
 
-      d3.select('#search-dialog #usnews-radio-button').classed("active", true);
-      $("#search-dialog #usnews-radio-button input").prop( "checked", true );
       self.usnewsChecked = true;
 
       self.filterColleges({selectAll: true});
@@ -477,7 +469,7 @@ class Search {
       $('#select2-regions').val('8'); 
       $('#select2-regions').trigger('change'); 
 
-      d3.select("#degree-radio-buttons.btn-group .btn-sm.active").classed("active", false)
+      d3.select("#degree-radio-buttons.btn-group .btn-sm.active").classed("active", true)
       d3.select("#degree-radio-buttons.btn-group #degree-bachelors-radio").classed("active", true)
 
       d3.selectAll("#control-buttons #control-public input").property("checked", true)
@@ -488,8 +480,6 @@ class Search {
     } else if (customFilter == "ivy_plus") {
       self.resetFilters();
 
-      d3.select('#search-dialog #ivyplus-radio-button').classed("active", true);
-      $("#search-dialog #ivyplus-radio-button input").prop( "checked", true );
 
       self.selectedColleges = self.ivyPlusEntries.map(function(entry) {
         return entry.text;
