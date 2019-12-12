@@ -27,8 +27,17 @@ def root():
       # Load the CSV file from the static folder, inside the current path
       scorecard_data_metric = pd.read_csv(os.path.join(APP_FOLDER,metric_all))
       scorecard_data_metric['field_of_study'] = scorecard_data_metric.apply(parseFieldOfStudy, axis=1)
+      scorecard_data_metric['cost_attendance_year'] = scorecard_data_metric.apply(parseCostPerYear, axis=1)
     
     return render_template("index.html")
+
+
+
+def parseCostPerYear(row):
+  if ~np.isnan(row['cost attendance academic_year']):
+    return row['cost attendance academic_year']
+  else:
+    return row['cost attendance program_year']
 
 
 def parseFieldOfStudy(row):
@@ -42,7 +51,6 @@ def parseFieldOfStudy(row):
             buf = buf + degreeToken
         i = i + 1
     return buf
-
 
 
 @app.route("/summary")
@@ -110,6 +118,7 @@ def getMetricFields():
       # Load the CSV file from the static folder, inside the current path
       scorecard_data_metric = pd.read_csv(os.path.join(APP_FOLDER,metric_all))
       scorecard_data_metric['field_of_study'] = scorecard_data_metric.apply(parseFieldOfStudy, axis=1)
+      scorecard_data_metric['cost_attendance_year'] = scorecard_data_metric.apply(parseCostPerYear, axis=1)
 
     cols = scorecard_data_metric.columns.tolist()
 
@@ -144,6 +153,7 @@ def getMetricData():
     # Load the CSV file from the static folder, inside the current path
     scorecard_data_metric = pd.read_csv(os.path.join(APP_FOLDER,metric_all))
     scorecard_data_metric['field_of_study'] = scorecard_data_metric.apply(parseFieldOfStudy, axis=1)
+    scorecard_data_metric['cost_attendance_year'] = scorecard_data_metric.apply(parseCostPerYear, axis=1)
 
   # dropping ALL duplicate values
 

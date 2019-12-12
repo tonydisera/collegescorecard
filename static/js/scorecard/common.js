@@ -13,7 +13,7 @@ let defaultMetricFieldNames = [
   "demographics median_family_income",
   "tuition in_state",
   "tuition out_of_state",
-  "cost attendance academic_year",
+  "cost_attendance_year",
   "median_debt_suppressed overall",
   "completion_rate_4yr_150nt",
   "retention_rate four_year full_time",

@@ -51,33 +51,8 @@ class Search {
 
     this.customFilter = null;
 
-    this.ivySchools = [
-      "Harvard University",
-      "Yale University",
-      "University of Pennsylvania",
-      "Princeton University",
-      "Columbia University in the City of New York",
-      "Brown University",
-      "Dartmouth College",
-      "Cornell University"
-    ]
+    this.ivyPlusEntries = [{"text":"Yale University","id":130794},{"text":"University of Chicago","id":144050},{"text":"Brown University","id":217156},{"text":"Dartmouth College","id":182670},{"text":"Cornell University","id":190415},{"text":"Stanford University","id":243744},{"text":"Harvard University","id":166027},{"text":"Massachusetts Institute of Technology","id":166683},{"text":"Johns Hopkins University","id":162928},{"text":"Columbia University in the City of New York","id":190150},{"text":"Princeton University","id":186131},{"text":"Duke University","id":198419}]
 
-    this.ivyPlusSchools = [
-      "Harvard University",
-      "Yale University",
-      "University of Pennsylvania",
-      "Princeton University",
-      "Columbia University in the City of New York",
-      "Brown University",
-      "Dartmouth College",
-      "Cornell University",
-      "Massachusetts Institute of Technology",
-      "Stanford University",
-      "Duke University",
-      "University of Chicago",
-      "Johns Hopkins University"
-     ]
-    
 
 	}
 
@@ -421,6 +396,7 @@ class Search {
 
     let self = this;
 
+    d3.select("#college-filters.btn-group .btn-sm.active").classed("active", false)
     d3.select("#degree-radio-buttons.btn-group .btn-sm.active").classed("active", false)
 
     $("#control-buttons input").prop( "checked", false );
@@ -479,8 +455,8 @@ class Search {
       d3.select("#degree-radio-buttons.btn-group .btn-sm.active").classed("active", false)
       d3.select("#degree-radio-buttons.btn-group #degree-bachelors-radio").classed("active", true)
 
-      d3.selectAll("#control-buttons.btn-group #control-public input").property("checked", true)
-      d3.selectAll("#control-buttons.btn-group #control-public").classed("active", true)
+      d3.selectAll("#control-buttons #control-public input").property("checked", true)
+      d3.selectAll("#control-buttons #control-public").classed("active", true)
       self.selectControl("1", "Public", true)
 
       self.actSlider.update( {
@@ -503,14 +479,24 @@ class Search {
       d3.select("#degree-radio-buttons.btn-group .btn-sm.active").classed("active", false)
       d3.select("#degree-radio-buttons.btn-group #degree-bachelors-radio").classed("active", true)
 
-      d3.selectAll("#control-buttons.btn-group #control-public input").property("checked", true)
-      d3.selectAll("#control-buttons.btn-group #control-public").classed("active", true)
+      d3.selectAll("#control-buttons #control-public input").property("checked", true)
+      d3.selectAll("#control-buttons #control-public").classed("active", true)
       self.selectControl("1", "Public", true)
 
       self.filterColleges({selectAll: true});
     } else if (customFilter == "ivy_plus") {
       self.resetFilters();
-      self.selectedColleges = self.ivyPlusSchools;
+      self.selectedColleges = self.ivyPlusEntries.map(function(entry) {
+        return entry.text;
+      });
+      self.ivyPlusEntries.forEach(function(entry) {
+        // Create a DOM Option and pre-select by default
+        var newOption = new Option(entry.text, entry.id, true, true);
+        // Append it to the select
+        $('#select2-colleges').append(newOption).trigger('change');
+
+      })
+      
       self.filterColleges({selectAll: true});
     } 
   }

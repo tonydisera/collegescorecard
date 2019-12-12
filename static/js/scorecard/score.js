@@ -112,10 +112,10 @@ function init() {
 
   $('#search-colleges-button').click(function() {
     deselectFilterButtons();
-    if (search.customFilter != null) {
-      search.resetFilters();
-    }
-    search.customFilter = null; 
+    //if (search.customFilter != null) {
+    //  search.resetFilters();
+    //}
+    //search.customFilter = null; 
     $("#search-dialog").modal()
   })
 
@@ -123,7 +123,7 @@ function init() {
       let option = $(this).val();
 
       search.applyCustomFilter(option);
-      rankColleges();
+      //rankColleges();
   });
 
 
