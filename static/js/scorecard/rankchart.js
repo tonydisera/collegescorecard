@@ -675,8 +675,8 @@ function rankchart() {
     // Set up column scales
     fieldDescriptors.forEach(function(field,i) {
       field.scale = d3.scaleLinear()
-          //.domain([d3.min(data, d => d[field.name]), d3.max(data, d => d[field.name])])
-          .domain([0, d3.max(data, d => d[field.name])])
+          .domain([d3.min(data, d => d[field.name]), d3.max(data, d => d[field.name])])
+          //.domain([0, d3.max(data, d => d[field.name])])
           .clamp(true)
       if (field.rankDescending) {
         field.scale.range([colWidth * field.currentWeight, 2])
@@ -685,8 +685,8 @@ function rankchart() {
       }
 
       field.scaleTotal = d3.scaleLinear()
-          //.domain([d3. min(data, d => d[field.name]), d3.max(data, d => d[field.name])])
-          .domain([0, d3.max(data, d => d[field.name])])
+          .domain([d3. min(data, d => d[field.name]), d3.max(data, d => d[field.name])])
+          //.domain([0, d3.max(data, d => d[field.name])])
           .clamp(true)
       if (field.rankDescending) {
         field.scaleTotal.range([(colWidthTotal/units) * field.currentWeight, 2])

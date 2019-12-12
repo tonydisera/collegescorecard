@@ -29,10 +29,16 @@ class Swarm {
           return 0;
         }
       })
-
+      var minValue = d3.min(data, function(d) {
+        if (d[field.name]) {
+          return +d[field.name];
+        } else {
+          return 0;
+        }
+      })
 
       field.swarmScaleX = d3.scaleLinear()
-        .domain(d3.extent([0, maxValue]))
+        .domain(d3.extent([minValue, maxValue]))
 
       if (field.rankDescending) {
         field.swarmScaleX.range([field.width-(self.maxRadius*2), self.maxRadius])
