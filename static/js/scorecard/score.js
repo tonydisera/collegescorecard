@@ -99,7 +99,7 @@ function init() {
   search = new Search();
   search.promiseInit()
   .then(function() {
-    search.applyCustomFilter("usnews_top_200");
+    search.applyCustomFilter("ivy_plus");
     rankColleges();
     setTimeout(function() {
       pulsateTourButton();
@@ -281,7 +281,7 @@ function deselectFilterButtons() {
 
 function rankCollegesAdvancedSearch() {
   deselectFilterButtons();
-  search.customFilter = null;
+  //search.customFilter = null;
   rankColleges();
 }
 
@@ -303,7 +303,7 @@ function rankColleges() {
 
         d3.select('#loading').style("display", "none")
 
-        if (tippyShowCount < 2) {
+        if (tippyShowCount < 1) {
           tippyShowCount++
           setTimeout(function() {
             tippy('#rank-chart #row-0 text.name', {
@@ -375,7 +375,7 @@ function showRescaledRankings(data) {
   rankChart(selection, d3.select("#rank-chart-heading"));
 
   if ($('#rank-chart .delta text') && $('#rank-chart .delta text').length > 0) {
-    if (tippyDeltaCount < 2) {
+    if (tippyDeltaCount < 1) {
       tippyDeltaCount++
   
       setTimeout(function() {
@@ -390,7 +390,7 @@ function showRescaledRankings(data) {
           if (document.querySelector('#rank-chart .delta text') && document.querySelector('#rank-chart .delta text')._tippy) {
             document.querySelector('#rank-chart .delta text')._tippy.hide();
           }
-        }, 5000)
+        }, 4000)
       } ,1000)
 
     }

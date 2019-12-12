@@ -381,7 +381,7 @@
                        <i class="fa fa-sort-amount-desc"></i>
                       <span>Go</span>
                    </button>
-                   <button style="float:right" id="reset-button" type="button" onclick="search.resetFilters()" class="btn btn-white btn-sm">Reset</button>
+                   <button style="float:right" id="reset-button" type="button" onclick="search.resetAllFilters()" class="btn btn-white btn-sm">Reset</button>
               </div>
                    <div id="limit-exceeded" class="alert alert-primary hide" role="alert">
                     Only 500 colleges can be ranked at a time. 
@@ -398,8 +398,8 @@
               <div id="college-examples" style="margin-top:5px">
 
                   <div  id="college-filters" class="btn-group"  data-toggle="buttons" style="margin-left:0px">
-                      <label id="usnews-radio-button" class="active btn btn-sm btn-default ">
-                          <input  type="radio" name="searchoption" checked value="usnews_top_200"> US News (top)  
+                      <label id="usnews-radio-button" class=" btn btn-sm btn-default ">
+                          <input  type="radio" name="searchoption"  value="usnews_top_200"> US News (top)  
                       </label>
                       <label  class=" btn btn-sm btn-default">
                           <input id="custom-filter-button-1"  type="radio" name="searchoption" value="public_high_act">Highly selective, Public
@@ -407,8 +407,8 @@
                       <label class=" btn btn-sm btn-default ">
                           <input type="radio" name="searchoption" value="west_coast"> West Coast, Public
                       </label>
-                      <label class="btn btn-sm btn-default ">
-                          <input type="radio" name="searchoption" value="ivy_plus"> Ivy League +
+                      <label id="ivyplus-radio-button" class="btn active btn-sm btn-default ">
+                          <input type="radio" name="searchoption" checked value="ivy_plus"> Ivy League +
                       </label>
                   </div>
               </div>          

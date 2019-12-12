@@ -250,29 +250,24 @@ class Search {
 
     let buf = "";
 
-    if (self.customFilter == "ivy") {
-      buf = self.formatBadge(["Ivy League colleges"])
-    } else if (self.customFilter == "ivy_plus") {
+    if (self.customFilter && self.customFilter == "ivy_plus") {
       buf = self.formatBadge(["Ivy League + colleges"])
-    } else {
-      buf += self.formatBadgeUSNews();
-      if (self.selectedColleges.length > 3) {
-        buf += self.formatBadge(self.selectedColleges.slice(0,2), ", ...");
-
-      } else {
-        buf += self.formatBadge(self.selectedColleges);
-      }
-      buf += self.formatDegreeLevelBadge();
-      buf += self.formatRegionBadge();
-      buf += self.formatControlBadge();
-      buf += self.formatBadge(self.selectedPrograms.map(function(program) {
-        return program.name;
-      }));
-      buf += self.formatBadgeACT();
-      buf += self.formatBadgeAdmission();
-
-
     }
+    buf += self.formatBadgeUSNews();
+    if (self.selectedColleges.length > 3) {
+      buf += self.formatBadge(self.selectedColleges.slice(0,2), ", ...");
+
+    } else {
+      buf += self.formatBadge(self.selectedColleges);
+    }
+    buf += self.formatDegreeLevelBadge();
+    buf += self.formatRegionBadge();
+    buf += self.formatControlBadge();
+    buf += self.formatBadge(self.selectedPrograms.map(function(program) {
+      return program.name;
+    }));
+    buf += self.formatBadgeACT();
+    buf += self.formatBadgeAdmission();
 
 
     return buf;
@@ -392,6 +387,11 @@ class Search {
     }
 
   }
+  resetAllFilters() {
+    let self  = this;
+    this.customFilter = null;
+    this.resetFilters();
+  }
   resetFilters() {
 
     let self = this;
@@ -487,6 +487,10 @@ class Search {
       self.filterColleges({selectAll: true});
     } else if (customFilter == "ivy_plus") {
       self.resetFilters();
+
+      d3.select('#search-dialog #ivyplus-radio-button').classed("active", true);
+      $("#search-dialog #ivyplus-radio-button input").prop( "checked", true );
+
       self.selectedColleges = self.ivyPlusEntries.map(function(entry) {
         return entry.text;
       });
