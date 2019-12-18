@@ -5,6 +5,7 @@ This is the final project for the [UC Berkeley's Data Visualization class](https
 
 ### [Live Demo](http://people.ischool.berkeley.edu/~tonydisera/w209/)
    
+### [Video](https://www.youtube.com/watch?v=Q4u2v-RxeMI&feature=youtu.be)
 
 ![alt text](https://github.com/tonydisera/collegescorecard/blob/master/screenshot.png)
 
