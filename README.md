@@ -7,7 +7,7 @@ This is the final project for the [UC Berkeley's Data Visualization class](https
    
 ### [Video](https://www.youtube.com/watch?v=Q4u2v-RxeMI&feature=youtu.be)
 
-![alt text](https://github.com/tonydisera/collegescorecard/blob/master/vidoes/collegescorecard.gif)
+![alt text](https://github.com/tonydisera/collegescorecard/blob/master/videos/collegescorecard.gif)
 
             
 The [College Scorecard](https://collegescorecard.ed.gov/) site is a federal
