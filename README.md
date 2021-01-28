@@ -48,7 +48,7 @@ $ pip3 install pandas
 Then run it like this  (running on port 5000):
 
 ```
-python3 w209.py 5000
+nohup python3 w209.py 5000 &
 ```
 
 Then open your browser on http://localhost:5000
