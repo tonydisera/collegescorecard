@@ -167,13 +167,12 @@ def getMetricData():
     scorecard_data_metric['tuition_revenue_per_fte'][scorecard_data_metric['tuition_revenue_per_fte'] >= 100000] = 100000
 
   if (len(ids) > 0):
-    data = scorecard_data_metric[scorecard_data_metric.id.isin(ids)]
+    data = scorecard_data_metric[scorecard_data_metric['id'].astype(str).isin(ids)]
   else:
     data = scorecard_data_metric
 
   if (len(search) > 0):
     data = scorecard_data_metric[scorecard_data_metric.name.str.contains(search, case=False)]
-
 
   jsonData = data[fields].to_json(orient='records')
 
@@ -198,5 +197,6 @@ if __name__ == "__main__":
     port = sys.argv[1]
 
   app.run(host="0.0.0.0", port=port)
+  #app.run()
 
 
